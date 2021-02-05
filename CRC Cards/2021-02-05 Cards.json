@@ -1,0 +1,212 @@
+[
+  {
+    "name": "Cinema",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "Store cinema details.",
+      "Provide cinema details.",
+      "Can create theaters."
+    ],
+    "collaborators": [
+      "Theater",
+      ""
+    ]
+  },
+  {
+    "name": "Theater",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "Store theater details.",
+      "Provide theater details.",
+      "Can create rows.",
+      "Find all available seats."
+    ],
+    "collaborators": [
+      "Row"
+    ]
+  },
+  {
+    "name": "Row",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "Store row details.",
+      "Provide row details.",
+      "Can create seats.",
+      "Provide n number of adjacent available seats.",
+      "Provide collection of available seats."
+    ],
+    "collaborators": [
+      "Seat"
+    ]
+  },
+  {
+    "name": "Seat",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "Store seat details.",
+      "Provide seat details.",
+      "Update status."
+    ],
+    "collaborators": [
+      ""
+    ]
+  },
+  {
+    "name": "Show",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "Store show details.",
+      "Provides show details.",
+      "Find available seats.",
+      "Change show status.",
+      "Find n number of adjacent available seats."
+    ],
+    "collaborators": [
+      "Theater"
+    ]
+  },
+  {
+    "name": "Customer information",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "Stores customer information.",
+      "Provide customer information.",
+      "Update customer information."
+    ],
+    "collaborators": [
+      ""
+    ]
+  },
+  {
+    "name": "Booking",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "Stores a show.",
+      "Stores customer information.",
+      "Stores collection of row and seat numbers.",
+      "Change booking status.",
+      "Find adjacent available seats.",
+      "Update collection of row and seat numbers."
+    ],
+    "collaborators": [
+      "Show"
+    ]
+  },
+  {
+    "name": "CinemaBookingSystem",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "Stores BookingCollection.",
+      "Stores CustomerInformationCollection.",
+      "Stores ShowCollection.",
+      "Find shows by movie and/or date range and/or  time range.",
+      "Find bookings by customer information.",
+      "Find bookings by show.",
+      "Find n number of adjacent seats by show.",
+      "Can add new customer information.",
+      "Can add new booking given show, customer information, collection of row and seat numbers.",
+      "Can add new show given movie, date, time, cinema, theater.",
+      "Can add new theater given collection of rows, cinema.",
+      "Can change show.",
+      "Can change booking."
+    ],
+    "collaborators": [
+      "ShowCollection",
+      "CustomerInformationCollection",
+      "BookingCollection",
+      "Booking",
+      "Customer information",
+      "Show",
+      "Cinema"
+    ]
+  },
+  {
+    "name": "ShowCollection",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "Stores a collection of shows.",
+      "Find and provide shows by movie and/or date range and/or time range.",
+      "Can create shows.",
+      "Update show."
+    ],
+    "collaborators": [
+      "Show"
+    ]
+  },
+  {
+    "name": "CustomerInformationCollection",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "Stores a collection of Customer information.",
+      "Find and provide customer information."
+    ],
+    "collaborators": [
+      "Customer Information"
+    ]
+  },
+  {
+    "name": "BookingCollection",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "Stores a collection of bookings.",
+      "Find and provide bookings by customer information.",
+      "Find and provide bookings by show.",
+      "Can create bookings.",
+      "Update booking."
+    ],
+    "collaborators": [
+      "Booking",
+      "Customer information"
+    ]
+  },
+  {
+    "name": "Movie",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "Store movie details.",
+      "Provide movie details.",
+      "Update movie details."
+    ],
+    "collaborators": [
+      ""
+    ]
+  },
+  {
+    "name": "MovieCollection",
+    "superclasses": "",
+    "subclasses": "",
+    "type": 1,
+    "responsibilities": [
+      "Stores a collection of movies.",
+      "Find and provide all movies.",
+      "Find and provide movies by title and/or genre."
+    ],
+    "collaborators": [
+      "Movie"
+    ]
+  }
+]
