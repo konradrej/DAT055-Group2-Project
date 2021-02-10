@@ -8,8 +8,7 @@ public class Movie {
     private String genre;
     private int lenght;
 
-}
-
+    
     public String getTitle() {
         return title;
     }
@@ -27,3 +26,6 @@ public class Movie {
         System.out.println(lenght);
         System.out.println(genre);
     }
+}
+
+    
