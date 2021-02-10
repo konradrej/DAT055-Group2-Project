@@ -4,7 +4,7 @@
 */
 public class Movie {
 
-    private String Title;
+    private String title;
     private String genre;
     private int lenght;
 
