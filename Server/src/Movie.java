@@ -4,8 +4,6 @@ public class Movie {
     private String genre;
     private int lenght;
 
-}
-
     public String getTitle() {
         return title;
     }
@@ -14,7 +12,7 @@ public class Movie {
         return genre;
     }
 
-    public int getMovieLenght() {
+    public int getLenght() {
         return lenght;
     }
 
@@ -23,3 +21,6 @@ public class Movie {
         System.out.println(lenght);
         System.out.println(genre);
     }
+
+}
+
