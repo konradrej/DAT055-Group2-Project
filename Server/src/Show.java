@@ -16,7 +16,7 @@ public class Show {
 	 * @param cinema			what cinema the show will be played at
 	 * @param theater		what theater the show will be played at
 	 */
-	public Show(String movie, Date day_and_time, String cinema, String theater)
+	public Show(Movie movie, Date day_and_time, Cinema cinema, Theater theater)
 	{
 		
 	}
