@@ -1,3 +1,7 @@
+import java.util.*;
+
+import src.Theatre;
+
 /**
  * @author Anthon Lenander, Erik Kieu, Phong Nguyen
  * @version version 0.0.0
@@ -5,42 +9,54 @@
 public class Cinema {
 
     private String name;
-    // Lägg till collection of theatre
+    private Collection<theatre> allTheatres;
+
 
     /**
-     * Store detail (name)
+     * Constructor for initializing the Cinema instance
+     *
+     * @param name      the name of the cinema
+     */
+    public Cinema(String name,....){
+        //Todo: Cinema parameter
+    }
+
+
+    /**
+     * Method for setting a cinema name
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * Provides detail (name)
+     * Method for getting cinema name
+     *
+     * @return returns the cinema instance itself
      */
-    public void getName() {
-        return name;
+    public Cinema getCinema() {
+        return this;
+    }
+
+
+    /**
+     * Method for getting theatres in collection of theatres.
+     *
+     * @return return
+     */
+    public Collection <Theatre> getTheatreCollection() {
+        //Todo: the code
+        //TODO: return information is missing
     }
 
     /**
-     * Store detail (collection of rows)
-     * */
-    public void setTheatreCollection(){
-
-    }
-
-    /**
-     * Provides detail collection of theatre
-     * */
-    public void getTheatreCollection(){
-
-    }
-
-    /**
-     * Creates new theatre given rows cinema...
-     * */
-    public Theater(String Cinema, int rows,...) {
-        this.cinema = cinema;
-        this.rows = rows;
+     * Creates new theatre given rows, cinema, ...
+     * Adds the created theatre to the collection of theatres
+     */
+    public void addTheater(int theaterNumber,...) {
+        //Todo: parameters for the method
+        Theatre t = new theatre(c, r);
+        this.allTheatres.add(t);
     }
 
 

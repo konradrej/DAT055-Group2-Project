@@ -8,32 +8,36 @@ public class Seat {
     private boolean available;
 
     /**
-     * Store detail (seat number)
+     * Constructor for initializing the Seat instance
+     *
+     * @param seatNumber     the number of the seat
+     * @param available      the seat status
      */
-    public void setSeatNumber(int seatNumber){
-        this.seatNumber = seatNumber;
+    public Seat (int seatNumber, boolean available){
+        seatNumber = this.seatNumber;
+        available = this.available;
     }
 
     /**
-     * Provide detail (seat number)
+     * Method for getting the details of the seat
+     *
+     * @return		returns the seat instance itself
      */
-    public void getSeatNumber(){
-        return seatNumber;
+    public Seat getSeat(){
+        return this;
     }
 
     /**
-     * Store detail (status)
+     * Method for updating (setting) the seat status
      */
-    public void setAvailable(boolean available){
-        this.available = available;
+    public void updateSeatStatus(boolean available){
+        available = this.available;
     }
 
-    /**
-     * Provide detail (status)
-     */
-    public void getAvailable(){
-        return available;
-    }
+
+
+
+
 
 
 
