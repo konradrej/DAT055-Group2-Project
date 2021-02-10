@@ -1,9 +1,14 @@
+/**
+* @author Anthon Lenander, Erik Kieu, Phong Nguyen
+* @version version 0.0.0
+*/
 public class Movie {
 
     private String Title;
     private String genre;
     private int lenght;
 
+    
     public String getTitle() {
         return title;
     }
@@ -12,7 +17,7 @@ public class Movie {
         return genre;
     }
 
-    public int getLenght() {
+    public int getMovieLenght() {
         return lenght;
     }
 
@@ -21,6 +26,6 @@ public class Movie {
         System.out.println(lenght);
         System.out.println(genre);
     }
-
 }
 
+    
