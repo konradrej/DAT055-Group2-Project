@@ -1,11 +1,16 @@
+import java.io.Serializable;
 import java.util.*;
 
 /**
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen
 * @version version 0.0.0
 */
-public class Booking implements AbstractCollectionObject{
+public class Booking implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 408224943807153172L;
 	private Show show;
 	private Customer customer;
 	private Collection<Row> rows;

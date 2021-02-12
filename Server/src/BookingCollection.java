@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.*;
 
@@ -9,8 +13,10 @@ public class BookingCollection implements Serializable, AllCollections{
 
 	private static final long serialVersionUID = 1450784786789696365L;
 	private Collection<Booking> allBookings;
+	private final String filename;
 	
-	public BookingCollection() {
+	public BookingCollection(String filename) {
+		this.filename = filename; 
 		allBookings = new LinkedList <Booking>();
 	}
 	
@@ -36,12 +42,21 @@ public class BookingCollection implements Serializable, AllCollections{
 		return bookings;
 	}
 	
-	public void addBookings(Show s, Customer c , Row [] r , Seat [] seat ) {
+	public void addBookings(Show s, Customer c , Collection <Row> r , Collection <Seat> seat ) {
 		Booking b = new Booking(s, c, r, seat );
 		this.allBookings.add(b);
 	}
 	
-	public void updateBooking (Booking b , Show s, Customer c , Row [] r , Seat [] seat ) {
+	public void removeBooking(Booking b ) {
+		for(Booking b2: this.allBookings) {
+			if(b2.equals(b)) {
+				this.allBookings.remove(b2);
+			}
+		}
+		System.out.println("Booking not found");
+	}
+	
+	public void updateBooking (Booking b , Show s, Customer c , Collection <Row> r , Collection <Seat> seat ) {
 		for(Booking b2 : this.allBookings) {
 			if(b2.equals(b)) {
 				b2 = new Booking(s, c, r, seat);
@@ -49,13 +64,23 @@ public class BookingCollection implements Serializable, AllCollections{
 		}
 	}
 
-	@Override
-	public Collection<AbstractCollectionObject> getCollection() {
-		Collection<AbstractCollectionObject> c = new LinkedList <AbstractCollectionObject>();
-		for(Booking b : this.allBookings) {
-			c.add(b);
-		}
-		return c;
+	public String getFilname() {
+		return this.filename;
 	}
+
+	@Override
+	public void updateCollection(){
+		
+		try {
+		ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(new File(this.filename)));
+		stream.writeObject(this);
+		stream.close();
+		}
+		catch (IOException e) {
+            System.out.println("Error initializing stream");
+        }
+		
+	}
+	
 
 }

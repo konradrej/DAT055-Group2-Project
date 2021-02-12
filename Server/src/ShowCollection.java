@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.*;
 
@@ -9,8 +13,10 @@ public class ShowCollection implements Serializable, AllCollections {
 	
 	private static final long serialVersionUID = 368284506033169560L;
 	private Collection <Show> allShows;
+	private final String filename;
 	
-	public ShowCollection() {
+	public ShowCollection(String filename) {
+		this.filename = filename;
 		allShows = new LinkedList <Show> ();
 	}
 	
@@ -31,6 +37,15 @@ public class ShowCollection implements Serializable, AllCollections {
 		this.allShows.add(s);
 	}
 	
+	public void removeShow(Show s ) {
+		for(Show s2: this.allShows) {
+			if(s2.equals(s)) {
+				this.allShows.remove(s2);
+			}
+		}
+		System.out.println("Show not found");
+	}
+	
 	public void updateShow(Show s, Movie m , Date dat, Cinema c, Theater t) {
 		for(Show s2 : allShows) {
 			if(s.equals(s2)) {
@@ -38,21 +53,29 @@ public class ShowCollection implements Serializable, AllCollections {
 				break;
 			}
 		}
-		System.out.println("Did not found show");
+		System.out.println("Show not found");
 	}
 	
 	public Collection<Show> getAllShows(){
 		return this.allShows;
 	}
+	
+	public String getFilename() {
+		return this.filename;
+	}
 
 	@Override
-	public Collection<AbstractCollectionObject> getCollection() {
-		Collection<AbstractCollectionObject> c = new LinkedList <AbstractCollectionObject>();
-		for(Show s : this.allShows) {
-			c.add(s);
+	public void updateCollection() {
+
+		try {
+		ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(new File(this.filename)));
+		stream.writeObject(this);
+		stream.close();
 		}
-		return c;
+		catch (IOException e) {
+            System.out.println("Error initializing stream");
+        }
+		
 	}
-	
 	
 }

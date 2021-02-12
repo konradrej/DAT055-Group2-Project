@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.*;
 
 import src.Theater;
@@ -6,9 +7,13 @@ import src.Theater;
  * @author Anthon Lenander, Erik Kieu, Phong Nguyen
  * @version version 0.0.0
  */
-public class Cinema {
+public class Cinema implements Serializable{
 
-    private String name;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -573847747221470914L;
+	private String name;
     private Collection <Theater> allTheaters;
 
 

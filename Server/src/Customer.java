@@ -1,11 +1,17 @@
 package src;
 
+import java.io.Serializable;
+
 /**
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen
 * @version version 0.0.0
 */
-public class Customer implements AbstractCollectionObject{
+public class Customer implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6060898922086321725L;
 	private String name;
 	private String phoneNumber;
 	private String SSN;

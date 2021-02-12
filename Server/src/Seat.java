@@ -1,10 +1,16 @@
+import java.io.Serializable;
+
 /**
  * @author Anthon Lenander, Erik Kieu, Phong Nguyen
  * @version version 0.0.0
  */
-public class Seat {
+public class Seat implements Serializable{
 
-    private int seatNumber;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2724216208606386504L;
+	private int seatNumber;
     private boolean available;
 
     /**

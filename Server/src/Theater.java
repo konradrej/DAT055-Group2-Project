@@ -1,13 +1,17 @@
+import java.io.Serializable;
 import java.util.Collection;
 
 import src.Row
+
 
 /**
  * @author Anthon Lenander, Erik Kieu, Phong Nguyen
  * @version version 0.0.0
  */
-public class Theater {
+public class Theater implements Serializable{
 
+	
+	private static final long serialVersionUID = 264852408018552280L;
     private int theaterNumber;
     private Collection<Row> allRows;
 

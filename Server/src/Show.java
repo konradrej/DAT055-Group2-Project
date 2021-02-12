@@ -1,13 +1,18 @@
 package src;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen
 * @version version 0.0.0
 */
-public class Show implements AbstractCollectionObject{
+public class Show implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9177195168561009276L;
 	private Movie movie;
 	private Date day_and_time;
 	private Cinema cinema;

@@ -1,13 +1,22 @@
+import java.io.Serializable;
 import java.util.Collection;
 
 import src.Seat
 /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1432188689020345890L;
+/**
  * @author Anthon Lenander, Erik Kieu, Phong Nguyen
  * @version version 0.0.0
  */
-public class Row {
+public class Row implements Serializable{
 
-    private int rowNumber;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1432188689020345890L;
+	private int rowNumber;
     private Collection<Seat> allSeats;
 
 
