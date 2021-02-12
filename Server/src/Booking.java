@@ -4,7 +4,7 @@ import java.util.*;
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen
 * @version version 0.0.0
 */
-public class Booking {
+public class Booking implements AbstractCollectionObject{
 	
 	private Show show;
 	private Customer customer;
@@ -66,6 +66,11 @@ public class Booking {
 	{
 		this.rows = rows;
 		this.seats = seats;
+	}
+
+	public Customer getCustomer() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

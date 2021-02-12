@@ -4,7 +4,9 @@ package src;
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen
 * @version version 0.0.0
 */
-public class Customer {
+public class Customer implements AbstractCollectionObject{
+
+	public int getSsn;
 
 	private String name;
 	private String phoneNumber;
@@ -29,7 +31,11 @@ public class Customer {
 	 * 
 	 * @return		returns the name of the customer
 	 */
+<<<<<<< HEAD
 	public String GetName()
+=======
+	public Customer getCustomer()
+>>>>>>> branch 'main' of https://github.com/konradrej/DAT055-Group2-Project.git
 	{
 		return this.name;
 	}

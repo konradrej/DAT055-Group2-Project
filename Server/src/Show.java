@@ -6,7 +6,7 @@ import java.util.*;
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen
 * @version version 0.0.0
 */
-public class Show {
+public class Show implements AbstractCollectionObject{
 
 	private Movie movie;
 	private Date day_and_time;
@@ -124,4 +124,15 @@ public class Show {
 		//TODO Change status of the show
 	}
 
+<<<<<<< HEAD
+=======
+	public Movie getMovie() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Show getShow() {
+		return this;
+	}
+>>>>>>> branch 'main' of https://github.com/konradrej/DAT055-Group2-Project.git
 }

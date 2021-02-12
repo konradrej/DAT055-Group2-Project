@@ -1,13 +1,17 @@
+import java.io.Serializable;
 import java.util.*;
 
 /**
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen
 * @version version 0.0.0
 */
-public class CustomerCollection {
-	private LinkedList <Customer> allCustomers = new LinkedList <Customer>();
+public class CustomerCollection implements Serializable, AllCollections {
 	
-	public CustomerCollection () {
+	private static final long serialVersionUID = 398906222416370481L;
+	private Collection <Customer> allCustomers;
+	
+	public CustomerCollection (final int ID) {
+		allCustomers = new LinkedList <Customer> ();
 	}
 	public Customer getCustomer(int ssn) {
 		for(Customer c : allCustomers) {
@@ -19,7 +23,11 @@ public class CustomerCollection {
 		return null;
 	}
 	
-	public void addCustomer(Customer c) {
-		this.allCustomers.add(c);
+	public Collection<AbstractCollectionObject> getCollection() {
+		Collection<AbstractCollectionObject> c = new LinkedList <AbstractCollectionObject>();
+		for(Customer c2 : this.allCustomers) {
+			c.add(c2);
+		}
+		return c;
 	}
 }
