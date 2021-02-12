@@ -13,10 +13,10 @@ public class CustomerCollection implements Serializable, AllCollections {
 	public CustomerCollection (final int ID) {
 		allCustomers = new LinkedList <Customer> ();
 	}
-	public Customer getCustomer(int ssn) {
+	public Customer getCustomer(String ssn) {
 		for(Customer c : allCustomers) {
 			// TODO: class Customer method getSsn
-			if(c.getSsn == ssn) {
+			if(c.GetSSN() == ssn) {
 				return c;
 			}
 		}
