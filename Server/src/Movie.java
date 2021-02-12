@@ -1,13 +1,24 @@
+import java.io.Serializable;
+
 /**
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen
 * @version version 0.0.0
 */
-public class Movie {
+public class Movie implements Serializable{
 
-    private String title;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String title;
     private String genre;
     private int lenght;
 
+    public Movie(String t, String g, int l) {
+    	this.title = t;
+    	this.genre = g;
+    	this.lenght = l;
+    }
     
     public String getTitle() {
         return title;

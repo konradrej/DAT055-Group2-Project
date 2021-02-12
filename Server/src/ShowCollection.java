@@ -1,20 +1,21 @@
 import java.util.*;
 
-import src.Show;
-
 /**
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen
 * @version version 0.0.0
 */
 public class ShowCollection {
-	private Collection <Show> allShows;
+	private LinkedList <Show> allShows = new LinkedList <Show> ();
 	
-	public Collection <Show> getSelectedShow(Movie m){
-		Collection <Show> selectedShows = null;
+	public ShowCollection() {
+	}
+	
+	public LinkedList <Show> getSelectedShow(Movie m){
+		LinkedList <Show> selectedShows = new LinkedList <Show>();
 		//TODO: Date dayAndtime
 		// class Show method getMovie();
 		for(Show s : this.allShows) {
-			Movie m2 = s2.getMovie();
+			Movie m2 = s.getMovie();
 			if(m.equals(m2)) {
 				selectedShows.add(s);
 			}

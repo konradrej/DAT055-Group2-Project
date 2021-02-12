@@ -1,18 +1,22 @@
+import java.io.Serializable;
 import java.util.*;
 
 /**
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen
 * @version version 0.0.0
 */
-public class BookingCollection {
-	private Collection <Booking> allBookings;
+public class BookingCollection implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	private final int BookingCollectionID;
+	private LinkedList<Booking> allBookings = new LinkedList <Booking>();
 	
-	public BookingCollection() {
-		
+	public BookingCollection(final int ID) {
+		BookingCollectionID = ID;
 	}
 	
-	public Collection <Booking> getBookingsByCustomer(Customer c){
-		Collection <Booking> bookings = null;
+	public LinkedList <Booking> getBookingsByCustomer(Customer c){
+		LinkedList <Booking> bookings = new LinkedList <Booking>();
 		for(Booking b : this.allBookings) {
 			//TODO: class Customer method getCustomer()
 			Customer c2 = b.getCustomer();
@@ -23,8 +27,8 @@ public class BookingCollection {
 		return bookings;
 	}
 	
-	public Collection <Booking> getfindBookingsByShow (Show s){
-		Collection <Booking> bookings;
+	public LinkedList <Booking> getfindBookingsByShow (Show s){
+		LinkedList <Booking> bookings = new LinkedList <Booking>();
 		for(Booking b : this.allBookings) {
 			//TODO: class Show method getShow()
 			Show s2 = s.getShow();
@@ -36,7 +40,6 @@ public class BookingCollection {
 	}
 	
 	public void addBookings (Show s, Customer c , Row [] r, Seat [] seat ) {
-		//något här
 		Booking b = new Booking(s, c, r, seat );
 		this.allBookings.add(b);
 	}

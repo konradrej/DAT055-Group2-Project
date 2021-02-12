@@ -5,12 +5,10 @@ import java.util.*;
 * @version version 0.0.0
 */
 public class CustomerCollection {
-	private Collection <Customer> allCustomers;
+	private LinkedList <Customer> allCustomers = new LinkedList <Customer>();
 	
 	public CustomerCollection () {
-		
 	}
-	
 	public Customer getCustomer(int ssn) {
 		for(Customer c : allCustomers) {
 			// TODO: class Customer method getSsn
@@ -18,6 +16,7 @@ public class CustomerCollection {
 				return c;
 			}
 		}
+		return null;
 	}
 	
 	public void addCustomer(Customer c) {

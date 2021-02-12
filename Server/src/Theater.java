@@ -1,4 +1,5 @@
-import src.Row;
+import java.util.Collection;
+
 /**
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen
 * @version version 0.0.0

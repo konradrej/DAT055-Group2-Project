@@ -1,4 +1,4 @@
-import src.Seat;
+import java.util.Collection;
 
 /**
  * @author Anthon Lenander, Erik Kieu, Phong Nguyen
@@ -8,7 +8,7 @@ public class Row {
 
     private int rowNumber;
     private int seatNumber;
-    private Collection <seat> allSeats;
+    private Collection <Seat> allSeats;
 
     /**
      * Constructor for initializing the Row instance

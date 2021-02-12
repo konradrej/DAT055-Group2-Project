@@ -60,5 +60,11 @@ public class Show {
 	{
 		
 	}
+
+	public Movie getMovie() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 }
