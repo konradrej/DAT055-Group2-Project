@@ -4,6 +4,4 @@ public interface AllCollections {
 	
 	public Collection <AbstractCollectionObject> getCollection();
 	
-	
-
 }

@@ -9,6 +9,7 @@ public class BookingCollection implements Serializable, AllCollections{
 
 	private static final long serialVersionUID = 1450784786789696365L;
 	private Collection<Booking> allBookings;
+	
 	public BookingCollection() {
 		allBookings = new LinkedList <Booking>();
 	}
@@ -27,7 +28,6 @@ public class BookingCollection implements Serializable, AllCollections{
 	public Collection <Booking> getfindBookingsByShow (Show s){
 		Collection <Booking> bookings = new LinkedList <Booking>();
 		for(Booking b : this.allBookings) {
-			//TODO: class Show method getShow()
 			Show s2 = s.getShow();
 			if(s.equals(s2)) {
 				bookings.add(b);
@@ -36,13 +36,17 @@ public class BookingCollection implements Serializable, AllCollections{
 		return bookings;
 	}
 	
-	public void addBookings(Show s, Customer c , Row [] r, Seat [] seat ) {
+	public void addBookings(Show s, Customer c , Row [] r , Seat [] seat ) {
 		Booking b = new Booking(s, c, r, seat );
 		this.allBookings.add(b);
 	}
 	
-	public void updateBooking (int row, int seat) {
-		
+	public void updateBooking (Booking b , Show s, Customer c , Row [] r , Seat [] seat ) {
+		for(Booking b2 : this.allBookings) {
+			if(b2.equals(b)) {
+				b2 = new Booking(s, c, r, seat);
+			}
+		}
 	}
 
 	@Override

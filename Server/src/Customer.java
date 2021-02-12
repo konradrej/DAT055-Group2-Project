@@ -6,8 +6,6 @@ package src;
 */
 public class Customer implements AbstractCollectionObject{
 
-	public int getSsn;
-
 	private String name;
 	private String phoneNumber;
 	private String SSN;
