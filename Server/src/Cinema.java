@@ -9,7 +9,7 @@ import src.Theatre;
 public class Cinema {
 
     private String name;
-    private Collection<theatre> allTheatres;
+    private Collection <theatre> allTheatres;
 
 
     /**
