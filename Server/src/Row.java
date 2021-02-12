@@ -1,5 +1,6 @@
 import java.util.Collection;
 
+import src.Seat
 /**
  * @author Anthon Lenander, Erik Kieu, Phong Nguyen
  * @version version 0.0.0
@@ -7,17 +8,18 @@ import java.util.Collection;
 public class Row {
 
     private int rowNumber;
-    private int seatNumber;
-    private Collection <Seat> allSeats;
+    private Collection<Seat> allSeats;
+
 
     /**
      * Constructor for initializing the Row instance
      *
-     * @param rowNumber      the number of the row
-     * @param seatNumber     the number of the seat
+     * @param rowNumber the number of the row
+     * @param allSeats  the Collection of allSeats
      */
-    public Row(int rowNumber, int seatNumber,...){
-        //TODO: row parameter
+    public Row(int rowNumber, Collection<Seat> allSeats) {
+        this.rowNumber = rowNumber;
+        this.allSeats = allSeats;
     }
 
     /**
@@ -30,25 +32,34 @@ public class Row {
     /**
      * Method for getting a row
      *
-     * @return      returns the Row instance itself
+     * @return returns the Row instance itself
      */
-    public Row getRowNumber() {
+    public Row getRow() {
         return this;
+    }
+
+    /**
+     * Method for getting a row number
+     *
+     * @return returns the row number
+     */
+    public int getRowNumber() {
+        return rowNumber;
     }
 
 
     /**
      * Method for getting seats from a collection of seats
      */
-    public Collection <Seat> getCollectionOfSeats() {
-        //TODO: return information
+    public Collection<Seat> getAllSeats() {
+        return this.allSeats;
     }
 
     /**
      * Method for creating new seats and adding it to
      * a collection of seats
      */
-    public void addSeat(int seatNumber, boolean available){
+    public void addSeat(int seatNumber, boolean available) {
         Seat s = new Seat(seatNumber, available);
         this.allSeats.add(s);
     }
@@ -74,8 +85,14 @@ public class Row {
      * Method for getting available seats from a
      * collection of available seats
      */
-    public void getCollectionOfAvailableSeats() {
-
+    public Collection<Seat> getCollectionOfAvailableSeats() {
+        private LinkedList<Seat> availableSeats = new LinkedList<Seat>();
+        for (Seat s : this.allSeats) {
+            if (s.getAvailable) {
+                availableSeats.add(s);
+            }
+        }
+        return availableSeats;
     }
 
 }

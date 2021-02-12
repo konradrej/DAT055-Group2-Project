@@ -1,7 +1,7 @@
 /**
-* @author Anthon Lenander, Erik Kieu, Phong Nguyen
-* @version version 0.0.0
-*/
+ * @author Anthon Lenander, Erik Kieu, Phong Nguyen
+ * @version version 0.0.0
+ */
 public class Seat {
 
     private int seatNumber;
@@ -10,10 +10,10 @@ public class Seat {
     /**
      * Constructor for initializing the Seat instance
      *
-     * @param seatNumber     the number of the seat
-     * @param available      the seat status
+     * @param seatNumber the number of the seat
+     * @param available  the seat status
      */
-    public Seat (int seatNumber, boolean available){
+    public Seat(int seatNumber, boolean available) {
         seatNumber = this.seatNumber;
         available = this.available;
     }
@@ -21,24 +21,37 @@ public class Seat {
     /**
      * Method for getting the details of the seat
      *
-     * @return		returns the seat instance itself
+     * @return returns the seat instance itself
      */
-    public Seat getSeat(){
+    public Seat getSeat() {
         return this;
+    }
+
+
+    /**
+     * Method for getting the seat number
+     *
+     * @return returns the seat number
+     */
+    public int getSeatNumber() {
+        return this.seatNumber;
+    }
+
+    /**
+     * Method for getting an available seat
+     *
+     * @return      returns if seat is available
+     */
+    public boolean getAvailable() {
+        return this.available;
     }
 
     /**
      * Method for updating (setting) the seat status
      */
-    public void updateSeatStatus(boolean available){
+    public void updateSeatStatus(boolean available) {
         available = this.available;
     }
-
-
-
-
-
-
 
 
 }

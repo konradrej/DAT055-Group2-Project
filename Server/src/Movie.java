@@ -4,12 +4,12 @@ import java.io.Serializable;
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen
 * @version version 0.0.0
 */
-public class Movie implements Serializable{
+public class Movie {
 
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+
 	private String title;
     private String genre;
     private int lenght;

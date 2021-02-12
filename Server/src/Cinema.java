@@ -1,6 +1,6 @@
 import java.util.*;
 
-import src.Theatre;
+import src.Theater;
 
 /**
  * @author Anthon Lenander, Erik Kieu, Phong Nguyen
@@ -9,16 +9,18 @@ import src.Theatre;
 public class Cinema {
 
     private String name;
-    private Collection <theatre> allTheatres;
+    private Collection <Theater> allTheaters;
 
 
     /**
      * Constructor for initializing the Cinema instance
      *
-     * @param name      the name of the cinema
+     * @param name              the name of the cinema
+     * @param allTheatres       the Collection of allTheatres
      */
-    public Cinema(String name,....){
-        //Todo: Cinema parameter
+    public Cinema(String name, Collection <Theatet> allTheaters){
+        this.name = name;
+        this.allTheaters = allTheaters;
     }
 
 
@@ -30,12 +32,21 @@ public class Cinema {
     }
 
     /**
-     * Method for getting cinema name
+     * Method for getting a cinema
      *
      * @return returns the cinema instance itself
      */
     public Cinema getCinema() {
         return this;
+    }
+
+    /**
+     * Method for getting cinema name
+     *
+     * @return      returns the cinema name
+     */
+    public String getCinema() {
+        return name;
     }
 
 
@@ -44,19 +55,17 @@ public class Cinema {
      *
      * @return return
      */
-    public Collection <Theatre> getTheatreCollection() {
-        //Todo: the code
-        //TODO: return information is missing
+    public Collection <Theater> getTheaterCollection() {
+        return this.allTheaters;
     }
 
     /**
-     * Creates new theatre given rows, cinema, ...
-     * Adds the created theatre to the collection of theatres
+     * Method for creating a new theater given rows, cinema...
+     *
      */
-    public void addTheater(int theaterNumber,...) {
-        //Todo: parameters for the method
-        Theatre t = new theatre(c, r);
-        this.allTheatres.add(t);
+    public void addTheater() {
+        //TODO: parameters
+        //TODO: CODE
     }
 
 
