@@ -8,27 +8,70 @@ import java.util.*;
 */
 public class Show {
 
+	private Movie movie;
+	private Date day_and_time;
+	private Cinema cinema;
+	private Theater theater;
+	private Boolean status;
+	
+	private Collection<Row> rows;
+	
 	/**
-	 * Constructor for initializing the show instance
+	 * Constructor for initializing the show instance with corresponding parameter values
 	 * 
 	 * @param movie			the movie that the show will play
 	 * @param day_and_time	the day and time of the show
-	 * @param cinema			what cinema the show will be played at
+	 * @param cinema		what cinema the show will be played at
 	 * @param theater		what theater the show will be played at
 	 */
 	public Show(Movie movie, Date day_and_time, Cinema cinema, Theater theater)
 	{
+		this.movie = movie;
+		this.day_and_time = day_and_time;
+		this.cinema = cinema;
+		this.theater = theater;
 		
+		this.rows = this.theater.getCollectionOfRows();
 	}
 	
 	/**
-	 * Method for getting the details of the show
+	 * Method for getting the movie that will be played
 	 * 
-	 * @return	returns the show object itself
+	 * @return	returns the movie instance variable of this object
 	 */
-	public Show GetDetails()
+	public Movie GetMovie()
 	{
-		return this;
+		return this.movie;
+	}
+	
+	/**
+	 * Method for getting the day and time at which the show will take place
+	 * 
+	 * @return	returns the day_and_time instance variable of this object
+	 */
+	public Date GetShowDateAndTime()
+	{
+		return this.day_and_time;
+	}
+	
+	/**
+	 * Method for getting the cinema at which the show will be played
+	 * 
+	 * @return	returns the cinema instance variable of this object
+	 */
+	public Cinema GetCinema()
+	{
+		return this.cinema;
+	}
+	
+	/**
+	 * Method for getting the theater at which the show will be played
+	 * 
+	 * @return	returns the theater instance variable of this object
+	 */
+	public Theater GetTheater()
+	{
+		return this.theater;
 	}
 	
 	/**
@@ -37,9 +80,19 @@ public class Show {
 	 * @param numOfSeats	the number of seats to find	
 	 * @return 				returns a Seat array, containing available seats
 	 */
-	public Seat[] FindAvailableSeats(int numOfSeats)
+	public Collection<Seat> FindAvailableSeats()
 	{
-		return new Seat[numOfSeats];
+		Collection<Seat> availableSeats = Collections.emptyList();
+		
+		for(Row r : this.rows)
+		{
+			for(Seat s : r.getCollectionOfAvailableSeats())
+			{
+				availableSeats.add(s);
+			}
+		}
+		
+		return availableSeats;
 	}
 	
 	/**
@@ -48,9 +101,19 @@ public class Show {
 	 * @param numOfSeats	the number of seats to find, adjacent to each other
 	 * @return 				returns a Seat array, containing available seats adjacent to each other
 	 */
-	public Seat[] FindAvailableAdjacentSeats(int numOfSeats)
+	public Collection<Seat> FindAvailableAdjacentSeats(int numOfSeats)
 	{
-		return new Seat[numOfSeats];
+		Collection<Seat> availableAdjacentSeats = Collections.emptyList();
+		
+		for(Row r : this.rows)
+		{
+			for(Seat s : r.getCollectionOfAdjacentAvailableSeats())
+			{
+				availableAdjacentSeats.add(s);
+			}
+		}
+		
+		return availableAdjacentSeats;
 	}
 	
 	/**
@@ -58,13 +121,7 @@ public class Show {
 	 */
 	public void ChangeStatus()
 	{
-		
+		//TODO Change status of the show
 	}
 
-	public Movie getMovie() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
 }

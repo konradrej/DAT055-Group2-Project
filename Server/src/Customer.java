@@ -6,6 +6,10 @@ package src;
 */
 public class Customer {
 
+	private String name;
+	private String phoneNumber;
+	private String SSN;
+	
 	/**
 	 * Constructor for initializing the Customer instance
 	 * 
@@ -15,17 +19,39 @@ public class Customer {
 	 */
 	public Customer(String name, String phoneNumber, String SSN)
 	{
-		
+		this.name = name;
+		this.phoneNumber = phoneNumber;
+		this.SSN = SSN;
 	}
 	
 	/**
-	 * Method for getting the details of the customer
+	 * Method for getting the name of the customer
 	 * 
-	 * @return		returns the customer instance itself
+	 * @return		returns the name of the customer
 	 */
-	public Customer GetCustomerInformation()
+	public String GetName()
 	{
-		return this;
+		return this.name;
+	}
+	
+	/**
+	 * Method for getting the phone number of the customer
+	 * 
+	 * @return		returns the phone number of the customer
+	 */
+	public String GetPhoneNumber()
+	{
+		return this.phoneNumber;
+	}
+	
+	/**
+	 * Method for getting the social security number of the customer
+	 * 
+	 * @return		returns the social security number of the customer
+	 */
+	public String GetSSN()
+	{
+		return this.SSN;
 	}
 	
 	/**

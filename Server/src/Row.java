@@ -77,7 +77,7 @@ public class Row {
      * Method for getting n number of adjacent available seats
      * Return information is missing
      */
-    public void getAdjacentAvailableSeats() {
+    public Collection<Seat> getCollectionOfAdjacentAvailableSeats() {
         //TODO: return information
     }
 

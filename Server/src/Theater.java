@@ -17,7 +17,7 @@ public class Theater {
      * @param theatreNumber the number of the theatre
      * @param allRows       the Collection of allrows
      */
-    public Theatre(int theaterNumber, Collection<Row> allRows) {
+    public Theater(int theaterNumber, Collection<Row> allRows) {
         this.theaterNumber = theaterNumber;
         this.allRows = allRows;
     }
