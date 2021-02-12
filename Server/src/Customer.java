@@ -4,7 +4,7 @@ package src;
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen
 * @version version 0.0.0
 */
-public class Customer {
+public class Customer implements AbstractCollectionObject{
 
 	/**
 	 * Constructor for initializing the Customer instance
@@ -23,7 +23,7 @@ public class Customer {
 	 * 
 	 * @return		returns the customer instance itself
 	 */
-	public Customer GetCustomerInformation()
+	public Customer getCustomer()
 	{
 		return this;
 	}

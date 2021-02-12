@@ -4,7 +4,7 @@
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen
 * @version version 0.0.0
 */
-public class Booking {
+public class Booking implements AbstractCollectionObject{
 	
 	/**
 	 * Constructor for initializing the Booking instance
@@ -36,6 +36,11 @@ public class Booking {
 	public void UpdateRowsAndSeats(Row[] rows, Seat[] seats)
 	{
 		
+	}
+
+	public Customer getCustomer() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

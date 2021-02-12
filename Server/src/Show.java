@@ -6,7 +6,7 @@ import java.util.*;
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen
 * @version version 0.0.0
 */
-public class Show {
+public class Show implements AbstractCollectionObject{
 
 	/**
 	 * Constructor for initializing the show instance
@@ -66,5 +66,7 @@ public class Show {
 		return null;
 	}
 
-	
+	public Show getShow() {
+		return this;
+	}
 }
