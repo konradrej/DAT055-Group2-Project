@@ -5,7 +5,7 @@ import java.util.*;
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen
 * @version version 0.0.0
 */
-public class CustomerCollection implements Serializable {
+public class CustomerCollection implements Serializable, AllCollections {
 	
 	private static final long serialVersionUID = 398906222416370481L;
 	private Collection <Customer> allCustomers;
@@ -23,18 +23,11 @@ public class CustomerCollection implements Serializable {
 		return null;
 	}
 	
-	public void addCustomer(Customer c) {
-		this.allCustomers.add(c);
-	}
-	
-	public void removeCustomer(Customer c) {
+	public Collection<AbstractCollectionObject> getCollection() {
+		Collection<AbstractCollectionObject> c = new LinkedList <AbstractCollectionObject>();
 		for(Customer c2 : this.allCustomers) {
-			if(c.equals(c2)) {
-				this.allCustomers.remove(c2);
-				//Break because only 1(not true) unique customer
-				break;
-			}
+			c.add(c2);
 		}
-		System.out.println("Customer not found");
+		return c;
 	}
 }

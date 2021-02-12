@@ -6,6 +6,8 @@ package src;
 */
 public class Customer implements AbstractCollectionObject{
 
+	public int getSsn;
+
 	/**
 	 * Constructor for initializing the Customer instance
 	 * 
