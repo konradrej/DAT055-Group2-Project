@@ -66,7 +66,8 @@ public class Row implements Serializable{
      * a collection of seats
      */
     public void addSeat(int seatNumber, boolean available) {
-        Seat s = new Seat(seatNumber, available);
+    	
+        Seat s = new Seat(this.allSeats.size() + 1, available);
         this.allSeats.add(s);
     }
 

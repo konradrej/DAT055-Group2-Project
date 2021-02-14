@@ -1,4 +1,4 @@
-import java.io.*;
+
 
 /**
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen
@@ -31,13 +31,21 @@ public class CinemaBookingSystem {
 	}
 	
 	
-	// Serialize (saves in path: Working Tree-> Server -> src) all collection
+	// Serialize (saves in path: Working Tree-> Maven project -> Server) all collection
 	
 	public void updateAllCollections(){
 		movieCollection.updateCollection();
 		showCollection.updateCollection();
 		customerCollection.updateCollection();
 		bookingCollection.updateCollection();
+	}
+	
+	public static void main (String [] args) {
+	      
+		//test get movies
+		MovieCollection m = new MovieCollection("test");
+		m.scanNewMovies();
+		
 	}
 	
 }

@@ -30,7 +30,7 @@ public class MovieCollection implements Serializable, AllCollections{
 	
 	public MovieCollection(String filename) {
 		this.filename = filename;
-		scanNewMovies();
+		allMovies = new LinkedList <Movie>();
 	}
 	
 	/**
@@ -110,11 +110,10 @@ public class MovieCollection implements Serializable, AllCollections{
 		catch (IOException e) {
             e.printStackTrace();
         }
-		
 	}
 	
 	/**
-	 * Scans (TODO: and updates) movies to the collection from this objects URL
+	 * Scans and updates new movies to the collection from this objects URL
 	 */
 	
 	public void scanNewMovies() {
@@ -131,7 +130,16 @@ public class MovieCollection implements Serializable, AllCollections{
 		for(Element e : body.select("h2 a")) {
 			String link = e.attributes().get("href");
 			String title = e.attributes().get("title");
-			scanMovieDetails(link, title);
+			Boolean scanthis = true;
+			for( Movie m : this.allMovies) {
+				if(m.getURL().equals(URL + link)){
+					scanthis = false;
+					break;
+				}
+			}
+			if(scanthis) {
+				scanMovieDetails(link, title);
+			}
 		}
 	}
 	
@@ -192,5 +200,8 @@ public class MovieCollection implements Serializable, AllCollections{
 		
 		Movie m = new Movie(title, elementTime.text(), list, URL + l);
 		this.allMovies.add(m);	
+		
+		//test
+		m.provideMovieDetails();
 	}
 }

@@ -34,7 +34,7 @@ public class ShowCollection implements Serializable, AllCollections {
 	 * @return a collection of shows
 	 */
 	
-	public Collection <Show> getShowsGivenMovie(Movie m){
+	public Collection <Show> getShowsGivenMovie(Movie m, Calendar c){
 		Collection <Show> selectedShows = new LinkedList <Show>();
 		//TODO: Date dayAndtime
 		for(Show s : this.allShows) {
