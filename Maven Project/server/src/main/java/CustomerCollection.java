@@ -15,10 +15,24 @@ public class CustomerCollection implements Serializable, AllCollections {
 	private Collection <Customer> allCustomers;
 	private final String filename;
 	
+	/**
+	 * Constructor for initializing the CustomerCollection instance
+	 * 
+	 * @param filename	Filename of the object when serializing
+	 */
+	
 	public CustomerCollection (String filename) {
 		this.filename = filename;
 		allCustomers = new LinkedList <Customer> ();
 	}
+	
+	/**
+	 * Gets a customer given ssn
+	 * 
+	 * @param ssn - the ssn that being searched
+	 * @return a customer
+	 */
+	
 	public Customer getCustomer(String ssn) {
 		for(Customer c : allCustomers) {
 			if(c.GetSSN() == ssn) {
@@ -27,10 +41,20 @@ public class CustomerCollection implements Serializable, AllCollections {
 		}
 		return null;
 	}
-	
+	/**
+	 * Adds a customer to the objects customer collection
+	 * 
+	 * @param c - the customer being added
+	 */
 	public void addCustomer(Customer c) {
 		this.allCustomers.add(c);
 	}
+	
+	/**
+	 * Removes a customer from the objects customer collection
+	 * 
+	 * @param c - the custoemr being removed
+	 */
 	
 	public void removeCustomer(Customer c ) {
 		for(Customer c2: this.allCustomers) {
@@ -41,11 +65,21 @@ public class CustomerCollection implements Serializable, AllCollections {
 		System.out.println("Customer not found");
 	}
 	
+	/**
+	 * Get method for the filename when serializing
+	 * 
+	 * @return a string of the filename
+	 */
 	public String getFilename() {
 		return this.filename;
 	}
 	
-	@Override
+	/**
+	 * Serializing and updates this object 
+	 * 
+	 * 	@Override
+	 */
+	
 	public void updateCollection(){
 		
 		try {
@@ -55,7 +89,6 @@ public class CustomerCollection implements Serializable, AllCollections {
 		}
 		catch (IOException e) {
             System.out.println("Error initializing stream");
-        }
-		
+        }	
 	}
 }

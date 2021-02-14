@@ -1,6 +1,7 @@
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 
 /**
@@ -93,7 +94,7 @@ public class Row implements Serializable{
      * collection of available seats
      */
     public Collection<Seat> getCollectionOfAvailableSeats() {
-        LinkedList<Seat> availableSeats = new LinkedList<Seat>();
+        Collection<Seat> availableSeats = Collections.emptyList();
         for (Seat s : this.allSeats) {
             if (s.getAvailable()) {
                 availableSeats.add(s);

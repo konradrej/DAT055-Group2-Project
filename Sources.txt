@@ -9,3 +9,6 @@ Lecture 6, DAT055
 
 How to build jar with maven
 https://www.baeldung.com/executable-jar-with-maven
+
+Webscraping + Jsoup
+https://www.youtube.com/watch?v=1I0iJB29ww0&t=10s

@@ -15,10 +15,23 @@ public class BookingCollection implements Serializable, AllCollections{
 	private Collection<Booking> allBookings;
 	private final String filename;
 	
+	/**
+	 * Constructor for initializing the BookingCollection instance
+	 * 
+	 * @param filename	Filename of the object when serializing
+	 */
+	
 	public BookingCollection(String filename) {
 		this.filename = filename; 
 		allBookings = new LinkedList <Booking>();
 	}
+	
+	/**
+	 * Get all bookings given a customer
+	 * 
+	 * @param c - the customer
+	 * @return a collection of bookings of the customer
+	 */
 	
 	public Collection <Booking> getBookingsByCustomer(Customer c){
 		Collection <Booking> bookings = new LinkedList <Booking>();
@@ -31,7 +44,14 @@ public class BookingCollection implements Serializable, AllCollections{
 		return bookings;
 	}
 	
-	public Collection <Booking> getfindBookingsByShow (Show s){
+	/**
+	 * Get all bookings given a show
+	 * 
+	 * @param s - the show 
+	 * @return a collection of bookings of the show
+	 */
+	
+	public Collection <Booking> getBookingsByShow (Show s){
 		Collection <Booking> bookings = new LinkedList <Booking>();
 		for(Booking b : this.allBookings) {
 			Show s2 = s.getShow();
@@ -42,10 +62,25 @@ public class BookingCollection implements Serializable, AllCollections{
 		return bookings;
 	}
 	
+	/**
+	 * Adds booking to the objects booking collection given show, customer, collection of rows and collection of seats
+	 * 
+	 * @param s - The show of the booking
+	 * @param c - The customer of the booking
+	 * @param r - (TODO: ) The collection of row of the booking
+	 * @param seat - The collection of seat of the booking
+	 */
+	
 	public void addBookings(Show s, Customer c , Collection <Row> r , Collection <Seat> seat ) {
 		Booking b = new Booking(s, c, r, seat );
 		this.allBookings.add(b);
 	}
+	
+	/**
+	 * Removes a booking from the objects booking collection
+	 * 
+	 * @param b - the booking that removes
+	 */
 	
 	public void removeBooking(Booking b ) {
 		for(Booking b2: this.allBookings) {
@@ -56,6 +91,16 @@ public class BookingCollection implements Serializable, AllCollections{
 		System.out.println("Booking not found");
 	}
 	
+	/**
+	 * Updates a booking given Show, customer, collection of rows and collection of seats
+	 * 
+	 * @param b - The booking that is updating
+	 * @param s - The updated show
+	 * @param c - The updated customer
+	 * @param r - The updated collection of row
+	 * @param seat - The updated collection of seat
+	 */
+	
 	public void updateBooking (Booking b , Show s, Customer c , Collection <Row> r , Collection <Seat> seat ) {
 		for(Booking b2 : this.allBookings) {
 			if(b2.equals(b)) {
@@ -63,12 +108,22 @@ public class BookingCollection implements Serializable, AllCollections{
 			}
 		}
 	}
+	
+	/**
+	 * Get method for the filename
+	 * 
+	 * @return the filename when serializing
+	 */
 
 	public String getFilname() {
 		return this.filename;
 	}
 
-	@Override
+	/**
+	 * Serializing and updates this object 
+	 * 
+	 * 	@Override
+	 */
 	public void updateCollection(){
 		
 		try {
