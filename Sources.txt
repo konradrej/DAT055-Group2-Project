@@ -1,0 +1,11 @@
+Two way communication:
+https://www.geeksforgeeks.org/establishing-the-two-way-communication-between-server-and-client-in-java/
+
+Singleton design pattern in java:
+https://www.baeldung.com/java-singleton
+
+Observer/observable
+Lecture 6, DAT055
+
+How to build jar with maven
+https://www.baeldung.com/executable-jar-with-maven
