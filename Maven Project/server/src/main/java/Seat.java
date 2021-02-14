@@ -6,9 +6,6 @@ import java.io.Serializable;
  */
 public class Seat implements Serializable{
 
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 2724216208606386504L;
 	private int seatNumber;
     private boolean available;

@@ -10,9 +10,6 @@ import java.util.LinkedList;
  */
 public class Row implements Serializable{
 
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = -1432188689020345890L;
 	private int rowNumber;
     private Collection<Seat> allSeats;
@@ -28,6 +25,8 @@ public class Row implements Serializable{
         this.rowNumber = rowNumber;
         this.allSeats = allSeats;
     }
+    
+    
 
     /**
      * Method for setting a row number
@@ -81,19 +80,10 @@ public class Row implements Serializable{
     }
 
     /**
-     * Method for getting n number of adjacent available seats
-     * Return information is missing
-     */
-    public Collection<Seat> getCollectionOfAdjacentAvailableSeats() {
-        //TODO: return information
-        return new ArrayList<>();
-    }
-
-    /**
      * Method for getting available seats from a
      * collection of available seats
      */
-    public Collection<Seat> getCollectionOfAvailableSeats() {
+    public Collection<Seat> getAllAvailableSeats() {
         Collection<Seat> availableSeats = Collections.emptyList();
         for (Seat s : this.allSeats) {
             if (s.getAvailable()) {
@@ -101,6 +91,31 @@ public class Row implements Serializable{
             }
         }
         return availableSeats;
+    }
+    
+    /**
+     * Method for getting n number of adjacent available seats
+     * Return information is missing
+     */
+    
+    public Collection <Seat> getAdjacentAvailableSeats (int numOfSeats){
+    	int count = 0;
+    	Collection <Seat> adjacentSeats = new LinkedList <Seat>();
+    	Collection <Seat> temp = new LinkedList <Seat>();
+    	for(Seat s : this.allSeats) {
+    		if(s.getAvailable()) {
+    			count++;
+    			temp.add(s);
+    		}
+    		else {
+    			if(count >= numOfSeats) {
+    				adjacentSeats.addAll(temp);
+    			}
+    			temp.removeAll(temp);
+    			count = 0;
+    		}
+    	}
+    	return adjacentSeats;
     }
 
 }

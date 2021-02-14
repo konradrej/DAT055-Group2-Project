@@ -9,7 +9,6 @@ import java.util.LinkedList;
  */
 public class Theater implements Serializable{
 
-	
 	private static final long serialVersionUID = 264852408018552280L;
     private int theaterNumber;
     private Collection<Row> allRows;
@@ -38,7 +37,7 @@ public class Theater implements Serializable{
      *
      * @return returns the theatre instance itself
      */
-    public Theater getTheatre() {
+    public Theater getTheater() {
         return this;
     }
 
@@ -48,7 +47,7 @@ public class Theater implements Serializable{
      *
      * @return returns the theatre instance itself
      */
-    public int getTheatreNumber() {
+    public int getTheaterNumber() {
         return this.theaterNumber;
 
     }
@@ -76,12 +75,20 @@ public class Theater implements Serializable{
     /**
      * Method for finding all available seats
      */
-    public LinkedList<Seat> availableSeats() {
-        LinkedList<Seat> availableSeats = new LinkedList<Seat>();
+    public Collection<Seat> getAllAvailableSeats() {
+        Collection<Seat> availableSeats = new LinkedList<Seat>();
         for (Row r : this.allRows) {
-            availableSeats.addAll(r.getCollectionOfAvailableSeats());
+            availableSeats.addAll(r.getAllAvailableSeats());
         }
         return availableSeats;
+    }
+    
+    public Collection <Seat> getAdjacentAvailableSeats(int numOfSeats){
+    	Collection <Seat> adjacentSeats = new LinkedList <Seat>();
+    	for(Row r : this.allRows) {
+    		adjacentSeats.addAll(r.getAdjacentAvailableSeats(numOfSeats));
+    	}
+    	return adjacentSeats;
     }
 
 

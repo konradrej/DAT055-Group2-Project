@@ -46,6 +46,27 @@ public class ShowCollection implements Serializable, AllCollections {
 		return selectedShows;
 	}
 	
+	public Collection <Seat> getAllAvailableSeats(Show s){
+		for(Show s2: this.allShows) {
+			if(s2.equals(s)) {
+				return s2.getAllAvailableSeats();
+			}
+		}
+		System.out.println("Show not found / no collection of seats available");
+		return null;
+	}
+	
+	public Collection <Seat> getAdjacentSeats(Show s, int numOfSeats){
+			for(Show s2: this.allShows) {
+				if(s2.equals(s)) {
+					return s2.getAdjacentAvailableSeats(numOfSeats);
+				}
+			}
+			System.out.println("Show not found / no collection of seats available");
+		return null;
+	}
+	
+	
 	/**
 	 * Adds a show given movie, date and time, cinema and theater:
 	 * 

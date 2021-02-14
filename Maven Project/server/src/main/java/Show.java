@@ -17,6 +17,7 @@ public class Show implements Serializable{
 	private Theater theater;
 	private Boolean status;
 	
+	// Remove?
 	private Collection<Row> rows;
 	
 	/**
@@ -83,19 +84,9 @@ public class Show implements Serializable{
 	 * @param numOfSeats	the number of seats to find	
 	 * @return 				returns a Seat array, containing available seats
 	 */
-	public Collection<Seat> FindAvailableSeats()
+	public Collection<Seat> getAllAvailableSeats()
 	{
-		Collection<Seat> availableSeats = Collections.emptyList();
-		
-		for(Row r : this.rows)
-		{
-			for(Seat s : r.getCollectionOfAvailableSeats())
-			{
-				availableSeats.add(s);
-			}
-		}
-		
-		return availableSeats;
+		return theater.getAllAvailableSeats();
 	}
 	
 	/**
@@ -104,19 +95,9 @@ public class Show implements Serializable{
 	 * @param numOfSeats	the number of seats to find, adjacent to each other
 	 * @return 				returns a Seat array, containing available seats adjacent to each other
 	 */
-	public Collection<Seat> FindAvailableAdjacentSeats(int numOfSeats)
+	public Collection<Seat> getAdjacentSeats(int numOfSeats)
 	{
-		Collection<Seat> availableAdjacentSeats = Collections.emptyList();
-		
-		for(Row r : this.rows)
-		{
-			for(Seat s : r.getCollectionOfAdjacentAvailableSeats())
-			{
-				availableAdjacentSeats.add(s);
-			}
-		}
-		
-		return availableAdjacentSeats;
+		return theater.getAdjacentAvailableSeats(numOfSeats);
 	}
 	
 	/**
@@ -136,5 +117,9 @@ public class Show implements Serializable{
 	// TODO Comments
 	public Show getShow() {
 		return this;
+	}
+	
+	public Theater getTheater() {
+		return this.theater;
 	}
 }
