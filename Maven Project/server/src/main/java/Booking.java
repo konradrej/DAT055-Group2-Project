@@ -15,7 +15,7 @@ public class Booking implements Serializable {
 	private Customer customer;
 	private Collection<Row> rows;
 	private Collection<Seat> seats;
-	private Boolean status;
+	private Boolean cancelled;
 	
 	/**
 	 * Constructor for initializing the Booking instance
@@ -31,6 +31,7 @@ public class Booking implements Serializable {
 		this.customer = customer;
 		this.rows = rows;
 		this.seats = seats;
+		this.cancelled = false;
 	}
 	
 	/**
@@ -54,11 +55,11 @@ public class Booking implements Serializable {
 	}
 	
 	/**
-	 * Method for changing the status of the booking
+	 * Method for internally changing the status of the booking
 	 */
 	public void ChangeStatus()
 	{
-		//TODO Implement status of the booking and make it possible to change it via this method
+		this.cancelled = !this.cancelled;
 	}
 	
 	/**
@@ -73,9 +74,13 @@ public class Booking implements Serializable {
 		this.seats = seats;
 	}
 
-	public Customer getCustomer() {
-		// TODO Auto-generated method stub
-		return null;
+	/**
+	 * Method for getting what customer the booking belongs to
+	 * 
+	 * @return customer		what customer the booking belongs to
+	 */
+	public Customer GetCustomer() {
+		return this.customer;
 	}
 	
 }

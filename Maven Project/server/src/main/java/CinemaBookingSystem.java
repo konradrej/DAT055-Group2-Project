@@ -31,7 +31,7 @@ public class CinemaBookingSystem {
 	}
 	
 	
-	// Serialize (saves in path: Working Tree-> Maven project -> Server) all collection
+	// Serialize (saves in path: Working Tree-> Maven project -> Server) all collections
 	
 	public void updateAllCollections(){
 		movieCollection.updateCollection();

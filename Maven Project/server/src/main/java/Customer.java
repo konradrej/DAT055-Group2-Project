@@ -36,12 +36,6 @@ public class Customer implements Serializable{
 	public String GetName(){
 		return this.name;
 	}
-
-	// TODO Add a comment (side note: why do we have this? you use a instance of this object to return this object?)
-	public Customer getCustomer()
-	{
-		return this;
-	}
 	
 	/**
 	 * Method for getting the phone number of the customer
@@ -64,13 +58,31 @@ public class Customer implements Serializable{
 	}
 	
 	/**
-	 * Method for setting customer information, 
-	 * yet to be implemented, parameter information
-	 * and return information missing at the moment.
+	 * Method for setting the name of the customer
+	 * 
+	 * @param		the name of the customer
 	 */
-	public void SetCustomerInformation()
-	{
-		
+	public void SetName(String name){
+		this.name = name;
 	}
 	
+	/**
+	 * Method for setting the phone number of the customer
+	 * 
+	 * @param		the phone number of the customer
+	 */
+	public void SetPhoneNumber(String phoneNumber)
+	{
+		this.phoneNumber = phoneNumber;
+	}
+	
+	/**
+	 * Method for setting the social security number of the customer
+	 * 
+	 * @param		the social security number of the customer
+	 */
+	public void SetSSN(String SSN)
+	{
+		this.SSN = SSN;
+	}
 }
