@@ -7,8 +7,8 @@ import java.net.Socket;
  */
 public class ConnectionHandler extends Thread {
     private final Socket socket;
-    private BufferedReader br;
-    private PrintStream ps;
+    private ObjectInputStream in;
+    private ObjectOutputStream out;
 
     /**
      * Constructor for initializing the ConnectionHandler instance.
@@ -27,23 +27,22 @@ public class ConnectionHandler extends Thread {
     }
 
     /**
-     * Esthbalise read/write streams through the socket.
+     * Establish read/write streams through the socket.
      */
     @Override
     public void run() {
         try {
-            ps = new PrintStream(
+            out = new ObjectOutputStream(
                     socket.getOutputStream()
             );
 
-            br = new BufferedReader(
-                    new InputStreamReader(
-                            this.socket.getInputStream()
-                    )
+            in = new ObjectInputStream(
+                    this.socket.getInputStream()
             );
 
             String str;
 
+            /*
             // TODO finish input/output handling.
             while ((str = br.readLine()) != null) {
                 // Handle input/output through socket
@@ -60,6 +59,7 @@ public class ConnectionHandler extends Thread {
                     ps.println(toSend);
                 }
             }
+            */
 
             closeConnection();
         } catch (IOException e){
@@ -69,9 +69,10 @@ public class ConnectionHandler extends Thread {
 
     public void closeConnection(){
         try {
+            out.flush();
             System.out.println("Connection closed.");
-            this.ps.close();
-            this.br.close();
+            this.out.close();
+            this.in.close();
             this.socket.close();
         } catch (IOException e) {
             e.printStackTrace();

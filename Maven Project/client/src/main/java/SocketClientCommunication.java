@@ -1,16 +1,13 @@
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.Socket;
 
-public class ServerCommunication extends Thread {
-    private static ServerCommunication INSTANCE;
+public class SocketClientCommunication extends Thread {
+    private static SocketClientCommunication INSTANCE;
     private Socket socket;
-    private BufferedReader br;
-    private DataOutputStream dos;
+    private ObjectInputStream in;
+    private ObjectOutputStream out;
 
-    private ServerCommunication() {
+    private SocketClientCommunication() {
         Runtime.getRuntime().addShutdownHook(new Thread(){
             @Override
             public void run() {
@@ -19,9 +16,9 @@ public class ServerCommunication extends Thread {
         });
     }
 
-    public synchronized static ServerCommunication getInstance(){
+    public synchronized static SocketClientCommunication getInstance(){
         if(INSTANCE == null){
-            INSTANCE = new ServerCommunication();
+            INSTANCE = new SocketClientCommunication();
         }
 
         return INSTANCE;
@@ -29,7 +26,7 @@ public class ServerCommunication extends Thread {
 
     public void sendMessage(String message){
         try {
-            this.dos.writeBytes(message + "\n");
+            this.out.writeBytes(message + "\n");
         } catch (IOException e) { }
     }
 
@@ -44,20 +41,21 @@ public class ServerCommunication extends Thread {
                 throw e;
             }
 
-            // to send data to the server
-            this.dos = new DataOutputStream(
-                    this.socket.getOutputStream()
+            out = new ObjectOutputStream(
+                    socket.getOutputStream()
             );
 
-            // to read data coming from the server
-            this.br = new BufferedReader(
-                    new InputStreamReader(
-                            this.socket.getInputStream()
-                    )
+            in = new ObjectInputStream(
+                    this.socket.getInputStream()
             );
 
+            while(true){
+
+            }
+
+            /*
             String str;
-            while ((str = br.readLine()) != null) {
+            while ((str = in.readLine()) != null) {
                 // receive from the server
                 System.out.println(str);
 
@@ -69,6 +67,7 @@ public class ServerCommunication extends Thread {
                     }
                 }
             }
+            */
 
             closeConnection();
         } catch(IOException e){
@@ -79,9 +78,10 @@ public class ServerCommunication extends Thread {
     public void closeConnection(){
         try {
             if(socket != null){
+                out.flush();
                 System.out.println("Connection closed.");
-                this.dos.close();
-                this.br.close();
+                this.out.close();
+                this.in.close();
                 this.socket.close();
             }
         } catch (IOException e) {

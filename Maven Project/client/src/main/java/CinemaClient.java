@@ -6,7 +6,7 @@ public class CinemaClient {
     private JFrame frame;
 
     public static void main(String[] args) {
-        ServerCommunication.getInstance().start();
+        SocketClientCommunication.getInstance().start();
         new CinemaClient();
     }
 

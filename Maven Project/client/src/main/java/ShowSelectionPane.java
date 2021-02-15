@@ -20,7 +20,7 @@ public class ShowSelectionPane extends AbstractPane {
     public void start(){
         super.start();
 
-        ServerCommunication.getInstance().closeConnection();
+        SocketClientCommunication.getInstance().closeConnection();
         //ServerCommunication.getInstance().sendMessage("loadMovieNames");
     }
 

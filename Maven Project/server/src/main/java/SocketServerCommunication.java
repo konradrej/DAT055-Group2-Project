@@ -10,25 +10,25 @@ import java.net.Socket;
  * @author Konrad Rej
  * @version 0.1.0
  */
-public class SocketCommunication extends Thread {
+public class SocketServerCommunication extends Thread {
     /**
      * Instance variable for singleton design pattern.
      */
-    private static SocketCommunication INSTANCE;
+    private static SocketServerCommunication INSTANCE;
 
     /**
      * Empty constructor.
      */
-    private SocketCommunication() { }
+    private SocketServerCommunication() { }
 
     /**
      * Retrieves singleton instance of SockerCommunication.
      *
      * @return SocketCommunication instance
      */
-    public static SocketCommunication getInstance(){
+    public static SocketServerCommunication getInstance(){
         if(INSTANCE == null){
-            INSTANCE = new SocketCommunication();
+            INSTANCE = new SocketServerCommunication();
         }
 
         return INSTANCE;
