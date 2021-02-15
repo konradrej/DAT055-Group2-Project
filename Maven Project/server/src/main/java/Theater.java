@@ -58,7 +58,6 @@ public class Theater implements Serializable{
      */
     public Collection<Row> getCollectionOfRows() {
         return this.allRows;
-
     }
 
     /**
@@ -66,33 +65,10 @@ public class Theater implements Serializable{
      * to the collection of rows
      */
     /*
-    // TODO are rowNumber and seatNumber their own classes or should these be ints?
-    public void addRow(rowNumber r, seatNumber s) {
+    // TODO are rowNumber and numOfSeats their own classes or should these be ints?
+    public void addRow(int rowNumber, int numOfSeats) {
         Row row = new Row(r, s);
         this.allRows.add(row);
     }
     */
-    
-    //Move this functionality to Show? Theater is not tied to a specific show, therefore give Show Theater's rows and execute this 
-    //code in the Show class.
-    /**
-     * Method for finding all available seats
-     */
-    public Collection<Seat> getAllAvailableSeats() {
-        Collection<Seat> availableSeats = new LinkedList<Seat>();
-        for (Row r : this.allRows) {
-            availableSeats.addAll(r.getAllAvailableSeats());
-        }
-        return availableSeats;
-    }
-    
-    public Collection <Seat> getAdjacentAvailableSeats(int numOfSeats){
-    	Collection <Seat> adjacentSeats = new LinkedList <Seat>();
-    	for(Row r : this.allRows) {
-    		adjacentSeats.addAll(r.getAdjacentAvailableSeats(numOfSeats));
-    	}
-    	return adjacentSeats;
-    }
-
-
 }

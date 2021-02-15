@@ -15,7 +15,7 @@ public class Show implements Serializable{
 	private Date day_and_time;
 	private Cinema cinema;
 	private Theater theater;
-	private Boolean status;
+	private Boolean cancelled;
 	
 	private Collection<Row> rows;
 	
@@ -33,6 +33,7 @@ public class Show implements Serializable{
 		this.day_and_time = day_and_time;
 		this.cinema = cinema;
 		this.theater = theater;
+		this.cancelled = false;
 		
 		this.rows = this.theater.getCollectionOfRows();
 	}
@@ -115,24 +116,52 @@ public class Show implements Serializable{
 		{
 			for(Seat s : r.getAllSeats())
 			{
-				if(s.getAvailable() && availableSeatsOfRow.size() < numOfSeats)
+				if(s.getAvailable())
 				{
 					availableSeatsOfRow.add(s);
 				}
 			}
+			
+			Seat[] availableSeatsOfRowArray = (Seat[])availableSeatsOfRow.toArray();
+			Seat[] availableAdjacentSeatsOfRowArray = new Seat[numOfSeats];
+			
+			for(int i = 0; i < availableSeatsOfRowArray.length - numOfSeats; i++)
+			{
+				boolean availableAdjacent = true;
+				
+				for(int j = i; j <= numOfSeats; j++)
+				{
+					if(!availableSeatsOfRowArray[j].getAvailable())
+					{
+						availableAdjacent = false;
+						break;
+					}
+					else availableAdjacentSeatsOfRowArray[j] = availableSeatsOfRowArray[i];
+				}
+				
+				if(availableAdjacent)
+				{
+					Collection<Seat> availableAdjacentSeats = new LinkedList<Seat>();
+					
+					for(int j = 0; j < numOfSeats; j++)
+					{
+						availableAdjacentSeats.add(availableAdjacentSeatsOfRowArray[j]);
+					}
+					
+					return availableAdjacentSeats;
+				}
+				else availableAdjacentSeatsOfRowArray = new Seat[numOfSeats];
+			}
 		}
-			
-			//TODO Check for each row if the row contains a collection of adjacent available seats
-			
-			return availableSeatsOfRow;
+		return new LinkedList<Seat>();
 	}
 	
 	/**
-	 * Changes the status of the show
+	 * Toggles the status of the show between cancelled and not cancelled
 	 */
 	public void ChangeStatus()
 	{
-		//TODO Change status of the show
+		this.cancelled = !this.cancelled;
 	}
 
 	// TODO Comments
