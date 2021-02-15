@@ -1,17 +1,10 @@
 Booking.class
 Cinema.class
-ConnectionHandler$1.class
 Theater.class
-ShowCollection.class
 AllCollections.class
-BookingCollection.class
-ConnectionHandler.class
 Show.class
-CinemaBookingSystem.class
 Customer.class
 MovieCollection.class
-SocketCommunication.class
 Seat.class
 Movie.class
-CustomerCollection.class
 Row.class
