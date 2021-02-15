@@ -12,3 +12,6 @@ https://www.baeldung.com/executable-jar-with-maven
 
 Webscraping + Jsoup
 https://www.youtube.com/watch?v=1I0iJB29ww0&t=10s
+
+Sockets and serialization
+https://www.codeproject.com/Tips/991180/Java-Sockets-and-Serialization
