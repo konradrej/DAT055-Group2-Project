@@ -3,7 +3,7 @@ import java.net.Socket;
 
 /**
  * @author Konrad Rej
- * @version 0.0.1
+ * @version 0.0.2
  */
 public class ConnectionHandler extends Thread {
     private final Socket socket;
@@ -41,25 +41,21 @@ public class ConnectionHandler extends Thread {
             );
 
             String str;
+            while(socket.isConnected()){
+                str = in.readUTF();
 
-            /*
-            // TODO finish input/output handling.
-            while ((str = br.readLine()) != null) {
-                // Handle input/output through socket
-                System.out.println(str);
-
-                String toSend = null;
                 switch(str){
-                    case "loadMovieNames":
-                        toSend = "movieNames(The Matrix,Daredevil)";
+                    case "getMovies":
+                        MovieCollection m = new MovieCollection("test2");
+                        m.scanNewMovies();
+
+                        out.writeUTF("sendMovies");
+                        out.writeObject(m);
+
+                        out.flush();
                         break;
                 }
-
-                if(toSend != null){
-                    ps.println(toSend);
-                }
             }
-            */
 
             closeConnection();
         } catch (IOException e){

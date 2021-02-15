@@ -1,14 +1,20 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.beans.PropertyChangeEvent;
 
-public class ShowSelectionPane extends AbstractPane {
+public class ShowSelectionPane extends AbstractPane implements Observer {
+    private MovieCollection movieCollection;
+    private ShowCollection showCollection;
+
     public ShowSelectionPane(JFrame frame){
         super(frame);
     }
 
     @Override
     public void init(){
+        ClientModel.getInstance().addObserver(this);
+
         contentPane.setLayout(new BorderLayout());
 
         contentPane.add(movieSelection(), BorderLayout.NORTH);
@@ -20,8 +26,7 @@ public class ShowSelectionPane extends AbstractPane {
     public void start(){
         super.start();
 
-        SocketClientCommunication.getInstance().closeConnection();
-        //ServerCommunication.getInstance().sendMessage("loadMovieNames");
+        SocketClientCommunication.getInstance().sendCommand("getMovies");
     }
 
     public Container movieSelection() {
@@ -37,12 +42,29 @@ public class ShowSelectionPane extends AbstractPane {
         return movieSelection;
     }
 
-    public void updateMovieSelection(String[] movies){
-        Container con = (JPanel) contentPane.getComponent(0);
-        con.removeAll();
+    public void updateMovieSelection(){
+        System.out.println("Update Movie UI");
 
-        JComboBox movieList = new JComboBox(movies);
-        con.add(movieList);
+        if(this.movieCollection != null){
+            System.out.println("MovieCollection isn't null.");
+
+            Container con = (JPanel) contentPane.getComponent(0);
+            con.removeAll();
+
+            JComboBox<String> movieList = new JComboBox<>();
+
+            for(Movie movie : this.movieCollection.getAllMovies()){
+                movieList.addItem(movie.getTitle());
+            }
+
+            con.add(movieList);
+
+            contentPane.validate();
+        }
+    }
+
+    public void updateShowSelection(){
+
     }
 
     public Container showSelection(){
@@ -83,5 +105,20 @@ public class ShowSelectionPane extends AbstractPane {
         userControls.setPreferredSize(new Dimension(frame.getWidth(), 50));
 
         return userControls;
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if(evt.getSource() instanceof ClientModel){
+            if(evt.getPropertyName().equals("movieCollection")){
+                this.movieCollection = (MovieCollection) evt.getNewValue();
+
+                updateMovieSelection();
+            }else if(evt.getPropertyName().equals("showCollection")){
+                this.showCollection = (ShowCollection) evt.getNewValue();
+
+                updateShowSelection();
+            }
+        }
     }
 }

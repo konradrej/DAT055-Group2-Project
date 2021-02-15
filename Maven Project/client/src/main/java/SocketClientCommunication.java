@@ -24,9 +24,10 @@ public class SocketClientCommunication extends Thread {
         return INSTANCE;
     }
 
-    public void sendMessage(String message){
+    public void sendCommand(String command){
         try {
-            this.out.writeBytes(message + "\n");
+            this.out.writeUTF(command);
+            out.flush();
         } catch (IOException e) { }
     }
 
@@ -49,28 +50,19 @@ public class SocketClientCommunication extends Thread {
                     this.socket.getInputStream()
             );
 
-            while(true){
-
-            }
-
-            /*
             String str;
-            while ((str = in.readLine()) != null) {
-                // receive from the server
-                System.out.println(str);
+            while(socket.isConnected()){
+                str = in.readUTF();
 
-                if(str.substring(0, str.indexOf("(")).equals("movieNames")){
-                    String[] movies = str.substring(str.indexOf("(")+1, str.indexOf(")")-1).split(",");
-
-                    for(String movie : movies){
-                        System.out.println(movie);
-                    }
+                switch(str){
+                    case "sendMovies":
+                        ClientModel.getInstance().setMovieCollection((MovieCollection) in.readObject());
+                        break;
                 }
             }
-            */
 
             closeConnection();
-        } catch(IOException e){
+        } catch(IOException | ClassNotFoundException e){
             e.printStackTrace();
         }
     }
