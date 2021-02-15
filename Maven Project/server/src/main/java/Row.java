@@ -26,7 +26,6 @@ public class Row implements Serializable{
         this.allSeats = allSeats;
     }
     
-    
 
     /**
      * Method for setting a row number
@@ -65,7 +64,7 @@ public class Row implements Serializable{
      * Method for creating new seats and adding it to
      * a collection of seats
      */
-    public void addSeat(int seatNumber, boolean available) {
+    public void addSeat(boolean available) {
     	
         Seat s = new Seat(this.allSeats.size() + 1, available);
         this.allSeats.add(s);
@@ -94,15 +93,16 @@ public class Row implements Serializable{
         return availableSeats;
     }
     
+    //TODO Discuss implementation of this method, perhaps move implementation from Show to Row?!
     /**
      * Method for getting n number of adjacent available seats
      * Return information is missing
      */
     
-    public Collection <Seat> getAdjacentAvailableSeats (int numOfSeats){
+    public Collection<Seat> getAdjacentAvailableSeats (int numOfSeats){
     	int count = 0;
-    	Collection <Seat> adjacentSeats = new LinkedList <Seat>();
-    	Collection <Seat> temp = new LinkedList <Seat>();
+    	Collection<Seat> adjacentSeats = new LinkedList<Seat>();
+    	Collection<Seat> temp = new LinkedList<Seat>();
     	for(Seat s : this.allSeats) {
     		if(s.getAvailable()) {
     			count++;

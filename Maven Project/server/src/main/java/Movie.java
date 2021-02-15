@@ -14,20 +14,20 @@ public class Movie implements Serializable{
 	private String title;
     private ArrayList <String> genre ;
     private String length;
-    private String URL;
+    private String url;
 
-    public Movie(String t, String l, ArrayList <String> g, String u) {
-    	this.title = t;
-    	this.genre = g;
-    	this.length = l;
-    	this.URL = u;
+    public Movie(String title, ArrayList<String> genre, String length, String url) {
+    	this.title = title;
+    	this.genre = genre;
+    	this.length = length;
+    	this.url = url;
     }
     
     public String getTitle() {
         return title;
     }
 
-    public ArrayList <String> getGenre() {
+    public ArrayList<String> getGenre() {
         return this.genre;
     }
 
@@ -36,7 +36,7 @@ public class Movie implements Serializable{
     }
     
     public String getURL() {
-    	return this.URL;
+    	return this.url;
     }
 
     public void provideMovieDetails(){

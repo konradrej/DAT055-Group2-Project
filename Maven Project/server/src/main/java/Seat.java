@@ -50,10 +50,10 @@ public class Seat implements Serializable{
     }
 
     /**
-     * Method for updating (setting) the seat status
+     * Method for toggling the seat status
      */
-    public void updateSeatStatus(boolean available) {
-        this.available = available;
+    public void updateSeatStatus() {
+        this.available = !this.available;
     }
 
 

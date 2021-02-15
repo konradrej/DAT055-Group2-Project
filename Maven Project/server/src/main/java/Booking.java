@@ -39,7 +39,7 @@ public class Booking implements Serializable {
 	 * 
 	 * @return rows		what rows the customer has booked seats in
 	 */
-	public Collection<Row> GetBookedRows()
+	public Collection<Row> getBookedRows()
 	{
 		return this.rows;
 	}
@@ -49,7 +49,7 @@ public class Booking implements Serializable {
 	 * 
 	 * @return rows		what seats the customer has booked
 	 */
-	public Collection<Seat> GetBookedSeats()
+	public Collection<Seat> getBookedSeats()
 	{
 		return this.seats;
 	}
@@ -57,7 +57,7 @@ public class Booking implements Serializable {
 	/**
 	 * Method for internally changing the status of the booking
 	 */
-	public void ChangeStatus()
+	public void changeStatus()
 	{
 		this.cancelled = !this.cancelled;
 	}
@@ -68,7 +68,7 @@ public class Booking implements Serializable {
 	 * @param rows			what rows the customer has booked
 	 * @param seats			what seat numbers the customer has booked
 	 */
-	public void UpdateRowsAndSeats(Collection<Row> rows, Collection<Seat> seats)
+	public void updateRowsAndSeats(Collection<Row> rows, Collection<Seat> seats)
 	{
 		this.rows = rows;
 		this.seats = seats;
@@ -79,7 +79,7 @@ public class Booking implements Serializable {
 	 * 
 	 * @return customer		what customer the booking belongs to
 	 */
-	public Customer GetCustomer() {
+	public Customer getCustomer() {
 		return this.customer;
 	}
 	

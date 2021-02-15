@@ -12,7 +12,7 @@ public class Show implements Serializable{
 	 */
 	private static final long serialVersionUID = -9177195168561009276L;
 	private Movie movie;
-	private Date day_and_time;
+	private Date dayAndTime;
 	private Cinema cinema;
 	private Theater theater;
 	private Boolean cancelled;
@@ -23,14 +23,14 @@ public class Show implements Serializable{
 	 * Constructor for initializing the show instance with corresponding parameter values
 	 * 
 	 * @param movie			the movie that the show will play
-	 * @param day_and_time	the day and time of the show
+	 * @param dayAndTime	the day and time of the show
 	 * @param cinema		what cinema the show will be played at
 	 * @param theater		what theater the show will be played at
 	 */
-	public Show(Movie movie, Date day_and_time, Cinema cinema, Theater theater)
+	public Show(Movie movie, Date dayAndTime, Cinema cinema, Theater theater)
 	{
 		this.movie = movie;
-		this.day_and_time = day_and_time;
+		this.dayAndTime = dayAndTime;
 		this.cinema = cinema;
 		this.theater = theater;
 		this.cancelled = false;
@@ -43,7 +43,7 @@ public class Show implements Serializable{
 	 * 
 	 * @return	returns the movie instance variable of this object
 	 */
-	public Movie GetMovie()
+	public Movie getMovie()
 	{
 		return this.movie;
 	}
@@ -53,9 +53,9 @@ public class Show implements Serializable{
 	 * 
 	 * @return	returns the day_and_time instance variable of this object
 	 */
-	public Date GetShowDateAndTime()
+	public Date getShowDateAndTime()
 	{
-		return this.day_and_time;
+		return this.dayAndTime;
 	}
 	
 	/**
@@ -63,7 +63,7 @@ public class Show implements Serializable{
 	 * 
 	 * @return	returns the cinema instance variable of this object
 	 */
-	public Cinema GetCinema()
+	public Cinema getCinema()
 	{
 		return this.cinema;
 	}
@@ -73,7 +73,7 @@ public class Show implements Serializable{
 	 * 
 	 * @return	returns the theater instance variable of this object
 	 */
-	public Theater GetTheater()
+	public Theater getTheater()
 	{
 		return this.theater;
 	}
@@ -84,17 +84,21 @@ public class Show implements Serializable{
 	 * @param numOfSeats	the number of seats to find	
 	 * @return 				returns a Seat array, containing available seats
 	 */
-	public Collection<Seat> getAvailableSeats(int numOfSeats)
+	public Collection<Seat> getAvailableSeats(int ... numOfSeats)
 	{
 		Collection<Seat> availableSeats = new LinkedList<Seat>();
 		
-		for(Row r : this.rows)
+		if(numOfSeats.length <= 1)
 		{
-			for(Seat s : r.getAllSeats())
+			for(Row r : this.rows)
 			{
-				if(s.getAvailable() && availableSeats.size() < numOfSeats)
+				for(Seat s : r.getAllSeats())
 				{
-					availableSeats.add(s);
+					if(s.getAvailable())
+					{
+						if(availableSeats.size() < numOfSeats[0] || numOfSeats.length == 0)
+						availableSeats.add(s);
+					}
 				}
 			}
 		}
@@ -108,7 +112,7 @@ public class Show implements Serializable{
 	 * @param numOfSeats	the number of seats to find, adjacent to each other
 	 * @return 				returns a Seat array, containing available seats adjacent to each other
 	 */
-	public Collection<Seat> GetAdjacentAvailableSeats(int numOfSeats)
+	public Collection<Seat> getAdjacentAvailableSeats(int numOfSeats)
 	{
 		Collection<Seat> availableSeatsOfRow = new LinkedList<Seat>();
 		
@@ -162,20 +166,5 @@ public class Show implements Serializable{
 	public void ChangeStatus()
 	{
 		this.cancelled = !this.cancelled;
-	}
-
-	// TODO Comments
-	public Movie getMovie() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	// TODO Comments
-	public Show getShow() {
-		return this;
-	}
-	
-	public Theater getTheater() {
-		return this.theater;
 	}
 }

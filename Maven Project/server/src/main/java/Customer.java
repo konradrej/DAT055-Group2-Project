@@ -12,7 +12,7 @@ public class Customer implements Serializable{
 	private static final long serialVersionUID = 6060898922086321725L;
 	private String name;
 	private String phoneNumber;
-	private String SSN;
+	private String ssn;
 	
 	/**
 	 * Constructor for initializing the Customer instance
@@ -25,7 +25,7 @@ public class Customer implements Serializable{
 	{
 		this.name = name;
 		this.phoneNumber = phoneNumber;
-		this.SSN = SSN;
+		this.ssn = SSN;
 	}
 	
 	/**
@@ -33,7 +33,7 @@ public class Customer implements Serializable{
 	 * 
 	 * @return		returns the name of the customer
 	 */
-	public String GetName(){
+	public String getName(){
 		return this.name;
 	}
 	
@@ -42,7 +42,7 @@ public class Customer implements Serializable{
 	 * 
 	 * @return		returns the phone number of the customer
 	 */
-	public String GetPhoneNumber()
+	public String getPhoneNumber()
 	{
 		return this.phoneNumber;
 	}
@@ -52,9 +52,9 @@ public class Customer implements Serializable{
 	 * 
 	 * @return		returns the social security number of the customer
 	 */
-	public String GetSSN()
+	public String getSSN()
 	{
-		return this.SSN;
+		return this.ssn;
 	}
 	
 	/**
@@ -62,7 +62,7 @@ public class Customer implements Serializable{
 	 * 
 	 * @param		the name of the customer
 	 */
-	public void SetName(String name){
+	public void setName(String name){
 		this.name = name;
 	}
 	
@@ -71,7 +71,7 @@ public class Customer implements Serializable{
 	 * 
 	 * @param		the phone number of the customer
 	 */
-	public void SetPhoneNumber(String phoneNumber)
+	public void setPhoneNumber(String phoneNumber)
 	{
 		this.phoneNumber = phoneNumber;
 	}
@@ -81,8 +81,8 @@ public class Customer implements Serializable{
 	 * 
 	 * @param		the social security number of the customer
 	 */
-	public void SetSSN(String SSN)
+	public void setSSN(String SSN)
 	{
-		this.SSN = SSN;
+		this.ssn = SSN;
 	}
 }

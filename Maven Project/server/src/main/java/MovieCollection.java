@@ -1,4 +1,3 @@
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -20,7 +19,7 @@ public class MovieCollection implements Serializable, AllCollections{
 	private static final long serialVersionUID = -6417208744468074004L;
 	private Collection <Movie> allMovies;
 	private final String filename;
-	private final String URL = "https://www.themoviedb.org";
+	private final String url = "https://www.themoviedb.org";
 	
 	/**
 	 * Constructor for initializing the MovieCollection instance
@@ -119,7 +118,7 @@ public class MovieCollection implements Serializable, AllCollections{
 	public void scanNewMovies() {
 		Document doc;
 		try {
-			doc = Jsoup.connect(URL + "/movie/now-playing").timeout(6000).get();
+			doc = Jsoup.connect(url + "/movie/now-playing").timeout(6000).get();
 		}
 		catch(IOException e) {
 			System.out.println("Error");
@@ -132,7 +131,7 @@ public class MovieCollection implements Serializable, AllCollections{
 			String title = e.attributes().get("title");
 			Boolean scanthis = true;
 			for( Movie m : this.allMovies) {
-				if(m.getURL().equals(URL + link)){
+				if(m.getURL().equals(url + link)){
 					scanthis = false;
 					break;
 				}
@@ -154,7 +153,7 @@ public class MovieCollection implements Serializable, AllCollections{
 		Document doc;
 		
 		try {
-			doc = Jsoup.connect(URL + l).timeout(6000).get();
+			doc = Jsoup.connect(url + l).timeout(6000).get();
 		}
 		catch(IOException e) {
 			System.out.println("Error");
@@ -198,7 +197,7 @@ public class MovieCollection implements Serializable, AllCollections{
 			list.add(s);
 		}
 		
-		Movie m = new Movie(title, elementTime.text(), list, URL + l);
+		Movie m = new Movie(title, elementTime.text(), list, url + l);
 		this.allMovies.add(m);	
 		
 		//test

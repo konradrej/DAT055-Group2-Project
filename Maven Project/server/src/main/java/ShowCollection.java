@@ -46,7 +46,7 @@ public class ShowCollection implements Serializable, AllCollections {
 		return selectedShows;
 	}
 	
-	public Collection <Seat> getAllAvailableSeats(Show s){
+	public Collection<Seat> getAllAvailableSeats(Show s){
 		for(Show s2: this.allShows) {
 			if(s2.equals(s)) {
 				return s2.getAllAvailableSeats();

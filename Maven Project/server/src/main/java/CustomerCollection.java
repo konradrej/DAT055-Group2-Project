@@ -12,7 +12,7 @@ import java.util.*;
 public class CustomerCollection implements Serializable, AllCollections {
 	
 	private static final long serialVersionUID = 398906222416370481L;
-	private Collection <Customer> allCustomers;
+	private Collection<Customer> allCustomers;
 	private final String filename;
 	
 	/**
@@ -23,7 +23,7 @@ public class CustomerCollection implements Serializable, AllCollections {
 	
 	public CustomerCollection (String filename) {
 		this.filename = filename;
-		allCustomers = new LinkedList <Customer> ();
+		allCustomers = new LinkedList<Customer>();
 	}
 	
 	/**
@@ -35,7 +35,7 @@ public class CustomerCollection implements Serializable, AllCollections {
 	
 	public Customer getCustomer(String ssn) {
 		for(Customer c : allCustomers) {
-			if(c.GetSSN() == ssn) {
+			if(c.getSSN() == ssn) {
 				return c;
 			}
 		}
@@ -53,7 +53,7 @@ public class CustomerCollection implements Serializable, AllCollections {
 	/**
 	 * Removes a customer from the objects customer collection
 	 * 
-	 * @param c - the custoemr being removed
+	 * @param c - the customer being removed
 	 */
 	
 	public void removeCustomer(Customer c ) {
