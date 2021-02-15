@@ -17,8 +17,8 @@ public class Seat implements Serializable{
      * @param available  the seat status
      */
     public Seat(int seatNumber, boolean available) {
-        seatNumber = this.seatNumber;
-        available = this.available;
+        this.seatNumber = seatNumber;
+        this.available = available;
     }
 
     /**
@@ -53,7 +53,7 @@ public class Seat implements Serializable{
      * Method for updating (setting) the seat status
      */
     public void updateSeatStatus(boolean available) {
-        available = this.available;
+        this.available = available;
     }
 
 

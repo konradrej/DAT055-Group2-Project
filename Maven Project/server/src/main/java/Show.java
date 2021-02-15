@@ -17,7 +17,6 @@ public class Show implements Serializable{
 	private Theater theater;
 	private Boolean status;
 	
-	// Remove?
 	private Collection<Row> rows;
 	
 	/**
@@ -84,9 +83,22 @@ public class Show implements Serializable{
 	 * @param numOfSeats	the number of seats to find	
 	 * @return 				returns a Seat array, containing available seats
 	 */
-	public Collection<Seat> getAllAvailableSeats()
+	public Collection<Seat> getAvailableSeats(int numOfSeats)
 	{
-		return theater.getAllAvailableSeats();
+		Collection<Seat> availableSeats = new LinkedList<Seat>();
+		
+		for(Row r : this.rows)
+		{
+			for(Seat s : r.getAllSeats())
+			{
+				if(s.getAvailable() && availableSeats.size() < numOfSeats)
+				{
+					availableSeats.add(s);
+				}
+			}
+		}
+		
+		return availableSeats;
 	}
 	
 	/**
@@ -95,9 +107,24 @@ public class Show implements Serializable{
 	 * @param numOfSeats	the number of seats to find, adjacent to each other
 	 * @return 				returns a Seat array, containing available seats adjacent to each other
 	 */
-	public Collection<Seat> getAdjacentSeats(int numOfSeats)
+	public Collection<Seat> GetAdjacentAvailableSeats(int numOfSeats)
 	{
-		return theater.getAdjacentAvailableSeats(numOfSeats);
+		Collection<Seat> availableSeatsOfRow = new LinkedList<Seat>();
+		
+		for(Row r : this.rows)
+		{
+			for(Seat s : r.getAllSeats())
+			{
+				if(s.getAvailable() && availableSeatsOfRow.size() < numOfSeats)
+				{
+					availableSeatsOfRow.add(s);
+				}
+			}
+		}
+			
+			//TODO Check for each row if the row contains a collection of adjacent available seats
+			
+			return availableSeatsOfRow;
 	}
 	
 	/**

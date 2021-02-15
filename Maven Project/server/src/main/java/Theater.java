@@ -72,6 +72,9 @@ public class Theater implements Serializable{
         this.allRows.add(row);
     }
     */
+    
+    //Move this functionality to Show? Theater is not tied to a specific show, therefore give Show Theater's rows and execute this 
+    //code in the Show class.
     /**
      * Method for finding all available seats
      */
