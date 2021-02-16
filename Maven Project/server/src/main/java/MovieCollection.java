@@ -97,8 +97,9 @@ public class MovieCollection implements Serializable, AllCollections{
 	/**
 	 * Serializing and updates this object 
 	 * 
-	 * @Override
+	 *
 	 */
+	@Override
 	public void updateCollection() {
 
 		try {

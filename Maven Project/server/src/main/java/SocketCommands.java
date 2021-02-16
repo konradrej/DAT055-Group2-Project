@@ -1,4 +1,14 @@
 public enum SocketCommands {
     getMovies,
-    responseGetMovies
+    responseGetMovies,
+    getShowsByMovie,
+    responseGetShowsByMovie,
+    getAllSeatsByShow,
+    responseGetAllSeatsByShow,
+    getCustomerBySSN,
+    responseGetCustomerBySSN,
+    createCustomer,
+    responseCreateCustomer,
+    createBooking,
+    responseCreateBooking
 }
