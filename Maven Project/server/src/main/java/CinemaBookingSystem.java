@@ -1,11 +1,11 @@
-
-
 /**
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen
 * @version version 0.0.0
 */
 public class CinemaBookingSystem {
 
+	private static CinemaBookingSystem INSTANCE;
+	
 	/**
 	 * Constructor for initializing the CinemaBookingSystem instance
 	 * 
@@ -16,20 +16,20 @@ public class CinemaBookingSystem {
 	 */
 	
 	
-	private BookingCollection bookingCollection;
-	private MovieCollection movieCollection;
-	private ShowCollection showCollection;
-	private CustomerCollection customerCollection;
+	private final BookingCollection bookingCollection = new BookingCollection("bookingCollection.txt");
+	private final MovieCollection movieCollection = new MovieCollection("movieCollection.txt");
+	private final ShowCollection showCollection = new ShowCollection("showCollection.txt");
+	private final CustomerCollection customerCollection = new CustomerCollection("customerCollection.txt");
 	
-	public CinemaBookingSystem(BookingCollection bookingCollection, CustomerCollection customerCollection, ShowCollection showCollection, 
-	MovieCollection movieCollection)
-	{
-		this.bookingCollection = bookingCollection;
-		this.customerCollection = customerCollection;
-		this.movieCollection = movieCollection;
-		this.showCollection = showCollection;
-	}
+	public CinemaBookingSystem() {}
 	
+	public synchronized static CinemaBookingSystem getInstance(){
+        if(INSTANCE == null){
+            INSTANCE = new CinemaBookingSystem();
+        }
+
+        return INSTANCE;
+    }
 	
 	// Serialize (saves in path: Working Tree-> Maven project -> Server) all collections
 	
