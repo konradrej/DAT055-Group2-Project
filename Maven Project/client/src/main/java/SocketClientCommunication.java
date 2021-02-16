@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.Socket;
+import java.net.SocketException;
 
 public class SocketClientCommunication extends Thread {
     private static SocketClientCommunication INSTANCE;
@@ -24,9 +25,9 @@ public class SocketClientCommunication extends Thread {
         return INSTANCE;
     }
 
-    public void sendCommand(String command){
+    public void sendCommand(SocketCommands command){
         try {
-            this.out.writeUTF(command);
+            this.out.writeObject(command);
             out.flush();
         } catch (IOException e) { }
     }
@@ -39,7 +40,7 @@ public class SocketClientCommunication extends Thread {
                 System.out.println("Connection established.");
             }catch (IOException e){
                 System.err.println("Connection could not be established.");
-                throw e;
+                return;
             }
 
             out = new ObjectOutputStream(
@@ -50,26 +51,30 @@ public class SocketClientCommunication extends Thread {
                     this.socket.getInputStream()
             );
 
-            String str;
+            SocketCommands str;
             while(socket.isConnected()){
-                str = in.readUTF();
+                str = (SocketCommands) in.readObject();
 
                 switch(str){
-                    case "sendMovies":
+                    case responseGetMovies:
                         ClientModel.getInstance().setMovieCollection((MovieCollection) in.readObject());
                         break;
                 }
             }
-
+        } catch (EOFException e){
             closeConnection();
-        } catch(IOException | ClassNotFoundException e){
+        } catch (SocketException e) {
+
+        } catch (IOException | ClassNotFoundException e){
             e.printStackTrace();
+
+            System.err.println("ERROR OR HERE");
         }
     }
 
     public void closeConnection(){
         try {
-            if(socket != null){
+            if(!socket.isClosed()){
                 out.flush();
                 System.out.println("Connection closed.");
                 this.out.close();

@@ -2,9 +2,11 @@ Booking.class
 Cinema.class
 Theater.class
 AllCollections.class
+ConnectionHandler$2.class
 Show.class
 Customer.class
 MovieCollection.class
 Seat.class
 Movie.class
+SocketCommands.class
 Row.class
