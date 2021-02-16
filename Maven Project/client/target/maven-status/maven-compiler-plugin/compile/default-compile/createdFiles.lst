@@ -1,5 +1,7 @@
-MainMenuPane.class
 Observer.class
+MainMenuPane.class
+SocketClientCommunication.class
+SocketClientCommunication$1.class
 Observable.class
 ShowSelectionPane.class
 CinemaClient.class
