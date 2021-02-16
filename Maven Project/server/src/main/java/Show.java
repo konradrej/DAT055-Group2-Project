@@ -89,6 +89,23 @@ public class Show implements Serializable{
 	}
 	
 	/**
+	 * Method for finding all seats in the theater that the show will be held in
+	 * 
+	 * @return 				returns a collection of Seat, containing all seats in the theater
+	 */
+	public Collection<Seat> getAllSeats()
+	{
+		Collection<Seat> allSeats = Collections.emptyList();
+		
+		for(Row r : this.rows)
+		{
+			allSeats.addAll(r.getAllSeats());
+		}
+		
+		return allSeats;
+	}
+	
+	/**
 	 * Method for finding all available seats in the theater that the show will be held in
 	 * 
 	 * @return 				returns a collection of Seat, containing all available seats
