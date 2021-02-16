@@ -6,3 +6,4 @@ CinemaClient.class
 AbstractPane.class
 ClientModel.class
 AbstractObservable.class
+SocketClientCommunication$2.class

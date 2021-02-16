@@ -26,7 +26,7 @@ public class ShowSelectionPane extends AbstractPane implements Observer {
     public void start(){
         super.start();
 
-        SocketClientCommunication.getInstance().sendCommand("getMovies");
+        SocketClientCommunication.getInstance().sendCommand(SocketCommands.getMovies);
     }
 
     public Container movieSelection() {
@@ -43,11 +43,7 @@ public class ShowSelectionPane extends AbstractPane implements Observer {
     }
 
     public void updateMovieSelection(){
-        System.out.println("Update Movie UI");
-
         if(this.movieCollection != null){
-            System.out.println("MovieCollection isn't null.");
-
             Container con = (JPanel) contentPane.getComponent(0);
             con.removeAll();
 

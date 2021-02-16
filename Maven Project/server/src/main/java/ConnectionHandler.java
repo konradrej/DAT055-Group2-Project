@@ -40,36 +40,38 @@ public class ConnectionHandler extends Thread {
                     this.socket.getInputStream()
             );
 
-            String str;
+            SocketCommands str;
             while(socket.isConnected()){
-                str = in.readUTF();
+                str = (SocketCommands) in.readObject();
 
                 switch(str){
-                    case "getMovies":
+                    case getMovies:
                         MovieCollection m = new MovieCollection("test2");
                         m.scanNewMovies();
 
-                        out.writeUTF("sendMovies");
+                        out.writeObject(SocketCommands.responseGetMovies);
                         out.writeObject(m);
 
                         out.flush();
                         break;
                 }
             }
-
+        } catch (EOFException e){
             closeConnection();
-        } catch (IOException e){
+        } catch (IOException | ClassNotFoundException e){
             e.printStackTrace();
         }
     }
 
     public void closeConnection(){
         try {
-            out.flush();
-            System.out.println("Connection closed.");
-            this.out.close();
-            this.in.close();
-            this.socket.close();
+            if(!socket.isClosed()){
+                out.flush();
+                System.out.println("Connection closed.");
+                this.out.close();
+                this.in.close();
+                this.socket.close();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
