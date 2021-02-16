@@ -10,6 +10,8 @@ public class ConnectionHandler extends Thread {
     private ObjectInputStream in;
     private ObjectOutputStream out;
 
+    private CinemaBookingSystem cbs = CinemaBookingSystem.getInstance();
+
     /**
      * Constructor for initializing the ConnectionHandler instance.
      *
@@ -46,13 +48,8 @@ public class ConnectionHandler extends Thread {
 
                 switch(str){
                     case getMovies:
-                        MovieCollection m = new MovieCollection("test2");
-                        m.scanNewMovies();
-
                         out.writeObject(SocketCommands.responseGetMovies);
-                        out.writeObject(m);
-
-                        out.flush();
+                        out.writeObject(cbs.getMovieCollection());
                         break;
                 }
             }
@@ -63,6 +60,9 @@ public class ConnectionHandler extends Thread {
         }
     }
 
+    /**
+     * Gracefully closes connection and informs user.
+     */
     public void closeConnection(){
         try {
             if(!socket.isClosed()){

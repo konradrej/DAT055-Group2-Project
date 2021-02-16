@@ -47,7 +47,22 @@ public class CinemaBookingSystem {
 		//test get movies
 		MovieCollection m = new MovieCollection("test");
 		m.scanNewMovies();
-		
+	}
+
+	public BookingCollection getBookingCollection(){
+		return bookingCollection;
+	}
+
+	public MovieCollection getMovieCollection(){
+		return movieCollection;
+	}
+
+	public ShowCollection getShowCollection(){
+		return showCollection;
+	}
+
+	public CustomerCollection getCustomerCollection(){
+		return customerCollection;
 	}
 	
 }
