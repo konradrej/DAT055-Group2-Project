@@ -79,27 +79,39 @@ public class Show implements Serializable{
 	}
 	
 	/**
-	 * Method for finding numOfSeats available seats 
+	 * Method for finding all available seats in the theater that the show will be held in
+	 * 
+	 * @return 				returns a collection of Seat, containing all available seats
+	 */
+	public Collection<Seat> getAllAvailableSeats()
+	{
+		Collection<Seat> allAvailableSeats = Collections.emptyList();
+		
+		for(Row r : this.rows)
+		{
+			allAvailableSeats.addAll(r.getAllAvailableSeats());
+		}
+		
+		return allAvailableSeats;
+	}
+	
+	/**
+	 * Method for finding numOfSeats available seats in the theater that the show will be held in
 	 * 
 	 * @param numOfSeats	the number of seats to find	
-	 * @return 				returns a Seat array, containing available seats
+	 * @return 				returns a collection of Seat, containing numOfSeats available seats
 	 */
-	public Collection<Seat> getAvailableSeats(int ... numOfSeats)
+	public Collection<Seat> getAvailableSeats(int numOfSeats)
 	{
-		Collection<Seat> availableSeats = new LinkedList<Seat>();
+		Collection<Seat> availableSeats = Collections.emptyList();
 		
-		if(numOfSeats.length <= 1)
+		for(Row r : this.rows)
 		{
-			for(Row r : this.rows)
+			availableSeats = r.getAvailableSeats(numOfSeats);
+			
+			if(availableSeats != Collections.<Seat>emptyList())
 			{
-				for(Seat s : r.getAllSeats())
-				{
-					if(s.getAvailable())
-					{
-						if(availableSeats.size() < numOfSeats[0] || numOfSeats.length == 0)
-						availableSeats.add(s);
-					}
-				}
+				return availableSeats;
 			}
 		}
 		
@@ -110,54 +122,23 @@ public class Show implements Serializable{
 	 * Method for finding numOfSeats available seats adjacent to each other
 	 * 
 	 * @param numOfSeats	the number of seats to find, adjacent to each other
-	 * @return 				returns a Seat array, containing available seats adjacent to each other
+	 * @return 				returns a collection of Seat, containing numOfSeats adjacent available seats
 	 */
 	public Collection<Seat> getAdjacentAvailableSeats(int numOfSeats)
 	{
-		Collection<Seat> availableSeatsOfRow = new LinkedList<Seat>();
+		Collection<Seat> availableAdjacentSeats = Collections.emptyList();
 		
 		for(Row r : this.rows)
 		{
-			for(Seat s : r.getAllSeats())
-			{
-				if(s.getAvailable())
-				{
-					availableSeatsOfRow.add(s);
-				}
-			}
+			availableAdjacentSeats = r.getAdjacentAvailableSeats(numOfSeats);
 			
-			Seat[] availableSeatsOfRowArray = (Seat[])availableSeatsOfRow.toArray();
-			Seat[] availableAdjacentSeatsOfRowArray = new Seat[numOfSeats];
-			
-			for(int i = 0; i < availableSeatsOfRowArray.length - numOfSeats; i++)
+			if(availableAdjacentSeats != Collections.<Seat>emptyList())
 			{
-				boolean availableAdjacent = true;
-				
-				for(int j = i; j <= numOfSeats; j++)
-				{
-					if(!availableSeatsOfRowArray[j].getAvailable())
-					{
-						availableAdjacent = false;
-						break;
-					}
-					else availableAdjacentSeatsOfRowArray[j] = availableSeatsOfRowArray[i];
-				}
-				
-				if(availableAdjacent)
-				{
-					Collection<Seat> availableAdjacentSeats = new LinkedList<Seat>();
-					
-					for(int j = 0; j < numOfSeats; j++)
-					{
-						availableAdjacentSeats.add(availableAdjacentSeatsOfRowArray[j]);
-					}
-					
-					return availableAdjacentSeats;
-				}
-				else availableAdjacentSeatsOfRowArray = new Seat[numOfSeats];
+				return availableAdjacentSeats;
 			}
 		}
-		return new LinkedList<Seat>();
+		
+		return availableAdjacentSeats;
 	}
 	
 	/**

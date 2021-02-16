@@ -79,44 +79,87 @@ public class Row implements Serializable{
 
     }
 
+    public Collection<Seat> getAllAvailableSeats()
+    {
+    	Collection<Seat> availableSeats = Collections.emptyList();
+    	
+    	for(Seat s : this.allSeats)
+    	{
+    		if(s.getAvailable()) availableSeats.add(s);
+    	}
+    	
+    	return availableSeats;
+    }
+    
     /**
      * Method for getting available seats from a
      * collection of available seats
      */
-    public Collection<Seat> getAllAvailableSeats() {
+    public Collection<Seat> getAvailableSeats(int numOfSeats) {
         Collection<Seat> availableSeats = Collections.emptyList();
-        for (Seat s : this.allSeats) {
-            if (s.getAvailable()) {
-                availableSeats.add(s);
-            }
+        
+        if(this.getAllAvailableSeats().size() > numOfSeats)
+        {
+        	availableSeats = this.getAllAvailableSeats();
+        	Collection<Seat> temp = Collections.emptyList();
+        	
+        	int count = 0;
+        	
+        	for(Seat s : availableSeats)
+        	{
+        		if(count < numOfSeats)
+        		{
+        			temp.add(s);
+        			count++;
+        		}
+        	}
+        	
+        	availableSeats = temp;
         }
+        else if(this.getAllAvailableSeats().size() == numOfSeats)
+        {
+        	availableSeats = this.getAllAvailableSeats();
+        }
+        
         return availableSeats;
     }
     
-    //TODO Discuss implementation of this method, perhaps move implementation from Show to Row?!
+    
     /**
      * Method for getting n number of adjacent available seats
      * Return information is missing
      */
     
     public Collection<Seat> getAdjacentAvailableSeats (int numOfSeats){
-    	int count = 0;
-    	Collection<Seat> adjacentSeats = new LinkedList<Seat>();
-    	Collection<Seat> temp = new LinkedList<Seat>();
-    	for(Seat s : this.allSeats) {
-    		if(s.getAvailable()) {
-    			count++;
-    			temp.add(s);
-    		}
-    		else {
-    			if(count >= numOfSeats) {
-    				adjacentSeats.addAll(temp);
-    			}
-    			temp.removeAll(temp);
-    			count = 0;
-    		}
-    	}
-    	return adjacentSeats;
+    	Collection<Seat> availableSeatsOfRow = this.getAvailableSeats(numOfSeats);
+    	Collection<Seat> availableAdjacentSeats = Collections.emptyList();
+		
+		Seat[] availableSeatsOfRowArray = (Seat[])availableSeatsOfRow.toArray();
+		Seat[] availableAdjacentSeatsOfRowArray = new Seat[numOfSeats];
+		
+		for(int i = 0; i < availableSeatsOfRowArray.length - numOfSeats; i++)
+		{
+			boolean availableAdjacent = true;
+			
+			for(int j = i; j <= numOfSeats; j++)
+			{
+				if(!availableSeatsOfRowArray[j].getAvailable())
+				{
+					availableAdjacent = false;
+					break;
+				}
+				else availableAdjacentSeatsOfRowArray[j] = availableSeatsOfRowArray[i];
+			}
+			
+			if(availableAdjacent)
+			{
+				for(int j = 0; j < numOfSeats; j++)
+				{
+					availableAdjacentSeats.add(availableAdjacentSeatsOfRowArray[j]);
+				}
+			}
+		}
+		
+		return availableAdjacentSeats;
     }
-
 }
