@@ -198,7 +198,7 @@ public class MovieCollection implements Serializable, AllCollections{
 			list.add(s);
 		}
 		
-		Movie m = new Movie(title, elementTime.text(), list, url + l);
+		Movie m = new Movie(title, list, elementTime.text(), url + l);
 		this.allMovies.add(m);	
 		
 		//test

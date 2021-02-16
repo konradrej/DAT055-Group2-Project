@@ -31,7 +31,7 @@ public class Movie implements Serializable{
         return this.genre;
     }
 
-    public String getLenght() {
+    public String getLength() {
         return length;
     }
     
