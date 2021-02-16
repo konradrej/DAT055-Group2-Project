@@ -50,7 +50,6 @@ public class BookingCollection implements Serializable, AllCollections{
 	 * @param s - the show 
 	 * @return a collection of bookings of the show
 	 */
-	
 	public Collection <Booking> getBookingsByShow (Show s){
 		Collection <Booking> bookings = new LinkedList <Booking>();
 		for(Booking b : this.allBookings) {
