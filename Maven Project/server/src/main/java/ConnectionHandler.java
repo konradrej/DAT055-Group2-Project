@@ -10,7 +10,7 @@ public class ConnectionHandler extends Thread {
     private ObjectInputStream in;
     private ObjectOutputStream out;
 
-    private CinemaBookingSystem cbs = CinemaBookingSystem.getInstance();
+    private final CinemaBookingSystem cbs = CinemaBookingSystem.getInstance();
 
     /**
      * Constructor for initializing the ConnectionHandler instance.
@@ -51,6 +51,8 @@ public class ConnectionHandler extends Thread {
                         out.writeObject(SocketCommands.responseGetMovies);
                         out.writeObject(cbs.getMovieCollection());
                         break;
+                    default:
+                        System.err.println("SocketCommand: " + str.toString() + " is not implemented.");
                 }
             }
         } catch (EOFException e){

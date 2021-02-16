@@ -7,6 +7,7 @@ public class SocketClientCommunication extends Thread {
     private Socket socket;
     private ObjectInputStream in;
     private ObjectOutputStream out;
+    private String ip = "localhost";
 
     private SocketClientCommunication() {
         Runtime.getRuntime().addShutdownHook(new Thread(){
@@ -32,11 +33,17 @@ public class SocketClientCommunication extends Thread {
         } catch (IOException e) { }
     }
 
+    public void start(String ip){
+        super.start();
+
+        this.ip = ip;
+    }
+
     @Override
     public void run() {
         try {
             try {
-                this.socket = new Socket("localhost", 888);
+                this.socket = new Socket(ip, 888);
                 System.out.println("Connection established.");
             }catch (IOException e){
                 System.err.println("Connection could not be established.");
@@ -59,6 +66,8 @@ public class SocketClientCommunication extends Thread {
                     case responseGetMovies:
                         ClientModel.getInstance().setMovieCollection((MovieCollection) in.readObject());
                         break;
+                    default:
+                        System.err.println("SocketCommand: " + str.toString() + " is not implemented.");
                 }
             }
         } catch (EOFException e){
@@ -67,8 +76,6 @@ public class SocketClientCommunication extends Thread {
 
         } catch (IOException | ClassNotFoundException e){
             e.printStackTrace();
-
-            System.err.println("ERROR OR HERE");
         }
     }
 

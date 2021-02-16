@@ -10,5 +10,7 @@ public enum SocketCommands {
     createCustomer,
     responseCreateCustomer,
     createBooking,
-    responseCreateBooking
+    responseCreateBooking,
+    findBookingsBySSN,
+    responseFindBookingsBySSN
 }

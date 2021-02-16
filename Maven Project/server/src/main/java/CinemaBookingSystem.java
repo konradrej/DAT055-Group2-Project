@@ -14,8 +14,6 @@ public class CinemaBookingSystem {
 	 * @param showCollection		a collection of shows
 	 * @param movieCollection		a collection of movies
 	 */
-	
-	
 	private final BookingCollection bookingCollection = new BookingCollection("bookingCollection.txt");
 	private final MovieCollection movieCollection = new MovieCollection("movieCollection.txt");
 	private final ShowCollection showCollection = new ShowCollection("showCollection.txt");
@@ -45,8 +43,7 @@ public class CinemaBookingSystem {
 	    SocketServerCommunication.getInstance().start();
 
 		//test get movies
-		MovieCollection m = new MovieCollection("test");
-		m.scanNewMovies();
+		CinemaBookingSystem.getInstance().getMovieCollection().scanNewMovies();
 	}
 
 	public BookingCollection getBookingCollection(){
