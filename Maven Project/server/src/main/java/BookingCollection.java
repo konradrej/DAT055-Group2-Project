@@ -67,11 +67,11 @@ public class BookingCollection implements Serializable, AllCollections{
 	 * @param s - The show of the booking
 	 * @param c - The customer of the booking
 	 * @param r - (TODO: ) The collection of row of the booking
-
+	 * @param seat - The collection of seat of the booking
 	 */
 	
-	public void addBookings(Show s, Customer c , Collection <Row> r) {
-		Booking b = new Booking(s, c, r );
+	public void addBookings(Show s, Customer c , Collection <Row> r , Collection <Seat> seat ) {
+		Booking b = new Booking(s, c, r, seat );
 		this.allBookings.add(b);
 	}
 	
@@ -97,12 +97,13 @@ public class BookingCollection implements Serializable, AllCollections{
 	 * @param s - The updated show
 	 * @param c - The updated customer
 	 * @param r - The updated collection of row
+	 * @param seat - The updated collection of seat
 	 */
 	
-	public void updateBooking (Booking b , Show s, Customer c , Collection <Row> r ) {
+	public void updateBooking (Booking b , Show s, Customer c , Collection <Row> r , Collection <Seat> seat ) {
 		for(Booking b2 : this.allBookings) {
 			if(b2.equals(b)) {
-				b2 = new Booking(s, c, r);
+				b2 = new Booking(s, c, r, seat);
 			}
 		}
 	}
