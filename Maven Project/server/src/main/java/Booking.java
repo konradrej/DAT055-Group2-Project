@@ -14,7 +14,6 @@ public class Booking implements Serializable {
 	private Show show;
 	private Customer customer;
 	private Collection<Row> rows;
-	private Collection<Seat> seats;
 	private Boolean cancelled;
 	
 	/**
@@ -23,14 +22,12 @@ public class Booking implements Serializable {
 	 * @param show			what show is booked
 	 * @param customer		which customer the booking belongs to
 	 * @param rows			what rows the customer has booked
-	 * @param seats			what seat numbers the customer has booked
 	 */
-	public Booking(Show show, Customer customer, Collection<Row> rows, Collection<Seat> seats)
+	public Booking(Show show, Customer customer, Collection<Row> rows)
 	{
 		this.show = show;
 		this.customer = customer;
 		this.rows = rows;
-		this.seats = seats;
 		this.cancelled = false;
 	}
 	
@@ -45,13 +42,24 @@ public class Booking implements Serializable {
 	}
 	
 	/**
-	 * Method for getting the seats that the customer has booked
+	 * Method for getting the seats in row with rowNumber that the customer has booked
 	 * 
-	 * @return rows		what seats the customer has booked
+	 * @param  rowNumber	what row the seats are located in
+	 * @return rows			what seats the customer has booked
 	 */
-	public Collection<Seat> getBookedSeats()
+	public Collection<Seat> getBookedSeats(int rowNumber)
 	{
-		return this.seats;
+		Collection<Seat> bookedSeats = Collections.emptyList();
+		
+		for(Row r : this.rows)
+		{
+			if(r.getRowNumber() == rowNumber)
+			{
+				bookedSeats = r.getAllSeats();
+			}
+		}
+		
+		return bookedSeats;
 	}
 	
 	/**
@@ -71,7 +79,6 @@ public class Booking implements Serializable {
 	public void updateRowsAndSeats(Collection<Row> rows, Collection<Seat> seats)
 	{
 		this.rows = rows;
-		this.seats = seats;
 	}
 
 	/**
