@@ -27,6 +27,7 @@ public class ShowSelectionPane extends AbstractPane implements Observer {
         super.start();
 
         SocketClientCommunication.getInstance().sendCommand(new GetMoviesCommand());
+
     }
 
     public Container movieSelection() {

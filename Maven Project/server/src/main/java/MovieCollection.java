@@ -4,9 +4,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedList;
+import java.util.*;
 
 /**
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen
@@ -15,7 +13,7 @@ import java.util.LinkedList;
 public class MovieCollection implements Serializable, AllCollections{
 
 	private static final long serialVersionUID = -6417208744468074004L;
-	private Collection <Movie> allMovies;
+	private Collection<Movie> allMovies;
 	private final String filename;
 	private final String url = "https://www.themoviedb.org";
 	
@@ -27,7 +25,7 @@ public class MovieCollection implements Serializable, AllCollections{
 	
 	public MovieCollection(String filename) {
 		this.filename = filename;
-		allMovies = new LinkedList <Movie>();
+		allMovies = new LinkedList <>();
 	}
 	
 	/**
@@ -49,7 +47,7 @@ public class MovieCollection implements Serializable, AllCollections{
 	/**
 	 * Adds a movie to the m to the objects movie collection
 	 * 
-	 * @param movie to add
+	 * @param m to add
 	 */
 	
 	public void addMovie(Movie m) {
@@ -59,7 +57,7 @@ public class MovieCollection implements Serializable, AllCollections{
 	/**
 	 * Removes a movie to the m to the objects movie collection
 	 * 
-	 * @param movie to remove
+	 * @param m to remove
 	 */
 	
 	public void removeMovie(Movie m ) {
@@ -79,7 +77,7 @@ public class MovieCollection implements Serializable, AllCollections{
 	 */
 	
 	public Collection <Movie> getSelectedMovies(String title, String genre){
-		Collection <Movie> selectedMovies = new LinkedList<Movie>();
+		Collection <Movie> selectedMovies = new LinkedList<>();
 		
 		for(Movie m : this.allMovies) {
 			for(String g : m.getGenre()) {
@@ -100,10 +98,8 @@ public class MovieCollection implements Serializable, AllCollections{
 	@Override
 	public void updateCollection() {
 
-		try {
-		ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(new File(this.filename)));
+		try (ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(new File(this.filename)))){
 		stream.writeObject(this);
-		stream.close();
 		}
 		catch (IOException e) {
             e.printStackTrace();
@@ -128,14 +124,14 @@ public class MovieCollection implements Serializable, AllCollections{
 		for(Element e : body.select("h2 a")) {
 			String link = e.attributes().get("href");
 			String title = e.attributes().get("title");
-			Boolean scanthis = true;
+			Boolean scanThis = true;
 			for( Movie m : this.allMovies) {
 				if(m.getURL().equals(url + link)){
-					scanthis = false;
+					scanThis = false;
 					break;
 				}
 			}
-			if(scanthis) {
+			if(scanThis) {
 				scanMovieDetails(link, title);
 			}
 		}
@@ -161,9 +157,9 @@ public class MovieCollection implements Serializable, AllCollections{
 		
 		Elements elementTime = doc.getElementsByClass("runtime");
 		Elements elementGenres = doc.select("span.genres");
-		ArrayList <String> list = new ArrayList<String>();
+		ArrayList <String> list = new ArrayList<>();
 		for(Element genre : elementGenres.select("a")) {
-			String s = "";
+			String s;
 
 			switch(genre.attributes().get("href")) {
 			
@@ -197,6 +193,7 @@ public class MovieCollection implements Serializable, AllCollections{
 		}
 		
 		Movie m = new Movie(title, list, elementTime.text(), url + l);
-		this.allMovies.add(m);	
+		this.allMovies.add(m);
 	}
+
 }

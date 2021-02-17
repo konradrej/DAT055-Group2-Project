@@ -23,19 +23,19 @@ public class ShowCollection implements Serializable, AllCollections {
 	
 	public ShowCollection(String filename) {
 		this.filename = filename;
-		allShows = new LinkedList <Show> ();
+		allShows = new LinkedList <> ();
 	}
 	
 	/**
 	 * Get a collection of selected shows given movie
 	 * 
-	 * @param d (TODO: date and time) -
+	 *   (TODO: date and time)
 	 * @param m - the movie being searched
 	 * @return a collection of shows
 	 */
 	
 	public Collection <Show> getShowsGivenMovie(Movie m, Calendar c){
-		Collection <Show> selectedShows = new LinkedList <Show>();
+		Collection <Show> selectedShows = new LinkedList <>();
 		//TODO: Date dayAndtime
 		for(Show s : this.allShows) {
 			Movie m2 = s.getMovie();
@@ -109,6 +109,7 @@ public class ShowCollection implements Serializable, AllCollections {
 	public void updateShow(Show s, Movie m , Date dat, Cinema c, Theater t) {
 		for(Show s2 : allShows) {
 			if(s.equals(s2)) {
+				//(TODO: fixa?)
 				s2 = new Show(m, dat, c, t);
 				break;
 			}
@@ -139,10 +140,8 @@ public class ShowCollection implements Serializable, AllCollections {
 	@Override
 	public void updateCollection() {
 
-		try {
-		ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(new File(this.filename)));
+		try (ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(new File(this.filename)))){
 		stream.writeObject(this);
-		stream.close();
 		}
 		catch (IOException e) {
             System.out.println("Error initializing stream");

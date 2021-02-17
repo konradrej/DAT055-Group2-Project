@@ -23,7 +23,7 @@ public class CustomerCollection implements Serializable, AllCollections {
 	
 	public CustomerCollection (String filename) {
 		this.filename = filename;
-		allCustomers = new LinkedList<Customer>();
+		allCustomers = new LinkedList<>();
 	}
 	
 	/**
@@ -35,7 +35,7 @@ public class CustomerCollection implements Serializable, AllCollections {
 	
 	public Customer getCustomer(String ssn) {
 		for(Customer c : allCustomers) {
-			if(c.getSSN() == ssn) {
+			if(c.getSSN().equals(ssn)) {
 				return c;
 			}
 		}
@@ -82,10 +82,8 @@ public class CustomerCollection implements Serializable, AllCollections {
 	
 	public void updateCollection(){
 		
-		try {
-		ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(new File(this.filename)));
+		try (ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(new File(this.filename)))){
 		stream.writeObject(this);
-		stream.close();
 		}
 		catch (IOException e) {
             System.out.println("Error initializing stream");

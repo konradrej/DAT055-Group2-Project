@@ -1,6 +1,12 @@
-public class GetMoviesCommand implements ServerCommand {
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+public class GetMoviesCommand implements ServerCommand, Serializable {
+    public GetMoviesCommand(){}
     @Override
-    public ClientCommand execute(CinemaBookingSystem cbs) {
-        return new ResponseGetMoviesCommand(cbs.getMovieCollection());
+    public void execute(ObjectOutputStream out, CinemaBookingSystem cbs) throws IOException {
+        out.writeObject(new ResponseGetMoviesCommand());
+        out.writeObject(cbs.getMovieCollection());
     }
 }

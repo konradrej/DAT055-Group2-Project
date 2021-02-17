@@ -1,3 +1,8 @@
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
+
 public interface ServerCommand {
-    ClientCommand execute(CinemaBookingSystem cbs);
+     void execute(ObjectOutputStream s, CinemaBookingSystem cbs) throws IOException;
+
 }

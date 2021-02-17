@@ -1,12 +1,12 @@
-public class ResponseGetMoviesCommand implements ClientCommand {
-    private MovieCollection movieCollection;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
 
-    public ResponseGetMoviesCommand(MovieCollection movieCollection){
-        this.movieCollection = movieCollection;
-    }
+public class ResponseGetMoviesCommand implements ClientCommand, Serializable {
 
+    public ResponseGetMoviesCommand(){}
     @Override
-    public void execute(ClientModel c) {
-        c.setMovieCollection(movieCollection);
+    public void execute(ObjectInputStream in, ClientModel c) throws IOException, ClassNotFoundException {
+        ClientModel.getInstance().setMovieCollection((MovieCollection) in.readObject());
     }
 }

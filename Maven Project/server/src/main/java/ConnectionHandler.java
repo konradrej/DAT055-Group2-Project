@@ -23,15 +23,12 @@ public class ConnectionHandler implements Runnable {
      */
     @Override
     public void run() {
-        try {
-            try(
-                    ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
-                    ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-            ){
+            try(ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+                ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream())){
+
                 while(socket.isConnected()){
                     ServerCommand command = (ServerCommand) in.readObject();
-
-                    command.execute(cbs);
+                    command.execute(out, cbs);
                 }
             } catch(ClassCastException e){
                 System.err.println("Class could not be cast to ClientCommand.");
@@ -45,11 +42,7 @@ public class ConnectionHandler implements Runnable {
             } catch (IOException e){
                 System.err.println("IOException occurred. Message: " + e.getMessage());
                 e.printStackTrace();
-            } finally {
-                socket.close();
             }
-        } catch (IOException e){
-            e.printStackTrace();
-        }
+
     }
 }

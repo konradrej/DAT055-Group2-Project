@@ -23,7 +23,7 @@ public class BookingCollection implements Serializable, AllCollections{
 	
 	public BookingCollection(String filename) {
 		this.filename = filename; 
-		allBookings = new LinkedList <Booking>();
+		allBookings = new LinkedList <>();
 	}
 	
 	/**
@@ -34,7 +34,7 @@ public class BookingCollection implements Serializable, AllCollections{
 	 */
 	
 	public Collection <Booking> getBookingsByCustomer(Customer c){
-		Collection <Booking> bookings = new LinkedList <Booking>();
+		Collection <Booking> bookings = new LinkedList <>();
 		for(Booking b : this.allBookings) {
 			Customer c2 = b.getCustomer();
 			if(c.equals(c2)) {
@@ -51,7 +51,7 @@ public class BookingCollection implements Serializable, AllCollections{
 	 * @return a collection of bookings of the show
 	 */
 	public Collection <Booking> getBookingsByShow (Show s){
-		Collection <Booking> bookings = new LinkedList <Booking>();
+		Collection <Booking> bookings = new LinkedList <>();
 		for(Booking b : this.allBookings) {
 			Show s2 = s.getShow();
 			if(s.equals(s2)) {
@@ -103,6 +103,7 @@ public class BookingCollection implements Serializable, AllCollections{
 	public void updateBooking (Booking b , Show s, Customer c , Collection <Row> r ) {
 		for(Booking b2 : this.allBookings) {
 			if(b2.equals(b)) {
+				//TODO: fixa
 				b2 = new Booking(s, c, r);
 			}
 		}
@@ -125,10 +126,8 @@ public class BookingCollection implements Serializable, AllCollections{
 	 */
 	public void updateCollection(){
 		
-		try {
-		ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(new File(this.filename)));
+		try (ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(new File(this.filename)))){
 		stream.writeObject(this);
-		stream.close();
 		}
 		catch (IOException e) {
             System.out.println("Error initializing stream");
