@@ -5,11 +5,8 @@ import java.net.Socket;
  * @author Konrad Rej
  * @version 0.0.2
  */
-public class ConnectionHandler extends Thread {
+public class ConnectionHandler implements Runnable {
     private final Socket socket;
-    private ObjectInputStream in;
-    private ObjectOutputStream out;
-
     private final CinemaBookingSystem cbs = CinemaBookingSystem.getInstance();
 
     /**
@@ -19,13 +16,6 @@ public class ConnectionHandler extends Thread {
      */
     public ConnectionHandler(Socket socket){
         this.socket = socket;
-
-        Runtime.getRuntime().addShutdownHook(new Thread(){
-            @Override
-            public void run() {
-                closeConnection();
-            }
-        });
     }
 
     /**
@@ -34,47 +24,31 @@ public class ConnectionHandler extends Thread {
     @Override
     public void run() {
         try {
-            out = new ObjectOutputStream(
-                    socket.getOutputStream()
-            );
+            try(
+                    ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+                    ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+            ){
+                while(socket.isConnected()){
+                    ServerCommand command = (ServerCommand) in.readObject();
 
-            in = new ObjectInputStream(
-                    this.socket.getInputStream()
-            );
-
-            SocketCommands str;
-            while(socket.isConnected()){
-                str = (SocketCommands) in.readObject();
-
-                switch(str){
-                    case getMovies:
-                        out.writeObject(SocketCommands.responseGetMovies);
-                        out.writeObject(cbs.getMovieCollection());
-                        break;
-                    default:
-                        System.err.println("SocketCommand: " + str.toString() + " is not implemented.");
+                    command.execute(cbs);
                 }
+            } catch(ClassCastException e){
+                System.err.println("Class could not be cast to ClientCommand.");
+                e.printStackTrace();
+            } catch(ClassNotFoundException e) {
+                System.err.println("Class could not be found.");
+                e.printStackTrace();
+            } catch(NotSerializableException e) {
+                System.err.println("Class is not serializable.");
+                e.printStackTrace();
+            } catch (IOException e){
+                System.err.println("IOException occurred. Message: " + e.getMessage());
+                e.printStackTrace();
+            } finally {
+                socket.close();
             }
-        } catch (EOFException e){
-            closeConnection();
-        } catch (IOException | ClassNotFoundException e){
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Gracefully closes connection and informs user.
-     */
-    public void closeConnection(){
-        try {
-            if(!socket.isClosed()){
-                out.flush();
-                System.out.println("Connection closed.");
-                this.out.close();
-                this.in.close();
-                this.socket.close();
-            }
-        } catch (IOException e) {
+        } catch (IOException e){
             e.printStackTrace();
         }
     }

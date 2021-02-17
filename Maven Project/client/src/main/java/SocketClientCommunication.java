@@ -1,94 +1,64 @@
 import java.io.*;
 import java.net.Socket;
-import java.net.SocketException;
 
-public class SocketClientCommunication extends Thread {
-    private static SocketClientCommunication INSTANCE;
-    private Socket socket;
-    private ObjectInputStream in;
-    private ObjectOutputStream out;
-    private String ip = "localhost";
+public enum SocketClientCommunication implements Runnable {
+    INSTANCE();
 
-    private SocketClientCommunication() {
-        Runtime.getRuntime().addShutdownHook(new Thread(){
-            @Override
-            public void run() {
-                closeConnection();
-            }
-        });
-    }
+    SocketClientCommunication(){ }
 
-    public synchronized static SocketClientCommunication getInstance(){
-        if(INSTANCE == null){
-            INSTANCE = new SocketClientCommunication();
-        }
-
+    public static SocketClientCommunication getInstance(){
         return INSTANCE;
     }
 
-    public void sendCommand(SocketCommands command){
-        try {
-            this.out.writeObject(command);
-            out.flush();
-        } catch (IOException e) { }
-    }
+    private String ip = "localhost";
+    private ObjectOutputStream out;
 
-    public void start(String ip){
-        super.start();
-
+    public void setIp(String ip){
         this.ip = ip;
     }
 
-    @Override
-    public void run() {
-        try {
-            try {
-                this.socket = new Socket(ip, 888);
-                System.out.println("Connection established.");
-            }catch (IOException e){
-                System.err.println("Connection could not be established.");
-                return;
+    public void sendCommand(ServerCommand command){
+        try{
+            if(out != null){
+                out.writeObject(command);
             }
-
-            out = new ObjectOutputStream(
-                    socket.getOutputStream()
-            );
-
-            in = new ObjectInputStream(
-                    this.socket.getInputStream()
-            );
-
-            SocketCommands str;
-            while(socket.isConnected()){
-                str = (SocketCommands) in.readObject();
-
-                switch(str){
-                    case responseGetMovies:
-                        ClientModel.getInstance().setMovieCollection((MovieCollection) in.readObject());
-                        break;
-                    default:
-                        System.err.println("SocketCommand: " + str.toString() + " is not implemented.");
-                }
-            }
-        } catch (EOFException e){
-            closeConnection();
-        } catch (SocketException e) {
-
-        } catch (IOException | ClassNotFoundException e){
+        } catch(IOException e){
+            System.err.println("Command could not be sent.");
             e.printStackTrace();
         }
     }
 
-    public void closeConnection(){
-        try {
-            if(!socket.isClosed()){
-                out.flush();
-                System.out.println("Connection closed.");
-                this.out.close();
-                this.in.close();
-                this.socket.close();
+    @Override
+    public void run() {
+        try(Socket socket = new Socket(ip, 888)) {
+            System.out.println("Connection established.");
+
+            try(ObjectInputStream in = new ObjectInputStream(socket.getInputStream())){
+                out = new ObjectOutputStream(socket.getOutputStream());
+
+                while(socket.isConnected()){
+                    ClientCommand command = (ClientCommand) in.readObject();
+
+                    command.execute(ClientModel.getInstance());
+                }
+            } catch(ClassCastException e){
+                System.err.println("Class could not be cast to ClientCommand.");
+                e.printStackTrace();
+            } catch(ClassNotFoundException e) {
+                System.err.println("Class could not be found.");
+                e.printStackTrace();
+            } catch(NotSerializableException e) {
+                System.err.println("Class is not serializable.");
+                e.printStackTrace();
+            } catch (IOException e){
+                System.err.println("IOException occurred. Message: " + e.getMessage());
+                e.printStackTrace();
+            } finally {
+                out.close();
+                out = null;
             }
-        } catch (IOException e) {
+        } catch(IOException e){
+            System.err.println("Connection could not be established.");
             e.printStackTrace();
         }
     }

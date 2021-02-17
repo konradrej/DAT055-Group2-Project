@@ -6,9 +6,12 @@ public class CinemaClient {
     private JFrame frame;
 
     public static void main(String[] args) {
-
         String ip = ipReader.readText();
-        SocketClientCommunication.getInstance().start(ip);
+
+        SocketClientCommunication scc = SocketClientCommunication.getInstance();
+        scc.setIp(ip);
+
+        new Thread(scc).start();
         new CinemaClient();
     }
 
