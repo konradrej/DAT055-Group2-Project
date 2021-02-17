@@ -40,7 +40,7 @@ public class CinemaBookingSystem {
 	
 	public static void main (String [] args) {
 		// Runs communication.
-	    SocketServerCommunication.getInstance().start();
+	    new Thread(SocketServerCommunication.getInstance()).start();
 
 		//test get movies
 		CinemaBookingSystem.getInstance().getMovieCollection().scanNewMovies();

@@ -10,16 +10,13 @@ import java.net.Socket;
  * @author Konrad Rej
  * @version 0.1.0
  */
-public class SocketServerCommunication extends Thread {
-    /**
-     * Instance variable for singleton design pattern.
-     */
-    private static SocketServerCommunication INSTANCE;
+public enum SocketServerCommunication implements Runnable {
+    INSTANCE();
 
     /**
      * Empty constructor.
      */
-    private SocketServerCommunication() { }
+    SocketServerCommunication(){ }
 
     /**
      * Retrieves singleton instance of SockerCommunication.
@@ -27,10 +24,6 @@ public class SocketServerCommunication extends Thread {
      * @return SocketCommunication instance
      */
     public static SocketServerCommunication getInstance(){
-        if(INSTANCE == null){
-            INSTANCE = new SocketServerCommunication();
-        }
-
         return INSTANCE;
     }
 
@@ -44,12 +37,12 @@ public class SocketServerCommunication extends Thread {
         try(ServerSocket ss = new ServerSocket(888)) {
             Socket s;
 
+            // GÖR EXIT CONDITION
             while(true){
                 s = ss.accept();
                 System.out.println("Connection established.");
 
-                Thread handler = new ConnectionHandler(s);
-                handler.start();
+                new Thread(new ConnectionHandler(s)).start();
             }
         } catch (IOException e){
             e.printStackTrace();
