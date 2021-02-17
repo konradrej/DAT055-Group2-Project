@@ -5,7 +5,7 @@ import java.util.*;
 
 public class ipReader {
 
-    public static String readText(){
+    public static Map<String, String> readText(){
 
         Path path = Paths.get(System.getProperty("user.dir")).resolve("Config.txt");
         BufferedReader reader = null;
@@ -34,10 +34,7 @@ public class ipReader {
                 e.printStackTrace();
             }
         }
-
-
-        return ipNum.get("ip");
+        return ipNum;
     }
-
 
 }

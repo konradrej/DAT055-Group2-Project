@@ -1,17 +1,20 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.util.Map;
 
 public class CinemaClient {
     private JFrame frame;
 
     public static void main(String[] args) {
-        String ip = ipReader.readText();
+        Map<String, String> ipNum = ipReader.readText();
+        System.out.println(ipNum.get("ip"));
 
         SocketClientCommunication scc = SocketClientCommunication.getInstance();
-        scc.setIp(ip);
+        scc.setIp(ipNum.getOrDefault("ip", "localhost"));
 
         new Thread(scc).start();
+
         new CinemaClient();
     }
 
