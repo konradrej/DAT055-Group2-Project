@@ -1,114 +1,94 @@
-import java.util.*;
+import java.util.Collection;
+import java.util.LinkedList;
 
-/**
-* @author Anthon Lenander, Erik Kieu, Phong Nguyen
-* @version version 0.0.0
-*/
 public enum CinemaBookingSystem {
 
 	INSTANCE();
 
+	/**
+	 * Constructor for initializing the CinemaBookingSystem instance
+	 *
+	 * @param bookingCollection 	a collection of bookings
+	 * @param customerCollection	a collection of customers
+	 * @param showCollection		a collection of shows
+	 * @param movieCollection		a collection of movies
+	 */
+
+	private final Cinema cinema;
 	private final BookingCollection bookingCollection = new BookingCollection("bookingCollection.txt");
 	private final MovieCollection movieCollection = new MovieCollection("movieCollection.txt");
 	private final ShowCollection showCollection = new ShowCollection("showCollection.txt");
 	private final CustomerCollection customerCollection = new CustomerCollection("customerCollection.txt");
 
-	/**
-	 * Constructor for initializing the CinemaBookingSystem instance
-	 */
-	CinemaBookingSystem() { /*DO ANY NECESSARY INITIALIZATION*/ }
 
-	public static CinemaBookingSystem getInstance() { return INSTANCE; }
-	
+	CinemaBookingSystem() {
+
+		Collection<Seat> seatTen = new LinkedList<>();
+		for(int i = 0; i < 10; i++){
+			seatTen.add(new Seat(i+1, true));
+		}
+
+		Collection <Seat> seatFifteen = new LinkedList<Seat>();
+		for(int i = 0; i < 15 ; i++){
+			seatFifteen.add(new Seat(i+1, true));
+		}
+
+		Collection<Row> rowFive = new LinkedList <>();
+		rowFive.add(new Row(1, seatTen));
+		rowFive.add(new Row(2, seatTen));
+		rowFive.add(new Row(3, seatFifteen));
+		rowFive.add(new Row(4, seatFifteen));
+		rowFive.add(new Row(5, seatFifteen));
+
+
+		Collection <Row> rowThree = new LinkedList<>();
+		rowThree.add(new Row(1, seatTen));
+		rowThree.add(new Row(2, seatTen));
+		rowThree.add(new Row(3, seatFifteen));
+
+		Collection <Theater> theaterFive = new LinkedList<>();
+		theaterFive.add(new Theater(1, rowFive, true));
+		theaterFive.add(new Theater(2, rowThree, true));
+		theaterFive.add(new Theater(3, rowThree, true));
+		theaterFive.add(new Theater(4, rowFive, true));
+		theaterFive.add(new Theater(5, rowFive, true));
+
+		cinema = new Cinema("Underground Bio",theaterFive);
+
+	}
+
+	public static CinemaBookingSystem getInstance(){
+		return INSTANCE;
+	}
+
+
+
 	// Serialize (saves in path: Working Tree-> Maven project -> Server) all collections
-	
-	//Should we have synchronized here? Applies to all of the following methods
-	public synchronized void updateAllCollections(){
+
+	public void updateAllCollections(){
 		movieCollection.updateCollection();
 		showCollection.updateCollection();
 		customerCollection.updateCollection();
 		bookingCollection.updateCollection();
 	}
-	
-	public synchronized BookingCollection getBookingCollection(){
+
+	public BookingCollection getBookingCollection(){
 		return bookingCollection;
 	}
 
-	public synchronized MovieCollection getMovieCollection(){
+	public MovieCollection getMovieCollection(){
 		return movieCollection;
 	}
 
-	public synchronized ShowCollection getShowCollection(){
+	public ShowCollection getShowCollection(){
 		return showCollection;
 	}
 
-	public synchronized CustomerCollection getCustomerCollection(){
+	public CustomerCollection getCustomerCollection(){
 		return customerCollection;
 	}
-	
-	public synchronized Show getShowByMovie(Movie movie)
-	{
-		for(Show s : this.showCollection.getAllShows())
-		{
-			if(s.getMovie() == movie)
-			{
-				return s;
-			}
-		}
 
-		return null;
-	}
-
-	public synchronized Collection<Seat> getAllSeatsByShow(Show show)
-	{
-		for(Show s : this.showCollection.getAllShows())
-		{
-			if(show.equals(s)) return s.getAllSeats();
-		}
-
-		return null;
-	}
-
-	public synchronized Customer getCustomerBySSN(String SSN)
-	{
-		return this.customerCollection.getCustomer(SSN);
-	}
-
-	//Discuss return type of this method
-	public synchronized Customer createCustomer(String name, String phoneNumber, String SSN)
-	{
-		Customer newCustomer = new Customer(name, phoneNumber, SSN);
-		this.customerCollection.addCustomer(newCustomer);
-
-		return newCustomer;
-	}
-
-	//Discuss return type of this method
-	public synchronized Booking createBooking(Show show, Customer customer, Collection<Row> rows)
-	{
-		Booking newBooking = new Booking(show, customer, rows);
-		this.bookingCollection.addBookings(show, customer, rows);
-
-		return newBooking;
-	}
-
-	public synchronized Collection<Booking> findBookingsBySSN(String SSN)
-	{
-		Customer customerToFind = this.customerCollection.getCustomer(SSN);
-
-		if(customerToFind != null)
-		{
-			return this.bookingCollection.getBookingsByCustomer(customerToFind);
-		}
-
-		return null;
-	}
-	
-	public static void main (String [] args) {
-		// Runs communication.
-	    new Thread(SocketServerCommunication.getInstance()).start();
-
-		//test get movies
-		CinemaBookingSystem.getInstance().getMovieCollection().scanNewMovies();
+	public Cinema getCinema() {
+		return cinema;
 	}
 }

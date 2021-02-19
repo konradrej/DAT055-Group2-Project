@@ -70,14 +70,11 @@ public class ShowCollection implements Serializable, AllCollections {
 	/**
 	 * Adds a show given movie, date and time, cinema and theater:
 	 * 
-	 * @param m - The movie of the show
-	 * @param dat - The date and time of the show
-	 * @param c - The cinema of the show
-	 * @param t - The theater of the show
+	 * @param s - The show that is added
+
 	 */
 	
-	public void addShow (Movie m, Date dat, Cinema c, Theater t) {
-		Show s = new Show(m, dat, c, t);
+	public void addShow (Show s) {
 		this.allShows.add(s);
 	}
 	
@@ -106,11 +103,11 @@ public class ShowCollection implements Serializable, AllCollections {
 	 * @param t - The updated theater of the show
 	 */
 	
-	public void updateShow(Show s, Movie m , Date dat, Cinema c, Theater t) {
+	public void updateShow(Show s, Movie m , CinemaDate dat, Cinema c, Theater t, Boolean b) {
 		for(Show s2 : allShows) {
 			if(s.equals(s2)) {
 				//(TODO: fixa?)
-				s2 = new Show(m, dat, c, t);
+				s2 = new Show(m, dat, c, t, b);
 				break;
 			}
 		}

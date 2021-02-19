@@ -11,6 +11,7 @@ public class Theater implements Serializable{
 
 	private static final long serialVersionUID = 264852408018552280L;
     private int theaterNumber;
+    private boolean status;
     private Collection<Row> allRows;
 
     /**
@@ -19,9 +20,10 @@ public class Theater implements Serializable{
      * @param theaterNumber the number of the theatre
      * @param allRows       the Collection of allrows
      */
-    public Theater(int theaterNumber, Collection<Row> allRows) {
+    public Theater(int theaterNumber, Collection<Row> allRows, Boolean status) {
         this.theaterNumber = theaterNumber;
         this.allRows = allRows;
+        this.status = status;
     }
 
     /**
@@ -52,7 +54,6 @@ public class Theater implements Serializable{
 
     }
 
-
     /**
      * Method for getting a row from a collection of rows
      */
@@ -71,4 +72,12 @@ public class Theater implements Serializable{
         this.allRows.add(row);
     }
     */
+
+    public void setStatus(Boolean b) {
+        this.status = b;
+    }
+
+    public boolean getStatus(){
+        return this.status;
+    }
 }

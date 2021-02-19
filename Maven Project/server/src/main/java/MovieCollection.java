@@ -116,7 +116,7 @@ public class MovieCollection implements Serializable, AllCollections{
 			doc = Jsoup.connect(url + "/movie/now-playing").timeout(6000).get();
 		}
 		catch(IOException e) {
-			System.out.println("Error");
+			System.out.println("Error connection");
 			return;
 		}
 		
