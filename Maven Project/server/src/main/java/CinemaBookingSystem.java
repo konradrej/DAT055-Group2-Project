@@ -1,3 +1,5 @@
+import java.util.*;
+
 /**
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen
 * @version version 0.0.0
@@ -5,25 +7,18 @@
 public enum CinemaBookingSystem {
 
 	INSTANCE();
-	
-	/**
-	 * Constructor for initializing the CinemaBookingSystem instance
-	 * 
-	 * @param bookingCollection 	a collection of bookings
-	 * @param customerCollection	a collection of customers
-	 * @param showCollection		a collection of shows
-	 * @param movieCollection		a collection of movies
-	 */
+
 	private final BookingCollection bookingCollection = new BookingCollection("bookingCollection.txt");
 	private final MovieCollection movieCollection = new MovieCollection("movieCollection.txt");
 	private final ShowCollection showCollection = new ShowCollection("showCollection.txt");
 	private final CustomerCollection customerCollection = new CustomerCollection("customerCollection.txt");
-	
-	CinemaBookingSystem() { //DO ANY NECESSARY INITIALIZATION }
-	
-	public static CinemaBookingSystem getInstance(){
-        return INSTANCE;
-    }
+
+	/**
+	 * Constructor for initializing the CinemaBookingSystem instance
+	 */
+	CinemaBookingSystem() { /*DO ANY NECESSARY INITIALIZATION*/ }
+
+	public static CinemaBookingSystem getInstance() { return INSTANCE; }
 	
 	// Serialize (saves in path: Working Tree-> Maven project -> Server) all collections
 	
@@ -53,10 +48,60 @@ public enum CinemaBookingSystem {
 	
 	public synchronized Show getShowByMovie(Movie movie)
 	{
-		for(Show s : this.showCollection)
+		for(Show s : this.showCollection.getAllShows())
 		{
-			if(s)
+			if(s.getMovie() == movie)
+			{
+				return s;
+			}
 		}
+
+		return null;
+	}
+
+	public synchronized Collection<Seat> getAllSeatsByShow(Show show)
+	{
+		for(Show s : this.showCollection.getAllShows())
+		{
+			if(show.equals(s)) return s.getAllSeats();
+		}
+
+		return null;
+	}
+
+	public synchronized Customer getCustomerBySSN(String SSN)
+	{
+		return this.customerCollection.getCustomer(SSN);
+	}
+
+	//Discuss return type of this method
+	public synchronized Customer createCustomer(String name, String phoneNumber, String SSN)
+	{
+		Customer newCustomer = new Customer(name, phoneNumber, SSN);
+		this.customerCollection.addCustomer(newCustomer);
+
+		return newCustomer;
+	}
+
+	//Discuss return type of this method
+	public synchronized Booking createBooking(Show show, Customer customer, Collection<Row> rows)
+	{
+		Booking newBooking = new Booking(show, customer, rows);
+		this.bookingCollection.addBookings(show, customer, rows);
+
+		return newBooking;
+	}
+
+	public synchronized Collection<Booking> findBookingsBySSN(String SSN)
+	{
+		Customer customerToFind = this.customerCollection.getCustomer(SSN);
+
+		if(customerToFind != null)
+		{
+			return this.bookingCollection.getBookingsByCustomer(customerToFind);
+		}
+
+		return null;
 	}
 	
 	public static void main (String [] args) {
