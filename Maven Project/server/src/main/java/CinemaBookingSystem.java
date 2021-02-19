@@ -2,9 +2,9 @@
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen
 * @version version 0.0.0
 */
-public class CinemaBookingSystem {
+public enum CinemaBookingSystem {
 
-	private static CinemaBookingSystem INSTANCE;
+	INSTANCE();
 	
 	/**
 	 * Constructor for initializing the CinemaBookingSystem instance
@@ -19,23 +19,36 @@ public class CinemaBookingSystem {
 	private final ShowCollection showCollection = new ShowCollection("showCollection.txt");
 	private final CustomerCollection customerCollection = new CustomerCollection("customerCollection.txt");
 	
-	public CinemaBookingSystem() {}
+	CinemaBookingSystem() { //DO ANY NECESSARY INITIALIZATION }
 	
-	public synchronized static CinemaBookingSystem getInstance(){
-        if(INSTANCE == null){
-            INSTANCE = new CinemaBookingSystem();
-        }
-
+	public static CinemaBookingSystem getInstance(){
         return INSTANCE;
     }
 	
 	// Serialize (saves in path: Working Tree-> Maven project -> Server) all collections
 	
-	public void updateAllCollections(){
+	//Should we have synchronized here? Applies to all of the following methods
+	public synchronized void updateAllCollections(){
 		movieCollection.updateCollection();
 		showCollection.updateCollection();
 		customerCollection.updateCollection();
 		bookingCollection.updateCollection();
+	}
+	
+	public synchronized BookingCollection getBookingCollection(){
+		return bookingCollection;
+	}
+
+	public synchronized MovieCollection getMovieCollection(){
+		return movieCollection;
+	}
+
+	public synchronized ShowCollection getShowCollection(){
+		return showCollection;
+	}
+
+	public synchronized CustomerCollection getCustomerCollection(){
+		return customerCollection;
 	}
 	
 	public static void main (String [] args) {
@@ -45,21 +58,4 @@ public class CinemaBookingSystem {
 		//test get movies
 		CinemaBookingSystem.getInstance().getMovieCollection().scanNewMovies();
 	}
-
-	public BookingCollection getBookingCollection(){
-		return bookingCollection;
-	}
-
-	public MovieCollection getMovieCollection(){
-		return movieCollection;
-	}
-
-	public ShowCollection getShowCollection(){
-		return showCollection;
-	}
-
-	public CustomerCollection getCustomerCollection(){
-		return customerCollection;
-	}
-	
 }
