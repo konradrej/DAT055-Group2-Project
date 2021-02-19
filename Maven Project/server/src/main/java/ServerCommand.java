@@ -3,6 +3,6 @@ import java.io.ObjectOutputStream;
 
 
 public interface ServerCommand {
-     void execute(ObjectOutputStream s, CinemaBookingSystem cbs) throws IOException;
+     void execute(ObjectOutputStream s, CinemaBookingSystem cbs) throws IOException, ClassNotFoundException;
 
 }

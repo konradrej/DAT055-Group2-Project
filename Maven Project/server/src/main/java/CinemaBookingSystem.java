@@ -51,6 +51,14 @@ public enum CinemaBookingSystem {
 		return customerCollection;
 	}
 	
+	public synchronized Show getShowByMovie(Movie movie)
+	{
+		for(Show s : this.showCollection)
+		{
+			if(s)
+		}
+	}
+	
 	public static void main (String [] args) {
 		// Runs communication.
 	    new Thread(SocketServerCommunication.getInstance()).start();
