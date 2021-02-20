@@ -155,13 +155,14 @@ public class CinemaAdmin {
     }
 
     public void addShowToCollection(){
+        // TODO Theater status needs to be checked with date/time
         if(movie != null && theater != null && theater.getStatus()) {
             Show s = new Show(movie, date, CinemaBookingSystem.getInstance().getCinema(), theater, true);
             CinemaBookingSystem.getInstance().getShowCollection().addShow(s);
             theater.setStatus(false);
             System.out.println(s.toString());
         }
-        else if (!theater.getStatus()){
+        else if (theater != null && !theater.getStatus()){
             System.out.println("Theater" + theater.getTheaterNumber() + " occupied");
         }
         else{

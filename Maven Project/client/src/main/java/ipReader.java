@@ -13,13 +13,13 @@ public class ipReader {
             reader = new BufferedReader(new FileReader(path.toFile()));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            return new HashMap<>();
         }
 
         Map<String, String> ipNum = new HashMap<>();
 
         String line = null;
         try {
-            assert reader != null;
             line = reader.readLine();
         } catch (IOException e) {
             e.printStackTrace();
@@ -34,6 +34,13 @@ public class ipReader {
                 e.printStackTrace();
             }
         }
+
+        try {
+            reader.close();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
         return ipNum;
     }
 
