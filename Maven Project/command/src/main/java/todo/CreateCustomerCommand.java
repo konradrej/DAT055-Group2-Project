@@ -1,4 +1,10 @@
+package todo;
+
+import server.ServerCommand;
+import server.ServerHandler;
+
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
@@ -14,8 +20,8 @@ public class CreateCustomerCommand implements ServerCommand, Serializable {
     }
 
     @Override
-    public void execute(ObjectOutputStream out, CinemaBookingSystem cbs) throws IOException {
+    public void execute(ServerHandler handler, ObjectInputStream in, ObjectOutputStream out) throws IOException {
         out.writeObject(new ResponseCreateCustomerCommand());
-        out.writeObject(cbs.createCustomer(this.name, this.phoneNumber, this.SSN));
+        //out.writeObject(cbs.createCustomer(this.name, this.phoneNumber, this.SSN));
     }
 }

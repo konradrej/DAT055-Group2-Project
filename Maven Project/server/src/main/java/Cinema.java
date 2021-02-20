@@ -70,6 +70,4 @@ public class Cinema implements Serializable{
         //TODO: parameters
         //TODO: CODE
     }
-
-
 }

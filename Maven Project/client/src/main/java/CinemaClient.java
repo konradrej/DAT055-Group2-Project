@@ -8,7 +8,6 @@ public class CinemaClient {
 
     public static void main(String[] args) {
         Map<String, String> ipNum = ipReader.readText();
-        System.out.println(ipNum.get("ip"));
 
         SocketClientCommunication scc = SocketClientCommunication.getInstance();
         scc.setIp(ipNum.getOrDefault("ip", "localhost"));

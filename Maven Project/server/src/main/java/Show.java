@@ -12,10 +12,10 @@ public class Show implements Serializable{
 	 */
 	private static final long serialVersionUID = -9177195168561009276L;
 	private Movie movie;
-	private Date dayAndTime;
+	private CinemaDate dayAndTime;
 	private Cinema cinema;
 	private Theater theater;
-	private Boolean cancelled;
+	private Boolean status;
 	
 	private Collection<Row> rows;
 	
@@ -27,14 +27,13 @@ public class Show implements Serializable{
 	 * @param cinema		what cinema the show will be played at
 	 * @param theater		what theater the show will be played at
 	 */
-	public Show(Movie movie, Date dayAndTime, Cinema cinema, Theater theater)
+	public Show(Movie movie, CinemaDate dayAndTime, Cinema cinema, Theater theater, Boolean status )
 	{
 		this.movie = movie;
 		this.dayAndTime = dayAndTime;
 		this.cinema = cinema;
 		this.theater = theater;
-		this.cancelled = false;
-		
+		this.status = status;
 		this.rows = this.theater.getCollectionOfRows();
 	}
 	
@@ -53,7 +52,7 @@ public class Show implements Serializable{
 	 * 
 	 * @return	returns the day_and_time instance variable of this object
 	 */
-	public Date getShowDateAndTime()
+	public CinemaDate getShowDateAndTime()
 	{
 		return this.dayAndTime;
 	}
@@ -173,6 +172,11 @@ public class Show implements Serializable{
 	 */
 	public void ChangeStatus()
 	{
-		this.cancelled = !this.cancelled;
+		this.status = !this.status;
+	}
+
+	public String toString(){
+		return "Movie:" + this.movie.getTitle() + " Date and time:" + this.dayAndTime.toString() +
+				" Cinema:" + this.cinema.getCinemaName() + " Theater Number:" + theater.getTheaterNumber();
 	}
 }

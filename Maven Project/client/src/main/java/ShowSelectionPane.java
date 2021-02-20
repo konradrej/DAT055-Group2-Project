@@ -1,7 +1,13 @@
+import server.GetMoviesCommand;
+import server.GetShowByMovieCommand;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
+import java.util.Collection;
+import java.util.LinkedList;
 
 public class ShowSelectionPane extends AbstractPane implements Observer {
     private MovieCollection movieCollection;
@@ -27,7 +33,6 @@ public class ShowSelectionPane extends AbstractPane implements Observer {
         super.start();
 
         SocketClientCommunication.getInstance().sendCommand(new GetMoviesCommand());
-
     }
 
     public Container movieSelection() {
@@ -45,7 +50,7 @@ public class ShowSelectionPane extends AbstractPane implements Observer {
 
     public void updateMovieSelection(){
         if(this.movieCollection != null){
-            Container con = (JPanel) contentPane.getComponent(0);
+            Container con = (Container) contentPane.getComponent(0);
             con.removeAll();
 
             JComboBox<String> movieList = new JComboBox<>();
@@ -54,6 +59,11 @@ public class ShowSelectionPane extends AbstractPane implements Observer {
                 movieList.addItem(movie.getTitle());
             }
 
+            movieList.addActionListener(e -> {
+                Movie movie = movieCollection.getMovieByTitle(String.valueOf(movieList.getSelectedItem()));
+                SocketClientCommunication.getInstance().sendCommand(new GetShowByMovieCommand(movie));
+            });
+
             con.add(movieList);
 
             contentPane.validate();
@@ -61,13 +71,25 @@ public class ShowSelectionPane extends AbstractPane implements Observer {
     }
 
     public void updateShowSelection(){
+        Container con = (Container) contentPane.getComponent(1);
+        con.removeAll();
 
+        JComboBox<String> showList = new JComboBox<>();
+
+        for(Show show : showCollection.getAllShows()){
+            showList.addItem(show.getShowDateAndTime().toString());
+            System.out.println(show.getShowDateAndTime().toString());
+        }
+
+        con.add(showList);
+
+        contentPane.validate();
     }
 
     public Container showSelection(){
-        Container showSelection = new JScrollPane(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        Container showSelection = new JPanel();
 
-        showSelection.setLayout(new ScrollPaneLayout());
+        showSelection.setLayout(new GridLayout());
 
         JButton continueButton2 = new JButton("Continue");
         continueButton2.setEnabled(false);

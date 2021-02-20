@@ -43,6 +43,22 @@ public class MovieCollection implements Serializable, AllCollections{
 	public Collection <Movie> getAllMovies(){
 		return this.allMovies;
 	}
+
+	/**
+	 * @param title movie title
+	 *
+	 * @return a movie with matching title
+	 */
+
+	public Movie getMovieByTitle(String title){
+		for(Movie movie : allMovies){
+			if(movie.getTitle().equals(title)){
+				return movie;
+			}
+		}
+
+		return null;
+	}
 	
 	/**
 	 * Adds a movie to the m to the objects movie collection
@@ -116,7 +132,7 @@ public class MovieCollection implements Serializable, AllCollections{
 			doc = Jsoup.connect(url + "/movie/now-playing").timeout(6000).get();
 		}
 		catch(IOException e) {
-			System.out.println("Error");
+			System.out.println("Error connection");
 			return;
 		}
 		
