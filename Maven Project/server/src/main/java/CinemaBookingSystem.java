@@ -1,7 +1,9 @@
+import server.ServerHandler;
+
 import java.util.Collection;
 import java.util.LinkedList;
 
-public enum CinemaBookingSystem {
+public enum CinemaBookingSystem implements ServerHandler {
 
 	INSTANCE();
 

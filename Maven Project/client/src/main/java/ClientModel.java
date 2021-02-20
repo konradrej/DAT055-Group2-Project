@@ -1,4 +1,9 @@
-public class ClientModel extends AbstractObservable {
+import client.ClientHandler;
+
+import java.util.Collection;
+import java.util.LinkedList;
+
+public class ClientModel extends AbstractObservable implements ClientHandler {
     private static ClientModel INSTANCE;
 
     private ClientModel() { }
@@ -26,17 +31,27 @@ public class ClientModel extends AbstractObservable {
         return movieCollection;
     }
 
-    public ShowCollection getShowCollection(){
-        return showCollection;
+    //public ShowCollection getShowCollection(){
+        //return showCollection;
+    //}
+
+    public void setMovieCollection(Object movieCollection){
+        try {
+            this.movieCollection = (MovieCollection) movieCollection;
+            notifyObservers("movieCollection", this.movieCollection);
+        } catch (ClassCastException e){
+            System.err.println("Class could not be casted. Message: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
-    public void setMovieCollection(MovieCollection movieCollection){
-        this.movieCollection = movieCollection;
-        notifyObservers("movieCollection", this.movieCollection);
-    }
-
-    public void setShowCollection(ShowCollection showCollection){
-        this.showCollection = showCollection;
-        notifyObservers("showCollection", this.showCollection);
+    public void setShowCollection(Object showCollection){
+        try {
+            this.showCollection = (ShowCollection) showCollection;
+            notifyObservers("showCollection", this.showCollection);
+        } catch (ClassCastException e){
+            System.err.println("Class could not be casted. Message: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

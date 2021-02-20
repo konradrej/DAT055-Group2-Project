@@ -1,3 +1,5 @@
+import server.ServerCommand;
+
 import java.io.*;
 import java.net.Socket;
 
@@ -23,26 +25,34 @@ public class ConnectionHandler implements Runnable {
      */
     @Override
     public void run() {
-            try(ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
-                ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream())){
+        try(ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+            ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream())){
 
-                while(socket.isConnected()){
-                    ServerCommand command = (ServerCommand) in.readObject();
-                    command.execute(out, cbs);
+            while(socket.isConnected()){
+                ServerCommand command = (ServerCommand) in.readObject();
+                command.execute(cbs, in, out);
+            }
+        } catch(ClassCastException e){
+            System.err.println("Class could not be cast to client.ClientCommand.");
+            e.printStackTrace();
+        } catch(ClassNotFoundException e) {
+            System.err.println("Class could not be found.");
+            e.printStackTrace();
+        } catch(NotSerializableException e) {
+            System.err.println("Class is not serializable.");
+            e.printStackTrace();
+        } catch (IOException e){
+            System.err.println("IOException occurred. Message: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            try {
+                if(!socket.isClosed()){
+                    socket.close();
                 }
-            } catch(ClassCastException e){
-                System.err.println("Class could not be cast to ClientCommand.");
-                e.printStackTrace();
-            } catch(ClassNotFoundException e) {
-                System.err.println("Class could not be found.");
-                e.printStackTrace();
-            } catch(NotSerializableException e) {
-                System.err.println("Class is not serializable.");
-                e.printStackTrace();
             } catch (IOException e){
-                System.err.println("IOException occurred. Message: " + e.getMessage());
+                System.err.println("Error closing socket. Message: " + e.getMessage());
                 e.printStackTrace();
             }
-
+        }
     }
 }

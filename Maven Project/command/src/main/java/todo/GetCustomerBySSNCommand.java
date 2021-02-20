@@ -1,4 +1,10 @@
+package todo;
+
+import server.ServerCommand;
+import server.ServerHandler;
+
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
@@ -9,8 +15,8 @@ public class GetCustomerBySSNCommand implements ServerCommand, Serializable {
     public GetCustomerBySSNCommand(String SSN) { this.SSN = SSN; }
 
     @Override
-    public void execute(ObjectOutputStream out, CinemaBookingSystem cbs) throws IOException {
+    public void execute(ServerHandler handler, ObjectInputStream in, ObjectOutputStream out) throws IOException {
         out.writeObject(new ResponseGetCustomerBySSNCommand());
-        out.writeObject(cbs.getCustomerBySSN(this.SSN));
+        //out.writeObject(cbs.getCustomerBySSN(this.SSN));
     }
 }

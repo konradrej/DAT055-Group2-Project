@@ -1,3 +1,6 @@
+import client.ClientCommand;
+import server.ServerCommand;
+
 import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
@@ -48,7 +51,7 @@ public enum SocketClientCommunication implements Runnable {
 
             while(socket.isConnected()){
                 ClientCommand command = (ClientCommand) in.readObject();
-                command.execute(in, ClientModel.getInstance());
+                command.execute(ClientModel.getInstance(), in, out);
 
             }
         } catch (EOFException e){

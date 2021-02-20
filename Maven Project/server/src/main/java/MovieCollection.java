@@ -43,6 +43,22 @@ public class MovieCollection implements Serializable, AllCollections{
 	public Collection <Movie> getAllMovies(){
 		return this.allMovies;
 	}
+
+	/**
+	 * @param title movie title
+	 *
+	 * @return a movie with matching title
+	 */
+
+	public Movie getMovieByTitle(String title){
+		for(Movie movie : allMovies){
+			if(movie.getTitle().equals(title)){
+				return movie;
+			}
+		}
+
+		return null;
+	}
 	
 	/**
 	 * Adds a movie to the m to the objects movie collection
