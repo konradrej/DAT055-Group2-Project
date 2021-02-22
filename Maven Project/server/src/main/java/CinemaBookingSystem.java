@@ -7,22 +7,15 @@ public enum CinemaBookingSystem implements ServerHandler {
 
 	INSTANCE();
 
-	/**
-	 * Constructor for initializing the CinemaBookingSystem instance
-	 *
-	 * @param bookingCollection 	a collection of bookings
-	 * @param customerCollection	a collection of customers
-	 * @param showCollection		a collection of shows
-	 * @param movieCollection		a collection of movies
-	 */
-
 	private final Cinema cinema;
 	private BookingCollection bookingCollection = new BookingCollection("bookingCollection.txt");
 	private MovieCollection movieCollection = new MovieCollection("movieCollection.txt");
 	private ShowCollection showCollection = new ShowCollection("showCollection.txt");
 	private CustomerCollection customerCollection = new CustomerCollection("customerCollection.txt");
 
-
+	/**
+	 * Constructor for initializing the CinemaBookingSystem instance
+	 */
 	CinemaBookingSystem() {
 
 		Collection<Seat> seatTen = new LinkedList<>();
@@ -100,4 +93,9 @@ public enum CinemaBookingSystem implements ServerHandler {
 	public Cinema getCinema() {
 		return cinema;
 	}
+
+	/*public void createBooking(Show show, Customer customer, Collection<Row> rows)
+	{
+		this.bookingCollection.addBookings(show, customer, rows);
+	}*/
 }

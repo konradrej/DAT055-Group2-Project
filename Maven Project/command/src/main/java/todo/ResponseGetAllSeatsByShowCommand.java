@@ -10,10 +10,13 @@ import java.io.Serializable;
 
 public class ResponseGetAllSeatsByShowCommand implements ClientCommand, Serializable {
 
-    public ResponseGetAllSeatsByShowCommand(){}
+    private Object show;
+
+    public ResponseGetAllSeatsByShowCommand(Object show) { this.show = show; }
 
     @Override
     public void execute(ClientHandler handler, ObjectInputStream in, ObjectOutputStream out) throws IOException, ClassNotFoundException {
         //ClientModel.getInstance(); //Discuss how to implement this in the ClientModel
+        //handler.getAllSeatsByShow(this.show);
     }
 }

@@ -16,7 +16,8 @@ public class GetAllSeatsByShowCommand implements ServerCommand, Serializable {
 
     @Override
     public void execute(ServerHandler handler, ObjectInputStream in, ObjectOutputStream out) throws IOException {
-        out.writeObject(new ResponseGetAllSeatsByShowCommand());
-        //out.writeObject(cbs.getAllSeatsByShow(this.show));
+        /*out.writeObject(new ResponseGetAllSeatsByShowCommand(
+                handler.getAllSeatsByShow()
+        ));*/
     }
 }
