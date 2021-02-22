@@ -3,20 +3,17 @@ import java.awt.*;
 import java.awt.event.*;
 import java.text.DateFormatSymbols;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
-// class extends JFrame
 public class CinemaAdmin {
     private final JFrame f = new JFrame();
-    private final Container pane = f.getContentPane();
+    Container pane = f.getContentPane();
     private int page = 1;
     private final CardLayout cl = new CardLayout();
-    private final JPanel cardPanel = new JPanel();
-    private final JPanel buttonPanel = new JPanel();
-    private static  Movie movie;
-    private static Theater theater;
-    private static  CinemaDate date = new CinemaDate("Dec", "21", "23:59");
+    JPanel cardPanel = new JPanel();
+    JPanel buttonPanel = new JPanel();
+    private  Movie movie;
+    private  Theater theater;
+    private  CinemaDate date = new CinemaDate("Dec", "31", "23:59");
 
     public CinemaAdmin()
     {
@@ -42,15 +39,15 @@ public class CinemaAdmin {
             dayArr.add(Integer.toString(i));
         }
 
-        JList jlm = new JList(movieArr.toArray());
+        JList<Object> jlm = new JList<>(movieArr.toArray());
         JScrollPane panelMovies = new JScrollPane(jlm);
         panelMovies.setColumnHeaderView(new JLabel("Movie:"));
 
-        JList jlt = new JList((theaterArr.toArray()));
+        JList<Object> jlt = new JList<>((theaterArr.toArray()));
         JScrollPane panelTheaters = new JScrollPane(jlt);
         panelTheaters.setColumnHeaderView(new JLabel("Theater:"));
 
-        JList jlmon = new JList(new DateFormatSymbols().getMonths());
+        JList<String> jlmon = new JList<>(new DateFormatSymbols().getMonths());
         JScrollPane panelMonth = new JScrollPane(jlmon);
         panelMonth.setColumnHeaderView(new JLabel("Month:"));
 
@@ -58,67 +55,75 @@ public class CinemaAdmin {
         JScrollPane panelDay = new JScrollPane(jlday);
         panelDay.setColumnHeaderView(new JLabel("Day:"));
 
-        JList jltime = new JList(new String [] {"17:00", "19:00", "21:00"});
+        JList<String> jltime = new JList<>(new String [] {"17:00", "19:00", "21:00"});
         JScrollPane panelTime = new JScrollPane(jltime);
         panelTime.setColumnHeaderView(new JLabel("Time:"));
 
         MouseListener m1 = new MouseAdapter() {
+            @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    System.out.println(jlm.getSelectedValue());
                     for(Movie m: CinemaBookingSystem.getInstance().getMovieCollection().getAllMovies()){
                         if(m.getTitle().equals(jlm.getSelectedValue())){
-                            CinemaAdmin.movie = m;
+                            movie = m;
                             break;
                         }
                     }
                 }
             }
         };
-        jlm.addMouseListener(m1);
 
         MouseListener m2 = new MouseAdapter() {
+            @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     for(Theater t : CinemaBookingSystem.getInstance().getCinema().getTheaterCollection()){
                         if(jlt.getSelectedValue().equals(Integer.toString(t.getTheaterNumber()))){
-                            CinemaAdmin.theater = t;
+                            theater = t;
                             break;
                         }
                     }
                 }
             }
         };
-        jlt.addMouseListener(m2);
 
         MouseListener m3 = new MouseAdapter() {
+            @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    String s = (String)jlmon.getSelectedValue();
-                    date.setMonth(s);
+                    String s = jlmon.getSelectedValue();
+                    for(Show show : CinemaBookingSystem.getInstance().getShowCollection().getAllShows()){
+                        System.out.println(show.getShowDateAndTime().toString());
+                    }
+                    date = date.setMonth(s);
                 }
             }
         };
-        jlmon.addMouseListener(m3);
 
         MouseListener m4 = new MouseAdapter() {
+            @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     String s = (String)jlday.getSelectedValue();
-                    date.setDay(s);
+                    date  = date.setDay(s);
                 }
             }
         };
-        jlday.addMouseListener(m4);
 
         MouseListener m5 = new MouseAdapter() {
+            @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    String s = (String) jltime.getSelectedValue();
-                    date.setTime(s);
+                    String s = jltime.getSelectedValue();
+                    date = date.setTime(s);
                 }
             }
         };
+
+        jlm.addMouseListener(m1);
+        jlt.addMouseListener(m2);
+        jlmon.addMouseListener(m3);
+        jlday.addMouseListener(m4);
         jltime.addMouseListener(m5);
 
         cardPanel.add(panelMovies, "1");
@@ -156,14 +161,22 @@ public class CinemaAdmin {
 
     public void addShowToCollection(){
         // TODO Theater status needs to be checked with date/time
-        if(movie != null && theater != null && theater.getStatus()) {
-            Show s = new Show(movie, date, CinemaBookingSystem.getInstance().getCinema(), theater, true);
-            CinemaBookingSystem.getInstance().getShowCollection().addShow(s);
-            theater.setStatus(false);
-            System.out.println(s.toString());
-        }
-        else if (theater != null && !theater.getStatus()){
-            System.out.println("Theater" + theater.getTheaterNumber() + " occupied");
+        if(movie != null && theater != null ) {
+            boolean addShow = true;
+            for(Show s2 : CinemaBookingSystem.getInstance().getShowCollection().getAllShows()){
+                System.out.println(s2.toString());
+                if(s2.getTheater().equals(theater) && s2.getShowDateAndTime().equals(date)){
+                    addShow = false;
+                    System.out.println("Theater" + theater.getTheaterNumber() + " is occupied at" + date.toString());
+                    break;
+                }
+            }
+            if(addShow) {
+                Show s = new Show(movie, date, CinemaBookingSystem.getInstance().getCinema(), theater, true);
+                System.out.println(s.toString());
+                CinemaBookingSystem.getInstance().getShowCollection().addShow(s);
+            }
+            CinemaBookingSystem.getInstance().updateAllCollections();
         }
         else{
             System.out.println("choose movie, theater, date");
@@ -174,8 +187,8 @@ public class CinemaAdmin {
     public static void main(String[] args)
     {
         new Thread(SocketServerCommunication.getInstance()).start();
+        CinemaBookingSystem.getInstance().readAllCollections();
         CinemaBookingSystem.getInstance().getMovieCollection().scanNewMovies();
-
         new CinemaAdmin();
 
     }

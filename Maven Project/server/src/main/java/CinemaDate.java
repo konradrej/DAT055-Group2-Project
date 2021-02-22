@@ -10,17 +10,30 @@ public class CinemaDate implements Serializable {
         this.day = d;
         this.time = t;
     }
-    public void setMonth(String s){
-        this.month = s;
+    public CinemaDate setMonth(String s){
+        return new CinemaDate(s, this.day, this.time);
     }
 
-    public void setDay(String d){
-        this.day = d;
+    public CinemaDate setDay(String d){
+        return new CinemaDate(this.month, d, this.time);
     }
 
-    public void setTime(String t){
-        this.time = t;
+    public CinemaDate setTime(String t){
+        return new CinemaDate(this.month, this.day, t);
     }
+
+    public String getMonth(){
+        return month;
+    }
+
+    public String getDay(){
+        return this.day;
+    }
+
+    public String getTime(){
+        return this.time;
+    }
+
     public String toString(){
         return this.day + " " + this.month + " " + this.time ;
     }

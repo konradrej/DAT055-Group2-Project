@@ -17,10 +17,10 @@ public enum CinemaBookingSystem implements ServerHandler {
 	 */
 
 	private final Cinema cinema;
-	private final BookingCollection bookingCollection = new BookingCollection("bookingCollection.txt");
-	private final MovieCollection movieCollection = new MovieCollection("movieCollection.txt");
-	private final ShowCollection showCollection = new ShowCollection("showCollection.txt");
-	private final CustomerCollection customerCollection = new CustomerCollection("customerCollection.txt");
+	private BookingCollection bookingCollection = new BookingCollection("bookingCollection.txt");
+	private MovieCollection movieCollection = new MovieCollection("movieCollection.txt");
+	private ShowCollection showCollection = new ShowCollection("showCollection.txt");
+	private CustomerCollection customerCollection = new CustomerCollection("customerCollection.txt");
 
 
 	CinemaBookingSystem() {
@@ -30,7 +30,7 @@ public enum CinemaBookingSystem implements ServerHandler {
 			seatTen.add(new Seat(i+1, true));
 		}
 
-		Collection <Seat> seatFifteen = new LinkedList<Seat>();
+		Collection <Seat> seatFifteen = new LinkedList<>();
 		for(int i = 0; i < 15 ; i++){
 			seatFifteen.add(new Seat(i+1, true));
 		}
@@ -49,11 +49,11 @@ public enum CinemaBookingSystem implements ServerHandler {
 		rowThree.add(new Row(3, seatFifteen));
 
 		Collection <Theater> theaterFive = new LinkedList<>();
-		theaterFive.add(new Theater(1, rowFive, true));
-		theaterFive.add(new Theater(2, rowThree, true));
-		theaterFive.add(new Theater(3, rowThree, true));
-		theaterFive.add(new Theater(4, rowFive, true));
-		theaterFive.add(new Theater(5, rowFive, true));
+		theaterFive.add(new Theater(1, rowFive));
+		theaterFive.add(new Theater(2, rowThree));
+		theaterFive.add(new Theater(3, rowThree));
+		theaterFive.add(new Theater(4, rowFive));
+		theaterFive.add(new Theater(5, rowFive));
 
 		cinema = new Cinema("Underground Bio",theaterFive);
 
@@ -68,10 +68,17 @@ public enum CinemaBookingSystem implements ServerHandler {
 	// Serialize (saves in path: Working Tree-> Maven project -> Server) all collections
 
 	public void updateAllCollections(){
-		movieCollection.updateCollection();
-		showCollection.updateCollection();
-		customerCollection.updateCollection();
-		bookingCollection.updateCollection();
+		movieCollection.updateCollection(movieCollection.getFilename());
+		showCollection.updateCollection(showCollection.getFilename());
+		customerCollection.updateCollection(customerCollection.getFilename());
+		bookingCollection.updateCollection(bookingCollection.getFilname());
+	}
+
+	public void readAllCollections(){
+		this.movieCollection =  movieCollection.readCollection();
+		this.showCollection = showCollection.readCollection();
+		this.customerCollection = customerCollection.readCollection();
+		this.bookingCollection =  bookingCollection.readCollection();
 	}
 
 	public BookingCollection getBookingCollection(){
