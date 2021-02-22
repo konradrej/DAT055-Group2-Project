@@ -1,7 +1,5 @@
 
 public interface AllCollections {
 	
-	public void updateCollection();
-	
-	
+	 void updateCollection(String s);
 }

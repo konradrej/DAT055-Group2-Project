@@ -1,15 +1,11 @@
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.util.*;
 
 /**
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen
 * @version version 0.0.0
 */
-public class ShowCollection implements Serializable, AllCollections {
+public class ShowCollection extends AbstractCollection implements Serializable{
 	
 	private static final long serialVersionUID = 368284506033169560L;
 	private Collection <Show> allShows;
@@ -28,15 +24,13 @@ public class ShowCollection implements Serializable, AllCollections {
 	
 	/**
 	 * Get a collection of selected shows given movie
-	 * 
-	 *   (TODO: date and time)
+	 *
 	 * @param m - the movie being searched
 	 * @return a collection of shows
 	 */
 	
-	public Collection <Show> getShowsGivenMovie(Movie m, Calendar c){
+	public Collection <Show> getShowsGivenMovie(Movie m){
 		Collection <Show> selectedShows = new LinkedList <>();
-		//TODO: Date dayAndtime
 		for(Show s : this.allShows) {
 			Movie m2 = s.getMovie();
 			if(m.equals(m2)) {
@@ -134,16 +128,24 @@ public class ShowCollection implements Serializable, AllCollections {
 		return this.filename;
 	}
 
-	@Override
-	public void updateCollection() {
+	public ShowCollection readCollection(){
+		try(ObjectInputStream stream = new ObjectInputStream(new FileInputStream(new File(this.filename)))){
 
-		try (ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(new File(this.filename)))){
-		stream.writeObject(this);
+			ShowCollection readThis = (ShowCollection) stream.readObject();
+			System.out.println("File has been read");
+			return readThis;
 		}
-		catch (IOException e) {
-            System.out.println("Error initializing stream");
-        }
-		
+		catch(FileNotFoundException e){
+			//something else
+			return null;
+		}
+		catch (ClassNotFoundException e) {
+			//something else
+			return null;
+		}
+		catch (IOException e ){
+			//something else
+			return null;
+		}
 	}
-	
 }

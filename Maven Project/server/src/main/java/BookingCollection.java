@@ -1,15 +1,11 @@
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.util.*;
 
 /**
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen
 * @version version 0.0.0
 */
-public class BookingCollection implements Serializable, AllCollections{
+public class BookingCollection extends AbstractCollection implements Serializable{
 
 	private static final long serialVersionUID = 1450784786789696365L;
 	private Collection<Booking> allBookings;
@@ -119,21 +115,25 @@ public class BookingCollection implements Serializable, AllCollections{
 		return this.filename;
 	}
 
-	/**
-	 * Serializing and updates this object 
-	 * 
-	 * 	@Override
-	 */
-	public void updateCollection(){
-		
-		try (ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(new File(this.filename)))){
-		stream.writeObject(this);
+	public BookingCollection readCollection(){
+		try(ObjectInputStream stream = new ObjectInputStream(new FileInputStream(new File(this.filename)))){
+
+			BookingCollection readThis = (BookingCollection) stream.readObject();
+			System.out.println("File has been read");
+			return readThis;
 		}
-		catch (IOException e) {
-            System.out.println("Error initializing stream");
-        }
-		
+		catch(FileNotFoundException e){
+			//something else
+			return null;
+		}
+		catch (ClassNotFoundException e) {
+			//something else
+			return null;
+		}
+		catch (IOException e ){
+			//something else
+			return null;
+		}
 	}
-	
 
 }

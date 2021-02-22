@@ -11,7 +11,6 @@ public class Theater implements Serializable{
 
 	private static final long serialVersionUID = 264852408018552280L;
     private int theaterNumber;
-    private boolean status;
     private Collection<Row> allRows;
 
     /**
@@ -20,10 +19,9 @@ public class Theater implements Serializable{
      * @param theaterNumber the number of the theatre
      * @param allRows       the Collection of allrows
      */
-    public Theater(int theaterNumber, Collection<Row> allRows, Boolean status) {
+    public Theater(int theaterNumber, Collection<Row> allRows) {
         this.theaterNumber = theaterNumber;
         this.allRows = allRows;
-        this.status = status;
     }
 
     /**
@@ -61,10 +59,7 @@ public class Theater implements Serializable{
         return this.allRows;
     }
 
-    /**
-     * Method for creating a new row and adding it
-     * to the collection of rows
-     */
+
     /*
     // TODO are rowNumber and numOfSeats their own classes or should these be ints?
     public void addRow(int rowNumber, int numOfSeats) {
@@ -73,11 +68,4 @@ public class Theater implements Serializable{
     }
     */
 
-    public void setStatus(Boolean b) {
-        this.status = b;
-    }
-
-    public boolean getStatus(){
-        return this.status;
-    }
 }

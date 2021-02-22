@@ -10,7 +10,7 @@ import java.util.*;
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen
 * @version version 0.0.0
 */
-public class MovieCollection implements Serializable, AllCollections{
+public class MovieCollection extends AbstractCollection implements Serializable{
 
 	private static final long serialVersionUID = -6417208744468074004L;
 	private Collection<Movie> allMovies;
@@ -105,23 +105,7 @@ public class MovieCollection implements Serializable, AllCollections{
 		}
 		return selectedMovies;
 	}
-	
-	/**
-	 * Serializing and updates this object 
-	 * 
-	 *
-	 */
-	@Override
-	public void updateCollection() {
 
-		try (ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(new File(this.filename)))){
-		stream.writeObject(this);
-		}
-		catch (IOException e) {
-            e.printStackTrace();
-        }
-	}
-	
 	/**
 	 * Scans and updates new movies to the collection from this objects URL
 	 */
@@ -210,6 +194,27 @@ public class MovieCollection implements Serializable, AllCollections{
 		
 		Movie m = new Movie(title, list, elementTime.text(), url + l);
 		this.allMovies.add(m);
+	}
+
+	public MovieCollection readCollection(){
+		try(ObjectInputStream stream = new ObjectInputStream(new FileInputStream(new File(this.filename)))){
+
+			MovieCollection readThis = (MovieCollection) stream.readObject();
+			System.out.println("File has been read");
+			return readThis;
+		}
+		catch(FileNotFoundException e){
+			//something else
+			return null;
+		}
+		catch (ClassNotFoundException e) {
+			//something else
+			return null;
+		}
+		catch (IOException e ){
+			//something else
+			return null;
+		}
 	}
 
 }
