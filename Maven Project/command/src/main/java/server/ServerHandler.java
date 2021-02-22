@@ -5,6 +5,10 @@ import java.util.Collection;
 public interface ServerHandler {
     Object getMovieCollection();
     Object getShowCollection();
-    //Object getAllSeatsByShow(); //Discuss the implementation of the following 2 as well
-    //void createBooking(Object show, Object customer, Collection<Object> rows);
+    Object getShowsByMovie(Object movie);
+    Object getAllSeatsByShow(Object Show);
+    Object getBookingsBySSN(String SSN);
+    Object getCustomerBySSN(String SSN);
+    void createBooking(Object show, Object customer, Collection<Object> rows);
+    void createCustomer(String name, String phoneNumber, String SSN);
 }

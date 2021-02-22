@@ -1,4 +1,4 @@
-package todo;
+package server;
 
 import server.ServerCommand;
 import server.ServerHandler;
@@ -10,14 +10,14 @@ import java.io.Serializable;
 
 public class GetAllSeatsByShowCommand implements ServerCommand, Serializable {
 
-    //private Show show;
+    private Object show;
 
-    //public todo.GetAllSeatsByShowCommand(Show show) { this.show = show; }
+    public GetAllSeatsByShowCommand(Object show) { this.show = show; }
 
     @Override
     public void execute(ServerHandler handler, ObjectInputStream in, ObjectOutputStream out) throws IOException {
-        /*out.writeObject(new ResponseGetAllSeatsByShowCommand(
-                handler.getAllSeatsByShow()
-        ));*/
+        out.writeObject(
+                handler.getAllSeatsByShow(show)
+        );
     }
 }

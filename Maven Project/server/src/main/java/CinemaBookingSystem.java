@@ -1,6 +1,7 @@
 import server.ServerHandler;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 
 public enum CinemaBookingSystem implements ServerHandler {
@@ -82,8 +83,48 @@ public enum CinemaBookingSystem implements ServerHandler {
 		return movieCollection;
 	}
 
-	public ShowCollection getShowCollection(){
-		return showCollection;
+	public ShowCollection getShowCollection() { return showCollection; }
+
+	public Collection<Show> getShowsByMovie(Object movie)
+	{
+		Collection<Show> showsByMovie = null;
+
+		for(Show s : this.getShowCollection().getAllShows())
+		{
+			if(s.equals(movie))
+			{
+				showsByMovie.add(s);
+			}
+		}
+
+		return showsByMovie;
+	}
+
+	public Collection<Seat> getAllSeatsByShow(Object show)
+	{
+		Collection<Seat> seatsByShow = null;
+
+		for(Show show1 : this.getShowCollection().getAllShows())
+		{
+			if(show1.equals(show))
+			{
+				seatsByShow.addAll(show1.getAllSeats());
+			}
+		}
+
+		return seatsByShow;
+	}
+
+	public Customer getCustomerBySSN(String SSN)
+	{
+		return this.customerCollection.getCustomer(SSN);
+	}
+
+	public Collection<Booking> getBookingsBySSN(String SSN)
+	{
+		Customer customer = getCustomerBySSN(SSN);
+
+		return this.bookingCollection.getBookingsByCustomer(customer);
 	}
 
 	public CustomerCollection getCustomerCollection(){
@@ -94,8 +135,21 @@ public enum CinemaBookingSystem implements ServerHandler {
 		return cinema;
 	}
 
-	/*public void createBooking(Show show, Customer customer, Collection<Row> rows)
+	public void createBooking(Object show, Object customer, Collection<Object> rows)
 	{
-		this.bookingCollection.addBookings(show, customer, rows);
-	}*/
+		Collection<Row> bookedRows = null;
+
+		for(Object r : rows)
+		{
+			bookedRows.add((Row)r);
+		}
+
+		this.bookingCollection.addBookings((Show)show, (Customer)customer, bookedRows);
+	}
+
+	public void createCustomer(String name, String phoneNumber, String SSN)
+	{
+		Customer newCustomer = new Customer(name, phoneNumber, SSN);
+		this.customerCollection.addCustomer(newCustomer);
+	}
 }

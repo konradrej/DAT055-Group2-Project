@@ -1,13 +1,10 @@
 import server.GetMoviesCommand;
-import server.GetShowByMovieCommand;
+import server.GetShowsByMovieCommand;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
-import java.util.Collection;
-import java.util.LinkedList;
 
 public class ShowSelectionPane extends AbstractPane implements Observer {
     private MovieCollection movieCollection;
@@ -61,7 +58,7 @@ public class ShowSelectionPane extends AbstractPane implements Observer {
 
             movieList.addActionListener(e -> {
                 Movie movie = movieCollection.getMovieByTitle(String.valueOf(movieList.getSelectedItem()));
-                SocketClientCommunication.getInstance().sendCommand(new GetShowByMovieCommand(movie));
+                SocketClientCommunication.getInstance().sendCommand(new GetShowsByMovieCommand(movie));
             });
 
             con.add(movieList);

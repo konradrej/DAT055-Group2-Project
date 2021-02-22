@@ -1,4 +1,4 @@
-package todo;
+package server;
 
 import server.ServerCommand;
 import server.ServerHandler;
@@ -16,7 +16,8 @@ public class GetCustomerBySSNCommand implements ServerCommand, Serializable {
 
     @Override
     public void execute(ServerHandler handler, ObjectInputStream in, ObjectOutputStream out) throws IOException {
-        out.writeObject(new ResponseGetCustomerBySSNCommand());
-        //out.writeObject(cbs.getCustomerBySSN(this.SSN));
+        out.writeObject(
+                handler.getCustomerBySSN(SSN)
+        );
     }
 }
