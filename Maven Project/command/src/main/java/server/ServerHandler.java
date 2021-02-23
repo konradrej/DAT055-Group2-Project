@@ -9,6 +9,6 @@ public interface ServerHandler {
     Object getAllSeatsByShow(Object Show);
     Object getBookingsBySSN(String SSN);
     Object getCustomerBySSN(String SSN);
-    void createBooking(Object show, Object customer, Collection<Object> rows);
-    void createCustomer(String name, String phoneNumber, String SSN);
+    String createBooking(Object show, Object customer, Collection<Object> rows);
+    String createCustomer(String name, String phoneNumber, String SSN);
 }

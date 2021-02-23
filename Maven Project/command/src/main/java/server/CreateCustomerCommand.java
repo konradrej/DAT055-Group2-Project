@@ -1,7 +1,6 @@
 package server;
 
-import server.ServerCommand;
-import server.ServerHandler;
+import client.ResponseCreateCustomerCommand;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -21,6 +20,8 @@ public class CreateCustomerCommand implements ServerCommand, Serializable {
 
     @Override
     public void execute(ServerHandler handler, ObjectInputStream in, ObjectOutputStream out) throws IOException {
-        handler.createCustomer(this.name, this.phoneNumber, this.SSN);
+        out.writeObject(new ResponseCreateCustomerCommand(
+                handler.createCustomer(this.name, this.phoneNumber, this.SSN)
+        ));
     }
 }

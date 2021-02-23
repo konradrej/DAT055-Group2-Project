@@ -1,4 +1,4 @@
-package todo;
+package client;
 
 import client.ClientCommand;
 import client.ClientHandler;
@@ -8,12 +8,14 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-public class ResponseGetCustomerBySSNCommand implements ClientCommand, Serializable {
+public class ResponseCreateCustomerCommand implements ClientCommand, Serializable {
 
-    public ResponseGetCustomerBySSNCommand(){}
+    private String statusMessage;
+
+    public ResponseCreateCustomerCommand(String statusMessage) { this.statusMessage = statusMessage; }
 
     @Override
     public void execute(ClientHandler handler, ObjectInputStream in, ObjectOutputStream out) throws IOException, ClassNotFoundException {
-        //ClientModel.getInstance(); //Discuss how to implement this
+        //ClientModel.getInstance(); //Discuss implementation of this in ClientModel
     }
 }

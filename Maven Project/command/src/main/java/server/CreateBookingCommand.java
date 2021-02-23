@@ -1,7 +1,6 @@
 package server;
 
-import server.ServerCommand;
-import server.ServerHandler;
+import client.ResponseCreateBookingCommand;
 
 import java.io.*;
 import java.util.*;
@@ -21,6 +20,8 @@ public class CreateBookingCommand implements ServerCommand, Serializable {
 
     @Override
     public void execute(ServerHandler handler, ObjectInputStream in, ObjectOutputStream out) throws IOException {
-        handler.createBooking(this.show, this.customer, this.rows);
+        out.writeObject(new ResponseCreateBookingCommand(
+                handler.createBooking(this.show, this.customer, this.rows)
+        ));
     }
 }

@@ -1,5 +1,8 @@
 import client.ClientHandler;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedList;
 
 public class ClientModel extends AbstractObservable implements ClientHandler {
     private static ClientModel INSTANCE;
@@ -16,6 +19,9 @@ public class ClientModel extends AbstractObservable implements ClientHandler {
 
     private MovieCollection movieCollection;
     private ShowCollection showCollection;
+    private Collection<Seat> seatsByShow;
+    private Collection<Booking> bookingsBySSN;
+    private Customer customer;
 
     public void updateMovies(){
         // Call communication to send request and do something.
@@ -29,9 +35,9 @@ public class ClientModel extends AbstractObservable implements ClientHandler {
         return movieCollection;
     }
 
-    public ShowCollection getShowCollection(){
-        return showCollection;
-    }
+    //public ShowCollection getShowCollection(){
+        //return showCollection;
+    //}
 
     public void setMovieCollection(Object movieCollection){
         try {
@@ -48,6 +54,52 @@ public class ClientModel extends AbstractObservable implements ClientHandler {
             this.showCollection = (ShowCollection) showCollection;
             notifyObservers("showCollection", this.showCollection);
         } catch (ClassCastException e){
+            System.err.println("Class could not be casted. Message: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void setSeatsByShow(Collection<Object> seatsByShow) {
+        try {
+            Collection<Seat> seatsByShow1 = Collections.emptyList();
+
+            for(Object s : seatsByShow)
+            {
+                seatsByShow1.add((Seat)s);
+            }
+
+            this.seatsByShow = seatsByShow1;
+            notifyObservers("seatsByShow", this.seatsByShow);
+        } catch (ClassCastException e) {
+            System.err.println("Class could not be casted. Message: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void setBookingsBySSN(Collection<Object> bookingsBySSN)
+    {
+        try {
+            Collection<Booking> bookingsBySSN1 = Collections.emptyList();
+
+            for(Object b : bookingsBySSN)
+            {
+                bookingsBySSN1.add((Booking)b);
+            }
+
+            this.bookingsBySSN = bookingsBySSN1;
+            notifyObservers("bookingsBySSN", this.bookingsBySSN);
+        } catch (ClassCastException e) {
+            System.err.println("Class could not be casted. Message: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void setCustomerBySSN(Object customer)
+    {
+        try {
+            this.customer = (Customer)customer;
+            notifyObservers("customer", this.customer);
+        } catch (ClassCastException e) {
             System.err.println("Class could not be casted. Message: " + e.getMessage());
             e.printStackTrace();
         }
@@ -70,4 +122,5 @@ public class ClientModel extends AbstractObservable implements ClientHandler {
 
         return allSeats;
     }
+
 }
