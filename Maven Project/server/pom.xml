@@ -47,7 +47,7 @@
                             <archive>
                                 <manifest>
                                     <mainClass>
-                                        CinemaBookingSystem
+                                        CinemaAdmin
                                     </mainClass>
                                 </manifest>
                             </archive>

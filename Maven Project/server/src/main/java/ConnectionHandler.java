@@ -2,6 +2,7 @@ import server.ServerCommand;
 
 import java.io.*;
 import java.net.Socket;
+import java.net.SocketException;
 
 /**
  * @author Konrad Rej
@@ -41,6 +42,8 @@ public class ConnectionHandler implements Runnable {
         } catch(NotSerializableException e) {
             System.err.println("Class is not serializable.");
             e.printStackTrace();
+        } catch(SocketException e){
+            System.out.println("Connection reset.");
         } catch (IOException e){
             System.err.println("IOException occurred. Message: " + e.getMessage());
             e.printStackTrace();

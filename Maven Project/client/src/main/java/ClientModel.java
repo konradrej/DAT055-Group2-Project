@@ -1,7 +1,5 @@
 import client.ClientHandler;
 
-import java.util.Collection;
-import java.util.LinkedList;
 
 public class ClientModel extends AbstractObservable implements ClientHandler {
     private static ClientModel INSTANCE;
@@ -31,9 +29,9 @@ public class ClientModel extends AbstractObservable implements ClientHandler {
         return movieCollection;
     }
 
-    //public ShowCollection getShowCollection(){
-        //return showCollection;
-    //}
+    public ShowCollection getShowCollection(){
+        return showCollection;
+    }
 
     public void setMovieCollection(Object movieCollection){
         try {

@@ -42,6 +42,7 @@ public enum SocketClientCommunication implements Runnable {
             System.err.println("Connection could not be established.");
             return;
         }
+
         try {
 
             out = new ObjectOutputStream(socket.getOutputStream());
@@ -56,9 +57,8 @@ public enum SocketClientCommunication implements Runnable {
             }
         } catch (EOFException e){
             closeConnection();
-        } catch (SocketException e) {
-            //Something else?
-            e.printStackTrace();
+        } catch(SocketException e){
+            System.out.println("Connection reset.");
         } catch (IOException | ClassNotFoundException e){
             e.printStackTrace();
         }
