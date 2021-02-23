@@ -5,5 +5,7 @@ import java.util.*;
 public interface ClientHandler {
     void setMovieCollection(Object movieCollection);
     void setShowCollection(Object showCollection);
-    //Collection<Object> getAllSeatsByShow(Object show); Discuss how to implement return methods
+    void setSeatsByShow(Collection<Object> seatsByShow);
+    void setBookingsBySSN(Collection<Object> bookingsBySSN);
+    void setCustomerBySSN(Object customer);
 }

@@ -1,7 +1,6 @@
 package server;
 
-import server.ServerCommand;
-import server.ServerHandler;
+import client.ReturnCustomerBySSNCommand;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -16,8 +15,8 @@ public class GetCustomerBySSNCommand implements ServerCommand, Serializable {
 
     @Override
     public void execute(ServerHandler handler, ObjectInputStream in, ObjectOutputStream out) throws IOException {
-        out.writeObject(
+        out.writeObject(new ReturnCustomerBySSNCommand(
                 handler.getCustomerBySSN(SSN)
-        );
+        ));
     }
 }

@@ -1,12 +1,9 @@
 package server;
 
-import server.ServerCommand;
-import server.ServerHandler;
+import client.ReturnAllSeatsByShowCommand;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
+import java.util.*;
 
 public class GetAllSeatsByShowCommand implements ServerCommand, Serializable {
 
@@ -16,8 +13,19 @@ public class GetAllSeatsByShowCommand implements ServerCommand, Serializable {
 
     @Override
     public void execute(ServerHandler handler, ObjectInputStream in, ObjectOutputStream out) throws IOException {
-        out.writeObject(
-                handler.getAllSeatsByShow(show)
-        );
+
+        Collection<Object> seatsByShow = Collections.emptyList();
+
+        try {
+            seatsByShow = (Collection<Object>)handler.getAllSeatsByShow(this.show);
+        } catch (ClassCastException e) {
+            System.err.println("Class could not be casted. Message: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            out.writeObject(new ReturnAllSeatsByShowCommand(
+                    seatsByShow
+            ));
+        }
+
     }
 }

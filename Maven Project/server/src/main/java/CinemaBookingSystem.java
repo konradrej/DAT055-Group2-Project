@@ -134,21 +134,40 @@ public enum CinemaBookingSystem implements ServerHandler {
 		return cinema;
 	}
 
-	public void createBooking(Object show, Object customer, Collection<Object> rows)
+	public String createBooking(Object show, Object customer, Collection<Object> rows)
 	{
-		Collection<Row> bookedRows = null;
+		Collection<Row> bookedRows = Collections.emptyList();
 
-		for(Object r : rows)
-		{
-			bookedRows.add((Row)r);
+		try {
+			for(Object r : rows)
+			{
+				bookedRows.add((Row)r);
+			}
+		} catch (ClassCastException e) {
+			System.err.println("Class could not be casted. Message: " + e.getMessage());
+			e.printStackTrace();
+			return "Booking failed";
+		} finally {
+			this.bookingCollection.addBookings((Show)show, (Customer)customer, bookedRows);
 		}
 
-		this.bookingCollection.addBookings((Show)show, (Customer)customer, bookedRows);
+		return "Booking successfully created";
 	}
 
-	public void createCustomer(String name, String phoneNumber, String SSN)
+	public String createCustomer(String name, String phoneNumber, String SSN)
 	{
-		Customer newCustomer = new Customer(name, phoneNumber, SSN);
-		this.customerCollection.addCustomer(newCustomer);
+		Customer newCustomer = null;
+
+		try {
+			newCustomer = new Customer(name, phoneNumber, SSN);
+		} catch (IllegalArgumentException e) {
+			System.err.println("Argument are of wrong type. Message: " + e.getMessage());
+			e.printStackTrace();
+			return "Creation of customer failed";
+		} finally {
+			this.customerCollection.addCustomer(newCustomer);
+		}
+
+		return "Customer successfully created";
 	}
 }
