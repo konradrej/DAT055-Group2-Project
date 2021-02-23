@@ -1,6 +1,9 @@
 package client;
 
+import java.util.*;
+
 public interface ClientHandler {
-    public void setMovieCollection(Object movieCollection);
-    public void setShowCollection(Object showCollection);
+    void setMovieCollection(Object movieCollection);
+    void setShowCollection(Object showCollection);
+    //Collection<Object> getAllSeatsByShow(Object show); Discuss how to implement return methods
 }

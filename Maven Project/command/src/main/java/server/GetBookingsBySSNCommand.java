@@ -1,4 +1,4 @@
-package todo;
+package server;
 
 import server.ServerCommand;
 import server.ServerHandler;
@@ -8,15 +8,16 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-public class GetAllSeatsByShowCommand implements ServerCommand, Serializable {
+public class GetBookingsBySSNCommand implements ServerCommand, Serializable {
 
-    //private Show show;
+    private String SSN;
 
-    //public todo.GetAllSeatsByShowCommand(Show show) { this.show = show; }
+    public GetBookingsBySSNCommand(String SSN) { this.SSN = SSN; }
 
     @Override
     public void execute(ServerHandler handler, ObjectInputStream in, ObjectOutputStream out) throws IOException {
-        out.writeObject(new ResponseGetAllSeatsByShowCommand());
-        //out.writeObject(cbs.getAllSeatsByShow(this.show));
+        out.writeObject(
+                handler.getBookingsBySSN(SSN)
+        );
     }
 }

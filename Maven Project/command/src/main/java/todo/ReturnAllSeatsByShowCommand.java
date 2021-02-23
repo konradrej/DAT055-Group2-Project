@@ -8,12 +8,15 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-public class ResponseGetAllSeatsByShowCommand implements ClientCommand, Serializable {
+public class ReturnAllSeatsByShowCommand implements ClientCommand, Serializable {
 
-    public ResponseGetAllSeatsByShowCommand(){}
+    //private Object show;
+
+    //public ReturnAllSeatsByShowCommand(Object show) { this.show = show; }
 
     @Override
     public void execute(ClientHandler handler, ObjectInputStream in, ObjectOutputStream out) throws IOException, ClassNotFoundException {
         //ClientModel.getInstance(); //Discuss how to implement this in the ClientModel
+        //handler.getAllSeatsByShow(this.show);
     }
 }

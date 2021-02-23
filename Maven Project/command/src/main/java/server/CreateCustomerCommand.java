@@ -1,4 +1,4 @@
-package todo;
+package server;
 
 import server.ServerCommand;
 import server.ServerHandler;
@@ -21,7 +21,6 @@ public class CreateCustomerCommand implements ServerCommand, Serializable {
 
     @Override
     public void execute(ServerHandler handler, ObjectInputStream in, ObjectOutputStream out) throws IOException {
-        out.writeObject(new ResponseCreateCustomerCommand());
-        //out.writeObject(cbs.createCustomer(this.name, this.phoneNumber, this.SSN));
+        handler.createCustomer(this.name, this.phoneNumber, this.SSN);
     }
 }

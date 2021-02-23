@@ -52,4 +52,22 @@ public class ClientModel extends AbstractObservable implements ClientHandler {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Method for getting all seats by show
+     *
+     * @param show 	        the specific show for which to find all seats for
+     * @return allSeats     a collection of all seats for the specified show
+     */
+    public Collection<Seat> getAllSeatsByShow(Show show)
+    {
+        Collection<Seat> allSeats = null;
+
+        for(Show s : this.showCollection.getAllShows())
+        {
+            if(s.equals(show)) allSeats = s.getAllSeats();
+        }
+
+        return allSeats;
+    }
 }
