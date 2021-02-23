@@ -14,11 +14,10 @@ public class Seat implements Serializable{
      * Constructor for initializing the Seat instance
      *
      * @param seatNumber the number of the seat
-     * @param available  the seat status
      */
-    public Seat(int seatNumber, boolean available) {
+    public Seat(int seatNumber) {
         this.seatNumber = seatNumber;
-        this.available = available;
+        this.available = true;
     }
 
     /**
@@ -52,8 +51,8 @@ public class Seat implements Serializable{
     /**
      * Method for toggling the seat status
      */
-    public void updateSeatStatus() {
-        this.available = !this.available;
+    public void updateSeatStatus(boolean status) {
+        this.available = status;
     }
 
 

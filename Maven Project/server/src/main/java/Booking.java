@@ -65,9 +65,20 @@ public class Booking implements Serializable {
 	/**
 	 * Method for internally changing the status of the booking
 	 */
-	public void changeStatus()
+
+	public void cancelBooking()
 	{
-		this.cancelled = !this.cancelled;
+
+		this.cancelled = true;
+
+		for(Row r : rows)
+		{
+			for(Seat s : r.getAllSeats())
+			{
+				s.updateSeatStatus(false);
+			}
+		}
+
 	}
 	
 	/**

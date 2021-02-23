@@ -22,12 +22,12 @@ public enum CinemaBookingSystem implements ServerHandler {
 
 		Collection<Seat> seatTen = new LinkedList<>();
 		for(int i = 0; i < 10; i++){
-			seatTen.add(new Seat(i+1, true));
+			seatTen.add(new Seat(i+1));
 		}
 
 		Collection <Seat> seatFifteen = new LinkedList<>();
 		for(int i = 0; i < 15 ; i++){
-			seatFifteen.add(new Seat(i+1, true));
+			seatFifteen.add(new Seat(i+1));
 		}
 
 		Collection<Row> rowFive = new LinkedList <>();
@@ -170,4 +170,6 @@ public enum CinemaBookingSystem implements ServerHandler {
 
 		return "Customer successfully created";
 	}
+
+	public void cancelBooking(Booking booking) { booking.cancelBooking(); }
 }
