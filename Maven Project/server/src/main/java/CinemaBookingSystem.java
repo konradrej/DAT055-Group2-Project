@@ -1,5 +1,6 @@
 import server.ServerHandler;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -69,7 +70,8 @@ public enum CinemaBookingSystem implements ServerHandler {
 	}
 
 	public void readAllCollections(){
-		this.movieCollection =  movieCollection.readCollection();
+
+		this.movieCollection = movieCollection.readCollection();
 		this.showCollection = showCollection.readCollection();
 		this.customerCollection = customerCollection.readCollection();
 		this.bookingCollection =  bookingCollection.readCollection();
@@ -80,29 +82,26 @@ public enum CinemaBookingSystem implements ServerHandler {
 	}
 
 	public MovieCollection getMovieCollection(){
-		return movieCollection;
+		return this.movieCollection;
 	}
 
-	public ShowCollection getShowCollection() { return showCollection; }
+	public ShowCollection getShowCollection() { return this.showCollection; }
 
-	public Collection<Show> getShowsByMovie(Object movie)
+	public ShowCollection getShowsByMovie(Object movie)
 	{
-		Collection<Show> showsByMovie = null;
-
-		for(Show s : this.getShowCollection().getAllShows())
-		{
-			if(s.equals(movie))
-			{
-				showsByMovie.add(s);
-			}
+		try {
+			Movie m = (Movie) movie;
+			return showCollection.getShowsGivenMovie(m);
 		}
-
-		return showsByMovie;
+		catch (ClassCastException e){
+			e.printStackTrace();
+		}
+		return new ShowCollection("empty");
 	}
 
 	public Collection<Seat> getAllSeatsByShow(Object show)
 	{
-		Collection<Seat> seatsByShow = null;
+		Collection<Seat> seatsByShow = new ArrayList<>();
 
 		for(Show show1 : this.getShowCollection().getAllShows())
 		{

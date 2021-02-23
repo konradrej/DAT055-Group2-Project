@@ -135,6 +135,8 @@ public class CinemaAdmin {
         JButton next = new JButton("Next");
         JButton addShow = new JButton("Add Show");
 
+        prev.setEnabled(false);
+
         buttonPanel.add(prev);
         buttonPanel.add(next);
         buttonPanel.add(addShow);
@@ -148,14 +150,26 @@ public class CinemaAdmin {
     }
 
     public void nextPage(){
+        JButton next = (JButton) buttonPanel.getComponent(1);
+        JButton prev = (JButton) buttonPanel.getComponent(0);
         if (page < 6) {
             cl.show(cardPanel, "" + (++page));
+            prev.setEnabled(true);
+        }
+        else{
+            next.setEnabled(false);
         }
     }
 
     public void prevPage(){
+        JButton next = (JButton) buttonPanel.getComponent(1);
+        JButton prev = (JButton) buttonPanel.getComponent(0);
         if (page > 1) {
             cl.show(cardPanel, "" + (--page));
+            next.setEnabled(true);
+        }
+        else{
+            prev.setEnabled(false);
         }
     }
 
@@ -164,24 +178,22 @@ public class CinemaAdmin {
         if(movie != null && theater != null ) {
             boolean addShow = true;
             for(Show s2 : CinemaBookingSystem.getInstance().getShowCollection().getAllShows()){
-                System.out.println(s2.toString());
                 if(s2.getTheater().equals(theater) && s2.getShowDateAndTime().equals(date)){
                     addShow = false;
-                    System.out.println("Theater" + theater.getTheaterNumber() + " is occupied at" + date.toString());
+                    JOptionPane.showMessageDialog(null, "Theater " + theater.getTheaterNumber() + " is occupied at " + date.toString(),
+                            "Not added", JOptionPane.ERROR_MESSAGE);
                     break;
                 }
             }
             if(addShow) {
                 Show s = new Show(movie, date, CinemaBookingSystem.getInstance().getCinema(), theater, true);
-                System.out.println(s.toString());
+                JOptionPane.showMessageDialog(null, s.toString(), "Show added", JOptionPane.INFORMATION_MESSAGE);
                 CinemaBookingSystem.getInstance().getShowCollection().addShow(s);
             }
-            CinemaBookingSystem.getInstance().updateAllCollections();
         }
         else{
-            System.out.println("choose movie, theater, date");
+            JOptionPane.showMessageDialog(null, "Choose movie, theater, date", "Not added", JOptionPane.ERROR_MESSAGE);
         }
-
     }
 
     public static void main(String[] args)
@@ -190,6 +202,9 @@ public class CinemaAdmin {
         CinemaBookingSystem.getInstance().readAllCollections();
         CinemaBookingSystem.getInstance().getMovieCollection().scanNewMovies();
         new CinemaAdmin();
+
+        Runtime.getRuntime().addShutdownHook(new Thread(() ->
+                CinemaBookingSystem.getInstance().updateAllCollections()));
 
     }
 } 

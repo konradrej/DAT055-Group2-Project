@@ -122,13 +122,9 @@ public class BookingCollection extends AbstractCollection implements Serializabl
 			System.out.println("File has been read");
 			return readThis;
 		}
-		catch(FileNotFoundException e){
+		catch (ClassNotFoundException | FileNotFoundException e) {
 			//something else
-			return null;
-		}
-		catch (ClassNotFoundException e) {
-			//something else
-			return null;
+			return new BookingCollection(this.filename);
 		}
 		catch (IOException e ){
 			//something else

@@ -29,15 +29,14 @@ public class ShowCollection extends AbstractCollection implements Serializable{
 	 * @return a collection of shows
 	 */
 	
-	public Collection <Show> getShowsGivenMovie(Movie m){
-		Collection <Show> selectedShows = new LinkedList <>();
-		for(Show s : this.allShows) {
-			Movie m2 = s.getMovie();
-			if(m.equals(m2)) {
-				selectedShows.add(s);
+	public ShowCollection getShowsGivenMovie(Movie m){
+		ShowCollection s = new ShowCollection("getShowsGivenMovie");
+		for(Show s2 : getAllShows()){
+			if( m.getTitle().equals(s2.getMovie().getTitle())){
+				s.addShow(s2);
 			}
 		}
-		return selectedShows;
+		return s;
 	}
 	
 	public Collection<Seat> getAllAvailableSeats(Show s){
@@ -135,13 +134,9 @@ public class ShowCollection extends AbstractCollection implements Serializable{
 			System.out.println("File has been read");
 			return readThis;
 		}
-		catch(FileNotFoundException e){
+		catch (ClassNotFoundException | FileNotFoundException e) {
 			//something else
-			return null;
-		}
-		catch (ClassNotFoundException e) {
-			//something else
-			return null;
+			return new ShowCollection(this.filename);
 		}
 		catch (IOException e ){
 			//something else

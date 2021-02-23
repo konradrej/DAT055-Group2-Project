@@ -77,12 +77,9 @@ public class CustomerCollection extends AbstractCollection implements Serializab
 			System.out.println("File has been read");
 			return readThis;
 		}
-		catch(FileNotFoundException e){
-			return null;
-		}
-		catch (ClassNotFoundException e) {
+		catch (ClassNotFoundException | FileNotFoundException e) {
 			//something else
-			return null;
+			return new CustomerCollection(this.filename);
 		}
 		catch (IOException e ){
 			//something else

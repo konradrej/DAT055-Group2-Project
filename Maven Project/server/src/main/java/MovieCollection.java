@@ -124,7 +124,7 @@ public class MovieCollection extends AbstractCollection implements Serializable{
 		for(Element e : body.select("h2 a")) {
 			String link = e.attributes().get("href");
 			String title = e.attributes().get("title");
-			Boolean scanThis = true;
+			boolean scanThis = true;
 			for( Movie m : this.allMovies) {
 				if(m.getURL().equals(url + link)){
 					scanThis = false;
@@ -203,13 +203,10 @@ public class MovieCollection extends AbstractCollection implements Serializable{
 			System.out.println("File has been read");
 			return readThis;
 		}
-		catch(FileNotFoundException e){
+
+		catch (ClassNotFoundException | FileNotFoundException e) {
 			//something else
-			return null;
-		}
-		catch (ClassNotFoundException e) {
-			//something else
-			return null;
+			return new MovieCollection(this.filename);
 		}
 		catch (IOException e ){
 			//something else
