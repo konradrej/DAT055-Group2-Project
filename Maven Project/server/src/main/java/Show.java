@@ -114,7 +114,7 @@ public class Show implements Serializable{
 	 */
 	public Collection<Seat> getAllAvailableSeats()
 	{
-		Collection<Seat> allAvailableSeats = Collections.emptyList();
+		Collection<Seat> allAvailableSeats = new ArrayList<>();
 		
 		for(Row r : this.rows)
 		{

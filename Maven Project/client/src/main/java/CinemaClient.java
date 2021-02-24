@@ -33,7 +33,7 @@ public class CinemaClient {
 
         ShowSelectionPane booking = new ShowSelectionPane(this.frame);
 
-        bookingButton.addActionListener((ActionEvent e) -> booking.start());
+        bookingButton.addActionListener((ActionEvent e) -> new ShowSelectionPane(frame).start());
 
         exitButton.addActionListener((ActionEvent e) -> System.exit(0));
 

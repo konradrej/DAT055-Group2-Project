@@ -77,7 +77,7 @@ public class Row implements Serializable{
 
     public Collection<Seat> getAllAvailableSeats()
     {
-    	Collection<Seat> availableSeats = Collections.emptyList();
+    	Collection<Seat> availableSeats = new ArrayList<>();
     	
     	for(Seat s : this.allSeats)
     	{
@@ -92,7 +92,7 @@ public class Row implements Serializable{
      * collection of available seats
      */
     public Collection<Seat> getAvailableSeats(int numOfSeats) {
-        Collection<Seat> availableSeats = Collections.emptyList();
+        Collection<Seat> availableSeats = new ArrayList<>();
         
         if(this.getAllAvailableSeats().size() > numOfSeats)
         {
