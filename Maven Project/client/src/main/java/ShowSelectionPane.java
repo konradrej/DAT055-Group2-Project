@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 
-public class ShowSelectionPane extends AbstractPane implements Observer {
+public class ShowSelectionPane extends AbstractPane implements IObserver<ClientModel> {
     private MovieCollection movieCollection;
     private ShowCollection showCollection;
 
@@ -123,6 +123,7 @@ public class ShowSelectionPane extends AbstractPane implements Observer {
         return userControls;
     }
 
+    /*
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if(evt.getSource() instanceof ClientModel){
@@ -136,5 +137,11 @@ public class ShowSelectionPane extends AbstractPane implements Observer {
                 updateShowSelection();
             }
         }
+    }
+    */
+
+    @Override
+    public void notify(ClientModel observable) {
+
     }
 }

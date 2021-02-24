@@ -6,14 +6,14 @@ import java.util.ArrayList;
 
 public class CinemaAdmin {
     private final JFrame f = new JFrame();
-    Container pane = f.getContentPane();
+    private final Container pane = f.getContentPane();
     private int page = 1;
     private final CardLayout cl = new CardLayout();
     JPanel cardPanel = new JPanel();
     JPanel buttonPanel = new JPanel();
-    private  Movie movie;
-    private  Theater theater;
-    private  CinemaDate date = new CinemaDate("Dec", "31", "23:59");
+    private Movie selectedMovie;
+    private Theater selectedTheater;
+    private CinemaDate date = new CinemaDate("Dec", "31", "23:59");
 
     public CinemaAdmin()
     {
@@ -65,7 +65,7 @@ public class CinemaAdmin {
                 if (e.getClickCount() == 2) {
                     for(Movie m: CinemaBookingSystem.getInstance().getMovieCollection().getAllMovies()){
                         if(m.getTitle().equals(jlm.getSelectedValue())){
-                            movie = m;
+                            selectedMovie = m;
                             break;
                         }
                     }
@@ -79,7 +79,7 @@ public class CinemaAdmin {
                 if (e.getClickCount() == 2) {
                     for(Theater t : CinemaBookingSystem.getInstance().getCinema().getTheaterCollection()){
                         if(jlt.getSelectedValue().equals(Integer.toString(t.getTheaterNumber()))){
-                            theater = t;
+                            selectedTheater = t;
                             break;
                         }
                     }
@@ -175,18 +175,18 @@ public class CinemaAdmin {
 
     public void addShowToCollection(){
         // TODO Theater status needs to be checked with date/time
-        if(movie != null && theater != null ) {
+        if(selectedMovie != null && selectedTheater != null ) {
             boolean addShow = true;
             for(Show s2 : CinemaBookingSystem.getInstance().getShowCollection().getAllShows()){
-                if(s2.getTheater().equals(theater) && s2.getShowDateAndTime().equals(date)){
+                if(s2.getTheater().equals(selectedTheater) && s2.getShowDateAndTime().equals(date)){
                     addShow = false;
-                    JOptionPane.showMessageDialog(null, "Theater " + theater.getTheaterNumber() + " is occupied at " + date.toString(),
+                    JOptionPane.showMessageDialog(null, "Theater " + selectedTheater.getTheaterNumber() + " is occupied at " + date.toString(),
                             "Not added", JOptionPane.ERROR_MESSAGE);
                     break;
                 }
             }
             if(addShow) {
-                Show s = new Show(movie, date, CinemaBookingSystem.getInstance().getCinema(), theater, true);
+                Show s = new Show(selectedMovie, date, CinemaBookingSystem.getInstance().getCinema(), selectedTheater, true);
                 JOptionPane.showMessageDialog(null, s.toString(), "Show added", JOptionPane.INFORMATION_MESSAGE);
                 CinemaBookingSystem.getInstance().getShowCollection().addShow(s);
             }

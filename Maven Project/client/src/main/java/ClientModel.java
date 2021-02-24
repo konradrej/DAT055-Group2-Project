@@ -1,10 +1,11 @@
 import client.ClientHandler;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 
-public class ClientModel extends AbstractObservable implements ClientHandler {
+public class ClientModel implements ClientHandler, IObservable<ClientModel> {
     private static ClientModel INSTANCE;
 
     private ClientModel() { }
@@ -17,6 +18,7 @@ public class ClientModel extends AbstractObservable implements ClientHandler {
         return INSTANCE;
     }
 
+    private final Collection<IObserver<ClientModel>> observers = new ArrayList<>();
     private MovieCollection movieCollection;
     private ShowCollection showCollection;
     private Collection<Seat> seatsByShow;
@@ -123,4 +125,19 @@ public class ClientModel extends AbstractObservable implements ClientHandler {
         return allSeats;
     }
 
+    @Override
+    public void addObserver(IObserver<ClientModel> obs) {
+        observers.add(obs);
+    }
+
+    @Override
+    public void removeObserver(IObserver<ClientModel> obs) {
+        observers.remove(obs);
+    }
+
+    public void notifyObservers() {
+        for(IObserver<ClientModel> o : observers) {
+            o.notify(this);
+        }
+    }
 }
