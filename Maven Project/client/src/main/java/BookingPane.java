@@ -1,14 +1,10 @@
-import server.GetBookingsBySSNCommand;
-import server.GetMoviesCommand;
-import server.GetShowsByMovieCommand;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.*;
 import java.util.List;
 
-public class ShowSelectionPane extends AbstractPane implements IObserver<ClientModel> {
+public class BookingPane extends AbstractPane implements IObserver<ClientModel> {
     private MovieCollection movieCollection;
     private ShowCollection showCollection;
     private ClientModel cm;
@@ -17,7 +13,7 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
     private final JPanel seatSelectionPanel = new JPanel();
     private final JPanel customerInformationPanel = new JPanel();
 
-    public ShowSelectionPane(JFrame frame){
+    public BookingPane(JFrame frame){
         super(frame);
     }
 
@@ -185,6 +181,8 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
 
                 button.addActionListener((ActionEvent e) -> {
                     System.out.println(e.getActionCommand());
+
+
                 });
 
                 wrapperPanel.add(button);

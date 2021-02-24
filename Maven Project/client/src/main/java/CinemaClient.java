@@ -31,9 +31,9 @@ public class CinemaClient {
         JButton bookingButton = new JButton("Book");
         JButton exitButton = new JButton("Exit");
 
-        ShowSelectionPane booking = new ShowSelectionPane(this.frame);
+        BookingPane booking = new BookingPane(this.frame);
 
-        bookingButton.addActionListener((ActionEvent e) -> new ShowSelectionPane(frame).start());
+        bookingButton.addActionListener((ActionEvent e) -> new BookingPane(frame).start());
 
         exitButton.addActionListener((ActionEvent e) -> System.exit(0));
 
