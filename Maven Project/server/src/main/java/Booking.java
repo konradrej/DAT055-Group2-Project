@@ -6,10 +6,7 @@ import java.util.*;
 * @version version 0.0.0
 */
 public class Booking implements Serializable {
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 408224943807153172L;
 	private Show show;
 	private Customer customer;

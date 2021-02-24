@@ -67,6 +67,7 @@ public class Cinema implements Serializable{
      *
      */
     public void addTheater() {
+        // DO WE NEED THESE?
         //TODO: parameters
         //TODO: CODE
     }

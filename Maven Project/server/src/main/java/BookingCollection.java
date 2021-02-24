@@ -8,7 +8,7 @@ import java.util.*;
 public class BookingCollection extends AbstractCollection {
 
 	private static final long serialVersionUID = 1450784786789696365L;
-	private Collection<Booking> allBookings;
+	private final Collection<Booking> allBookings;
 	private final String filename;
 	
 	/**
@@ -83,7 +83,6 @@ public class BookingCollection extends AbstractCollection {
 				this.allBookings.remove(b2);
 			}
 		}
-		System.out.println("Booking not found");
 	}
 	
 	/**
@@ -99,8 +98,8 @@ public class BookingCollection extends AbstractCollection {
 	public void updateBooking (Booking b , Show s, Customer c , Collection <Row> r ) {
 		for(Booking b2 : this.allBookings) {
 			if(b2.equals(b)) {
-				//TODO: fixa
-				b2 = new Booking(s, c, r);
+				this.allBookings.remove(b2);
+				this.addBookings(s, c, r);
 			}
 		}
 	}
@@ -115,21 +114,32 @@ public class BookingCollection extends AbstractCollection {
 		return this.filename;
 	}
 
-	public BookingCollection readCollection(){
+	/**
+	 * Read serialized file
+	 *
+	 * @return BookingCollection of the read file
+	 * @exception ClassCastException returns an empty BookingCollection
+	 * @exception FileNotFoundException returns an empty BookingCollection
+	 * @exception NullPointerException returns an empty BookingCollection
+	 * @exception IOException returns null
+	 */
+
+	public BookingCollection readCollection() throws FileNotFoundException, IOException{
 		try(ObjectInputStream stream = new ObjectInputStream(new FileInputStream(new File(this.filename)))){
 
 			BookingCollection readThis = (BookingCollection) stream.readObject();
-			System.out.println("File has been read");
+			System.out.println("File: "  + this.filename + " has been read");
 			return readThis;
 		}
-		catch (ClassNotFoundException | FileNotFoundException e) {
-			//something else
+		catch (ClassNotFoundException | FileNotFoundException | NullPointerException e) {
+			System.err.println(e.getMessage());
+			e.printStackTrace();
 			return new BookingCollection(this.filename);
 		}
 		catch (IOException e ){
-			//something else
+			System.err.println(e.getMessage());
+			e.printStackTrace();
 			return null;
 		}
 	}
-
 }
