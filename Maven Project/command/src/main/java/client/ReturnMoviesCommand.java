@@ -5,7 +5,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-public class ReturnMoviesCommand implements ClientCommand, Serializable {
+public class ReturnMoviesCommand implements ClientCommand {
 
     private Object movieCollection;
 

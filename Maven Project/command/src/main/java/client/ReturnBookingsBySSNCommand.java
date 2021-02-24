@@ -6,7 +6,7 @@ import client.ClientHandler;
 import java.io.*;
 import java.util.*;
 
-public class ReturnBookingsBySSNCommand implements ClientCommand, Serializable {
+public class ReturnBookingsBySSNCommand implements ClientCommand {
 
     private Collection<Object> bookingsBySSN;
 

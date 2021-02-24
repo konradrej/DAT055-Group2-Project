@@ -7,7 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-public class GetCustomerBySSNCommand implements ServerCommand, Serializable {
+public class GetCustomerBySSNCommand implements ServerCommand {
 
     private String SSN;
 

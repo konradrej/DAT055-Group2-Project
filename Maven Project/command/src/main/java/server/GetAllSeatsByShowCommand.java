@@ -5,7 +5,7 @@ import client.ReturnAllSeatsByShowCommand;
 import java.io.*;
 import java.util.*;
 
-public class GetAllSeatsByShowCommand implements ServerCommand, Serializable {
+public class GetAllSeatsByShowCommand implements ServerCommand {
 
     private Object show;
 

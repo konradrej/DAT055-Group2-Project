@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
 
-public class GetBookingsBySSNCommand implements ServerCommand, Serializable {
+public class GetBookingsBySSNCommand implements ServerCommand {
 
     private String SSN;
 

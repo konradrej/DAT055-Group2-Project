@@ -3,7 +3,7 @@ package server;
 import java.io.*;
 import client.ReturnShowsByMovieCommand;
 
-public class GetShowsByMovieCommand implements ServerCommand, Serializable {
+public class GetShowsByMovieCommand implements ServerCommand {
 
     private Object movie;
 

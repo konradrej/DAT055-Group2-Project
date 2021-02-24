@@ -5,7 +5,7 @@ import java.util.*;
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen
 * @version version 0.0.0
 */
-public class ShowCollection extends AbstractCollection implements Serializable{
+public class ShowCollection extends AbstractCollection {
 	
 	private static final long serialVersionUID = 368284506033169560L;
 	private Collection <Show> allShows;

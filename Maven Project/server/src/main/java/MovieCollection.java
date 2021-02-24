@@ -10,7 +10,7 @@ import java.util.*;
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen
 * @version version 0.0.0
 */
-public class MovieCollection extends AbstractCollection implements Serializable{
+public class MovieCollection extends AbstractCollection {
 
 	private static final long serialVersionUID = -6417208744468074004L;
 	private Collection<Movie> allMovies;

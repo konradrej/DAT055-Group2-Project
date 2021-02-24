@@ -2,7 +2,7 @@ package client;
 
 import java.io.*;
 
-public class ResponseCreateBookingCommand implements ClientCommand, Serializable {
+public class ResponseCreateBookingCommand implements ClientCommand {
 
     private String statusMessage;
 

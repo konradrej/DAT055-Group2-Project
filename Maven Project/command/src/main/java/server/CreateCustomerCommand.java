@@ -7,7 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-public class CreateCustomerCommand implements ServerCommand, Serializable {
+public class CreateCustomerCommand implements ServerCommand {
 
     private String name, phoneNumber, SSN;
 

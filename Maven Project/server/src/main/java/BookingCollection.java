@@ -5,7 +5,7 @@ import java.util.*;
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen
 * @version version 0.0.0
 */
-public class BookingCollection extends AbstractCollection implements Serializable{
+public class BookingCollection extends AbstractCollection {
 
 	private static final long serialVersionUID = 1450784786789696365L;
 	private Collection<Booking> allBookings;

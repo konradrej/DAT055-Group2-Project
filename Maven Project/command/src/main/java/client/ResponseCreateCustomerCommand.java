@@ -8,7 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-public class ResponseCreateCustomerCommand implements ClientCommand, Serializable {
+public class ResponseCreateCustomerCommand implements ClientCommand {
 
     private String statusMessage;
 

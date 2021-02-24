@@ -5,7 +5,7 @@ import java.util.*;
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen
 * @version version 0.0.0
 */
-public class CustomerCollection extends AbstractCollection implements Serializable{
+public class CustomerCollection extends AbstractCollection {
 	
 	private static final long serialVersionUID = 398906222416370481L;
 	private Collection<Customer> allCustomers;

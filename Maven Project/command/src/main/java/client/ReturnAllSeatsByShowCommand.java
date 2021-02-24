@@ -6,7 +6,7 @@ import client.ClientHandler;
 import java.io.*;
 import java.util.*;
 
-public class ReturnAllSeatsByShowCommand implements ClientCommand, Serializable {
+public class ReturnAllSeatsByShowCommand implements ClientCommand {
 
     private Collection<Object> allSeatsByShow;
 

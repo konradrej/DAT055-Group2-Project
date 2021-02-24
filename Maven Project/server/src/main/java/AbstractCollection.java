@@ -1,6 +1,6 @@
 import java.io.*;
 
-public abstract class AbstractCollection implements AllCollections{
+public abstract class AbstractCollection implements AllCollections {
 
     /**
      * Serializing and updates this object

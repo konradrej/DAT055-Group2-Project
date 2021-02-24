@@ -5,7 +5,7 @@ import client.ResponseCreateBookingCommand;
 import java.io.*;
 import java.util.*;
 
-public class CreateBookingCommand implements ServerCommand, Serializable {
+public class CreateBookingCommand implements ServerCommand {
 
     private Object show;
     private Object customer;

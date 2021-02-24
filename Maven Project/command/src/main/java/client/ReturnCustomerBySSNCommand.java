@@ -2,7 +2,7 @@ package client;
 
 import java.io.*;
 
-public class ReturnCustomerBySSNCommand implements ClientCommand, Serializable {
+public class ReturnCustomerBySSNCommand implements ClientCommand {
 
     private Object customer;
 
