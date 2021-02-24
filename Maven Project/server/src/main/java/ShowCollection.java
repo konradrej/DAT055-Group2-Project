@@ -6,9 +6,9 @@ import java.util.*;
 * @version version 0.0.0
 */
 public class ShowCollection extends AbstractCollection {
-	
+
 	private static final long serialVersionUID = 368284506033169560L;
-	private Collection <Show> allShows;
+	private final Collection <Show> allShows;
 	private final String filename;
 	
 	/**
@@ -19,7 +19,7 @@ public class ShowCollection extends AbstractCollection {
 	
 	public ShowCollection(String filename) {
 		this.filename = filename;
-		allShows = new LinkedList <> ();
+		allShows = new LinkedList <>();
 	}
 	
 	/**
@@ -64,7 +64,6 @@ public class ShowCollection extends AbstractCollection {
 	 * Adds a show given movie, date and time, cinema and theater:
 	 * 
 	 * @param s - The show that is added
-
 	 */
 	
 	public void addShow (Show s) {
@@ -99,12 +98,21 @@ public class ShowCollection extends AbstractCollection {
 	public void updateShow(Show s, Movie m , CinemaDate dat, Cinema c, Theater t, Boolean b) {
 		for(Show s2 : allShows) {
 			if(s.equals(s2)) {
-				//(TODO: fixa?)
-				s2 = new Show(m, dat, c, t, b);
+				this.removeShow(s2);
+				this.addShow(new Show (m, dat, c, t, b));
 				break;
 			}
 		}
-		System.out.println("Show not found");
+	}
+
+	public Show getShowByUID(String uid){
+		for(Show s : this.getAllShows()){
+			if(uid.equals(s.getUniqueID())){
+				return s;
+			}
+		}
+		//TODO något annat
+		return null;
 	}
 	
 	/**
@@ -127,19 +135,31 @@ public class ShowCollection extends AbstractCollection {
 		return this.filename;
 	}
 
-	public ShowCollection readCollection(){
+	/**
+	 * Read serialized file
+	 *
+	 * @return ShowCollection of the read file
+	 * @exception ClassCastException returns an empty ShowCollection
+	 * @exception FileNotFoundException returns an empty ShowCollection
+	 * @exception NullPointerException returns an empty ShowCollection
+	 * @exception IOException returns null
+	 */
+
+	public ShowCollection readCollection() throws FileNotFoundException, IOException{
 		try(ObjectInputStream stream = new ObjectInputStream(new FileInputStream(new File(this.filename)))){
 
 			ShowCollection readThis = (ShowCollection) stream.readObject();
-			System.out.println("File has been read");
+			System.out.println("File: "  + this.filename + " has been read");
 			return readThis;
 		}
-		catch (ClassNotFoundException | FileNotFoundException e) {
-			//something else
+		catch (ClassNotFoundException | FileNotFoundException | NullPointerException e) {
+			System.err.println(e.getMessage());
+			e.printStackTrace();
 			return new ShowCollection(this.filename);
 		}
 		catch (IOException e ){
-			//something else
+			System.err.println(e.getMessage());
+			e.printStackTrace();
 			return null;
 		}
 	}

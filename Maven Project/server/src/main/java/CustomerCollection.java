@@ -8,7 +8,7 @@ import java.util.*;
 public class CustomerCollection extends AbstractCollection {
 	
 	private static final long serialVersionUID = 398906222416370481L;
-	private Collection<Customer> allCustomers;
+	private final Collection<Customer> allCustomers;
 	private final String filename;
 	
 	/**
@@ -70,19 +70,30 @@ public class CustomerCollection extends AbstractCollection {
 		return this.filename;
 	}
 
-	public CustomerCollection readCollection(){
+	/**
+	 * Read serialized file
+	 *
+	 * @return CustomerCollectcion of the read file
+	 * @exception ClassCastException returns an empty CustomerCollection
+	 * @exception FileNotFoundException returns an empty CustomerCollection
+	 * @exception NullPointerException returns an empty CustomerCollection
+	 * @exception IOException returns null
+	 */
+	public CustomerCollection readCollection() throws FileNotFoundException, IOException{
 		try(ObjectInputStream stream = new ObjectInputStream(new FileInputStream(new File(this.filename)))){
 
 			CustomerCollection readThis = (CustomerCollection) stream.readObject();
-			System.out.println("File has been read");
+			System.out.println("File: "  + this.filename + " has been read");
 			return readThis;
 		}
-		catch (ClassNotFoundException | FileNotFoundException e) {
-			//something else
+		catch (ClassNotFoundException | FileNotFoundException | NullPointerException e) {
+			System.err.println(e.getMessage());
+			e.printStackTrace();
 			return new CustomerCollection(this.filename);
 		}
 		catch (IOException e ){
-			//something else
+			System.err.println(e.getMessage());
+			e.printStackTrace();
 			return null;
 		}
 	}

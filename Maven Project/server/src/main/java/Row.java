@@ -71,13 +71,9 @@ public class Row implements Serializable{
     }
 
     /**
-     * Method for finding n number of adjacent available seats
+     * Method for finding all seats
      */
-    public void adjacentAvailableSeats() {
-        //TODO: Parameter
-        //TODO: code to finding n number of adjacent available seats
 
-    }
 
     public Collection<Seat> getAllAvailableSeats()
     {

@@ -19,6 +19,7 @@ public class Theater implements Serializable{
      * @param theaterNumber the number of the theatre
      * @param allRows       the Collection of allrows
      */
+
     public Theater(int theaterNumber, Collection<Row> allRows) {
         this.theaterNumber = theaterNumber;
         this.allRows = allRows;
@@ -27,6 +28,7 @@ public class Theater implements Serializable{
     /**
      * Method for setting a theatre number
      */
+
     public void setTheaterNumber(int theaterNumber) {
         this.theaterNumber = theaterNumber;
     }
@@ -47,9 +49,9 @@ public class Theater implements Serializable{
      *
      * @return returns the theatre instance itself
      */
+
     public int getTheaterNumber() {
         return this.theaterNumber;
-
     }
 
     /**
@@ -61,7 +63,7 @@ public class Theater implements Serializable{
 
 
     /*
-    // TODO are rowNumber and numOfSeats their own classes or should these be ints?
+    // TODO DO WE NEED THIS? are rowNumber and numOfSeats their own classes or should these be ints?
     public void addRow(int rowNumber, int numOfSeats) {
         Row row = new Row(r, s);
         this.allRows.add(row);

@@ -13,7 +13,7 @@ import java.util.*;
 public class MovieCollection extends AbstractCollection {
 
 	private static final long serialVersionUID = -6417208744468074004L;
-	private Collection<Movie> allMovies;
+	private final Collection<Movie> allMovies;
 	private final String filename;
 	private final String url = "https://www.themoviedb.org";
 	
@@ -56,7 +56,6 @@ public class MovieCollection extends AbstractCollection {
 				return movie;
 			}
 		}
-
 		return null;
 	}
 	
@@ -116,7 +115,8 @@ public class MovieCollection extends AbstractCollection {
 			doc = Jsoup.connect(url + "/movie/now-playing").timeout(6000).get();
 		}
 		catch(IOException e) {
-			System.out.println("Error connection");
+			System.err.println("Error at the connection: " + e.getMessage());
+			e.printStackTrace();
 			return;
 		}
 		
@@ -151,7 +151,8 @@ public class MovieCollection extends AbstractCollection {
 			doc = Jsoup.connect(url + l).timeout(6000).get();
 		}
 		catch(IOException e) {
-			System.out.println("Error");
+			System.out.println("Error at the connection: " + e.getMessage());
+			e.printStackTrace();
 			return;
 		}
 		
@@ -196,20 +197,32 @@ public class MovieCollection extends AbstractCollection {
 		this.allMovies.add(m);
 	}
 
-	public MovieCollection readCollection(){
+	/**
+	 * Read serialized file
+	 *
+	 * @return MovieCollection of the read file
+	 * @exception ClassCastException returns an empty MovieCollection
+	 * @exception FileNotFoundException returns an empty MovieCollection
+	 * @exception NullPointerException returns an empty MovieCollection
+	 * @exception IOException returns null
+	 */
+
+	public MovieCollection readCollection()throws FileNotFoundException, IOException{
 		try(ObjectInputStream stream = new ObjectInputStream(new FileInputStream(new File(this.filename)))){
 
 			MovieCollection readThis = (MovieCollection) stream.readObject();
-			System.out.println("File has been read");
+			System.out.println("File: "  + this.filename + " has been read");
 			return readThis;
 		}
 
-		catch (ClassNotFoundException | FileNotFoundException e) {
-			//something else
+		catch (ClassNotFoundException | FileNotFoundException | NullPointerException e) {
+			System.err.println(e.getMessage());
+			e.printStackTrace();
 			return new MovieCollection(this.filename);
 		}
 		catch (IOException e ){
-			//something else
+			System.err.println(e.getMessage());
+			e.printStackTrace();
 			return null;
 		}
 	}

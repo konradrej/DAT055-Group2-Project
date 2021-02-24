@@ -7,17 +7,15 @@ import java.util.*;
 */
 public class Show implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -9177195168561009276L;
-	private Movie movie;
-	private CinemaDate dayAndTime;
-	private Cinema cinema;
-	private Theater theater;
+	private final String uniqueID;
+	private final Movie movie;
+	private final CinemaDate dayAndTime;
+	private final Cinema cinema;
+	private final Theater theater;
 	private Boolean status;
 	
-	private Collection<Row> rows;
+	private final Collection<Row> rows;
 	
 	/**
 	 * Constructor for initializing the show instance with corresponding parameter values
@@ -35,6 +33,11 @@ public class Show implements Serializable{
 		this.theater = theater;
 		this.status = status;
 		this.rows = this.theater.getCollectionOfRows();
+		this.uniqueID = UUID.randomUUID().toString();
+	}
+
+	public String getUniqueID (){
+		return this.uniqueID;
 	}
 	
 	/**
@@ -49,7 +52,7 @@ public class Show implements Serializable{
 	
 	/**
 	 * Method for getting the day and time at which the show will take place
-	 * 
+	 * S
 	 * @return	returns the day_and_time instance variable of this object
 	 */
 	public CinemaDate getShowDateAndTime()
@@ -175,8 +178,13 @@ public class Show implements Serializable{
 		this.status = !this.status;
 	}
 
+	/**
+	 * A method to get the Movie , Cinema, Theater and time of the show
+	 * @return a string representing the show
+	 */
+
 	public String toString(){
-		return "Movie:" + this.movie.getTitle() + " Date and time:" + this.dayAndTime.toString() +
-				" Cinema:" + this.cinema.getCinemaName() + " Theater Number:" + theater.getTheaterNumber();
+		return "Movie: " + this.movie.getTitle() + "\nDate and time: " + this.dayAndTime.toString() +
+				"\nCinema: " + this.cinema.getCinemaName() + "\nTheater Number: " + theater.getTheaterNumber();
 	}
 }

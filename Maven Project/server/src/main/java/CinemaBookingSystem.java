@@ -1,5 +1,6 @@
 import server.ServerHandler;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -17,6 +18,7 @@ public enum CinemaBookingSystem implements ServerHandler {
 
 	/**
 	 * Constructor for initializing the CinemaBookingSystem instance
+	 * Predefined for all Cinema, Theater, Row, Seat
 	 */
 	CinemaBookingSystem() {
 
@@ -54,28 +56,37 @@ public enum CinemaBookingSystem implements ServerHandler {
 
 	}
 
+	/**
+	 * Get method to get the instance of CinemaBookingSystem objecy
+	 * @return a CinemaBookingSystem of the instance
+	 */
+
 	public static CinemaBookingSystem getInstance(){
 		return INSTANCE;
 	}
 
+	/**
+	 * Method that serialize all collection of the object
+	 */
 
-
-	// Serialize (saves in path: Working Tree-> Maven project -> Server) all collections
-
-	public void updateAllCollections(){
-		movieCollection.updateCollection(movieCollection.getFilename());
-		showCollection.updateCollection(showCollection.getFilename());
-		customerCollection.updateCollection(customerCollection.getFilename());
-		bookingCollection.updateCollection(bookingCollection.getFilname());
+	public void serializeAllCollection(){
+		movieCollection.serializeCollection(movieCollection.getFilename());
+		showCollection.serializeCollection(showCollection.getFilename());
+		customerCollection.serializeCollection(customerCollection.getFilename());
+		bookingCollection.serializeCollection(bookingCollection.getFilname());
 	}
 
-	public void readAllCollections(){
+	/**
+	 * Method that reads all the collection from a file to this objects collection
+	 */
 
+	public void readAllCollections() throws IOException {
 		this.movieCollection = movieCollection.readCollection();
 		this.showCollection = showCollection.readCollection();
 		this.customerCollection = customerCollection.readCollection();
 		this.bookingCollection =  bookingCollection.readCollection();
 	}
+
 
 	public BookingCollection getBookingCollection(){
 		return bookingCollection;
@@ -96,7 +107,7 @@ public enum CinemaBookingSystem implements ServerHandler {
 		catch (ClassCastException e){
 			e.printStackTrace();
 		}
-		return new ShowCollection("empty");
+		return new ShowCollection("Empty showCollection");
 	}
 
 	public Collection<Seat> getAllSeatsByShow(Object show)
