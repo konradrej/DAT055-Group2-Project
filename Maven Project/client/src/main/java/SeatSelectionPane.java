@@ -22,7 +22,6 @@ public class SeatSelectionPane extends AbstractPane {
      */
     private JButton continueButton;
     private JButton backButton;
-    private JButton cancelButton;
 
     /**
      *  Variables for new booking
@@ -93,7 +92,6 @@ public class SeatSelectionPane extends AbstractPane {
 
         continueButton = new JButton("Continue");
         backButton = new JButton("Back");
-        cancelButton = new JButton("Cancel");
 
         continueButton.setEnabled(false);
         backButton.setEnabled(true);
@@ -107,14 +105,8 @@ public class SeatSelectionPane extends AbstractPane {
             stop();
         });
 
-        cancelButton.addActionListener((ActionEvent e) -> {
-            // TODO
-            stop();
-        });
-
         userControls.add(continueButton);
         userControls.add(backButton);
-        userControls.add(cancelButton);
 
         return userControls;
     }

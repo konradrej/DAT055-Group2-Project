@@ -109,18 +109,6 @@ public enum CinemaBookingSystem implements ServerHandler {
 		return new ShowCollection("Empty showCollection");
 	}
 
-	public List<Seat> getAllSeatsByShow(Object show)
-	{
-		try {
-			Show s = (Show)show;
-			return showCollection.getAllSeats(s);
-		} catch (ClassCastException e) {
-			e.printStackTrace();
-		}
-
-		return null;
-	}
-
 	/**
 	 * A method for getting a customer given a SSN
 	 *
@@ -170,8 +158,6 @@ public enum CinemaBookingSystem implements ServerHandler {
 	 * @param rows			A collection of all the rows, containing all seats to be reserved for the customer
 	 * @return 				Returns a string to the client containing information about how the creation went
 	 */
-	//TODO Implement Collection<Object> rows as Collection<Map(Object, Object)> rows, where Map(Object, Object)=Map(Row, Seat)
-	//TODO Also change the status of each booked seat to unavailable
 	public String createBooking(Object show, Object customer, ArrayList<Object> rows)
 	{
 		List<Row> bookedRows = new ArrayList<>();

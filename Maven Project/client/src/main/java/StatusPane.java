@@ -29,6 +29,8 @@ public class StatusPane extends AbstractPane implements IObserver<ClientModel> {
 
     public StatusPane(JFrame frame) {
         super(frame);
+
+
     }
 
     @Override

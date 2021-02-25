@@ -12,17 +12,15 @@ import java.util.*;
 import java.util.List;
 
 public class ShowSelectionPane extends AbstractPane implements IObserver<ClientModel> {
-    private ClientModel cm;
+    private final ClientModel cm;
     private MovieCollection movieCollection;
     private ShowCollection showCollection;
-    private JPanel movieShowSelectionPanel;
-    private JPanel userControlsPanel;
+    private final JPanel movieShowSelectionPanel;
 
     /**
      * User control buttons
      */
     private JButton continueButton;
-    private JButton backButton;
     private JButton cancelButton;
 
     /**
@@ -69,23 +67,18 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
         userControls.setLayout(new FlowLayout());
 
         continueButton = new JButton("Continue");
-        backButton = new JButton("Back");
         cancelButton = new JButton("Cancel");
 
         continueButton.setEnabled(false);
-        backButton.setEnabled(false);
 
         continueButton.addActionListener((ActionEvent e) -> {
             SeatSelectionPane seatPane = new SeatSelectionPane(frame, bookShow);
             seatPane.start();
         });
 
-        cancelButton.addActionListener((ActionEvent e) -> {
-            stop();
-        });
+        cancelButton.addActionListener((ActionEvent e) -> stop());
 
         userControls.add(continueButton);
-        userControls.add(backButton);
         userControls.add(cancelButton);
 
         return userControls;
@@ -208,11 +201,11 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
                     button.addActionListener((ActionEvent e) -> {
                         bookShow = cm.getShowCollection().getShowByUID(e.getActionCommand());
 
-                        // TODO
-                        //updateSeatSelectionPanel();
+                        if(bookShow == null){
 
-                        continueButton.setEnabled(true);
-                        backButton.setEnabled(true);
+                        }else{
+                            continueButton.setEnabled(true);
+                        }
                     });
 
                     wrapperPanel.add(button);
@@ -253,7 +246,7 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
         contentPane.setLayout(new BorderLayout());
 
         this.movieShowSelectionPanel = createMovieShowSelectionPanel();
-        this.userControlsPanel = createUserControlsPanel();
+        JPanel userControlsPanel = createUserControlsPanel();
 
         contentPane.add(movieShowSelectionPanel, BorderLayout.CENTER);
         contentPane.add(userControlsPanel, BorderLayout.SOUTH);

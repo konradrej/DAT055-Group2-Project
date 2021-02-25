@@ -48,12 +48,11 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
         b1.addActionListener((ActionEvent e) -> {
             if(j1.getText()!=null) {
                 ssn = j1.getText();
-                SocketClientCommunication.getInstance().sendCommand(new GetBookingsBySSNCommand(ssn));
+                cm.updateBookingsBySSN(ssn);
             } else if(j2.getText()!=null){
                 phonenumber = j2.getText();
-                SocketClientCommunication.getInstance().sendCommand(new GetBookingsByPhoneNumberCommand(phonenumber));
+                cm.updateBookingsByPhoneNumber(phonenumber);
             }
-            //System.out.println(phonenumber + " " + ssn);
         });
 
         enterInformation.add(l1);
@@ -144,7 +143,7 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
                 infoContainer.setBackground(Color.RED);
                 rowSeatPanel.setBackground(Color.yellow);
 
-                bookingPanel.add(buttonContainer,BorderLayout.EAST);
+                bookingPanel.add(buttonContainer, BorderLayout.EAST);
                 bookingPanel.add(infoContainer, BorderLayout.CENTER);
                 bookingPanel.setPreferredSize(new Dimension(scrollpane.getWidth(), 200));
                 wrapperpanel.add(bookingPanel);

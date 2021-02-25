@@ -1,10 +1,9 @@
 import client.ClientHandler;
-import server.GetBookingsBySSNCommand;
-import server.GetCustomerBySSNCommand;
-import server.GetMoviesCommand;
-import server.GetShowsByMovieCommand;
+import server.*;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import ObserverPattern.*;
 import collections.*;
 import cinemaObjects.*;
@@ -25,7 +24,6 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
     private final ArrayList<IObserver<ClientModel>> observers = new ArrayList<>();
     private MovieCollection movieCollection;
     private ShowCollection showCollection;
-    private ArrayList<Seat> seatsByShow;
     private ArrayList<Booking> bookings;
     private Customer customer;
 
@@ -41,10 +39,17 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
         SocketClientCommunication.getInstance().sendCommand(new GetCustomerBySSNCommand(customer));
     }
 
-    public void updateBookings(Booking booking){
-        SocketClientCommunication.getInstance().sendCommand(new GetBookingsBySSNCommand(booking.getCustomer().getSSN()));
+    public void updateBookingsBySSN(String SSN){
+        SocketClientCommunication.getInstance().sendCommand(new GetBookingsBySSNCommand(SSN));
     }
 
+    public void updateBookingsByPhoneNumber(String phoneNumber){
+        SocketClientCommunication.getInstance().sendCommand(new GetBookingsByPhoneNumberCommand(phoneNumber));
+    }
+
+    public void createBooking(Show show, Customer customer, List<Row> rows){
+        SocketClientCommunication.getInstance().sendCommand(new CreateBookingCommand(show, customer, new ArrayList<>(rows)));
+    }
 
     public MovieCollection getMovieCollection(){
         return movieCollection;
@@ -82,22 +87,6 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
         }
     }
 
-    public void setSeatsByShow(ArrayList<Object> seatsByShow) {
-        try {
-            ArrayList<Seat> seatsByShow1 = new ArrayList<>();
-
-            for (Object s : seatsByShow) {
-                seatsByShow1.add((Seat) s);
-            }
-
-            this.seatsByShow = seatsByShow1;
-            notifyObservers();
-        } catch (ClassCastException e) {
-            System.err.println("Class could not be casted. Message: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
     public void setBookings(ArrayList<Object> bookings)
     {
         try {
@@ -125,24 +114,6 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
             System.err.println("Class could not be casted. Message: " + e.getMessage());
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Method for getting all seats by show
-     *
-     * @param show 	        the specific show for which to find all seats for
-     * @return allSeats     a collection of all seats for the specified show
-     */
-    public ArrayList<Seat> getAllSeatsByShow(Show show)
-    {
-        ArrayList<Seat> allSeats = null;
-
-        for(Show s : this.showCollection.getAllShows())
-        {
-            if(s.equals(show)) allSeats = s.getAllSeats();
-        }
-
-        return allSeats;
     }
 
     @Override

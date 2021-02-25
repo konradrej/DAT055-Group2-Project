@@ -1,36 +1,37 @@
+import ObserverPattern.IObserver;
 import cinemaObjects.Customer;
 import cinemaObjects.Row;
 import cinemaObjects.Show;
-import server.GetCustomerBySSNCommand;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerInformationPane extends AbstractPane {
-    private ClientModel cm;
-    private Customer customer;
-    private JPanel customerInformationPanel;
-    private JPanel userControlsPanel;
+public class CustomerInformationPane extends AbstractPane implements IObserver<ClientModel> {
+    private final ClientModel cm;
+    private final JPanel customerInformationPanel;
+    private final List<JTextField> customerInfoFields = new ArrayList<>();
 
     /**
      * User control buttons
      */
     private JButton continueButton;
     private JButton backButton;
-    private JButton cancelButton;
 
     /**
      *  Variables for new booking
      */
-    private Show bookShow;
-    private List<Row> bookRows;
+    private final Show bookShow;
+    private final List<Row> bookRows;
     private Customer bookCustomer;
 
     private JPanel createCustomerInformationPanel(){
-        if(customer == null){
-            customer = new Customer();
+        if(bookCustomer == null){
+            bookCustomer = new Customer();
         }
 
         JPanel customerInformationPanel = new JPanel();
@@ -43,9 +44,7 @@ public class CustomerInformationPane extends AbstractPane {
         JTextField getInfoTextField = new JTextField();
         JButton searchButton = new JButton("Find");
 
-        searchButton.addActionListener((ActionEvent e) -> {
-            SocketClientCommunication.getInstance().sendCommand(new GetCustomerBySSNCommand(getInfoTextField.getText()));
-        });
+        searchButton.addActionListener((ActionEvent e) -> cm.updateCustomer(getInfoTextField.getText()));
 
         findBySSNPanel.setLayout(new BoxLayout(findBySSNPanel, BoxLayout.Y_AXIS));
         findBySSNPanel.add(getInfoLabel);
@@ -54,21 +53,79 @@ public class CustomerInformationPane extends AbstractPane {
 
         JLabel enterNameLabel = new JLabel("Name");
         JTextField enterNameTextField = new JTextField();
-        enterNameTextField.addActionListener((ActionEvent e) -> {
-            customer.setName(enterNameTextField.getText());
-        });
+        enterNameTextField.getDocument().addDocumentListener((new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                update();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                update();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                update();
+            }
+
+            public void update(){
+                bookCustomer.setName(enterNameTextField.getText());
+                updateContinueButton();
+            }
+        }));
+        customerInfoFields.add(enterNameTextField);
 
         JLabel enterSSNLabel = new JLabel("SSN");
         JTextField enterSSNTextField = new JTextField();
-        enterSSNTextField.addActionListener((ActionEvent e) -> {
-            customer.setSSN(enterSSNTextField.getText());
-        });
+        enterSSNTextField.getDocument().addDocumentListener((new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                update();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                update();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                update();
+            }
+
+            public void update(){
+                bookCustomer.setSSN(enterSSNTextField.getText());
+                updateContinueButton();
+            }
+        }));
+        customerInfoFields.add(enterSSNTextField);
 
         JLabel enterPhoneNumberLabel = new JLabel("Phone number");
         JTextField enterTelephoneTextField = new JTextField();
-        enterTelephoneTextField.addActionListener((ActionEvent e) -> {
-            customer.setPhoneNumber(enterTelephoneTextField.getText());
-        });
+        enterTelephoneTextField.getDocument().addDocumentListener((new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                update();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                update();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                update();
+            }
+
+            public void update(){
+                bookCustomer.setPhoneNumber(enterTelephoneTextField.getText());
+                updateContinueButton();
+            }
+        }));
+        customerInfoFields.add(enterTelephoneTextField);
+
 
         enterInfoPanel.setLayout(new BoxLayout(enterInfoPanel, BoxLayout.Y_AXIS));
         enterInfoPanel.add(enterNameLabel);
@@ -94,28 +151,21 @@ public class CustomerInformationPane extends AbstractPane {
 
         continueButton = new JButton("Continue");
         backButton = new JButton("Back");
-        cancelButton = new JButton("Cancel");
 
         continueButton.setEnabled(false);
         backButton.setEnabled(true);
 
         continueButton.addActionListener((ActionEvent e) -> {
-            CustomerInformationPane customerPane = new CustomerInformationPane(frame, bookShow, bookRows);
-            customerPane.start();
+            cm.createBooking(bookShow, bookCustomer, new ArrayList<>(bookRows));
+
+            StatusPane statusPane = new StatusPane(frame);
+            statusPane.start();
         });
 
-        backButton.addActionListener((ActionEvent e) -> {
-            stop();
-        });
-
-        cancelButton.addActionListener((ActionEvent e) -> {
-            // TODO
-            stop();
-        });
+        backButton.addActionListener((ActionEvent e) -> stop());
 
         userControls.add(continueButton);
         userControls.add(backButton);
-        userControls.add(cancelButton);
 
         return userControls;
     }
@@ -129,9 +179,25 @@ public class CustomerInformationPane extends AbstractPane {
         textFields[1] = (JTextField) con2.getComponent(3);
         textFields[2] = (JTextField) con2.getComponent(5);
 
-        textFields[0].setText(customer.getName());
-        textFields[1].setText(customer.getSSN());
-        textFields[2].setText(customer.getPhoneNumber());
+        textFields[0].setText(bookCustomer.getName());
+        textFields[1].setText(bookCustomer.getSSN());
+        textFields[2].setText(bookCustomer.getPhoneNumber());
+
+        updateContinueButton();
+        contentPane.validate();
+    }
+
+    public void updateContinueButton(){
+        boolean enabled = true;
+
+        for(JTextField textField : customerInfoFields){
+            if(textField.getText() == null || textField.getText().equals("")){
+                enabled = false;
+                break;
+            }
+        }
+
+        continueButton.setEnabled(enabled);
     }
 
 
@@ -145,13 +211,25 @@ public class CustomerInformationPane extends AbstractPane {
         this.bookRows = rows;
 
         cm = ClientModel.getInstance();
+        cm.addObserver(this);
 
         contentPane.setLayout(new BorderLayout());
 
         this.customerInformationPanel = createCustomerInformationPanel();
-        this.userControlsPanel = createUserControlsPanel();
+        JPanel userControlsPanel = createUserControlsPanel();
 
         contentPane.add(customerInformationPanel, BorderLayout.CENTER);
         contentPane.add(userControlsPanel, BorderLayout.SOUTH);
+    }
+
+    @Override
+    public void notify(ClientModel observable) {
+        Customer bookCustomer = observable.getCustomer();
+
+        if(bookCustomer != null && bookCustomer != this.bookCustomer){
+            this.bookCustomer = bookCustomer;
+
+            updateCustomerInformationPanel();
+        }
     }
 }
