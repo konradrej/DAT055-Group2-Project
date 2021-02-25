@@ -1,3 +1,5 @@
+package cinemaObjects;
+
 import java.io.Serializable;
 import java.util.*;
 
@@ -14,7 +16,7 @@ public class Booking implements Serializable {
 	private Boolean cancelled;
 	
 	/**
-	 * Constructor for initializing the Booking instance
+	 * Constructor for initializing the cinemaObjects.Booking instance
 	 * 
 	 * @param show			what show is booked
 	 * @param customer		which customer the booking belongs to

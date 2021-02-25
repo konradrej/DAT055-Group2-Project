@@ -22,7 +22,7 @@ public class CinemaClient {
     }
 
     private void createFrame(){
-        this.frame = new JFrame("Cinema");
+        this.frame = new JFrame("cinemaObjects.Cinema");
         this.frame.setPreferredSize(new Dimension(600, 600));
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         final Container contentPane = this.frame.getContentPane();

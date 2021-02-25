@@ -3,6 +3,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.*;
 import java.util.List;
+import ObserverPattern.*;
+import collections.*;
+import cinemaObjects.*;
 
 public class BookingPane extends AbstractPane implements IObserver<ClientModel> {
     private MovieCollection movieCollection;

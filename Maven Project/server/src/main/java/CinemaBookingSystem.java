@@ -1,9 +1,11 @@
+import cinemaObjects.*;
+import collections.*;
 import server.ServerHandler;
+import collections.ShowCollection;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.LinkedList;
 
 public enum CinemaBookingSystem implements ServerHandler {
@@ -186,12 +188,12 @@ public enum CinemaBookingSystem implements ServerHandler {
 		} catch (ClassCastException e) {
 			System.err.println("Class could not be casted. Message: " + e.getMessage());
 			e.printStackTrace();
-			return "Booking failed";
+			return "cinemaObjects.Booking failed";
 		} finally {
 			this.bookingCollection.addBookings((Show)show, (Customer)customer, bookedRows);
 		}
 
-		return "Booking successfully created";
+		return "cinemaObjects.Booking successfully created";
 	}
 
 	/**
@@ -215,13 +217,13 @@ public enum CinemaBookingSystem implements ServerHandler {
 			this.customerCollection.addCustomer(newCustomer);
 		}
 
-		return "Customer successfully created";
+		return "cinemaObjects.Customer successfully created";
 	}
 
 	/**
 	 * This method cancels the input parameter bookings
 	 *
-	 * @param booking	Booking to be cancelled
+	 * @param booking	cinemaObjects.Booking to be cancelled
 	 */
 	public void cancelBooking(Booking booking) { booking.cancelBooking(); }
 }

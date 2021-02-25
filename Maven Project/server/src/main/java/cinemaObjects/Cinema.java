@@ -1,3 +1,5 @@
+package cinemaObjects;
+
 import java.io.Serializable;
 import java.util.*;
 
@@ -16,7 +18,7 @@ public class Cinema implements Serializable{
 
 
     /**
-     * Constructor for initializing the Cinema instance
+     * Constructor for initializing the cinemaObjects.Cinema instance
      *
      * @param name              the name of the cinema
      * @param allTheaters       the Collection of allTheatres

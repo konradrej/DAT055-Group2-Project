@@ -1,3 +1,5 @@
+package collections;
+
 import java.io.*;
 
 public abstract class AbstractCollection implements AllCollections {

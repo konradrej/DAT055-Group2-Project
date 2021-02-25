@@ -1,3 +1,5 @@
+package cinemaObjects;
+
 import java.io.Serializable;
 
 /**
@@ -12,7 +14,7 @@ public class Customer implements Serializable{
 	private String ssn;
 	
 	/**
-	 * Constructor for initializing the Customer instance
+	 * Constructor for initializing the cinemaObjects.Customer instance
 	 * 
 	 * @param name			the name of the customer
 	 * @param phoneNumber	the phone number of the customer

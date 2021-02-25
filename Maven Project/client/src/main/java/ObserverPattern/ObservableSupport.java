@@ -1,3 +1,5 @@
+package ObserverPattern;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
