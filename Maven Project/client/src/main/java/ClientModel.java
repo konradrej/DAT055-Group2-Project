@@ -1,12 +1,12 @@
 import client.ClientHandler;
-import collections.*;
-import cinemaObjects.*;
-import ObserverPattern.*;
+import server.GetMoviesCommand;
+import server.GetShowsByMovieCommand;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
+import ObserverPattern.*;
+import collections.*;
+import cinemaObjects.*;
 
 public class ClientModel implements ClientHandler, IObservable<ClientModel> {
     private static ClientModel INSTANCE;
@@ -28,12 +28,13 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
     private Collection<Booking> bookingsBySSN;
     private Customer customer;
 
+
     public void updateMovies(){
-        // Call communication to send request and do something.
+        SocketClientCommunication.getInstance().sendCommand(new GetMoviesCommand());
     }
 
     public void updateShows(Movie movie){
-        // Call communication to send request and do something.
+        SocketClientCommunication.getInstance().sendCommand(new GetShowsByMovieCommand(movie));
     }
 
     public MovieCollection getMovieCollection(){
@@ -47,7 +48,7 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
     public void setMovieCollection(Object movieCollection){
         try {
             this.movieCollection = (MovieCollection) movieCollection;
-            notifyObservers(this);
+            notifyObservers();
         } catch (ClassCastException e){
             System.err.println("Class could not be casted. Message: " + e.getMessage());
             e.printStackTrace();
@@ -57,7 +58,7 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
     public void setShowCollection(Object showCollection){
         try {
             this.showCollection = (ShowCollection) showCollection;
-            notifyObservers(this);
+            notifyObservers();
         } catch (ClassCastException e){
             System.err.println("Class could not be casted. Message: " + e.getMessage());
             e.printStackTrace();
@@ -66,7 +67,7 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
 
     public void setSeatsByShow(Collection<Object> seatsByShow) {
         try {
-            Collection<Seat> seatsByShow1 = Collections.emptyList();
+            Collection<Seat> seatsByShow1 = new ArrayList<>();
 
             for(Object s : seatsByShow)
             {
@@ -74,7 +75,7 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
             }
 
             this.seatsByShow = seatsByShow1;
-            notifyObservers(this);
+            notifyObservers();
         } catch (ClassCastException e) {
             System.err.println("Class could not be casted. Message: " + e.getMessage());
             e.printStackTrace();
@@ -84,7 +85,7 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
     public void setBookingsBySSN(Collection<Object> bookingsBySSN)
     {
         try {
-            Collection<Booking> bookingsBySSN1 = Collections.emptyList();
+            Collection<Booking> bookingsBySSN1 = new ArrayList<>();
 
             for(Object b : bookingsBySSN)
             {
@@ -92,7 +93,7 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
             }
 
             this.bookingsBySSN = bookingsBySSN1;
-            notifyObservers(this);
+            notifyObservers();
         } catch (ClassCastException e) {
             System.err.println("Class could not be casted. Message: " + e.getMessage());
             e.printStackTrace();
@@ -103,7 +104,7 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
     {
         try {
             this.customer = (Customer)customer;
-            notifyObservers(this);
+            notifyObservers();
         } catch (ClassCastException e) {
             System.err.println("Class could not be casted. Message: " + e.getMessage());
             e.printStackTrace();

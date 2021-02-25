@@ -15,7 +15,7 @@ public class Show implements Serializable{
 	private final CinemaDate dayAndTime;
 	private final Cinema cinema;
 	private final Theater theater;
-	private Boolean status;
+	private Boolean cancelled;
 	
 	private final Collection<Row> rows;
 	
@@ -27,13 +27,13 @@ public class Show implements Serializable{
 	 * @param cinema		what cinema the show will be played at
 	 * @param theater		what theater the show will be played at
 	 */
-	public Show(Movie movie, CinemaDate dayAndTime, Cinema cinema, Theater theater, Boolean status )
+	public Show(Movie movie, CinemaDate dayAndTime, Cinema cinema, Theater theater)
 	{
 		this.movie = movie;
 		this.dayAndTime = dayAndTime;
 		this.cinema = cinema;
 		this.theater = theater;
-		this.status = status;
+		this.cancelled = false;
 		this.rows = this.theater.getCollectionOfRows();
 		this.uniqueID = UUID.randomUUID().toString();
 	}
@@ -175,9 +175,9 @@ public class Show implements Serializable{
 	/**
 	 * Toggles the status of the show between cancelled and not cancelled
 	 */
-	public void ChangeStatus()
+	public void cancelShow()
 	{
-		this.status = !this.status;
+		this.cancelled = true;
 	}
 
 	/**

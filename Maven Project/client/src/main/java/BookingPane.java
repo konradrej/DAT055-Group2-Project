@@ -51,6 +51,9 @@ public class BookingPane extends AbstractPane implements IObserver<ClientModel> 
     }
 
     public void updateMovieSelection(){
+
+        System.out.println("Hi");
+
         if(this.movieCollection != null){
             Container con = (Container) contentPane.getComponent(0);
             con.removeAll();

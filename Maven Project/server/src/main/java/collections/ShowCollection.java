@@ -99,11 +99,11 @@ public class ShowCollection extends AbstractCollection {
 	 * @param t - The updated theater of the show
 	 */
 	
-	public void updateShow(Show s, Movie m , CinemaDate dat, Cinema c, Theater t, Boolean b) {
+	public void updateShow(Show s, Movie m , CinemaDate dat, Cinema c, Theater t) {
 		for(Show s2 : allShows) {
 			if(s.equals(s2)) {
 				this.removeShow(s2);
-				this.addShow(new Show (m, dat, c, t, b));
+				this.addShow(new Show (m, dat, c, t));
 				break;
 			}
 		}

@@ -17,9 +17,7 @@ public class CinemaClient {
         new CinemaClient();
     }
 
-    public CinemaClient(){
-        createFrame();
-    }
+    public CinemaClient() { createFrame(); }
 
     private void createFrame(){
         this.frame = new JFrame("cinemaObjects.Cinema");
