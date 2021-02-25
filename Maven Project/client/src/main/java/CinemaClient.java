@@ -27,15 +27,21 @@ public class CinemaClient {
         contentPane.setLayout(new GridLayout(4, 4, 10, 10));
 
         JButton bookingButton = new JButton("Book");
+        JButton findBookingButton = new JButton("Find your booking");
         JButton exitButton = new JButton("Exit");
 
         BookingPane booking = new BookingPane(this.frame);
 
         bookingButton.addActionListener((ActionEvent e) -> new BookingPane(frame).start());
 
+        FindBookingPane finder = new FindBookingPane(this.frame);
+
+        findBookingButton.addActionListener((ActionEvent e) -> finder.start());
+
         exitButton.addActionListener((ActionEvent e) -> System.exit(0));
 
         contentPane.add(bookingButton);
+        contentPane.add(findBookingButton);
         contentPane.add(exitButton);
 
         this.frame.pack();

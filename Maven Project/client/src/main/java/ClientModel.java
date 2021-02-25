@@ -1,4 +1,6 @@
 import client.ClientHandler;
+import server.GetBookingsBySSNCommand;
+import server.GetCustomerBySSNCommand;
 import server.GetMoviesCommand;
 import server.GetShowsByMovieCommand;
 
@@ -25,9 +27,8 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
     private MovieCollection movieCollection;
     private ShowCollection showCollection;
     private Collection<Seat> seatsByShow;
-    private Collection<Booking> bookingsBySSN;
+    private Collection<Booking> bookings;
     private Customer customer;
-
 
     public void updateMovies(){
         SocketClientCommunication.getInstance().sendCommand(new GetMoviesCommand());
@@ -37,12 +38,29 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
         SocketClientCommunication.getInstance().sendCommand(new GetShowsByMovieCommand(movie));
     }
 
+    public void updateCustomer(String customer){
+        SocketClientCommunication.getInstance().sendCommand(new GetCustomerBySSNCommand(customer));
+    }
+
+    public void updateBookings(Booking booking){
+        SocketClientCommunication.getInstance().sendCommand(new GetBookingsBySSNCommand(booking.getCustomer().getSSN()));
+    }
+
+
     public MovieCollection getMovieCollection(){
         return movieCollection;
     }
 
     public ShowCollection getShowCollection(){
         return showCollection;
+    }
+
+    public Collection<Booking>  getBookingCollection(){
+        return bookings;
+    }
+
+    public Customer  getCustomer(){
+        return customer;
     }
 
     public void setMovieCollection(Object movieCollection){
@@ -69,9 +87,8 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
         try {
             Collection<Seat> seatsByShow1 = new ArrayList<>();
 
-            for(Object s : seatsByShow)
-            {
-                seatsByShow1.add((Seat)s);
+            for (Object s : seatsByShow) {
+                seatsByShow1.add((Seat) s);
             }
 
             this.seatsByShow = seatsByShow1;
@@ -82,35 +99,17 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
         }
     }
 
-    public void setBookingsBySSN(Collection<Object> bookingsBySSN)
+    public void setBookings(Collection<Object> bookings)
     {
         try {
-            Collection<Booking> bookingsBySSN1 = new ArrayList<>();
+            Collection<Booking> bookings1 = new ArrayList<>();
 
-            for(Object b : bookingsBySSN)
+            for(Object b : bookings)
             {
-                bookingsBySSN1.add((Booking)b);
+                bookings1.add((Booking)b);
             }
 
-            this.bookingsBySSN = bookingsBySSN1;
-            notifyObservers();
-        } catch (ClassCastException e) {
-            System.err.println("Class could not be casted. Message: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-
-    public void setBookingsByPhoneNumber(Collection<Object> bookingsByPhoneNumber)
-    {
-        try {
-            Collection<Booking> bookingsByPhoneNumber1 = new ArrayList<>();
-
-            for(Object b : bookingsByPhoneNumber)
-            {
-                bookingsByPhoneNumber1.add((Booking)b);
-            }
-
-            this.bookingsBySSN = bookingsByPhoneNumber1;
+            this.bookings = bookings1;
             notifyObservers();
         } catch (ClassCastException e) {
             System.err.println("Class could not be casted. Message: " + e.getMessage());

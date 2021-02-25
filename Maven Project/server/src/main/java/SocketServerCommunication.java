@@ -34,7 +34,7 @@ public enum SocketServerCommunication implements Runnable {
      */
     @Override
     public void run(){
-        try(ServerSocket ss = new ServerSocket(888)) {
+        try(ServerSocket ss = new ServerSocket(1030)) {
             Socket s;
 
             // GÖR EXIT CONDITION

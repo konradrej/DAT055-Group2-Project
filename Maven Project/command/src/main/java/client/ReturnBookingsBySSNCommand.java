@@ -14,6 +14,6 @@ public class ReturnBookingsBySSNCommand implements ClientCommand {
 
     @Override
     public void execute(ClientHandler handler, ObjectInputStream in, ObjectOutputStream out) throws IOException, ClassNotFoundException {
-        handler.setBookingsBySSN(bookingsBySSN);
+        handler.setBookings(bookingsBySSN);
     }
 }

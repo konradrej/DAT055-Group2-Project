@@ -36,7 +36,7 @@ public enum SocketClientCommunication implements Runnable {
     @Override
     public void run() {
         try {
-            this.socket = new Socket(ip, 888);
+            this.socket = new Socket(ip, 1030);
             System.out.println("Connection established.");
         }catch (IOException e){
             System.err.println("Connection could not be established.");

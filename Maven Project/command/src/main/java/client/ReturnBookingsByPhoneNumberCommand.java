@@ -13,6 +13,6 @@ public class ReturnBookingsByPhoneNumberCommand implements ClientCommand {
 
     @Override
     public void execute(ClientHandler handler, ObjectInputStream in, ObjectOutputStream out) throws IOException, ClassNotFoundException {
-        handler.setBookingsByPhoneNumber(this.bookingsByPhoneNumber);
+        handler.setBookings(this.bookingsByPhoneNumber);
     }
 }
