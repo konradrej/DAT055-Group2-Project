@@ -13,7 +13,9 @@ public class GetBookingsBySSNCommand implements ServerCommand {
 
     private String SSN;
 
-    public GetBookingsBySSNCommand(String SSN) { this.SSN = SSN; }
+    public GetBookingsBySSNCommand(String SSN) {
+        this.SSN = SSN;
+    }
 
     @Override
     public void execute(ServerHandler handler, ObjectInputStream in, ObjectOutputStream out) throws IOException {
@@ -21,7 +23,7 @@ public class GetBookingsBySSNCommand implements ServerCommand {
         Collection<Object> bookingsBySSN = Collections.emptyList();
 
         try {
-            bookingsBySSN = (Collection<Object>)handler.getBookingsBySSN(this.SSN);
+            bookingsBySSN = (Collection<Object>) handler.getBookingsBySSN(this.SSN);
         } catch (ClassCastException e) {
             System.err.println("Class could not be casted. Message: " + e.getMessage());
             e.printStackTrace();
@@ -30,6 +32,5 @@ public class GetBookingsBySSNCommand implements ServerCommand {
                     bookingsBySSN
             ));
         }
-
     }
 }

@@ -1,5 +1,7 @@
 import ObserverPattern.IObserver;
 import cinemaObjects.Booking;
+import cinemaObjects.Row;
+import cinemaObjects.Seat;
 import server.GetBookingsByPhoneNumberCommand;
 import server.GetBookingsBySSNCommand;
 
@@ -78,21 +80,70 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
         return showBookings;
     }
     public void updateShowBookings() {
+
+        Container con = (Container) contentPane.getComponent(1);
+        con.removeAll();
+
         if (bookings != null) {
-            Container con = (Container) contentPane.getComponent(1);
-            con.removeAll();
 
             JPanel wrapperpanel = new JPanel();
             JScrollPane scrollpane = new JScrollPane();
 
-            for(Booking booking : bookings) {
+            wrapperpanel.setLayout(new GridLayout(-1,1));
 
+
+
+
+            for(Booking booking : bookings) {
+                JPanel bookingPanel = new JPanel();
+                bookingPanel.setLayout(new BorderLayout());
+
+                JPanel buttonContainer = new JPanel();
+                JPanel infoContainer = new JPanel();
+
+                buttonContainer.setBorder(BorderFactory.createEtchedBorder());
+                infoContainer.setBorder(BorderFactory.createEtchedBorder());
+
+                JLabel movieLabel = new JLabel("Movie: " + booking.getShow().getMovie().getTitle() );
+                infoContainer.add(movieLabel);
+
+                JLabel dateTimeLabel = new JLabel("Date and time: " + booking.getShow().getShowDateAndTime() );
+                infoContainer.add(dateTimeLabel);
+
+                JLabel cinemaLabel = new JLabel("Cinema " + booking.getShow().getCinema());
+                infoContainer.add(cinemaLabel);
+
+                JLabel theaterLabel = new JLabel("Theater: " + booking.getShow().getTheater());
+                infoContainer.add(theaterLabel);
+
+                JLabel bookedRowLabel = new JLabel("Row: " + booking.getBookedRows());
+                infoContainer.add(bookedRowLabel);
+
+                for(Row row: booking.getBookedRows()){
+                    Collection<Seat> bookedSeats =  booking.getBookedSeats(row.getRowNumber());
+                }
+
+
+                JLabel bookedSeatsLabel = new JLabel("Seat: " + booking);
+
+                bookingPanel.add(buttonContainer,BorderLayout.EAST);
+                bookingPanel.add(infoContainer, BorderLayout.CENTER);
+
+                wrapperpanel.add(bookingPanel);
             }
+
             con.add(scrollpane);
             scrollpane.add(wrapperpanel);
 
             JLabel bookinglabel = new JLabel();
             wrapperpanel.add(bookinglabel);
+        }
+
+        else{
+            JLabel label = new JLabel("No booking found");
+            con.add(label);
+
+
         }
     }
 

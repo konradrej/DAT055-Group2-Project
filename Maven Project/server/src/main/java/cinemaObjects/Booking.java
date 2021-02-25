@@ -101,5 +101,7 @@ public class Booking implements Serializable {
 	public Customer getCustomer() {
 		return this.customer;
 	}
-	
+
+	public Show getShow(){ return this.show;}
+
 }
