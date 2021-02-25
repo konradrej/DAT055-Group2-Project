@@ -203,14 +203,16 @@ public enum CinemaBookingSystem implements ServerHandler {
 		return "Customer successfully created";
 	}
 
+
+
 	/**
 	 * This method cancels the input parameter bookings
 	 *
 	 * @param booking	cinemaObjects.Booking to be cancelled
 	 */
-	public void cancelBooking(Booking booking)
+	public void cancelBooking(Object booking)
 	{
-		booking.cancelBooking();
-		this.bookingCollection.removeBooking(booking);
+		((Booking)booking).cancelBooking();
+		this.bookingCollection.removeBooking((Booking) booking);
 	}
 }

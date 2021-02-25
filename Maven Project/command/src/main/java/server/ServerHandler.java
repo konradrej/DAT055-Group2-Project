@@ -12,4 +12,5 @@ public interface ServerHandler {
     Object getCustomerBySSN(String SSN);
     ResponseStatus createBooking(Object show, Object customer, ArrayList<Object> rows);
     String createCustomer(String name, String phoneNumber, String SSN);
+    void cancelBooking(Object booking);
 }
