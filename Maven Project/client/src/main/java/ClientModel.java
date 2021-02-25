@@ -100,6 +100,24 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
         }
     }
 
+    public void setBookingsByPhoneNumber(Collection<Object> bookingsByPhoneNumber)
+    {
+        try {
+            Collection<Booking> bookingsByPhoneNumber1 = new ArrayList<>();
+
+            for(Object b : bookingsByPhoneNumber)
+            {
+                bookingsByPhoneNumber1.add((Booking)b);
+            }
+
+            this.bookingsBySSN = bookingsByPhoneNumber1;
+            notifyObservers();
+        } catch (ClassCastException e) {
+            System.err.println("Class could not be casted. Message: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
     public void setCustomerBySSN(Object customer)
     {
         try {

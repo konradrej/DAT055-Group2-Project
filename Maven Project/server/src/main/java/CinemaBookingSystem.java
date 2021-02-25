@@ -62,7 +62,6 @@ public enum CinemaBookingSystem implements ServerHandler {
 	 * Get method to get the instance of CinemaBookingSystem objecy
 	 * @return a CinemaBookingSystem of the instance
 	 */
-
 	public static CinemaBookingSystem getInstance(){
 		return INSTANCE;
 	}
@@ -70,7 +69,6 @@ public enum CinemaBookingSystem implements ServerHandler {
 	/**
 	 * Method that serialize all collection of the object
 	 */
-
 	public void serializeAllCollection(){
 		movieCollection.serializeCollection(movieCollection.getFilename());
 		showCollection.serializeCollection(showCollection.getFilename());
@@ -81,7 +79,6 @@ public enum CinemaBookingSystem implements ServerHandler {
 	/**
 	 * Method that reads all the collection from a file to this objects collection
 	 */
-
 	public void readAllCollections() throws IOException {
 		this.movieCollection = movieCollection.readCollection();
 		this.showCollection = showCollection.readCollection();
@@ -106,7 +103,7 @@ public enum CinemaBookingSystem implements ServerHandler {
 			Movie m = (Movie) movie;
 			return showCollection.getShowsGivenMovie(m);
 		}
-		catch (ClassCastException e){
+		catch (ClassCastException e) {
 			e.printStackTrace();
 		}
 		return new ShowCollection("Empty showCollection");
@@ -114,17 +111,14 @@ public enum CinemaBookingSystem implements ServerHandler {
 
 	public Collection<Seat> getAllSeatsByShow(Object show)
 	{
-		Collection<Seat> seatsByShow = new ArrayList<>();
-
-		for(Show show1 : this.getShowCollection().getAllShows())
-		{
-			if(show1.equals(show))
-			{
-				seatsByShow.addAll(show1.getAllSeats());
-			}
+		try {
+			Show s = (Show)show;
+			return showCollection.getAllSeats(s);
+		} catch (ClassCastException e) {
+			e.printStackTrace();
 		}
 
-		return seatsByShow;
+		return null;
 	}
 
 	/**
@@ -176,6 +170,8 @@ public enum CinemaBookingSystem implements ServerHandler {
 	 * @param rows			A collection of all the rows, containing all seats to be reserved for the customer
 	 * @return 				Returns a string to the client containing information about how the creation went
 	 */
+	//TODO Implement Collection<Object> rows as Collection<Map(Object, Object)> rows, where Map(Object, Object)=Map(Row, Seat)
+	//TODO Also change the status of each booked seat to unavailable
 	public String createBooking(Object show, Object customer, Collection<Object> rows)
 	{
 		Collection<Row> bookedRows = new ArrayList<>();
@@ -188,12 +184,12 @@ public enum CinemaBookingSystem implements ServerHandler {
 		} catch (ClassCastException e) {
 			System.err.println("Class could not be casted. Message: " + e.getMessage());
 			e.printStackTrace();
-			return "cinemaObjects.Booking failed";
+			return "Booking failed";
 		} finally {
 			this.bookingCollection.addBookings((Show)show, (Customer)customer, bookedRows);
 		}
 
-		return "cinemaObjects.Booking successfully created";
+		return "Booking successfully created";
 	}
 
 	/**
@@ -217,7 +213,7 @@ public enum CinemaBookingSystem implements ServerHandler {
 			this.customerCollection.addCustomer(newCustomer);
 		}
 
-		return "cinemaObjects.Customer successfully created";
+		return "Customer successfully created";
 	}
 
 	/**
@@ -225,5 +221,9 @@ public enum CinemaBookingSystem implements ServerHandler {
 	 *
 	 * @param booking	cinemaObjects.Booking to be cancelled
 	 */
-	public void cancelBooking(Booking booking) { booking.cancelBooking(); }
+	public void cancelBooking(Booking booking)
+	{
+		booking.cancelBooking();
+		this.bookingCollection.removeBooking(booking);
+	}
 }

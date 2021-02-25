@@ -97,9 +97,10 @@ public class Show implements Serializable{
 	 * 
 	 * @return 				returns a collection of Seat, containing all seats in the theater
 	 */
+	//TODO Should seats be mapped to a specific row? For example Map(row, seat)
 	public Collection<Seat> getAllSeats()
 	{
-		Collection<Seat> allSeats = Collections.emptyList();
+		Collection<Seat> allSeats = new ArrayList<>();
 		
 		for(Row r : this.rows)
 		{

@@ -79,6 +79,8 @@ public class Booking implements Serializable {
 		}
 
 	}
+
+	public Boolean getCancelledStatus() { return cancelled; }
 	
 	/**
 	 * Method for updating what rows and seats the customer has booked

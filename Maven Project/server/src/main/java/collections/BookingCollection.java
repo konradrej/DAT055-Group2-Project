@@ -79,10 +79,10 @@ public class BookingCollection extends AbstractCollection {
 	 * 
 	 * @param b - the booking that removes
 	 */
-	
+	//TODO Make seats of the booking available before removing it completely
 	public void removeBooking(Booking b ) {
 		for(Booking b2: this.allBookings) {
-			if(b2.equals(b)) {
+			if(b2.equals(b) && b.getCancelledStatus()) {
 				this.allBookings.remove(b2);
 			}
 		}
@@ -127,8 +127,8 @@ public class BookingCollection extends AbstractCollection {
 	 * @exception IOException returns null
 	 */
 
-	public BookingCollection readCollection() throws FileNotFoundException, IOException{
-		try(ObjectInputStream stream = new ObjectInputStream(new FileInputStream(new File(this.filename)))){
+	public BookingCollection readCollection() throws FileNotFoundException, IOException {
+		try(ObjectInputStream stream = new ObjectInputStream(new FileInputStream(this.filename))){
 
 			BookingCollection readThis = (BookingCollection) stream.readObject();
 			System.out.println("File: "  + this.filename + " has been read");

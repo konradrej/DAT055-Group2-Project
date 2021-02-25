@@ -42,7 +42,22 @@ public class ShowCollection extends AbstractCollection {
 		}
 		return s;
 	}
-	
+
+	public Collection<Seat> getAllSeats(Show show)
+	{
+		Collection<Seat> allSeats = new ArrayList<>();
+
+		for(Show s : this.allShows)
+		{
+			if(s.equals(show))
+			{
+				allSeats = s.getAllSeats();
+			}
+		}
+
+		return allSeats;
+	}
+
 	public Collection<Seat> getAllAvailableSeats(Show s){
 		for(Show s2: this.allShows) {
 			if(s2.equals(s)) {
@@ -150,7 +165,7 @@ public class ShowCollection extends AbstractCollection {
 	 */
 
 	public ShowCollection readCollection() throws FileNotFoundException, IOException{
-		try(ObjectInputStream stream = new ObjectInputStream(new FileInputStream(new File(this.filename)))){
+		try(ObjectInputStream stream = new ObjectInputStream(new FileInputStream(this.filename))){
 
 			ShowCollection readThis = (ShowCollection) stream.readObject();
 			System.out.println("File: "  + this.filename + " has been read");
