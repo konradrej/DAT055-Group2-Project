@@ -2,6 +2,7 @@ package cinemaObjects;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Anthon Lenander, Erik Kieu, Phong Nguyen
@@ -14,7 +15,7 @@ public class Cinema implements Serializable{
 	 */
 	private static final long serialVersionUID = -573847747221470914L;
 	private String name;
-    private ArrayList <Theater> allTheaters;
+    private List <Theater> allTheaters;
 
 
     /**
@@ -23,7 +24,7 @@ public class Cinema implements Serializable{
      * @param name              the name of the cinema
      * @param allTheaters       the Collection of allTheatres
      */
-    public Cinema(String name, ArrayList <Theater> allTheaters){
+    public Cinema(String name, List <Theater> allTheaters){
         this.name = name;
         this.allTheaters = allTheaters;
     }
@@ -60,7 +61,7 @@ public class Cinema implements Serializable{
      *
      * @return return
      */
-    public ArrayList <Theater> getTheaterCollection() {
+    public List<Theater> getTheaterCollection() {
         return this.allTheaters;
     }
 

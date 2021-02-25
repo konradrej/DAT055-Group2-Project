@@ -2,6 +2,7 @@ package cinemaObjects;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Anthon Lenander, Erik Kieu, Phong Nguyen
@@ -11,7 +12,7 @@ public class Row implements Serializable{
 
 	private static final long serialVersionUID = -1432188689020345890L;
 	private int rowNumber;
-    private ArrayList<Seat> allSeats;
+    private List<Seat> allSeats;
 
 
     /**
@@ -20,7 +21,7 @@ public class Row implements Serializable{
      * @param rowNumber the number of the row
      * @param allSeats  the Collection of allSeats
      */
-    public Row(int rowNumber, ArrayList<Seat> allSeats) {
+    public Row(int rowNumber, List<Seat> allSeats) {
         this.rowNumber = rowNumber;
         this.allSeats = allSeats;
     }
@@ -55,7 +56,7 @@ public class Row implements Serializable{
     /**
      * Method for getting seats from a collection of seats
      */
-    public ArrayList<Seat> getAllSeats() {
+    public List<Seat> getAllSeats() {
         return new ArrayList<>(this.allSeats);
     }
 

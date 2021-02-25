@@ -131,7 +131,7 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
                 JComboBox<String> seatsText = new JComboBox<>();
                 for(Row row: booking.getBookedRows()){
                     for(Seat seat : booking.getBookedSeats(row.getRowNumber())){
-                        seatsText.addItem("R:" + row.getRowNumber() + " S:" + seat.getSeatNumber());
+                        seatsText.addItem("Row:" + row.getRowNumber() + " Seat:" + seat.getSeatNumber());
                     }
                 }
                 rowSeatPanel.add(bookedSeatsLabel);

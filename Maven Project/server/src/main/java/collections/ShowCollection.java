@@ -4,6 +4,7 @@ import cinemaObjects.*;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 public class ShowCollection extends AbstractCollection {
 
 	private static final long serialVersionUID = 368284506033169560L;
-	private final ArrayList <Show> allShows;
+	private final List<Show> allShows;
 	private final String filename;
 	
 	/**
@@ -43,9 +44,9 @@ public class ShowCollection extends AbstractCollection {
 		return s;
 	}
 
-	public ArrayList<Seat> getAllSeats(Show show)
+	public List<Seat> getAllSeats(Show show)
 	{
-		ArrayList<Seat> allSeats = new ArrayList<>();
+		List<Seat> allSeats = new ArrayList<>();
 
 		for(Show s : this.allShows)
 		{
@@ -58,7 +59,7 @@ public class ShowCollection extends AbstractCollection {
 		return allSeats;
 	}
 
-	public ArrayList<Seat> getAllAvailableSeats(Show s){
+	public List<Seat> getAllAvailableSeats(Show s){
 		for(Show s2: this.allShows) {
 			if(s2.equals(s)) {
 				return s2.getAllAvailableSeats();
@@ -68,7 +69,7 @@ public class ShowCollection extends AbstractCollection {
 		return null;
 	}
 	
-	public ArrayList <Seat> getAdjacentSeats(Show s, int numOfSeats){
+	public List <Seat> getAdjacentSeats(Show s, int numOfSeats){
 			for(Show s2: this.allShows) {
 				if(s2.equals(s)) {
 					return s2.getAdjacentAvailableSeats(numOfSeats);
@@ -140,7 +141,7 @@ public class ShowCollection extends AbstractCollection {
 	 * @return - a collection of shows
 	 */
 	
-	public ArrayList<Show> getAllShows(){
+	public List<Show> getAllShows(){
 		return this.allShows;
 	}
 	

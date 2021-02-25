@@ -8,6 +8,7 @@ import org.jsoup.select.Elements;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen
@@ -16,7 +17,7 @@ import java.util.ArrayList;
 public class MovieCollection extends AbstractCollection {
 
 	private static final long serialVersionUID = -6417208744468074004L;
-	private final ArrayList<Movie> allMovies;
+	private final List<Movie> allMovies;
 	private final String filename;
 	private final String url = "https://www.themoviedb.org";
 	
@@ -43,7 +44,7 @@ public class MovieCollection extends AbstractCollection {
 	 * @return a collection of Movies of the objects movie collection
 	 */
 	
-	public ArrayList <Movie> getAllMovies(){
+	public List <Movie> getAllMovies(){
 		return this.allMovies;
 	}
 
@@ -94,8 +95,8 @@ public class MovieCollection extends AbstractCollection {
 	 * @param genre - selected genre for the movies
 	 */
 	
-	public ArrayList <Movie> getSelectedMovies(String title, String genre){
-		ArrayList <Movie> selectedMovies = new ArrayList<>();
+	public List <Movie> getSelectedMovies(String title, String genre){
+		List <Movie> selectedMovies = new ArrayList<>();
 		
 		for(Movie m : this.allMovies) {
 			for(String g : m.getGenre()) {
@@ -161,7 +162,7 @@ public class MovieCollection extends AbstractCollection {
 		
 		Elements elementTime = doc.getElementsByClass("runtime");
 		Elements elementGenres = doc.select("span.genres");
-		ArrayList <String> list = new ArrayList<>();
+		List <String> list = new ArrayList<>();
 		for(Element genre : elementGenres.select("a")) {
 			String s;
 

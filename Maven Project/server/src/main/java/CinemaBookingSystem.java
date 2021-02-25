@@ -5,6 +5,7 @@ import collections.ShowCollection;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public enum CinemaBookingSystem implements ServerHandler {
@@ -23,17 +24,17 @@ public enum CinemaBookingSystem implements ServerHandler {
 	 */
 	CinemaBookingSystem() {
 
-		ArrayList<Seat> seatTen = new ArrayList<>();
+		List<Seat> seatTen = new ArrayList<>();
 		for(int i = 0; i < 10; i++){
 			seatTen.add(new Seat(i+1));
 		}
 
-		ArrayList <Seat> seatFifteen = new ArrayList<>();
+		List <Seat> seatFifteen = new ArrayList<>();
 		for(int i = 0; i < 15 ; i++){
 			seatFifteen.add(new Seat(i+1));
 		}
 
-		ArrayList<Row> rowFive = new ArrayList <>();
+		List<Row> rowFive = new ArrayList <>();
 		rowFive.add(new Row(1, seatTen));
 		rowFive.add(new Row(2, seatTen));
 		rowFive.add(new Row(3, seatFifteen));
@@ -41,12 +42,12 @@ public enum CinemaBookingSystem implements ServerHandler {
 		rowFive.add(new Row(5, seatFifteen));
 
 
-		ArrayList <Row> rowThree = new ArrayList<>();
+		List <Row> rowThree = new ArrayList<>();
 		rowThree.add(new Row(1, seatTen));
 		rowThree.add(new Row(2, seatTen));
 		rowThree.add(new Row(3, seatFifteen));
 
-		ArrayList <Theater> theaterFive = new ArrayList<>();
+		List <Theater> theaterFive = new ArrayList<>();
 		theaterFive.add(new Theater(1, rowFive));
 		theaterFive.add(new Theater(2, rowThree));
 		theaterFive.add(new Theater(3, rowThree));
@@ -108,7 +109,7 @@ public enum CinemaBookingSystem implements ServerHandler {
 		return new ShowCollection("Empty showCollection");
 	}
 
-	public ArrayList<Seat> getAllSeatsByShow(Object show)
+	public List<Seat> getAllSeatsByShow(Object show)
 	{
 		try {
 			Show s = (Show)show;
@@ -137,7 +138,7 @@ public enum CinemaBookingSystem implements ServerHandler {
 	 * @param SSN	The social security of the customer to look up
 	 * @return 		Returns a collection of all the bookings by the customer given a SSN
 	 */
-	public ArrayList<Booking> getBookingsBySSN(String SSN)
+	public List<Booking> getBookingsBySSN(String SSN)
 	{
 		Customer customer = getCustomerBySSN(SSN);
 
@@ -173,7 +174,7 @@ public enum CinemaBookingSystem implements ServerHandler {
 	//TODO Also change the status of each booked seat to unavailable
 	public String createBooking(Object show, Object customer, ArrayList<Object> rows)
 	{
-		ArrayList<Row> bookedRows = new ArrayList<>();
+		List<Row> bookedRows = new ArrayList<>();
 
 		try {
 			for(Object r : rows)

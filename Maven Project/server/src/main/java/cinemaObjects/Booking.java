@@ -2,6 +2,7 @@ package cinemaObjects;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen
@@ -12,8 +13,8 @@ public class Booking implements Serializable {
 	private static final long serialVersionUID = 408224943807153172L;
 	private Show show;
 	private Customer customer;
-	//TODO ArrayList of (map(Row,Seat))????
-	private ArrayList<Row> rows;
+	//TODO List of (map(Row,Seat))????
+	private List<Row> rows;
 	private Boolean cancelled;
 	
 	/**
@@ -23,7 +24,7 @@ public class Booking implements Serializable {
 	 * @param customer		which customer the booking belongs to
 	 * @param rows			what rows the customer has booked
 	 */
-	public Booking(Show show, Customer customer, ArrayList<Row> rows)
+	public Booking(Show show, Customer customer, List<Row> rows)
 	{
 		this.show = show;
 		this.customer = customer;
@@ -36,7 +37,7 @@ public class Booking implements Serializable {
 	 * 
 	 * @return rows		what rows the customer has booked seats in
 	 */
-	public ArrayList<Row> getBookedRows()
+	public List<Row> getBookedRows()
 	{
 		return this.rows;
 	}
@@ -47,9 +48,9 @@ public class Booking implements Serializable {
 	 * @param  rowNumber	what row the seats are located in
 	 * @return rows			what seats the customer has booked
 	 */
-	public ArrayList<Seat> getBookedSeats(int rowNumber)
+	public List<Seat> getBookedSeats(int rowNumber)
 	{
-		ArrayList<Seat> bookedSeats = new ArrayList <>();
+		List<Seat> bookedSeats = new ArrayList <>();
 		
 		for(Row r : this.rows)
 		{
@@ -89,7 +90,7 @@ public class Booking implements Serializable {
 	 * @param rows			what rows the customer has booked
 	 * @param seats			what seat numbers the customer has booked
 	 */
-	public void updateRowsAndSeats(ArrayList<Row> rows, ArrayList<Seat> seats)
+	public void updateRowsAndSeats(List<Row> rows, List<Seat> seats)
 	{
 		this.rows = rows;
 	}

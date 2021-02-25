@@ -4,6 +4,7 @@ import cinemaObjects.Customer;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 public class CustomerCollection extends AbstractCollection {
 	
 	private static final long serialVersionUID = 398906222416370481L;
-	private final ArrayList<Customer> allCustomers;
+	private final List<Customer> allCustomers;
 	private final String filename;
 	
 	/**

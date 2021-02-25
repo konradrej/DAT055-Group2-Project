@@ -2,6 +2,7 @@ package cinemaObjects;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen
@@ -11,7 +12,7 @@ public class Movie implements Serializable{
 
 	private static final long serialVersionUID = 1239018110549344321L;
 	private final String title;
-    private final ArrayList <String> genre ;
+    private final List <String> genre ;
     private final String length;
     private final String url;
 
@@ -24,7 +25,7 @@ public class Movie implements Serializable{
      * @param url the URL of the movie
      */
 
-    public Movie(String title, ArrayList<String> genre, String length, String url) {
+    public Movie(String title, List<String> genre, String length, String url) {
     	this.title = title;
     	this.genre = genre;
     	this.length = length;
@@ -45,7 +46,7 @@ public class Movie implements Serializable{
      * @return a string array of the genres
      */
 
-    public ArrayList<String> getGenre() {
+    public List<String> getGenre() {
         return this.genre;
     }
 

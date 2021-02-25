@@ -17,7 +17,7 @@ public class Show implements Serializable{
 	private final Theater theater;
 	private Boolean cancelled;
 	
-	private final ArrayList<Row> rows;
+	private final List<Row> rows;
 	
 	/**
 	 * Constructor for initializing the show instance with corresponding parameter values
