@@ -1,8 +1,5 @@
 import ObserverPattern.IObserver;
-import cinemaObjects.Booking;
-import cinemaObjects.Customer;
-import cinemaObjects.Row;
-import cinemaObjects.Seat;
+import cinemaObjects.*;
 import server.GetBookingsByPhoneNumberCommand;
 import server.GetBookingsBySSNCommand;
 
@@ -87,14 +84,22 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
         Row newRow = new Row(1, seats);
         ArrayList<Row> rows = new ArrayList<>();
         rows.add(newRow);
-        Booking newBooking = new Booking(cm.getShowCollection().getAllShows().iterator().next(), new Customer("Konrad", "999999", "99"), rows);
+        Show show = cm.getShowCollection().getAllShows().iterator().next();
+        Booking newBooking = new Booking(show, new Customer("Konrad", "999999", "99"), rows);
         bookings.add(newBooking);
+        Booking newBooking1 = new Booking(show, new Customer("Konrad", "999999", "99"), rows);
+        bookings.add(newBooking1);
+        Booking newBooking2 = new Booking(show, new Customer("Konrad", "999999", "99"), rows);
+        bookings.add(newBooking2);
+        Booking newBooking3 = new Booking(show, new Customer("Konrad", "999999", "99"), rows);
+        bookings.add(newBooking3);
+        Booking newBooking4 = new Booking(show, new Customer("Konrad", "999999", "99"), rows);
+        bookings.add(newBooking4);
         // END TEMP
 
         if (bookings != null && bookings.size() > 0) {
             JPanel wrapperpanel = new JPanel();
             JScrollPane scrollpane = new JScrollPane(wrapperpanel);
-            scrollpane.setPreferredSize(new Dimension(200, 200));
             scrollpane.setLayout(new ScrollPaneLayout());
 
             wrapperpanel.setLayout(new BoxLayout(wrapperpanel, BoxLayout.Y_AXIS));
@@ -152,7 +157,7 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
 
                 bookingPanel.add(buttonContainer, BorderLayout.EAST);
                 bookingPanel.add(infoContainer, BorderLayout.CENTER);
-                bookingPanel.setPreferredSize(new Dimension(scrollpane.getWidth(), 200));
+                bookingPanel.setPreferredSize(new Dimension(scrollpane.getWidth(), 120));
                 wrapperpanel.add(bookingPanel);
 
 
