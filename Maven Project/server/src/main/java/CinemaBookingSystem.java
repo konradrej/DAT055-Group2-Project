@@ -171,7 +171,7 @@ public enum CinemaBookingSystem implements ServerHandler {
 
 			this.bookingCollection.addBookings((Show)show, (Customer)customer, bookedRows);
 
-			if (this.customerCollection.getCustomer((((Customer) customer).getSSN())) == null)
+			if (this.customerCollection.getCustomer((((Customer) customer).getSSN())) != null)
 			{
 				this.customerCollection.addCustomer((Customer)customer);
 			}
