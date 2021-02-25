@@ -1,11 +1,14 @@
 import cinemaObjects.*;
 import collections.*;
+import server.ResponseStatus;
 import server.ServerHandler;
 import collections.ShowCollection;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public enum CinemaBookingSystem implements ServerHandler {
@@ -158,7 +161,7 @@ public enum CinemaBookingSystem implements ServerHandler {
 	 * @param rows			A collection of all the rows, containing all seats to be reserved for the customer
 	 * @return 				Returns a string to the client containing information about how the creation went
 	 */
-	public String createBooking(Object show, Object customer, ArrayList<Object> rows)
+	public ResponseStatus createBooking(Object show, Object customer, ArrayList<Object> rows)
 	{
 		List<Row> bookedRows = new ArrayList<>();
 
@@ -167,15 +170,15 @@ public enum CinemaBookingSystem implements ServerHandler {
 			{
 				bookedRows.add((Row)r);
 			}
+
+			this.bookingCollection.addBookings((Show)show, (Customer)customer, bookedRows);
 		} catch (ClassCastException e) {
 			System.err.println("Class could not be casted. Message: " + e.getMessage());
 			e.printStackTrace();
-			return "Booking failed";
-		} finally {
-			this.bookingCollection.addBookings((Show)show, (Customer)customer, bookedRows);
+			return new ResponseStatus("Booking failed", false);
 		}
 
-		return "Booking successfully created";
+		return new ResponseStatus("Booking successfully created", true);
 	}
 
 	/**
