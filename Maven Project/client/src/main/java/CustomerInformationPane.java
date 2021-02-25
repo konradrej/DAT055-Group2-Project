@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.List;
 
-public class CustomerInformationPane extends AbstractPaneV2 {
+public class CustomerInformationPane extends AbstractPane {
     private ClientModel cm;
     private Customer customer;
     private JPanel customerInformationPanel;

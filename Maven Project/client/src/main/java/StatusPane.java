@@ -3,7 +3,7 @@ import ObserverPattern.IObserver;
 import javax.swing.*;
 import java.awt.*;
 
-public class StatusPane extends AbstractPaneV2 implements IObserver<ClientModel> {
+public class StatusPane extends AbstractPane implements IObserver<ClientModel> {
 
 
 

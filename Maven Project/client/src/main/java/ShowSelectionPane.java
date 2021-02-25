@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.util.*;
 import java.util.List;
 
-public class ShowSelectionPane extends AbstractPaneV2 implements IObserver<ClientModel> {
+public class ShowSelectionPane extends AbstractPane implements IObserver<ClientModel> {
     private ClientModel cm;
     private MovieCollection movieCollection;
     private ShowCollection showCollection;

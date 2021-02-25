@@ -20,10 +20,6 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
 
     public FindBookingPane(JFrame frame){
         super(frame);
-    }
-
-    @Override
-    public void init(){
 
         cm = ClientModel.getInstance();
         cm.addObserver(this);

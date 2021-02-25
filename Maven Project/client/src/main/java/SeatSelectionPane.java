@@ -1,4 +1,3 @@
-import ObserverPattern.IObserver;
 import cinemaObjects.Row;
 import cinemaObjects.Seat;
 import cinemaObjects.Show;
@@ -12,7 +11,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public class SeatSelectionPane extends AbstractPaneV2 {
+public class SeatSelectionPane extends AbstractPane {
     private ClientModel cm;
     private ShowCollection showCollection;
     private JPanel seatSelectionPanel;
