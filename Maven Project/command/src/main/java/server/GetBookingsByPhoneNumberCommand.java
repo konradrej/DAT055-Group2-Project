@@ -17,10 +17,10 @@ public class GetBookingsByPhoneNumberCommand implements ServerCommand {
     public void execute(ServerHandler handler, ObjectInputStream in, ObjectOutputStream out)
     throws IOException, ClassCastException {
 
-        Collection<Object> bookingsBySSN = new ArrayList<>();
+        ArrayList<Object> bookingsBySSN = new ArrayList<>();
 
         try {
-            bookingsBySSN = (Collection<Object>)handler.getBookingsBySSN(this.phoneNumber);
+            bookingsBySSN = (ArrayList<Object>)handler.getBookingsBySSN(this.phoneNumber);
         } catch (ClassCastException e) {
             System.err.println("Class could not be casted. Message: " + e.getMessage());
             e.printStackTrace();

@@ -9,9 +9,9 @@ public class CreateBookingCommand implements ServerCommand {
 
     private Object show;
     private Object customer;
-    private Collection<Object> rows;
+    private ArrayList<Object> rows;
 
-    public CreateBookingCommand(Object show, Object customer, Collection<Object> rows)
+    public CreateBookingCommand(Object show, Object customer, ArrayList<Object> rows)
     {
         this.show = show;
         this.customer = customer;

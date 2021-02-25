@@ -24,17 +24,17 @@ public enum CinemaBookingSystem implements ServerHandler {
 	 */
 	CinemaBookingSystem() {
 
-		Collection<Seat> seatTen = new LinkedList<>();
+		ArrayList<Seat> seatTen = new ArrayList<>();
 		for(int i = 0; i < 10; i++){
 			seatTen.add(new Seat(i+1));
 		}
 
-		Collection <Seat> seatFifteen = new LinkedList<>();
+		ArrayList <Seat> seatFifteen = new ArrayList<>();
 		for(int i = 0; i < 15 ; i++){
 			seatFifteen.add(new Seat(i+1));
 		}
 
-		Collection<Row> rowFive = new LinkedList <>();
+		ArrayList<Row> rowFive = new ArrayList <>();
 		rowFive.add(new Row(1, seatTen));
 		rowFive.add(new Row(2, seatTen));
 		rowFive.add(new Row(3, seatFifteen));
@@ -42,12 +42,12 @@ public enum CinemaBookingSystem implements ServerHandler {
 		rowFive.add(new Row(5, seatFifteen));
 
 
-		Collection <Row> rowThree = new LinkedList<>();
+		ArrayList <Row> rowThree = new ArrayList<>();
 		rowThree.add(new Row(1, seatTen));
 		rowThree.add(new Row(2, seatTen));
 		rowThree.add(new Row(3, seatFifteen));
 
-		Collection <Theater> theaterFive = new LinkedList<>();
+		ArrayList <Theater> theaterFive = new ArrayList<>();
 		theaterFive.add(new Theater(1, rowFive));
 		theaterFive.add(new Theater(2, rowThree));
 		theaterFive.add(new Theater(3, rowThree));
@@ -138,7 +138,7 @@ public enum CinemaBookingSystem implements ServerHandler {
 	 * @param SSN	The social security of the customer to look up
 	 * @return 		Returns a collection of all the bookings by the customer given a SSN
 	 */
-	public Collection<Booking> getBookingsBySSN(String SSN)
+	public ArrayList<Booking> getBookingsBySSN(String SSN)
 	{
 		Customer customer = getCustomerBySSN(SSN);
 
@@ -172,9 +172,9 @@ public enum CinemaBookingSystem implements ServerHandler {
 	 */
 	//TODO Implement Collection<Object> rows as Collection<Map(Object, Object)> rows, where Map(Object, Object)=Map(Row, Seat)
 	//TODO Also change the status of each booked seat to unavailable
-	public String createBooking(Object show, Object customer, Collection<Object> rows)
+	public String createBooking(Object show, Object customer, ArrayList<Object> rows)
 	{
-		Collection<Row> bookedRows = new ArrayList<>();
+		ArrayList<Row> bookedRows = new ArrayList<>();
 
 		try {
 			for(Object r : rows)

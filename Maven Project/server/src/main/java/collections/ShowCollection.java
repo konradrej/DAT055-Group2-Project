@@ -12,7 +12,7 @@ import java.util.*;
 public class ShowCollection extends AbstractCollection {
 
 	private static final long serialVersionUID = 368284506033169560L;
-	private final Collection <Show> allShows;
+	private final ArrayList <Show> allShows;
 	private final String filename;
 	
 	/**
@@ -23,7 +23,7 @@ public class ShowCollection extends AbstractCollection {
 	
 	public ShowCollection(String filename) {
 		this.filename = filename;
-		allShows = new LinkedList <>();
+		allShows = new ArrayList <>();
 	}
 	
 	/**
@@ -43,9 +43,9 @@ public class ShowCollection extends AbstractCollection {
 		return s;
 	}
 
-	public Collection<Seat> getAllSeats(Show show)
+	public ArrayList<Seat> getAllSeats(Show show)
 	{
-		Collection<Seat> allSeats = new ArrayList<>();
+		ArrayList<Seat> allSeats = new ArrayList<>();
 
 		for(Show s : this.allShows)
 		{
@@ -58,7 +58,7 @@ public class ShowCollection extends AbstractCollection {
 		return allSeats;
 	}
 
-	public Collection<Seat> getAllAvailableSeats(Show s){
+	public ArrayList<Seat> getAllAvailableSeats(Show s){
 		for(Show s2: this.allShows) {
 			if(s2.equals(s)) {
 				return s2.getAllAvailableSeats();
@@ -68,7 +68,7 @@ public class ShowCollection extends AbstractCollection {
 		return null;
 	}
 	
-	public Collection <Seat> getAdjacentSeats(Show s, int numOfSeats){
+	public ArrayList <Seat> getAdjacentSeats(Show s, int numOfSeats){
 			for(Show s2: this.allShows) {
 				if(s2.equals(s)) {
 					return s2.getAdjacentAvailableSeats(numOfSeats);
@@ -140,7 +140,7 @@ public class ShowCollection extends AbstractCollection {
 	 * @return - a collection of shows
 	 */
 	
-	public Collection<Show> getAllShows(){
+	public ArrayList<Show> getAllShows(){
 		return this.allShows;
 	}
 	
@@ -164,7 +164,7 @@ public class ShowCollection extends AbstractCollection {
 	 * @exception IOException returns null
 	 */
 
-	public ShowCollection readCollection() throws FileNotFoundException, IOException{
+	public ShowCollection readCollection() throws IOException{
 		try(ObjectInputStream stream = new ObjectInputStream(new FileInputStream(this.filename))){
 
 			ShowCollection readThis = (ShowCollection) stream.readObject();

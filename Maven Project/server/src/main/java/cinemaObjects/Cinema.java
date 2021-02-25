@@ -14,7 +14,7 @@ public class Cinema implements Serializable{
 	 */
 	private static final long serialVersionUID = -573847747221470914L;
 	private String name;
-    private Collection <Theater> allTheaters;
+    private ArrayList <Theater> allTheaters;
 
 
     /**
@@ -23,7 +23,7 @@ public class Cinema implements Serializable{
      * @param name              the name of the cinema
      * @param allTheaters       the Collection of allTheatres
      */
-    public Cinema(String name, Collection <Theater> allTheaters){
+    public Cinema(String name, ArrayList <Theater> allTheaters){
         this.name = name;
         this.allTheaters = allTheaters;
     }
@@ -60,7 +60,7 @@ public class Cinema implements Serializable{
      *
      * @return return
      */
-    public Collection <Theater> getTheaterCollection() {
+    public ArrayList <Theater> getTheaterCollection() {
         return this.allTheaters;
     }
 

@@ -8,9 +8,9 @@ import java.util.*;
 
 public class ReturnAllSeatsByShowCommand implements ClientCommand {
 
-    private Collection<Object> allSeatsByShow;
+    private ArrayList<Object> allSeatsByShow;
 
-    public ReturnAllSeatsByShowCommand(Collection<Object> allSeatsByShow) { this.allSeatsByShow = allSeatsByShow; }
+    public ReturnAllSeatsByShowCommand(ArrayList<Object> allSeatsByShow) { this.allSeatsByShow = allSeatsByShow; }
 
     @Override
     public void execute(ClientHandler handler, ObjectInputStream in, ObjectOutputStream out) throws IOException, ClassNotFoundException {

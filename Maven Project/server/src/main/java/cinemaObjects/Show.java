@@ -98,9 +98,9 @@ public class Show implements Serializable{
 	 * @return 				returns a collection of Seat, containing all seats in the theater
 	 */
 	//TODO Should seats be mapped to a specific row? For example Map(row, seat)
-	public Collection<Seat> getAllSeats()
+	public ArrayList<Seat> getAllSeats()
 	{
-		Collection<Seat> allSeats = new ArrayList<>();
+		ArrayList<Seat> allSeats = new ArrayList<>();
 		
 		for(Row r : this.rows)
 		{
@@ -115,9 +115,9 @@ public class Show implements Serializable{
 	 * 
 	 * @return 				returns a collection of Seat, containing all available seats
 	 */
-	public Collection<Seat> getAllAvailableSeats()
+	public ArrayList<Seat> getAllAvailableSeats()
 	{
-		Collection<Seat> allAvailableSeats = new ArrayList<>();
+		ArrayList<Seat> allAvailableSeats = new ArrayList<>();
 		
 		for(Row r : this.rows)
 		{
@@ -133,15 +133,16 @@ public class Show implements Serializable{
 	 * @param numOfSeats	the number of seats to find	
 	 * @return 				returns a collection of Seat, containing numOfSeats available seats
 	 */
-	public Collection<Seat> getAvailableSeats(int numOfSeats)
+	//TODO Vad gör denna?
+	public ArrayList<Seat> getAvailableSeats(int numOfSeats)
 	{
-		Collection<Seat> availableSeats = Collections.emptyList();
+		ArrayList<Seat> availableSeats = new ArrayList <> ();
 		
 		for(Row r : this.rows)
 		{
 			availableSeats = r.getAvailableSeats(numOfSeats);
 			
-			if(availableSeats != Collections.<Seat>emptyList())
+			if(availableSeats.size() != 0)
 			{
 				return availableSeats;
 			}
@@ -156,15 +157,15 @@ public class Show implements Serializable{
 	 * @param numOfSeats	the number of seats to find, adjacent to each other
 	 * @return 				returns a collection of Seat, containing numOfSeats adjacent available seats
 	 */
-	public Collection<Seat> getAdjacentAvailableSeats(int numOfSeats)
+	public ArrayList<Seat> getAdjacentAvailableSeats(int numOfSeats)
 	{
-		Collection<Seat> availableAdjacentSeats = Collections.emptyList();
+		ArrayList<Seat> availableAdjacentSeats = new ArrayList <> ();
 		
 		for(Row r : this.rows)
 		{
 			availableAdjacentSeats = r.getAdjacentAvailableSeats(numOfSeats);
 			
-			if(availableAdjacentSeats != Collections.<Seat>emptyList())
+			if(availableAdjacentSeats.size() != 0)
 			{
 				return availableAdjacentSeats;
 			}

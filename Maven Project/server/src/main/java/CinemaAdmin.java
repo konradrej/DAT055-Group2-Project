@@ -51,10 +51,11 @@ public class CinemaAdmin {
      */
 
     public void createListsWithListeners(){
-
         jlDay = new JList<>();
         ArrayList<String> movieArr = new ArrayList<>();
         ArrayList<String> theaterArr = new ArrayList<>();
+
+
 
         for(Movie m : CinemaBookingSystem.getInstance().getMovieCollection().getAllMovies()){
             movieArr.add(m.getTitle());

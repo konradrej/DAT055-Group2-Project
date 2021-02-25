@@ -5,7 +5,6 @@ import server.GetMoviesCommand;
 import server.GetShowsByMovieCommand;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import ObserverPattern.*;
 import collections.*;
 import cinemaObjects.*;
@@ -23,11 +22,11 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
         return INSTANCE;
     }
 
-    private final Collection<IObserver<ClientModel>> observers = new ArrayList<>();
+    private final ArrayList<IObserver<ClientModel>> observers = new ArrayList<>();
     private MovieCollection movieCollection;
     private ShowCollection showCollection;
-    private Collection<Seat> seatsByShow;
-    private Collection<Booking> bookings;
+    private ArrayList<Seat> seatsByShow;
+    private ArrayList<Booking> bookings;
     private Customer customer;
 
     public void updateMovies(){
@@ -55,7 +54,7 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
         return showCollection;
     }
 
-    public Collection<Booking> getBookingCollection(){
+    public ArrayList<Booking> getBookingCollection(){
         return bookings;
     }
 
@@ -83,9 +82,9 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
         }
     }
 
-    public void setSeatsByShow(Collection<Object> seatsByShow) {
+    public void setSeatsByShow(ArrayList<Object> seatsByShow) {
         try {
-            Collection<Seat> seatsByShow1 = new ArrayList<>();
+            ArrayList<Seat> seatsByShow1 = new ArrayList<>();
 
             for (Object s : seatsByShow) {
                 seatsByShow1.add((Seat) s);
@@ -99,10 +98,10 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
         }
     }
 
-    public void setBookings(Collection<Object> bookings)
+    public void setBookings(ArrayList<Object> bookings)
     {
         try {
-            Collection<Booking> bookings1 = new ArrayList<>();
+            ArrayList<Booking> bookings1 = new ArrayList<>();
 
             for(Object b : bookings)
             {
@@ -134,9 +133,9 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
      * @param show 	        the specific show for which to find all seats for
      * @return allSeats     a collection of all seats for the specified show
      */
-    public Collection<Seat> getAllSeatsByShow(Show show)
+    public ArrayList<Seat> getAllSeatsByShow(Show show)
     {
-        Collection<Seat> allSeats = null;
+        ArrayList<Seat> allSeats = null;
 
         for(Show s : this.showCollection.getAllShows())
         {

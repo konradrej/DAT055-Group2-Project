@@ -16,7 +16,7 @@ import java.util.*;
 public class MovieCollection extends AbstractCollection {
 
 	private static final long serialVersionUID = -6417208744468074004L;
-	private final Collection<Movie> allMovies;
+	private final ArrayList<Movie> allMovies;
 	private final String filename;
 	private final String url = "https://www.themoviedb.org";
 	
@@ -28,7 +28,7 @@ public class MovieCollection extends AbstractCollection {
 	
 	public MovieCollection(String filename) {
 		this.filename = filename;
-		allMovies = new LinkedList <>();
+		allMovies = new ArrayList <>();
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class MovieCollection extends AbstractCollection {
 	 * @return a collection of Movies of the objects movie collection
 	 */
 	
-	public Collection <Movie> getAllMovies(){
+	public ArrayList <Movie> getAllMovies(){
 		return this.allMovies;
 	}
 
@@ -94,8 +94,8 @@ public class MovieCollection extends AbstractCollection {
 	 * @param genre - selected genre for the movies
 	 */
 	
-	public Collection <Movie> getSelectedMovies(String title, String genre){
-		Collection <Movie> selectedMovies = new LinkedList<>();
+	public ArrayList <Movie> getSelectedMovies(String title, String genre){
+		ArrayList <Movie> selectedMovies = new ArrayList<>();
 		
 		for(Movie m : this.allMovies) {
 			for(String g : m.getGenre()) {
@@ -210,8 +210,8 @@ public class MovieCollection extends AbstractCollection {
 	 * @exception IOException returns null
 	 */
 
-	public MovieCollection readCollection()throws FileNotFoundException, IOException{
-		try(ObjectInputStream stream = new ObjectInputStream(new FileInputStream(new File(this.filename)))){
+	public MovieCollection readCollection()throws IOException{
+		try(ObjectInputStream stream = new ObjectInputStream(new FileInputStream(this.filename))){
 
 			MovieCollection readThis = (MovieCollection) stream.readObject();
 			System.out.println("File: "  + this.filename + " has been read");

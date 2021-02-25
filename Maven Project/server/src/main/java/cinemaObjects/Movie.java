@@ -51,7 +51,7 @@ public class Movie implements Serializable{
 
     /**
      * Get method to retrieve the length of the movie
-     * @return a string of the length
+     * @return an array of string of the length
      */
 
     public String getLength() {

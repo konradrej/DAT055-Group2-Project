@@ -12,7 +12,7 @@ import java.util.*;
 public class CustomerCollection extends AbstractCollection {
 	
 	private static final long serialVersionUID = 398906222416370481L;
-	private final Collection<Customer> allCustomers;
+	private final ArrayList<Customer> allCustomers;
 	private final String filename;
 	
 	/**
@@ -23,7 +23,7 @@ public class CustomerCollection extends AbstractCollection {
 	
 	public CustomerCollection (String filename) {
 		this.filename = filename;
-		allCustomers = new LinkedList<>();
+		allCustomers = new ArrayList<>();
 	}
 	
 	/**
@@ -83,8 +83,8 @@ public class CustomerCollection extends AbstractCollection {
 	 * @exception NullPointerException returns an empty CustomerCollection
 	 * @exception IOException returns null
 	 */
-	public CustomerCollection readCollection() throws FileNotFoundException, IOException{
-		try(ObjectInputStream stream = new ObjectInputStream(new FileInputStream(new File(this.filename)))){
+	public CustomerCollection readCollection() throws IOException{
+		try(ObjectInputStream stream = new ObjectInputStream(new FileInputStream( this.filename))){
 
 			CustomerCollection readThis = (CustomerCollection) stream.readObject();
 			System.out.println("File: "  + this.filename + " has been read");

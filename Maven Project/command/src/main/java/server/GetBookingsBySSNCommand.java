@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -20,10 +21,10 @@ public class GetBookingsBySSNCommand implements ServerCommand {
     @Override
     public void execute(ServerHandler handler, ObjectInputStream in, ObjectOutputStream out) throws IOException {
 
-        Collection<Object> bookingsBySSN = Collections.emptyList();
+        ArrayList<Object> bookingsBySSN = new ArrayList<>();
 
         try {
-            bookingsBySSN = (Collection<Object>) handler.getBookingsBySSN(this.SSN);
+            bookingsBySSN = (ArrayList<Object>) handler.getBookingsBySSN(this.SSN);
         } catch (ClassCastException e) {
             System.err.println("Class could not be casted. Message: " + e.getMessage());
             e.printStackTrace();

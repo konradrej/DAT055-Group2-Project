@@ -1,6 +1,7 @@
 package cinemaObjects;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 
 
@@ -12,7 +13,7 @@ public class Theater implements Serializable{
 
 	private static final long serialVersionUID = 264852408018552280L;
     private int theaterNumber;
-    private Collection<Row> allRows;
+    private ArrayList<Row> allRows;
 
     /**
      * Constructor for initializing the Theatre instance
@@ -21,7 +22,7 @@ public class Theater implements Serializable{
      * @param allRows       the Collection of allrows
      */
 
-    public Theater(int theaterNumber, Collection<Row> allRows) {
+    public Theater(int theaterNumber, ArrayList<Row> allRows) {
         this.theaterNumber = theaterNumber;
         this.allRows = allRows;
     }
@@ -58,7 +59,7 @@ public class Theater implements Serializable{
     /**
      * Method for getting a row from a collection of rows
      */
-    public Collection<Row> getCollectionOfRows() {
+    public ArrayList<Row> getCollectionOfRows() {
         return this.allRows;
     }
 

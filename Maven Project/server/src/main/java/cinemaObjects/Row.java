@@ -55,7 +55,7 @@ public class Row implements Serializable{
     /**
      * Method for getting seats from a collection of seats
      */
-    public List<Seat> getAllSeats() {
+    public ArrayList<Seat> getAllSeats() {
         return new ArrayList<>(this.allSeats);
     }
 
@@ -80,9 +80,9 @@ public class Row implements Serializable{
     /**
      * Method for finding all seats
      */
-    public Collection<Seat> getAllAvailableSeats()
+    public ArrayList<Seat> getAllAvailableSeats()
     {
-    	Collection<Seat> availableSeats = new ArrayList<>();
+		ArrayList<Seat> availableSeats = new ArrayList<>();
     	
     	for(Seat s : this.allSeats)
     	{
@@ -96,13 +96,13 @@ public class Row implements Serializable{
      * Method for getting available seats from a
      * collection of available seats
      */
-    public Collection<Seat> getAvailableSeats(int numOfSeats) {
-        Collection<Seat> availableSeats = new ArrayList<>();
+    public ArrayList<Seat> getAvailableSeats(int numOfSeats) {
+		ArrayList<Seat> availableSeats = new ArrayList<>();
         
         if(this.getAllAvailableSeats().size() > numOfSeats)
         {
         	availableSeats = this.getAllAvailableSeats();
-        	Collection<Seat> temp = Collections.emptyList();
+			ArrayList<Seat> temp = new ArrayList<>();
         	
         	int count = 0;
         	
@@ -131,9 +131,9 @@ public class Row implements Serializable{
      * Return information is missing
      */
     
-    public Collection<Seat> getAdjacentAvailableSeats (int numOfSeats){
-    	Collection<Seat> availableSeatsOfRow = this.getAvailableSeats(numOfSeats);
-    	Collection<Seat> availableAdjacentSeats = Collections.emptyList();
+    public ArrayList<Seat> getAdjacentAvailableSeats (int numOfSeats){
+		ArrayList<Seat> availableSeatsOfRow = this.getAvailableSeats(numOfSeats);
+		ArrayList<Seat> availableAdjacentSeats = new ArrayList <> ();
 		
 		Seat[] availableSeatsOfRowArray = (Seat[])availableSeatsOfRow.toArray();
 		Seat[] availableAdjacentSeatsOfRowArray = new Seat[numOfSeats];

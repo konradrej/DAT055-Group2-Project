@@ -14,10 +14,10 @@ public class GetAllSeatsByShowCommand implements ServerCommand {
     @Override
     public void execute(ServerHandler handler, ObjectInputStream in, ObjectOutputStream out) throws IOException {
 
-        Collection<Object> seatsByShow = Collections.emptyList();
+        ArrayList<Object> seatsByShow = new ArrayList <> ();
 
         try {
-            seatsByShow = (Collection<Object>)handler.getAllSeatsByShow(this.show);
+            seatsByShow = (ArrayList<Object>)handler.getAllSeatsByShow(this.show);
         } catch (ClassCastException e) {
             System.err.println("Class could not be casted. Message: " + e.getMessage());
             e.printStackTrace();

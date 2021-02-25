@@ -12,7 +12,8 @@ public class Booking implements Serializable {
 	private static final long serialVersionUID = 408224943807153172L;
 	private Show show;
 	private Customer customer;
-	private Collection<Row> rows;
+	//TODO ArrayList of (map(Row,Seat))????
+	private ArrayList<Row> rows;
 	private Boolean cancelled;
 	
 	/**
@@ -22,7 +23,7 @@ public class Booking implements Serializable {
 	 * @param customer		which customer the booking belongs to
 	 * @param rows			what rows the customer has booked
 	 */
-	public Booking(Show show, Customer customer, Collection<Row> rows)
+	public Booking(Show show, Customer customer, ArrayList<Row> rows)
 	{
 		this.show = show;
 		this.customer = customer;
@@ -35,7 +36,7 @@ public class Booking implements Serializable {
 	 * 
 	 * @return rows		what rows the customer has booked seats in
 	 */
-	public Collection<Row> getBookedRows()
+	public ArrayList<Row> getBookedRows()
 	{
 		return this.rows;
 	}
@@ -46,9 +47,9 @@ public class Booking implements Serializable {
 	 * @param  rowNumber	what row the seats are located in
 	 * @return rows			what seats the customer has booked
 	 */
-	public Collection<Seat> getBookedSeats(int rowNumber)
+	public ArrayList<Seat> getBookedSeats(int rowNumber)
 	{
-		Collection<Seat> bookedSeats = Collections.emptyList();
+		ArrayList<Seat> bookedSeats = new ArrayList <>();
 		
 		for(Row r : this.rows)
 		{
@@ -88,7 +89,7 @@ public class Booking implements Serializable {
 	 * @param rows			what rows the customer has booked
 	 * @param seats			what seat numbers the customer has booked
 	 */
-	public void updateRowsAndSeats(Collection<Row> rows, Collection<Seat> seats)
+	public void updateRowsAndSeats(ArrayList<Row> rows, ArrayList<Seat> seats)
 	{
 		this.rows = rows;
 	}

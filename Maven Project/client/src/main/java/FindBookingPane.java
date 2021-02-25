@@ -16,7 +16,7 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
     private String ssn;
     private String phonenumber;
     private ClientModel cm;
-    private Collection<Booking> bookings = new ArrayList<>();
+    private ArrayList<Booking> bookings = new ArrayList<>();
 
     public FindBookingPane(JFrame frame){
         super(frame);
@@ -83,10 +83,10 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
 
         // TEMP
         Seat newSeat = new Seat(1);
-        Collection<Seat> seats = new ArrayList<>();
+        ArrayList<Seat> seats = new ArrayList<>();
         seats.add(newSeat);
         Row newRow = new Row(1, seats);
-        Collection<Row> rows = new ArrayList<>();
+        ArrayList<Row> rows = new ArrayList<>();
         rows.add(newRow);
         Booking newBooking = new Booking(cm.getShowCollection().getAllShows().iterator().next(), new Customer("Konrad", "999999", "99"), rows);
         bookings.add(newBooking);
@@ -166,16 +166,14 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
         backToMain.setLayout(new FlowLayout());
         JButton backButton = new JButton("Back");
         backToMain.add(backButton);
-        backButton.addActionListener((ActionEvent e) -> {
-            stop();
-        });
+        backButton.addActionListener((ActionEvent e) -> stop());
         backToMain.setPreferredSize(new Dimension(frame.getWidth(), 50));
         return backToMain;
     }
 
     @Override
     public void notify(ClientModel observable) {
-        Collection<Booking> bookings = observable.getBookingCollection();
+        ArrayList<Booking> bookings = observable.getBookingCollection();
 
         if(bookings != null && bookings != this.bookings){
             this.bookings = bookings;
