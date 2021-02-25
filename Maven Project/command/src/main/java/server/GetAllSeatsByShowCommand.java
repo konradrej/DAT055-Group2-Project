@@ -3,7 +3,7 @@ package server;
 import client.ReturnAllSeatsByShowCommand;
 
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
 
 public class GetAllSeatsByShowCommand implements ServerCommand {
 

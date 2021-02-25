@@ -1,6 +1,6 @@
 package client;
 
-import java.util.*;
+import java.util.ArrayList;
 
 public interface ClientHandler {
     void setMovieCollection(Object movieCollection);

@@ -3,7 +3,7 @@ package server;
 import client.ResponseCreateBookingCommand;
 
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
 
 public class CreateBookingCommand implements ServerCommand {
 

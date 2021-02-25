@@ -1,7 +1,7 @@
 package cinemaObjects;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
 
 /**
  * @author Anthon Lenander, Erik Kieu, Phong Nguyen

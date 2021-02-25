@@ -3,7 +3,7 @@ package collections;
 import cinemaObjects.Customer;
 
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
 
 /**
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen

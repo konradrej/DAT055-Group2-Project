@@ -1,7 +1,7 @@
 package collections;
 
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
 import cinemaObjects.*;
 
 /**
@@ -11,7 +11,7 @@ import cinemaObjects.*;
 public class BookingCollection extends AbstractCollection {
 
 	private static final long serialVersionUID = 1450784786789696365L;
-	private final Collection<Booking> allBookings;
+	private final ArrayList<Booking> allBookings;
 	private final String filename;
 	
 	/**
@@ -22,7 +22,7 @@ public class BookingCollection extends AbstractCollection {
 	
 	public BookingCollection(String filename) {
 		this.filename = filename; 
-		allBookings = new LinkedList <>();
+		allBookings = new ArrayList <>();
 	}
 	
 	/**

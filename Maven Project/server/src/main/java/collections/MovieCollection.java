@@ -7,7 +7,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
 
 /**
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen

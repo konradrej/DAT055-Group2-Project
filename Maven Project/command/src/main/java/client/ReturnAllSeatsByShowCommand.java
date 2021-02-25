@@ -1,10 +1,8 @@
 package client;
-
-import client.ClientCommand;
-import client.ClientHandler;
+;
 
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
 
 public class ReturnAllSeatsByShowCommand implements ClientCommand {
 

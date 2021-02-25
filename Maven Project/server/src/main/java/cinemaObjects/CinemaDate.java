@@ -1,7 +1,6 @@
 package cinemaObjects;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class CinemaDate implements Serializable {
     private String month;

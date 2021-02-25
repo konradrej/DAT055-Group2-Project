@@ -5,8 +5,7 @@ import collections.ShowCollection;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedList;
+
 
 public enum CinemaBookingSystem implements ServerHandler {
 
@@ -109,7 +108,7 @@ public enum CinemaBookingSystem implements ServerHandler {
 		return new ShowCollection("Empty showCollection");
 	}
 
-	public Collection<Seat> getAllSeatsByShow(Object show)
+	public ArrayList<Seat> getAllSeatsByShow(Object show)
 	{
 		try {
 			Show s = (Show)show;
