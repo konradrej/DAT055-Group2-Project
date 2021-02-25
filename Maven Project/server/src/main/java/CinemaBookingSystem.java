@@ -161,19 +161,22 @@ public enum CinemaBookingSystem implements ServerHandler {
 	 */
 	public ResponseStatus createBooking(Object show, Object customer, ArrayList<Object> rows)
 	{
-		List<Row> bookedRows = new ArrayList<>();
-
 		try {
+			List<Row> bookedRows = new ArrayList<>();
+
 			for(Object r : rows)
 			{
 				bookedRows.add((Row)r);
 			}
 
-			this.bookingCollection.addBookings((Show)show, (Customer)customer, bookedRows);
+			Show s = (Show)show;
+			Customer c = (Customer)customer;
 
-			if (this.customerCollection.getCustomer((((Customer) customer).getSSN())) != null)
+			this.bookingCollection.addBookings(s, c, bookedRows);
+
+			if (this.customerCollection.getCustomer(c.getSSN()) == null)
 			{
-				this.customerCollection.addCustomer((Customer)customer);
+				this.customerCollection.addCustomer(c);
 			}
 
 		} catch (ClassCastException e) {
