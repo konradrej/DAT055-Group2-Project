@@ -55,11 +55,11 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
         return showCollection;
     }
 
-    public Collection<Booking>  getBookingCollection(){
+    public Collection<Booking> getBookingCollection(){
         return bookings;
     }
 
-    public Customer  getCustomer(){
+    public Customer getCustomer(){
         return customer;
     }
 

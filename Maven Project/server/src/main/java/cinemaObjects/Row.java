@@ -55,8 +55,8 @@ public class Row implements Serializable{
     /**
      * Method for getting seats from a collection of seats
      */
-    public Collection<Seat> getAllSeats() {
-        return this.allSeats;
+    public List<Seat> getAllSeats() {
+        return new ArrayList<>(this.allSeats);
     }
 
     /**
@@ -69,11 +69,17 @@ public class Row implements Serializable{
         this.allSeats.add(s);
     }
 
+	public void addSeat(Seat seat){
+		this.allSeats.add(seat);
+	}
+
+	public void removeSeat(Seat seat){
+		this.allSeats.remove(seat);
+	}
+
     /**
      * Method for finding all seats
      */
-
-
     public Collection<Seat> getAllAvailableSeats()
     {
     	Collection<Seat> availableSeats = new ArrayList<>();

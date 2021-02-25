@@ -264,6 +264,7 @@ public class CinemaAdmin {
         new Thread(SocketServerCommunication.getInstance()).start();
         CinemaBookingSystem.getInstance().readAllCollections();
         CinemaBookingSystem.getInstance().getMovieCollection().scanNewMovies();
+        CinemaBookingSystem.getInstance().createCustomer("Konrad", "000000000", "99");
         new CinemaAdmin();
 
         Runtime.getRuntime().addShutdownHook(new Thread(() ->

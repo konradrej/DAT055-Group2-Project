@@ -20,19 +20,21 @@ public class CinemaClient {
     public CinemaClient() { createFrame(); }
 
     private void createFrame(){
-        this.frame = new JFrame("cinemaObjects.Cinema");
+        this.frame = new JFrame("Cinema");
         this.frame.setPreferredSize(new Dimension(600, 600));
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         final Container contentPane = this.frame.getContentPane();
-        contentPane.setLayout(new GridLayout(4, 4, 10, 10));
+        contentPane.setLayout(new GridLayout(3, 1, 10, 10));
 
         JButton bookingButton = new JButton("Book");
         JButton findBookingButton = new JButton("Find your booking");
         JButton exitButton = new JButton("Exit");
 
-        BookingPane booking = new BookingPane(this.frame);
+        //BookingPane booking = new BookingPane(this.frame);
+        //bookingButton.addActionListener((ActionEvent e) -> new BookingPane(frame).start());
 
-        bookingButton.addActionListener((ActionEvent e) -> new BookingPane(frame).start());
+        ShowSelectionPane booking = new ShowSelectionPane(this.frame);
+        bookingButton.addActionListener((ActionEvent e) -> booking.start());
 
         FindBookingPane finder = new FindBookingPane(this.frame);
 

@@ -12,7 +12,11 @@ public class Customer implements Serializable{
 	private String name;
 	private String phoneNumber;
 	private String ssn;
-	
+
+	public Customer(){
+
+	}
+
 	/**
 	 * Constructor for initializing the cinemaObjects.Customer instance
 	 * 
@@ -59,7 +63,7 @@ public class Customer implements Serializable{
 	/**
 	 * Method for setting the name of the customer
 	 * 
-	 * @param		the name of the customer
+	 * @param name	the name of the customer
 	 */
 	public void setName(String name){
 		this.name = name;
@@ -68,7 +72,7 @@ public class Customer implements Serializable{
 	/**
 	 * Method for setting the phone number of the customer
 	 * 
-	 * @param		the phone number of the customer
+	 * @param phoneNumber		the phone number of the customer
 	 */
 	public void setPhoneNumber(String phoneNumber)
 	{
@@ -78,7 +82,7 @@ public class Customer implements Serializable{
 	/**
 	 * Method for setting the social security number of the customer
 	 * 
-	 * @param		the social security number of the customer
+	 * @param SSN		the social security number of the customer
 	 */
 	public void setSSN(String SSN)
 	{

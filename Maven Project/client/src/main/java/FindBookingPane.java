@@ -9,9 +9,7 @@ import server.GetBookingsBySSNCommand;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.print.Book;
 import java.util.*;
-import java.util.List;
 
 public class FindBookingPane extends AbstractPane implements IObserver<ClientModel> {
 
@@ -130,7 +128,6 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
                 JLabel theaterLabel = new JLabel("Theater: " + booking.getShow().getTheater().getTheaterNumber());
                 theaterLabel.setAlignmentX(JPanel.LEFT_ALIGNMENT);
                 infoContainer.add(theaterLabel);
-
 
                 JPanel rowSeatPanel = new JPanel();
                 rowSeatPanel.setAlignmentX(JPanel.LEFT_ALIGNMENT);
