@@ -133,10 +133,17 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
                         seatsText.addItem("Row:" + row.getRowNumber() + " Seat:" + seat.getSeatNumber());
                     }
                 }
+
+
                 rowSeatPanel.add(bookedSeatsLabel);
                 rowSeatPanel.add(seatsText);
 
+                JButton cancelButton = new JButton("Cancel booking");
+                buttonContainer.add(cancelButton);
+
                 infoContainer.add(rowSeatPanel);
+
+
 
 
                 buttonContainer.setBackground(Color.BLACK);
@@ -147,6 +154,8 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
                 bookingPanel.add(infoContainer, BorderLayout.CENTER);
                 bookingPanel.setPreferredSize(new Dimension(scrollpane.getWidth(), 200));
                 wrapperpanel.add(bookingPanel);
+
+
             }
 
             con.add(scrollpane);
