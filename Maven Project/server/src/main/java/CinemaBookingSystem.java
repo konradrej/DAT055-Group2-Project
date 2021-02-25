@@ -1,14 +1,12 @@
 import cinemaObjects.*;
 import collections.*;
-import server.ResponseStatus;
+import client.ResponseStatus;
 import server.ServerHandler;
 import collections.ShowCollection;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 public enum CinemaBookingSystem implements ServerHandler {
@@ -175,10 +173,10 @@ public enum CinemaBookingSystem implements ServerHandler {
 		} catch (ClassCastException e) {
 			System.err.println("Class could not be casted. Message: " + e.getMessage());
 			e.printStackTrace();
-			return new ResponseStatus("Booking failed", false);
+			return new ResponseStatus(false, "Booking failed");
 		}
 
-		return new ResponseStatus("Booking successfully created", true);
+		return new ResponseStatus(true, "Booking successfully created");
 	}
 
 	/**

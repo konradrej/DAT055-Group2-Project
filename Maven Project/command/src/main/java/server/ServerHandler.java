@@ -1,5 +1,7 @@
 package server;
 
+import client.ResponseStatus;
+
 import java.util.ArrayList;
 
 public interface ServerHandler {
@@ -8,6 +10,6 @@ public interface ServerHandler {
     Object getShowsByMovie(Object movie);
     Object getBookingsBySSN(String SSN);
     Object getCustomerBySSN(String SSN);
-    String createBooking(Object show, Object customer, ArrayList<Object> rows);
+    ResponseStatus createBooking(Object show, Object customer, ArrayList<Object> rows);
     String createCustomer(String name, String phoneNumber, String SSN);
 }
