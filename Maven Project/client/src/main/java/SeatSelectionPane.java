@@ -1,7 +1,6 @@
 import cinemaObjects.Row;
 import cinemaObjects.Seat;
 import cinemaObjects.Show;
-import collections.ShowCollection;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,14 +10,13 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Pane for selecting seat in theater.
+ */
 public class SeatSelectionPane extends AbstractPane {
     private final ClientModel cm;
     private JPanel seatSelectionPanel;
     private JPanel userControlsPanel;
-
-    /**
-     * User control buttons
-     */
     private JButton continueButton;
 
     /**
@@ -100,7 +98,7 @@ public class SeatSelectionPane extends AbstractPane {
                 cm.getNavigator().back());
 
         cancelButton.addActionListener((ActionEvent e) ->
-                cm.getNavigator().backToMainMenu());
+                cm.getNavigator().backToStart());
 
         userControls.add(continueButton);
         userControls.add(backButton);
@@ -149,6 +147,12 @@ public class SeatSelectionPane extends AbstractPane {
         continueButton.setEnabled(bookRows.size() != 0);
     }
 
+    /**
+     * Instantiates a new Seat selection pane.
+     *
+     * @param frame the window frame
+     * @param show  the show to book and get seats from
+     */
     public SeatSelectionPane(JFrame frame, Show show) {
         super(frame);
 

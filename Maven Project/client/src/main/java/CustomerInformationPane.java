@@ -11,6 +11,9 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Pane for inputting customer information during booking.
+ */
 public class CustomerInformationPane extends AbstractPane implements IObserver<ClientModel> {
     private final ClientModel cm;
     private final JPanel customerInformationPanel;
@@ -163,7 +166,7 @@ public class CustomerInformationPane extends AbstractPane implements IObserver<C
                 cm.getNavigator().back());
 
         cancelButton.addActionListener((ActionEvent e) ->
-                cm.getNavigator().backToMainMenu());
+                cm.getNavigator().backToStart());
 
         userControls.add(continueButton);
         userControls.add(backButton);
@@ -189,6 +192,9 @@ public class CustomerInformationPane extends AbstractPane implements IObserver<C
         contentPane.validate();
     }
 
+    /**
+     * Checks text fields and updates continue button if all fields contain text.
+     */
     public void updateContinueButton(){
         boolean enabled = true;
 
@@ -202,6 +208,13 @@ public class CustomerInformationPane extends AbstractPane implements IObserver<C
         continueButton.setEnabled(enabled);
     }
 
+    /**
+     * Instantiates a new Customer information pane.
+     *
+     * @param frame the window frame
+     * @param show  the show to book
+     * @param rows  the rows containing the seats to be booked
+     */
     public CustomerInformationPane(JFrame frame, Show show, List<Row> rows) {
         super(frame);
 

@@ -8,18 +8,18 @@ import collections.ShowCollection;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.util.*;
+import java.text.DateFormatSymbols;
 import java.util.List;
+import java.util.*;
 
+/**
+ * Pane for selecting a show
+ */
 public class ShowSelectionPane extends AbstractPane implements IObserver<ClientModel> {
     private final ClientModel cm;
     private MovieCollection movieCollection;
     private ShowCollection showCollection;
     private final JPanel movieShowSelectionPanel;
-
-    /**
-     * User control buttons
-     */
     private JButton continueButton;
 
     /**
@@ -74,7 +74,7 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
                 cm.getNavigator().startNewPane(new SeatSelectionPane(frame, bookShow)));
 
         cancelButton.addActionListener((ActionEvent e) ->
-                cm.getNavigator().backToMainMenu());
+                cm.getNavigator().backToStart());
 
         userControls.add(continueButton);
         userControls.add(cancelButton);
@@ -82,6 +82,9 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
         return userControls;
     }
 
+    /**
+     * Updates movieSelection panel with new information from movieCollection
+     */
     public void updateMovieSelection(){
         if(this.movieCollection != null){
             Container con = (Container) movieShowSelectionPanel.getComponent(0);
@@ -114,6 +117,9 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
         }
     }
 
+    /**
+     * Updates showSelection panel with new information from showCollection
+     */
     public void updateShowSelection(){
         Container con = (Container) movieShowSelectionPanel.getComponent(1);
         con.removeAll();
@@ -131,7 +137,28 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
         List<String> datesList = new ArrayList<>(dates);
         List<String> timesList = new ArrayList<>(times);
 
-        datesList.sort(new DateComparator());
+        datesList.sort((item1, item2) -> {
+            List<String> months = new ArrayList<>();
+
+            for(String month : new DateFormatSymbols().getMonths()){
+                months.add(month.toLowerCase());
+            }
+
+            String[] items1 = item1.split(" ");
+            String[] items2 = item2.split(" ");
+
+            if (!items1[1].equals(items2[1])) {
+                return Integer.compare(
+                        months.indexOf(items1[1].toLowerCase()),
+                        months.indexOf(items2[1].toLowerCase())
+                );
+            } else {
+                return Integer.compare(
+                        Integer.parseInt(items1[0]),
+                        Integer.parseInt(items2[0])
+                );
+            }
+        });
         timesList.sort(Comparator.naturalOrder());
 
         JScrollPane showGrid = createShowGrid(datesList, timesList);
@@ -228,6 +255,11 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
         return gridWrapper;
     }
 
+    /**
+     * Instantiates a new Show selection pane.
+     *
+     * @param frame the window frame
+     */
     public ShowSelectionPane(JFrame frame) {
         super(frame);
 

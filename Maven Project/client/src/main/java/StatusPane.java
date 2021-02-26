@@ -5,16 +5,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
+/**
+ * Pane for displaying status and options after making a booking.
+ */
 public class StatusPane extends AbstractPane implements IObserver<ClientModel> {
     private final ClientModel cm;
     private ResponseStatus response;
     private final JPanel statusPanel;
-
-    /**
-     * User control buttons
-     */
-    private JButton mainMenuButton;
-    private JButton backButton;
 
     private JPanel createStatusPanel(){
         JPanel statusPanel = new JPanel();
@@ -30,14 +27,14 @@ public class StatusPane extends AbstractPane implements IObserver<ClientModel> {
         JPanel userControls = new JPanel();
         userControls.setLayout(new FlowLayout());
 
-        mainMenuButton = new JButton("Main menu");
+        JButton mainMenuButton = new JButton("Main menu");
         mainMenuButton.addActionListener((ActionEvent e) ->
-                cm.getNavigator().backToMainMenu());
+                cm.getNavigator().backToStart());
 
         userControls.add(mainMenuButton);
 
         if(!this.response.getStatus()){
-            backButton = new JButton("Back");
+            JButton backButton = new JButton("Back");
             backButton.addActionListener((ActionEvent e) ->
                     cm.getNavigator().back());
 
@@ -52,6 +49,11 @@ public class StatusPane extends AbstractPane implements IObserver<ClientModel> {
         statusLabel.setText(this.response.getMessage());
     }
 
+    /**
+     * Instantiates a new Status pane.
+     *
+     * @param frame the window frame
+     */
     public StatusPane(JFrame frame) {
         super(frame);
 

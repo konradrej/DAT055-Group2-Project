@@ -170,7 +170,7 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
         JButton backButton = new JButton("Back");
         backToMain.add(backButton);
         backButton.addActionListener((ActionEvent e) ->
-                cm.getNavigator().backToMainMenu());
+                cm.getNavigator().backToStart());
         backToMain.setPreferredSize(new Dimension(frame.getWidth(), 50));
         return backToMain;
     }
