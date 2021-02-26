@@ -20,7 +20,6 @@ public class CustomerInformationPane extends AbstractPane implements IObserver<C
      * User control buttons
      */
     private JButton continueButton;
-    private JButton backButton;
 
     /**
      *  Variables for new booking
@@ -150,22 +149,25 @@ public class CustomerInformationPane extends AbstractPane implements IObserver<C
         userControls.setLayout(new FlowLayout());
 
         continueButton = new JButton("Continue");
-        backButton = new JButton("Back");
+        JButton backButton = new JButton("Back");
+        JButton cancelButton = new JButton("Cancel");
 
         continueButton.setEnabled(false);
-        backButton.setEnabled(true);
 
-        continueButton.addActionListener((ActionEvent e) -> {
+        continueButton.addActionListener((ActionEvent e) ->{
             cm.createBooking(bookShow, bookCustomer, new ArrayList<>(bookRows));
-
-            StatusPane statusPane = new StatusPane(frame);
-            statusPane.start();
+            cm.getNavigator().startNewPane(new StatusPane(frame));
         });
 
-        backButton.addActionListener((ActionEvent e) -> stop());
+        backButton.addActionListener((ActionEvent e) ->
+                cm.getNavigator().back());
+
+        cancelButton.addActionListener((ActionEvent e) ->
+                cm.getNavigator().backToMainMenu());
 
         userControls.add(continueButton);
         userControls.add(backButton);
+        userControls.add(cancelButton);
 
         return userControls;
     }
@@ -199,10 +201,6 @@ public class CustomerInformationPane extends AbstractPane implements IObserver<C
 
         continueButton.setEnabled(enabled);
     }
-
-
-
-
 
     public CustomerInformationPane(JFrame frame, Show show, List<Row> rows) {
         super(frame);

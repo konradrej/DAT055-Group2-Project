@@ -1,5 +1,7 @@
 package client;
 
+import misc.ResponseStatus;
+
 import java.util.ArrayList;
 
 public interface ClientHandler {
@@ -7,4 +9,5 @@ public interface ClientHandler {
     void setShowCollection(Object showCollection);
     void setBookings(ArrayList<Object> bookings);
     void setCustomerBySSN(Object customer);
+    void setResponseStatus(ResponseStatus response);
 }

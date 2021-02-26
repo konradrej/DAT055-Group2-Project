@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.util.Map;
 
 public class CinemaClient {
@@ -23,28 +22,10 @@ public class CinemaClient {
         this.frame = new JFrame("Cinema");
         this.frame.setPreferredSize(new Dimension(600, 600));
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        final Container contentPane = this.frame.getContentPane();
-        contentPane.setLayout(new GridLayout(3, 1, 10, 10));
 
-        JButton bookingButton = new JButton("Book");
-        JButton findBookingButton = new JButton("Find your booking");
-        JButton exitButton = new JButton("Exit");
+        ClientModel.getInstance().setNavigator(new Navigator(new MainMenuPane(frame)));
 
-        //BookingPane booking = new BookingPane(this.frame);
-        //bookingButton.addActionListener((ActionEvent e) -> new BookingPane(frame).start());
-
-        ShowSelectionPane booking = new ShowSelectionPane(this.frame);
-        bookingButton.addActionListener((ActionEvent e) -> booking.start());
-
-        FindBookingPane finder = new FindBookingPane(this.frame);
-
-        findBookingButton.addActionListener((ActionEvent e) -> finder.start());
-
-        exitButton.addActionListener((ActionEvent e) -> System.exit(0));
-
-        contentPane.add(bookingButton);
-        contentPane.add(findBookingButton);
-        contentPane.add(exitButton);
+        //new MainMenuPane(frame).start();
 
         this.frame.pack();
         this.frame.setVisible(true);

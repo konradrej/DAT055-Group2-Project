@@ -38,6 +38,7 @@ public class BookingCollection extends AbstractCollection {
 		List <Booking> bookings = new ArrayList <>();
 		for(Booking b : this.allBookings) {
 			Customer c2 = b.getCustomer();
+
 			if(c.equals(c2)) {
 				bookings.add(b);
 			}
@@ -129,7 +130,7 @@ public class BookingCollection extends AbstractCollection {
 	 * @exception IOException returns null
 	 */
 
-	public BookingCollection readCollection() throws IOException {
+	public BookingCollection readCollection() {
 		try(ObjectInputStream stream = new ObjectInputStream(new FileInputStream(this.filename))){
 
 			BookingCollection readThis = (BookingCollection) stream.readObject();

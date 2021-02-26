@@ -1,4 +1,5 @@
 import client.ClientHandler;
+import misc.ResponseStatus;
 import server.*;
 
 import java.util.ArrayList;
@@ -21,11 +22,37 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
         return INSTANCE;
     }
 
+
+
+
+
+
+
+    private Navigator navigator;
+
+    public void setNavigator(Navigator navigator){
+        this.navigator = navigator;
+    }
+
+    public Navigator getNavigator(){
+        return navigator;
+    }
+
+
+
+
+
+
+
+
+
+
     private final ArrayList<IObserver<ClientModel>> observers = new ArrayList<>();
     private MovieCollection movieCollection;
     private ShowCollection showCollection;
     private ArrayList<Booking> bookings;
     private Customer customer;
+    private ResponseStatus response;
 
     public void updateMovies(){
         SocketClientCommunication.getInstance().sendCommand(new GetMoviesCommand());
@@ -66,7 +93,11 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
     public Customer getCustomer(){
         return customer;
     }
+    public ResponseStatus getResponse(){
+        return response;
+    }
 
+    @Override
     public void setMovieCollection(Object movieCollection){
         try {
             this.movieCollection = (MovieCollection) movieCollection;
@@ -77,6 +108,7 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
         }
     }
 
+    @Override
     public void setShowCollection(Object showCollection){
         try {
             this.showCollection = (ShowCollection) showCollection;
@@ -87,6 +119,7 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
         }
     }
 
+    @Override
     public void setBookings(ArrayList<Object> bookings)
     {
         try {
@@ -105,6 +138,7 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
         }
     }
 
+    @Override
     public void setCustomerBySSN(Object customer)
     {
         try {
@@ -114,6 +148,12 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
             System.err.println("Class could not be casted. Message: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void setResponseStatus(ResponseStatus response) {
+        this.response = response;
+        notifyObservers();
     }
 
     @Override

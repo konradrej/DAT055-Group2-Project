@@ -1,8 +1,7 @@
 package server;
 
 import client.ResponseCancelBookingCommand;
-import client.ResponseCreateBookingCommand;
-import client.ResponseStatus;
+import misc.ResponseStatus;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

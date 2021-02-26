@@ -1,19 +1,18 @@
 import ObserverPattern.IObserver;
 import cinemaObjects.*;
-import server.GetBookingsByPhoneNumberCommand;
-import server.GetBookingsBySSNCommand;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.*;
+import java.util.List;
 
 public class FindBookingPane extends AbstractPane implements IObserver<ClientModel> {
 
     private String ssn;
     private String phonenumber;
     private ClientModel cm;
-    private ArrayList<Booking> bookings = new ArrayList<>();
+    private List<Booking> bookings = new ArrayList<>();
 
     public FindBookingPane(JFrame frame){
         super(frame);
@@ -32,7 +31,6 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
     }
 
     public Container enterInformation() {
-
         Container enterInformation = new JPanel();
         enterInformation.setLayout(new FlowLayout());
 
@@ -60,7 +58,6 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
         enterInformation.setPreferredSize(new Dimension(frame.getWidth(), 50));
 
         return enterInformation;
-
     }
 
     public Container showBookings() {
@@ -70,12 +67,11 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
         showBookings.add(l1);
         return showBookings;
     }
-    public void updateShowBookings() {
 
+    public void updateShowBookings() {
         Container con = (Container) contentPane.getComponent(1);
         con.setLayout(new GridLayout());
         con.removeAll();
-
 
         // TEMP
         Seat newSeat = new Seat(1);
@@ -139,7 +135,6 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
                     }
                 }
 
-
                 rowSeatPanel.add(bookedSeatsLabel);
                 rowSeatPanel.add(seatsText);
 
@@ -147,9 +142,6 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
                 buttonContainer.add(cancelButton);
 
                 infoContainer.add(rowSeatPanel);
-
-
-
 
                 buttonContainer.setBackground(Color.BLACK);
                 infoContainer.setBackground(Color.RED);
@@ -159,8 +151,6 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
                 bookingPanel.add(infoContainer, BorderLayout.CENTER);
                 bookingPanel.setPreferredSize(new Dimension(scrollpane.getWidth(), 120));
                 wrapperpanel.add(bookingPanel);
-
-
             }
 
             con.add(scrollpane);
@@ -179,14 +169,15 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
         backToMain.setLayout(new FlowLayout());
         JButton backButton = new JButton("Back");
         backToMain.add(backButton);
-        backButton.addActionListener((ActionEvent e) -> stop());
+        backButton.addActionListener((ActionEvent e) ->
+                cm.getNavigator().backToMainMenu());
         backToMain.setPreferredSize(new Dimension(frame.getWidth(), 50));
         return backToMain;
     }
 
     @Override
     public void notify(ClientModel observable) {
-        ArrayList<Booking> bookings = observable.getBookingCollection();
+        List<Booking> bookings = observable.getBookingCollection();
 
         if(bookings != null && bookings != this.bookings){
             this.bookings = bookings;

@@ -21,7 +21,6 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
      * User control buttons
      */
     private JButton continueButton;
-    private JButton cancelButton;
 
     /**
      *  Variable for new booking
@@ -67,16 +66,15 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
         userControls.setLayout(new FlowLayout());
 
         continueButton = new JButton("Continue");
-        cancelButton = new JButton("Cancel");
+        JButton cancelButton = new JButton("Cancel");
 
         continueButton.setEnabled(false);
 
-        continueButton.addActionListener((ActionEvent e) -> {
-            SeatSelectionPane seatPane = new SeatSelectionPane(frame, bookShow);
-            seatPane.start();
-        });
+        continueButton.addActionListener((ActionEvent e) ->
+                cm.getNavigator().startNewPane(new SeatSelectionPane(frame, bookShow)));
 
-        cancelButton.addActionListener((ActionEvent e) -> stop());
+        cancelButton.addActionListener((ActionEvent e) ->
+                cm.getNavigator().backToMainMenu());
 
         userControls.add(continueButton);
         userControls.add(cancelButton);
@@ -202,7 +200,14 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
                         bookShow = cm.getShowCollection().getShowByUID(e.getActionCommand());
 
                         if(bookShow == null){
+                            JOptionPane.showMessageDialog(
+                                    frame,
+                                    "Could not retrieve seats.",
+                                    "Retrieve seat error",
+                                    JOptionPane.ERROR_MESSAGE
+                            );
 
+                            cm.getNavigator().back();
                         }else{
                             continueButton.setEnabled(true);
                         }
@@ -222,20 +227,6 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
 
         return gridWrapper;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     public ShowSelectionPane(JFrame frame) {
         super(frame);

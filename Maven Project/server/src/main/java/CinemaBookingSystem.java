@@ -1,6 +1,6 @@
 import cinemaObjects.*;
 import collections.*;
-import client.ResponseStatus;
+import misc.ResponseStatus;
 import server.ServerHandler;
 import collections.ShowCollection;
 
@@ -10,7 +10,6 @@ import java.util.List;
 
 
 public enum CinemaBookingSystem implements ServerHandler {
-
 	INSTANCE();
 
 	private final Cinema cinema;
@@ -87,7 +86,6 @@ public enum CinemaBookingSystem implements ServerHandler {
 		this.bookingCollection =  bookingCollection.readCollection();
 	}
 
-
 	public BookingCollection getBookingCollection(){
 		return bookingCollection;
 	}
@@ -159,7 +157,7 @@ public enum CinemaBookingSystem implements ServerHandler {
 	 * @param rows			A collection of all the rows, containing all seats to be reserved for the customer
 	 * @return 				Returns a string to the client containing information about how the creation went
 	 */
-	public ResponseStatus createBooking(Object show, Object customer, ArrayList<Object> rows)
+	public ResponseStatus createBooking(Object show, Object customer, List<Object> rows)
 	{
 		try {
 			List<Row> bookedRows = new ArrayList<>();
@@ -211,8 +209,6 @@ public enum CinemaBookingSystem implements ServerHandler {
 
 		return "Customer successfully created";
 	}
-
-
 
 	/**
 	 * This method cancels the input parameter bookings

@@ -12,8 +12,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class SeatSelectionPane extends AbstractPane {
-    private ClientModel cm;
-    private ShowCollection showCollection;
+    private final ClientModel cm;
     private JPanel seatSelectionPanel;
     private JPanel userControlsPanel;
 
@@ -21,7 +20,6 @@ public class SeatSelectionPane extends AbstractPane {
      * User control buttons
      */
     private JButton continueButton;
-    private JButton backButton;
 
     /**
      *  Variables for new booking
@@ -66,9 +64,8 @@ public class SeatSelectionPane extends AbstractPane {
                     if(seat.getAvailable()){
                         seatButton.setBackground(Color.GREEN);
 
-                        seatButton.addActionListener((ActionEvent e) -> {
-                            handleSeatClick(row, seat, seatButton);
-                        });
+                        seatButton.addActionListener((ActionEvent e) ->
+                                handleSeatClick(row, seat, seatButton));
                     }else{
                         seatButton.setBackground(Color.RED);
                     }
@@ -91,22 +88,23 @@ public class SeatSelectionPane extends AbstractPane {
         userControls.setLayout(new FlowLayout());
 
         continueButton = new JButton("Continue");
-        backButton = new JButton("Back");
+        JButton backButton = new JButton("Back");
+        JButton cancelButton = new JButton("Cancel");
 
         continueButton.setEnabled(false);
-        backButton.setEnabled(true);
 
-        continueButton.addActionListener((ActionEvent e) -> {
-            CustomerInformationPane customerPane = new CustomerInformationPane(frame, bookShow, bookRows);
-            customerPane.start();
-        });
+        continueButton.addActionListener((ActionEvent e) ->
+                cm.getNavigator().startNewPane(new CustomerInformationPane(frame, bookShow, bookRows)));
 
-        backButton.addActionListener((ActionEvent e) -> {
-            stop();
-        });
+        backButton.addActionListener((ActionEvent e) ->
+                cm.getNavigator().back());
+
+        cancelButton.addActionListener((ActionEvent e) ->
+                cm.getNavigator().backToMainMenu());
 
         userControls.add(continueButton);
         userControls.add(backButton);
+        userControls.add(cancelButton);
 
         return userControls;
     }
@@ -148,22 +146,8 @@ public class SeatSelectionPane extends AbstractPane {
             }
         }
 
-        if(bookRows.size() == 0){
-            continueButton.setEnabled(false);
-        }else{
-            continueButton.setEnabled(true);
-        }
+        continueButton.setEnabled(bookRows.size() != 0);
     }
-
-
-
-
-
-
-
-
-
-
 
     public SeatSelectionPane(JFrame frame, Show show) {
         super(frame);
