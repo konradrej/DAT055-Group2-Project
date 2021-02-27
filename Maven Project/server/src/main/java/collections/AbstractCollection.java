@@ -11,7 +11,7 @@ public abstract class AbstractCollection implements AllCollections {
     @Override
     public void serializeCollection(String s) {
 
-        try (ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(new File(s)))){
+        try (ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(s))){
             stream.writeObject(this);
         }
         catch (IOException e) {

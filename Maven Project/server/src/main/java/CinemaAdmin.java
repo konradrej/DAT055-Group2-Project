@@ -141,6 +141,7 @@ public class CinemaAdmin {
                     }
                     panelDay = new JScrollPane(jlDay);
                     cardPanel.add(panelDay, "4");
+                    panelDay.setColumnHeaderView(new JLabel("Day: "));
                     jlDay.addMouseListener(dayListener);
                 }
             }
@@ -240,18 +241,22 @@ public class CinemaAdmin {
 
     public void addShowToCollection(){
 
-        if(selectedMovie != null && selectedTheater != null && date.getMonth() != null && date.getTime() != null && date.getDay() != null) {
+        if(selectedMovie != null && selectedTheater != null &&
+                date.getMonth() != null && date.getTime() != null && date.getDay() != null) {
             boolean addShow = true;
             for(Show s2 : CinemaBookingSystem.getInstance().getShowCollection().getAllShows()){
-                if(s2.getTheater().equals(selectedTheater) && s2.getShowDateAndTime().equals(date)){
+                if(s2.getTheater().getTheaterNumber() == selectedTheater.getTheaterNumber() &&
+                        s2.getShowDateAndTime().equals(date)){
                     addShow = false;
-                    JOptionPane.showMessageDialog(null, "Theater " + selectedTheater.getTheaterNumber() + " is occupied at " + date.toString(),
+                    JOptionPane.showMessageDialog(null, "Theater " + selectedTheater.getTheaterNumber() +
+                                    " is occupied at " + date.toString(),
                             "Not added", JOptionPane.ERROR_MESSAGE);
                     break;
                 }
             }
             if(addShow) {
-                Show s = new Show(selectedMovie, date, CinemaBookingSystem.getInstance().getCinema(), selectedTheater);
+                Theater t = selectedTheater.cloneTheater();
+                Show s = new Show(selectedMovie, date, CinemaBookingSystem.getInstance().getCinema(),t);
                 JOptionPane.showMessageDialog(null, s.toString(), "Show added", JOptionPane.INFORMATION_MESSAGE);
                 CinemaBookingSystem.getInstance().getShowCollection().addShow(s);
             }

@@ -23,9 +23,21 @@ public class Row implements Serializable{
      */
     public Row(int rowNumber, List<Seat> allSeats) {
         this.rowNumber = rowNumber;
-        this.allSeats = allSeats;
+        this.allSeats = Seat.cloneList(allSeats);
     }
-    
+
+    public Row(Row r){
+    	this.allSeats = Seat.cloneList(r.getAllSeats());
+    	this.rowNumber = r.rowNumber;
+	}
+
+	public static List<Row> cloneList(List <Row> rows){
+    	List<Row> cl = new ArrayList<>();
+    	for(Row r: rows){
+    		cl.add(r.cloneRow());
+		}
+    	return cl;
+	}
 
     /**
      * Method for setting a row number
@@ -39,9 +51,13 @@ public class Row implements Serializable{
      *
      * @return returns the cinemaObjects.Row instance itself
      */
-    public Row getRow() {
-        return this;
+    public Row cloneRow() {
+        return new Row(this);
     }
+
+
+
+
 
     /**
      * Method for getting a row number

@@ -28,34 +28,32 @@ public enum CinemaBookingSystem implements ServerHandler {
 		for(int i = 0; i < 10; i++){
 			seatTen.add(new Seat(i+1));
 		}
-
 		List <Seat> seatFifteen = new ArrayList<>();
 		for(int i = 0; i < 15 ; i++){
 			seatFifteen.add(new Seat(i+1));
 		}
-
 		List<Row> rowFive = new ArrayList <>();
-		rowFive.add(new Row(1, seatTen));
-		rowFive.add(new Row(2, seatTen));
-		rowFive.add(new Row(3, seatFifteen));
-		rowFive.add(new Row(4, seatFifteen));
-		rowFive.add(new Row(5, seatFifteen));
+
+		rowFive.add(new Row(1, Seat.cloneList(seatTen)));
+		rowFive.add(new Row(2, Seat.cloneList(seatTen)));
+		rowFive.add(new Row(3, Seat.cloneList(seatFifteen)));
+		rowFive.add(new Row(4, Seat.cloneList(seatFifteen)));
+		rowFive.add(new Row(5, Seat.cloneList(seatFifteen)));
 
 
 		List <Row> rowThree = new ArrayList<>();
-		rowThree.add(new Row(1, seatTen));
-		rowThree.add(new Row(2, seatTen));
-		rowThree.add(new Row(3, seatFifteen));
+		rowThree.add(new Row(1, Seat.cloneList(seatTen)));
+		rowThree.add(new Row(2, Seat.cloneList(seatTen)));
+		rowThree.add(new Row(3, Seat.cloneList(seatFifteen)));
 
 		List <Theater> theaterFive = new ArrayList<>();
-		theaterFive.add(new Theater(1, rowFive));
-		theaterFive.add(new Theater(2, rowThree));
-		theaterFive.add(new Theater(3, rowThree));
-		theaterFive.add(new Theater(4, rowFive));
-		theaterFive.add(new Theater(5, rowFive));
+		theaterFive.add(new Theater(1, Row.cloneList(rowThree)));
+		theaterFive.add(new Theater(2, Row.cloneList(rowThree)));
+		theaterFive.add(new Theater(3, Row.cloneList(rowFive)));
+		theaterFive.add(new Theater(4, Row.cloneList(rowFive)));
+		theaterFive.add(new Theater(5, Row.cloneList(rowFive)));
 
-		cinema = new Cinema("Underground Bio",theaterFive);
-
+		cinema = new Cinema("Underground Bio",Theater.cloneList(theaterFive));
 	}
 
 	/**

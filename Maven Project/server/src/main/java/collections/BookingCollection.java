@@ -15,7 +15,7 @@ public class BookingCollection extends AbstractCollection {
 	private static final long serialVersionUID = 1450784786789696365L;
 	private final List<Booking> allBookings;
 	private final String filename;
-	
+
 	/**
 	 * Constructor for initializing the BookingCollection instance
 	 * 
@@ -73,6 +73,19 @@ public class BookingCollection extends AbstractCollection {
 	 */
 	
 	public void addBookings(Show s, Customer c , List<Row> r) {
+		for(Row row1: r){
+			for(Row row : s.getTheater().getCollectionOfRows()){
+				if(row.getRowNumber() == row1.getRowNumber()){
+					for(Seat seat : row.getAllSeats()){
+						for(Seat seat1: row1.getAllSeats()){
+							if(seat.getSeatNumber() == seat1.getSeatNumber()){
+								seat.updateSeatStatus(false);
+							}
+						}
+					}
+				}
+			}
+		}
 		Booking b = new Booking(s, c, r );
 		this.allBookings.add(b);
 	}
@@ -86,6 +99,7 @@ public class BookingCollection extends AbstractCollection {
 	public void removeBooking(Booking b ) {
 		for(Booking b2: this.allBookings) {
 			if(b2.equals(b) && b.getCancelledStatus()) {
+				b2.cancelBooking();
 				this.allBookings.remove(b2);
 			}
 		}
@@ -130,7 +144,7 @@ public class BookingCollection extends AbstractCollection {
 	 * @exception IOException returns null
 	 */
 
-	public BookingCollection readCollection() {
+	public BookingCollection readCollection() throws IOException{
 		try(ObjectInputStream stream = new ObjectInputStream(new FileInputStream(this.filename))){
 
 			BookingCollection readThis = (BookingCollection) stream.readObject();

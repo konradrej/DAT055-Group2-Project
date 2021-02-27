@@ -1,6 +1,8 @@
 package cinemaObjects;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Anthon Lenander, Erik Kieu, Phong Nguyen
@@ -9,7 +11,7 @@ import java.io.Serializable;
 public class Seat implements Serializable{
 
 	private static final long serialVersionUID = 2724216208606386504L;
-	private int seatNumber;
+	private final int seatNumber;
     private boolean available;
 
     /**
@@ -22,15 +24,27 @@ public class Seat implements Serializable{
         this.available = true;
     }
 
+    public Seat (Seat s){
+        this.seatNumber = s.seatNumber;
+        this.available = true;
+    }
+
     /**
      * Method for getting the details of the seat
      *
      * @return returns the seat instance itself
      */
-    public Seat getSeat() {
-        return this;
+    public Seat cloneSeat() {
+        return new Seat(this);
     }
 
+   public static List <Seat>cloneList (List<Seat> seat){
+        ArrayList<Seat> cl = new ArrayList<>();
+        for(Seat s: seat){
+            cl.add(s.cloneSeat());
+        }
+        return cl;
+    }
 
     /**
      * Method for getting the seat number
