@@ -10,6 +10,7 @@ import collections.*;
 import cinemaObjects.*;
 
 public class ClientModel implements ClientHandler, IObservable<ClientModel> {
+
     private static ClientModel INSTANCE;
 
     private ClientModel() { }
@@ -22,12 +23,6 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
         return INSTANCE;
     }
 
-
-
-
-
-
-
     private Navigator navigator;
 
     public void setNavigator(Navigator navigator){
@@ -37,15 +32,6 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
     public Navigator getNavigator(){
         return navigator;
     }
-
-
-
-
-
-
-
-
-
 
     private final ArrayList<IObserver<ClientModel>> observers = new ArrayList<>();
     private MovieCollection movieCollection;

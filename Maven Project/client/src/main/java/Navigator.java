@@ -14,8 +14,8 @@ public class Navigator {
      */
     public Navigator(AbstractPane startPane){
         this.startPane = startPane;
-        paneTrace.add(this.startPane);
-        paneTrace.peek().start();
+        this.paneTrace.add(this.startPane);
+        this.paneTrace.peek().start();
     }
 
     /**

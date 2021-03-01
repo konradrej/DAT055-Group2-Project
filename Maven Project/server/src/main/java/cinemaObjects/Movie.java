@@ -8,7 +8,7 @@ import java.util.List;
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen
 * @version version 0.0.0
 */
-public class Movie implements Serializable{
+public class Movie implements Serializable {
 
 	private static final long serialVersionUID = 1239018110549344321L;
 	private final String title;
@@ -24,7 +24,6 @@ public class Movie implements Serializable{
      * @param length the length of the movie
      * @param url the URL of the movie
      */
-
     public Movie(String title, List<String> genre, String length, String url) {
     	this.title = title;
     	this.genre = genre;
@@ -34,36 +33,36 @@ public class Movie implements Serializable{
 
     /**
      * Get method to retrieve the title of the movie
+     *
      * @return a string of the title
      */
-    
     public String getTitle() {
         return title;
     }
 
     /**
      * Get method to retrieve all the genres of the movie
+     *
      * @return a string array of the genres
      */
-
     public List<String> getGenre() {
         return this.genre;
     }
 
     /**
      * Get method to retrieve the length of the movie
+     *
      * @return an array of string of the length
      */
-
     public String getLength() {
         return length;
     }
 
     /**
      * Get method to retrieve the URL ouf the movie
+     *
      * @return a string of the URL
      */
-    
     public String getURL() {
     	return this.url;
     }
@@ -79,6 +78,5 @@ public class Movie implements Serializable{
         }
         System.out.println();
     }
-}
 
-    
+}

@@ -2,12 +2,10 @@ import cinemaObjects.*;
 import collections.*;
 import misc.ResponseStatus;
 import server.ServerHandler;
-import collections.ShowCollection;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 
 public enum CinemaBookingSystem implements ServerHandler {
 	INSTANCE();
@@ -57,7 +55,8 @@ public enum CinemaBookingSystem implements ServerHandler {
 	}
 
 	/**
-	 * Get method to get the instance of CinemaBookingSystem objecy
+	 * Get method to get the instance of CinemaBookingSystem object
+	 *
 	 * @return a CinemaBookingSystem of the instance
 	 */
 	public static CinemaBookingSystem getInstance(){

@@ -16,12 +16,11 @@ public class Theater implements Serializable{
     private List<Row> allRows;
 
     /**
-     * Constructor for initializing the Theatre instance
+     * Constructor for initializing the Theater instance
      *
-     * @param theaterNumber the number of the theatre
+     * @param theaterNumber the number of the theater
      * @param allRows       the Collection of allrows
      */
-
     public Theater(int theaterNumber, List<Row> allRows) {
         this.theaterNumber = theaterNumber;
         this.allRows = Row.cloneList(allRows);
@@ -34,8 +33,9 @@ public class Theater implements Serializable{
 
     /**
      * Method for setting a theatre number
+     *
+     * @param theaterNumber     the number to set to this theaters theaterNumber
      */
-
     public void setTheaterNumber(int theaterNumber) {
         this.theaterNumber = theaterNumber;
     }
@@ -43,12 +43,18 @@ public class Theater implements Serializable{
     /**
      * Method for getting a theatre
      *
-     * @return returns the theatre instance itself
+     * @return returns the theater instance itself
      */
     public Theater cloneTheater() {
         return new Theater(this);
     }
 
+    /**
+     * Method for cloning a list of theaters
+     *
+     * @param theaters  the list of theaters to clone
+     * @return          returns a cloned list of the input list of theaters
+     */
     public static List<Theater> cloneList(List <Theater> theaters){
         List <Theater> cl = new ArrayList<>();
         for(Theater t: theaters){
@@ -63,13 +69,14 @@ public class Theater implements Serializable{
      *
      * @return returns the theatre instance itself
      */
-
     public int getTheaterNumber() {
         return this.theaterNumber;
     }
 
     /**
      * Method for getting a row from a collection of rows
+     *
+     * @return returns this theaters collection of rows as a list of rows
      */
     public List<Row> getCollectionOfRows() {
         return this.allRows;

@@ -7,7 +7,7 @@ import java.util.*;
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen
 * @version version 0.0.0
 */
-public class Show implements Serializable{
+public class Show implements Serializable {
 
 	private static final long serialVersionUID = -9177195168561009276L;
 	private final String uniqueID;
@@ -38,6 +38,11 @@ public class Show implements Serializable{
 		this.uniqueID = UUID.randomUUID().toString();
 	}
 
+	/**
+	 * Method for getting the unique ID of the show itself
+	 *
+	 * @return returns the unique ID assigned to this specific show
+	 */
 	public String getUniqueID (){
 		return this.uniqueID;
 	}
@@ -54,7 +59,7 @@ public class Show implements Serializable{
 	
 	/**
 	 * Method for getting the day and time at which the show will take place
-	 * S
+	 *
 	 * @return	returns the day_and_time instance variable of this object
 	 */
 	public CinemaDate getShowDateAndTime()
@@ -133,7 +138,7 @@ public class Show implements Serializable{
 	 * @param numOfSeats	the number of seats to find	
 	 * @return 				returns a collection of Seat, containing numOfSeats available seats
 	 */
-	//TODO Vad gör denna?
+	//TODO Vad gör denna? Svar: Den returnerar en arraylist av alla Seats som är lediga
 	public ArrayList<Seat> getAvailableSeats(int numOfSeats)
 	{
 		ArrayList<Seat> availableSeats = new ArrayList <> ();
@@ -175,7 +180,7 @@ public class Show implements Serializable{
 	}
 	
 	/**
-	 * Toggles the status of the show between cancelled and not cancelled
+	 * Method for turning the status of the show to cancelled
 	 */
 	public void cancelShow()
 	{
@@ -183,10 +188,10 @@ public class Show implements Serializable{
 	}
 
 	/**
-	 * A method to get the Movie , Cinema, Theater and time of the show
+	 * Method to get the Movie , Cinema, Theater and time of the show
+	 *
 	 * @return a string representing the show
 	 */
-
 	public String toString(){
 		return "Movie: " + this.movie.getTitle() + "\nDate and time: " + this.dayAndTime.toString() +
 				"\nCinema: " + this.cinema.getCinemaName() + "\nTheater Number: " + theater.getTheaterNumber();

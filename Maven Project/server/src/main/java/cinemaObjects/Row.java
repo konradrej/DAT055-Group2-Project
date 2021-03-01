@@ -8,12 +8,11 @@ import java.util.List;
  * @author Anthon Lenander, Erik Kieu, Phong Nguyen
  * @version version 0.0.0
  */
-public class Row implements Serializable{
+public class Row implements Serializable {
 
 	private static final long serialVersionUID = -1432188689020345890L;
 	private int rowNumber;
     private List<Seat> allSeats;
-
 
     /**
      * Constructor for initializing the cinemaObjects.Row instance
@@ -26,11 +25,22 @@ public class Row implements Serializable{
         this.allSeats = Seat.cloneList(allSeats);
     }
 
-    public Row(Row r){
+	/**
+	 * Constructor for initializing the Row instance given another Row instance
+	 *
+	 * @param r	the row to clone
+	 */
+	public Row(Row r){
     	this.allSeats = Seat.cloneList(r.getAllSeats());
     	this.rowNumber = r.rowNumber;
 	}
 
+	/**
+	 * Method for cloning a list of rows given a list of rows
+	 *
+	 * @param rows	the rows to be cloned
+	 * @return		returns a cloned list of the input list of rows
+	 */
 	public static List<Row> cloneList(List <Row> rows){
     	List<Row> cl = new ArrayList<>();
     	for(Row r: rows){
@@ -41,6 +51,8 @@ public class Row implements Serializable{
 
     /**
      * Method for setting a row number
+	 *
+	 * @param rowNumber the row number to set this rows rowNumber to
      */
     public void setRowNumber(int rowNumber) {
         this.rowNumber = rowNumber;
@@ -55,10 +67,6 @@ public class Row implements Serializable{
         return new Row(this);
     }
 
-
-
-
-
     /**
      * Method for getting a row number
      *
@@ -68,17 +76,19 @@ public class Row implements Serializable{
         return rowNumber;
     }
 
-
     /**
      * Method for getting seats from a collection of seats
+	 *
+	 * @return returns an arraylist containing all seats of this Row instance's seats
      */
     public List<Seat> getAllSeats() {
         return new ArrayList<>(this.allSeats);
     }
 
     /**
-     * Method for creating new seats and adding it to
-     * a collection of seats
+     * Method for creating new seats and adding it to a collection of seats
+	 *
+	 * @param available a boolean value signifying if the seat to be added should be made available or not
      */
     public void addSeat(boolean available) {
     	
@@ -86,16 +96,28 @@ public class Row implements Serializable{
         this.allSeats.add(s);
     }
 
+	/**
+	 * Method for adding a seat given another instance of a seat
+	 *
+	 * @param seat	the seat which is to be added
+	 */
 	public void addSeat(Seat seat){
 		this.allSeats.add(seat);
 	}
 
+	/**
+	 * Method for removing a seat given another instance of a seat
+	 *
+	 * @param seat	the seat which is to be removed
+	 */
 	public void removeSeat(Seat seat){
 		this.allSeats.remove(seat);
 	}
 
     /**
      * Method for finding all seats
+	 *
+	 * @return	returns a list of all available seats
      */
     public ArrayList<Seat> getAllAvailableSeats()
     {
@@ -110,8 +132,10 @@ public class Row implements Serializable{
     }
     
     /**
-     * Method for getting available seats from a
-     * collection of available seats
+     * Method for getting available seats from a collection of available seats
+	 *
+	 * @param numOfSeats	the number of available seats to find
+	 * @return 				returns an arraylist of size numOfSeats of available seats
      */
     public ArrayList<Seat> getAvailableSeats(int numOfSeats) {
 		ArrayList<Seat> availableSeats = new ArrayList<>();
@@ -138,6 +162,7 @@ public class Row implements Serializable{
         {
         	availableSeats = this.getAllAvailableSeats();
         }
+        else if (this.getAllAvailableSeats().size() < numOfSeats) availableSeats = new ArrayList<>();
         
         return availableSeats;
     }
@@ -145,9 +170,10 @@ public class Row implements Serializable{
     
     /**
      * Method for getting n number of adjacent available seats
-     * Return information is missing
+	 *
+	 * @param numOfSeats	the number of adjacent available seats to find
+	 * @return 				returns a list of size numOfSeats if numOfSeats adjacent available seats are found
      */
-    
     public ArrayList<Seat> getAdjacentAvailableSeats (int numOfSeats){
 		ArrayList<Seat> availableSeatsOfRow = this.getAvailableSeats(numOfSeats);
 		ArrayList<Seat> availableAdjacentSeats = new ArrayList <> ();
@@ -175,9 +201,11 @@ public class Row implements Serializable{
 				{
 					availableAdjacentSeats.add(availableAdjacentSeatsOfRowArray[j]);
 				}
+				return availableAdjacentSeats;
 			}
 		}
 		
-		return availableAdjacentSeats;
+		return new ArrayList<>();
     }
+
 }

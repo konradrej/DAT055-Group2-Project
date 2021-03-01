@@ -8,15 +8,11 @@ import java.util.List;
  * @author Anthon Lenander, Erik Kieu, Phong Nguyen
  * @version version 0.0.0
  */
-public class Cinema implements Serializable{
+public class Cinema implements Serializable {
 
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = -573847747221470914L;
 	private String name;
     private List <Theater> allTheaters;
-
 
     /**
      * Constructor for initializing the cinemaObjects.Cinema instance
@@ -29,9 +25,10 @@ public class Cinema implements Serializable{
         this.allTheaters = allTheaters;
     }
 
-
     /**
      * Method for setting a cinema name
+     *
+     * @param name  the name to set this Cinema's name to
      */
     public void setName(String name) {
         this.name = name;
@@ -51,19 +48,14 @@ public class Cinema implements Serializable{
      *
      * @return      returns the cinema name
      */
-    public String getCinemaName() {
-        return name;
-    }
-
+    public String getCinemaName() { return name; }
 
     /**
      * Method for getting theatres in collection of theatres.
      *
      * @return return
      */
-    public List<Theater> getTheaterCollection() {
-        return this.allTheaters;
-    }
+    public List<Theater> getTheaterCollection() { return this.allTheaters; }
 
     /**
      * Method for creating a new theater given rows, cinema...

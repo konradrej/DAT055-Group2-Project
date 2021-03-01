@@ -6,13 +6,16 @@ import java.io.Serializable;
 * @author Anthon Lenander, Erik Kieu, Phong Nguyen
 * @version version 0.0.0
 */
-public class Customer implements Serializable{
+public class Customer implements Serializable {
 
 	private static final long serialVersionUID = 6060898922086321725L;
 	private String name;
 	private String phoneNumber;
 	private String ssn;
 
+	/**
+	 * Empty Constructor for initializing an empty customer instance
+	 */
 	public Customer(){
 
 	}
@@ -88,4 +91,5 @@ public class Customer implements Serializable{
 	{
 		this.ssn = SSN;
 	}
+
 }

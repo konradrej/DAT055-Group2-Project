@@ -66,7 +66,6 @@ public class Booking implements Serializable {
 	/**
 	 * Method for internally changing the status of the booking
 	 */
-
 	public void cancelBooking()
 	{
 
@@ -82,6 +81,11 @@ public class Booking implements Serializable {
 
 	}
 
+	/**
+	 * Method for getting the status of this particular booking
+	 *
+	 * @return	returns the cancelled status of this particular booking
+	 */
 	public Boolean getCancelledStatus() { return cancelled; }
 	
 	/**
@@ -104,6 +108,11 @@ public class Booking implements Serializable {
 		return this.customer;
 	}
 
+	/**
+	 * Method for getting the show instance of this booking
+	 *
+	 * @return returns the show instance of this booking
+	 */
 	public Show getShow(){ return this.show;}
 
 }
