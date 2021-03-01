@@ -11,7 +11,7 @@ public class GetMoviesCommand implements ServerCommand {
     public GetMoviesCommand(){}
 
     @Override
-    public void execute(ServerHandler handler, ObjectInputStream in, ObjectOutputStream out) throws IOException {
+    public void execute(ServerHandler handler, ObjectOutputStream out) throws IOException {
         out.writeObject(new ReturnMoviesCommand(
                 handler.getMovieCollection()
         ));

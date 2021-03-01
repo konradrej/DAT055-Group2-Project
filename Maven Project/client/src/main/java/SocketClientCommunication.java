@@ -44,16 +44,13 @@ public enum SocketClientCommunication implements Runnable {
         }
 
         try {
-
             out = new ObjectOutputStream(socket.getOutputStream());
 
             in = new ObjectInputStream(this.socket.getInputStream());
 
-
             while(socket.isConnected()){
                 ClientCommand command = (ClientCommand) in.readObject();
-                command.execute(ClientModel.getInstance(), in, out);
-
+                command.execute(ClientModel.getInstance());
             }
         } catch (EOFException e){
             closeConnection();

@@ -58,11 +58,7 @@ public class CustomerCollection extends AbstractCollection {
 	 */
 	
 	public void removeCustomer(Customer c ) {
-		for(Customer c2: this.allCustomers) {
-			if(c2.equals(c)) {
-				this.allCustomers.remove(c2);
-			}
-		}
+		this.allCustomers.removeIf(c2 -> c2.equals(c));
 		System.out.println("cinemaObjects.Customer not found");
 	}
 	
@@ -79,19 +75,16 @@ public class CustomerCollection extends AbstractCollection {
 	 * Read serialized file
 	 *
 	 * @return CustomerCollectcion of the read file
-	 * @exception ClassCastException returns an empty CustomerCollection
-	 * @exception FileNotFoundException returns an empty CustomerCollection
 	 * @exception NullPointerException returns an empty CustomerCollection
-	 * @exception IOException returns null
 	 */
-	public CustomerCollection readCollection() throws IOException{
+	public CustomerCollection readCollection() {
 		try(ObjectInputStream stream = new ObjectInputStream(new FileInputStream( this.filename))){
 
 			CustomerCollection readThis = (CustomerCollection) stream.readObject();
 			System.out.println("File: "  + this.filename + " has been read");
 			return readThis;
 		}
-		catch (ClassNotFoundException | FileNotFoundException | NullPointerException e) {
+		catch (ClassCastException | ClassNotFoundException | FileNotFoundException | NullPointerException e) {
 			System.err.println(e.getMessage());
 			e.printStackTrace();
 			return new CustomerCollection(this.filename);

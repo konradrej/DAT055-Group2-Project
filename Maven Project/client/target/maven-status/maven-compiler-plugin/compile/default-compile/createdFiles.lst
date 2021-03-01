@@ -1,13 +1,7 @@
-ObservableSupport.class
-Observer.class
 SocketClientCommunication.class
 ipReader.class
 AbstractPane.class
 ClientModel.class
-AbstractObservable.class
 MainMenuPane.class
-Observable.class
 ShowSelectionPane.class
 CinemaClient.class
-IObservable.class
-IObserver.class

@@ -56,8 +56,6 @@ public class SeatSelectionPane extends AbstractPane {
                 for(Seat seat : row.getAllSeats()){
                     JButton seatButton = new JButton();
                     seatButton.setPreferredSize(new Dimension(25, 25));
-                    // Needed? with mouseClick listener
-                    seatButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
                     if(seat.getAvailable()){
                         seatButton.setBackground(Color.GREEN);

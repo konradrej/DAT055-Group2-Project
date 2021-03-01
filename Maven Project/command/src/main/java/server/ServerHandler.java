@@ -1,16 +1,19 @@
 package server;
 
+import cinemaObjects.*;
+import collections.MovieCollection;
+import collections.ShowCollection;
 import misc.ResponseStatus;
 
 import java.util.List;
 
 public interface ServerHandler {
-    Object getMovieCollection();
-    Object getShowCollection();
-    Object getShowsByMovie(Object movie);
-    Object getBookingsBySSN(String SSN);
-    Object getCustomerBySSN(String SSN);
-    ResponseStatus createBooking(Object show, Object customer, List<Object> rows);
+    MovieCollection getMovieCollection();
+    ShowCollection getShowCollection();
+    ShowCollection getShowsByMovie(Movie movie);
+    List<Booking> getBookingsBySSN(String SSN);
+    Customer getCustomerBySSN(String SSN);
+    ResponseStatus createBooking(Show show, Customer customer, List<Row> rows);
     String createCustomer(String name, String phoneNumber, String SSN);
-    void cancelBooking(Object booking);
+    void cancelBooking(Booking booking);
 }

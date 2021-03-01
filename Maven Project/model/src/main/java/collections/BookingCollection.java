@@ -71,7 +71,6 @@ public class BookingCollection extends AbstractCollection {
 	 * @param r - (TODO: ) The collection of row of the booking
 
 	 */
-	
 	public void addBookings(Show s, Customer c , List<Row> r) {
 		for(Row row1: r){
 			for(Row row : s.getTheater().getCollectionOfRows()){
@@ -138,20 +137,17 @@ public class BookingCollection extends AbstractCollection {
 	 * Read serialized file
 	 *
 	 * @return BookingCollection of the read file
-	 * @exception ClassCastException returns an empty BookingCollection
-	 * @exception FileNotFoundException returns an empty BookingCollection
 	 * @exception NullPointerException returns an empty BookingCollection
-	 * @exception IOException returns null
 	 */
 
-	public BookingCollection readCollection() throws IOException{
+	public BookingCollection readCollection() {
 		try(ObjectInputStream stream = new ObjectInputStream(new FileInputStream(this.filename))){
 
 			BookingCollection readThis = (BookingCollection) stream.readObject();
 			System.out.println("File: "  + this.filename + " has been read");
 			return readThis;
 		}
-		catch (ClassNotFoundException | FileNotFoundException | NullPointerException e) {
+		catch (ClassCastException | ClassNotFoundException | FileNotFoundException | NullPointerException e) {
 			System.err.println(e.getMessage());
 			e.printStackTrace();
 			return new BookingCollection(this.filename);

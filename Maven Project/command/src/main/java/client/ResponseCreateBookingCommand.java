@@ -6,14 +6,14 @@ import java.io.*;
 
 public class ResponseCreateBookingCommand implements ClientCommand {
 
-    private ResponseStatus response;
+    private final ResponseStatus response;
 
     public ResponseCreateBookingCommand(ResponseStatus response) {
         this.response = response;
     }
 
     @Override
-    public void execute(ClientHandler handler, ObjectInputStream in, ObjectOutputStream out) throws IOException, ClassNotFoundException {
+    public void execute(ClientHandler handler) throws IOException {
         handler.setResponseStatus(response);
     }
 }

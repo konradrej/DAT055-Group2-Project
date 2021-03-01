@@ -31,7 +31,7 @@ public class ConnectionHandler implements Runnable {
 
             while(socket.isConnected()){
                 ServerCommand command = (ServerCommand) in.readObject();
-                command.execute(cbs, in, out);
+                command.execute(cbs, out);
             }
         } catch(ClassCastException e){
             System.err.println("Class could not be cast to client.ClientCommand.");

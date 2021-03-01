@@ -10,7 +10,6 @@ import collections.*;
 import cinemaObjects.*;
 
 public class ClientModel implements ClientHandler, IObservable<ClientModel> {
-
     private static ClientModel INSTANCE;
 
     private ClientModel() { }
@@ -36,7 +35,7 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
     private final ArrayList<IObserver<ClientModel>> observers = new ArrayList<>();
     private MovieCollection movieCollection;
     private ShowCollection showCollection;
-    private ArrayList<Booking> bookings;
+    private List<Booking> bookings;
     private Customer customer;
     private ResponseStatus response;
 
@@ -72,68 +71,40 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
         return showCollection;
     }
 
-    public ArrayList<Booking> getBookingCollection(){
+    public List<Booking> getBookingCollection(){
         return bookings;
     }
 
     public Customer getCustomer(){
         return customer;
     }
+
     public ResponseStatus getResponse(){
         return response;
     }
 
     @Override
-    public void setMovieCollection(Object movieCollection){
-        try {
-            this.movieCollection = (MovieCollection) movieCollection;
-            notifyObservers();
-        } catch (ClassCastException e){
-            System.err.println("Class could not be casted. Message: " + e.getMessage());
-            e.printStackTrace();
-        }
+    public void setMovieCollection(MovieCollection movieCollection){
+        this.movieCollection = movieCollection;
+        notifyObservers();
     }
 
     @Override
-    public void setShowCollection(Object showCollection){
-        try {
-            this.showCollection = (ShowCollection) showCollection;
-            notifyObservers();
-        } catch (ClassCastException e){
-            System.err.println("Class could not be casted. Message: " + e.getMessage());
-            e.printStackTrace();
-        }
+    public void setShowCollection(ShowCollection showCollection){
+        this.showCollection = showCollection;
+        notifyObservers();
     }
 
     @Override
-    public void setBookings(ArrayList<Object> bookings)
-    {
-        try {
-            ArrayList<Booking> bookings1 = new ArrayList<>();
-
-            for(Object b : bookings)
-            {
-                bookings1.add((Booking)b);
-            }
-
-            this.bookings = bookings1;
-            notifyObservers();
-        } catch (ClassCastException e) {
-            System.err.println("Class could not be casted. Message: " + e.getMessage());
-            e.printStackTrace();
-        }
+    public void setBookings(List<Booking> bookings) {
+        this.bookings = bookings;
+        notifyObservers();
     }
 
     @Override
-    public void setCustomerBySSN(Object customer)
-    {
-        try {
-            this.customer = (Customer)customer;
-            notifyObservers();
-        } catch (ClassCastException e) {
-            System.err.println("Class could not be casted. Message: " + e.getMessage());
-            e.printStackTrace();
-        }
+    public void setCustomerBySSN(Customer customer) {
+        this.customer = customer;
+        notifyObservers();
     }
 
     @Override

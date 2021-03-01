@@ -1,12 +1,2 @@
-todo\GetCustomerBySSNCommand.class
-todo\GetBookingsBySSNCommand.class
-todo\ResponseCreateBookingCommand.class
-todo\ResponseGetCustomerBySSNCommand.class
 client\ReturnMoviesCommand.class
-todo\ResponseCreateCustomerCommand.class
 client\ReturnShowsByMovieCommand.class
-todo\CreateCustomerCommand.class
-todo\GetAllSeatsByShowCommand.class
-todo\ResponseGetBookingsBySSNCommand.class
-todo\CreateBookingCommand.class
-todo\ResponseGetAllSeatsByShowCommand.class
