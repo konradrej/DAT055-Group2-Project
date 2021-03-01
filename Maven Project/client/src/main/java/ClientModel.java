@@ -86,6 +86,7 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
     @Override
     public void setMovieCollection(MovieCollection movieCollection){
         this.movieCollection = movieCollection;
+        this.showCollection = null;
         notifyObservers();
     }
 
