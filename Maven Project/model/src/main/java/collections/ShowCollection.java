@@ -113,7 +113,7 @@ public class ShowCollection extends AbstractCollection {
 	
 	public void updateShow(Show s, Movie m , CinemaDate dat, Cinema c, Theater t) {
 		for(Show s2 : allShows) {
-			if(s.equals(s2)) {
+			if(s.getUniqueID().equals(s2.getUniqueID())) {
 				this.removeShow(s2);
 				this.addShow(new Show (m, dat, c, t));
 				break;

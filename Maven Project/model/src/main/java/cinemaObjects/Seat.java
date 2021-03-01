@@ -30,8 +30,8 @@ public class Seat implements Serializable {
      * @param s the Seat which is to be cloned
      */
     public Seat (Seat s){
-        this.seatNumber = s.seatNumber;
-        this.available = true;
+        this.seatNumber = s.getSeatNumber();
+        this.available = s.getAvailable();
     }
 
     /**

@@ -147,7 +147,7 @@ public enum CinemaBookingSystem implements ServerHandler {
 	 * @return 				Returns a string to the client containing information about how the creation went
 	 */
 	public ResponseStatus createBooking(Show show, Customer customer, List<Row> rows) {
-		this.bookingCollection.addBookings(show, customer, rows);
+		this.bookingCollection.addBookings(show, customer, rows, this.showCollection);
 
 		if (this.customerCollection.getCustomer(customer.getSSN()) == null) {
 			this.customerCollection.addCustomer(customer);

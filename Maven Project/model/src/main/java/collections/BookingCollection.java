@@ -71,7 +71,7 @@ public class BookingCollection extends AbstractCollection {
 	 * @param r - (TODO: ) The collection of row of the booking
 
 	 */
-	public void addBookings(Show s, Customer c , List<Row> r) {
+	public void addBookings(Show s, Customer c , List<Row> r, ShowCollection showCollection) {
 		for(Row row1: r){
 			for(Row row : s.getTheater().getCollectionOfRows()){
 				if(row.getRowNumber() == row1.getRowNumber()){
@@ -85,6 +85,9 @@ public class BookingCollection extends AbstractCollection {
 				}
 			}
 		}
+
+		showCollection.updateShow(s, s.getMovie(), s.getShowDateAndTime(), s.getCinema(), s.getTheater());
+
 		Booking b = new Booking(s, c, r );
 		this.allBookings.add(b);
 	}
@@ -113,12 +116,11 @@ public class BookingCollection extends AbstractCollection {
 	 * @param r - The updated collection of row
 
 	 */
-	
-	public void updateBooking (Booking b , Show s, Customer c , List <Row> r ) {
+	public void updateBooking (Booking b , Show s, Customer c , List <Row> r, ShowCollection showCollection) {
 		for(Booking b2 : this.allBookings) {
 			if(b2.equals(b)) {
 				this.allBookings.remove(b2);
-				this.addBookings(s, c, r);
+				this.addBookings(s, c, r, showCollection);
 			}
 		}
 	}
