@@ -76,7 +76,7 @@ public enum CinemaBookingSystem implements ServerHandler {
 	/**
 	 * Method that reads all the collection from a file to this objects collection
 	 */
-	public void readAllCollections() throws IOException {
+	public void readAllCollections() {
 		this.movieCollection = movieCollection.readCollection();
 		this.showCollection = showCollection.readCollection();
 		this.customerCollection = customerCollection.readCollection();
@@ -93,16 +93,8 @@ public enum CinemaBookingSystem implements ServerHandler {
 
 	public ShowCollection getShowCollection() { return this.showCollection; }
 
-	public ShowCollection getShowsByMovie(Object movie)
-	{
-		try {
-			Movie m = (Movie) movie;
-			return showCollection.getShowsGivenMovie(m);
-		}
-		catch (ClassCastException e) {
-			e.printStackTrace();
-		}
-		return new ShowCollection("Empty showCollection");
+	public ShowCollection getShowsByMovie(Movie movie) {
+		return showCollection.getShowsGivenMovie(movie);
 	}
 
 	/**
@@ -154,30 +146,11 @@ public enum CinemaBookingSystem implements ServerHandler {
 	 * @param rows			A collection of all the rows, containing all seats to be reserved for the customer
 	 * @return 				Returns a string to the client containing information about how the creation went
 	 */
-	public ResponseStatus createBooking(Object show, Object customer, List<Object> rows)
-	{
-		try {
-			List<Row> bookedRows = new ArrayList<>();
+	public ResponseStatus createBooking(Show show, Customer customer, List<Row> rows) {
+		this.bookingCollection.addBookings(show, customer, rows, this.showCollection);
 
-			for(Object r : rows)
-			{
-				bookedRows.add((Row)r);
-			}
-
-			Show s = (Show)show;
-			Customer c = (Customer)customer;
-
-			this.bookingCollection.addBookings(s, c, bookedRows);
-
-			if (this.customerCollection.getCustomer(c.getSSN()) == null)
-			{
-				this.customerCollection.addCustomer(c);
-			}
-
-		} catch (ClassCastException e) {
-			System.err.println("Class could not be casted. Message: " + e.getMessage());
-			e.printStackTrace();
-			return new ResponseStatus(false, "Booking failed");
+		if (this.customerCollection.getCustomer(customer.getSSN()) == null) {
+			this.customerCollection.addCustomer(customer);
 		}
 
 		return new ResponseStatus(true, "Booking successfully created");
@@ -190,8 +163,7 @@ public enum CinemaBookingSystem implements ServerHandler {
 	 * @param SSN			The social security number of the customer to be created
 	 * @return 				Returns a string to the client containing information about how the creation went
 	 */
-	public String createCustomer(String name, String phoneNumber, String SSN)
-	{
+	public String createCustomer(String name, String phoneNumber, String SSN) {
 		Customer newCustomer = null;
 
 		try {
@@ -212,9 +184,8 @@ public enum CinemaBookingSystem implements ServerHandler {
 	 *
 	 * @param booking	cinemaObjects.Booking to be cancelled
 	 */
-	public void cancelBooking(Object booking)
-	{
-		((Booking)booking).cancelBooking();
-		this.bookingCollection.removeBooking((Booking) booking);
+	public void cancelBooking(Booking booking) {
+		booking.cancelBooking();
+		this.bookingCollection.removeBooking(booking);
 	}
 }

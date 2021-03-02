@@ -1,15 +1,17 @@
 package client;
 
+import cinemaObjects.Customer;
+
 import java.io.*;
 
 public class ReturnCustomerBySSNCommand implements ClientCommand {
 
-    private Object customer;
+    private final Customer customer;
 
-    public ReturnCustomerBySSNCommand(Object customer) { this.customer = customer; }
+    public ReturnCustomerBySSNCommand(Customer customer) { this.customer = customer; }
 
     @Override
-    public void execute(ClientHandler handler, ObjectInputStream in, ObjectOutputStream out) throws IOException, ClassNotFoundException {
+    public void execute(ClientHandler handler) throws IOException {
         handler.setCustomerBySSN(this.customer);
     }
 }

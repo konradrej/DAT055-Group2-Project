@@ -97,11 +97,7 @@ public class ShowCollection extends AbstractCollection {
 	 */
 	
 	public void removeShow(Show s ) {
-		for(Show s2: this.allShows) {
-			if(s2.equals(s)) {
-				this.allShows.remove(s2);
-			}
-		}
+		this.allShows.removeIf(s2 -> s2.equals(s));
 		System.out.println("Show not found");
 	}
 	
@@ -117,7 +113,7 @@ public class ShowCollection extends AbstractCollection {
 	
 	public void updateShow(Show s, Movie m , CinemaDate dat, Cinema c, Theater t) {
 		for(Show s2 : allShows) {
-			if(s.equals(s2)) {
+			if(s.getUniqueID().equals(s2.getUniqueID())) {
 				this.removeShow(s2);
 				this.addShow(new Show (m, dat, c, t));
 				break;
@@ -159,20 +155,17 @@ public class ShowCollection extends AbstractCollection {
 	 * Read serialized file
 	 *
 	 * @return ShowCollection of the read file
-	 * @exception ClassCastException returns an empty ShowCollection
-	 * @exception FileNotFoundException returns an empty ShowCollection
 	 * @exception NullPointerException returns an empty ShowCollection
-	 * @exception IOException returns null
 	 */
 
-	public ShowCollection readCollection() throws IOException{
+	public ShowCollection readCollection() {
 		try(ObjectInputStream stream = new ObjectInputStream(new FileInputStream(this.filename))){
 
 			ShowCollection readThis = (ShowCollection) stream.readObject();
 			System.out.println("File: "  + this.filename + " has been read");
 			return readThis;
 		}
-		catch (ClassNotFoundException | FileNotFoundException | NullPointerException e) {
+		catch (ClassCastException | ClassNotFoundException | FileNotFoundException | NullPointerException e) {
 			System.err.println(e.getMessage());
 			e.printStackTrace();
 			return new ShowCollection(this.filename);

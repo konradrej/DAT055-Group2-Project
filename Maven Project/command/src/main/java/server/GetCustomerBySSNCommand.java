@@ -8,12 +8,12 @@ import java.io.ObjectOutputStream;
 
 public class GetCustomerBySSNCommand implements ServerCommand {
 
-    private String SSN;
+    private final String SSN;
 
     public GetCustomerBySSNCommand(String SSN) { this.SSN = SSN; }
 
     @Override
-    public void execute(ServerHandler handler, ObjectInputStream in, ObjectOutputStream out) throws IOException {
+    public void execute(ServerHandler handler, ObjectOutputStream out) throws IOException {
         out.writeObject(new ReturnCustomerBySSNCommand(
                 handler.getCustomerBySSN(SSN)
         ));

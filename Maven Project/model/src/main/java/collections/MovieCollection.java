@@ -80,11 +80,7 @@ public class MovieCollection extends AbstractCollection {
 	 */
 	
 	public void removeMovie(Movie m ) {
-		for(Movie m2: this.allMovies) {
-			if(m2.equals(m)) {
-				this.allMovies.remove(m2);
-			}
-		}
+		this.allMovies.removeIf(m2 -> m2.equals(m));
 		System.out.println("cinemaObjects.Movie not found");
 	}
 	
@@ -93,8 +89,8 @@ public class MovieCollection extends AbstractCollection {
 	 * 
 	 * @param title - selected title for the movies
 	 * @param genre - selected genre for the movies
+	 * @return TODO
 	 */
-	
 	public List <Movie> getSelectedMovies(String title, String genre){
 		List <Movie> selectedMovies = new ArrayList<>();
 		
@@ -205,13 +201,10 @@ public class MovieCollection extends AbstractCollection {
 	 * Read serialized file
 	 *
 	 * @return MovieCollection of the read file
-	 * @exception ClassCastException returns an empty MovieCollection
-	 * @exception FileNotFoundException returns an empty MovieCollection
 	 * @exception NullPointerException returns an empty MovieCollection
-	 * @exception IOException returns null
 	 */
 
-	public MovieCollection readCollection()throws IOException{
+	public MovieCollection readCollection() {
 		try(ObjectInputStream stream = new ObjectInputStream(new FileInputStream(this.filename))){
 
 			MovieCollection readThis = (MovieCollection) stream.readObject();
@@ -219,7 +212,7 @@ public class MovieCollection extends AbstractCollection {
 			return readThis;
 		}
 
-		catch (ClassNotFoundException | FileNotFoundException | NullPointerException e) {
+		catch (ClassCastException | ClassNotFoundException | FileNotFoundException | NullPointerException e) {
 			System.err.println(e.getMessage());
 			e.printStackTrace();
 			return new MovieCollection(this.filename);

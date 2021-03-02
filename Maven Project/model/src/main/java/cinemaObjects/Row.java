@@ -2,6 +2,7 @@ package cinemaObjects;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -176,8 +177,7 @@ public class Row implements Serializable {
      */
     public ArrayList<Seat> getAdjacentAvailableSeats (int numOfSeats){
 		ArrayList<Seat> availableSeatsOfRow = this.getAvailableSeats(numOfSeats);
-		ArrayList<Seat> availableAdjacentSeats = new ArrayList <> ();
-		
+
 		Seat[] availableSeatsOfRowArray = (Seat[])availableSeatsOfRow.toArray();
 		Seat[] availableAdjacentSeatsOfRowArray = new Seat[numOfSeats];
 		
@@ -197,11 +197,7 @@ public class Row implements Serializable {
 			
 			if(availableAdjacent)
 			{
-				for(int j = 0; j < numOfSeats; j++)
-				{
-					availableAdjacentSeats.add(availableAdjacentSeatsOfRowArray[j]);
-				}
-				return availableAdjacentSeats;
+				return new ArrayList<>(Arrays.asList(availableAdjacentSeatsOfRowArray).subList(0, numOfSeats));
 			}
 		}
 		

@@ -69,10 +69,9 @@ public class BookingCollection extends AbstractCollection {
 	 * @param s - The show of the booking
 	 * @param c - The customer of the booking
 	 * @param r - (TODO: ) The collection of row of the booking
-
+	 * @param showCollection - showCollection to update
 	 */
-	
-	public void addBookings(Show s, Customer c , List<Row> r) {
+	public void addBookings(Show s, Customer c , List<Row> r, ShowCollection showCollection) {
 		for(Row row1: r){
 			for(Row row : s.getTheater().getCollectionOfRows()){
 				if(row.getRowNumber() == row1.getRowNumber()){
@@ -86,6 +85,9 @@ public class BookingCollection extends AbstractCollection {
 				}
 			}
 		}
+
+		showCollection.updateShow(s, s.getMovie(), s.getShowDateAndTime(), s.getCinema(), s.getTheater());
+
 		Booking b = new Booking(s, c, r );
 		this.allBookings.add(b);
 	}
@@ -112,14 +114,13 @@ public class BookingCollection extends AbstractCollection {
 	 * @param s - The updated show
 	 * @param c - The updated customer
 	 * @param r - The updated collection of row
-
+	 * @param showCollection - showCollection to update
 	 */
-	
-	public void updateBooking (Booking b , Show s, Customer c , List <Row> r ) {
+	public void updateBooking (Booking b , Show s, Customer c , List <Row> r, ShowCollection showCollection) {
 		for(Booking b2 : this.allBookings) {
 			if(b2.equals(b)) {
 				this.allBookings.remove(b2);
-				this.addBookings(s, c, r);
+				this.addBookings(s, c, r, showCollection);
 			}
 		}
 	}
@@ -138,20 +139,17 @@ public class BookingCollection extends AbstractCollection {
 	 * Read serialized file
 	 *
 	 * @return BookingCollection of the read file
-	 * @exception ClassCastException returns an empty BookingCollection
-	 * @exception FileNotFoundException returns an empty BookingCollection
 	 * @exception NullPointerException returns an empty BookingCollection
-	 * @exception IOException returns null
 	 */
 
-	public BookingCollection readCollection() throws IOException{
+	public BookingCollection readCollection() {
 		try(ObjectInputStream stream = new ObjectInputStream(new FileInputStream(this.filename))){
 
 			BookingCollection readThis = (BookingCollection) stream.readObject();
 			System.out.println("File: "  + this.filename + " has been read");
 			return readThis;
 		}
-		catch (ClassNotFoundException | FileNotFoundException | NullPointerException e) {
+		catch (ClassCastException | ClassNotFoundException | FileNotFoundException | NullPointerException e) {
 			System.err.println(e.getMessage());
 			e.printStackTrace();
 			return new BookingCollection(this.filename);

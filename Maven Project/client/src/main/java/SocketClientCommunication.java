@@ -5,12 +5,25 @@ import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
 
+/**
+ * Singleton class that handles establishing a connection to the server
+ * as well as the execution of received commands from server and sending
+ * commands to server.
+ *
+ * @author Konrad Rej
+ * @version 2021-03-01
+ */
 public enum SocketClientCommunication implements Runnable {
     INSTANCE();
 
     SocketClientCommunication() {
     }
 
+    /**
+     * Get singleton instance of this class
+     *
+     * @return SocketClientCommunication instance
+     */
     public static SocketClientCommunication getInstance() {
         return INSTANCE;
     }
@@ -20,11 +33,31 @@ public enum SocketClientCommunication implements Runnable {
     private ObjectInputStream in;
     private Socket socket;
 
+    /**
+     * Sets the ip address value to be used for socket from parameter ip. If
+     * the socket is not active yet it will write to System.out the ip to be
+     * used to open the socket, if the socket is already active it will instead
+     * write to System.err and inform about socket being active and which ip is
+     * already in use instead.
+     *
+     * @param ip the new ip address
+     */
     public void setIp(String ip) {
-        this.ip = ip;
+        if (this.socket == null) {
+            this.ip = ip;
+
+            System.out.println("IP set to: " + this.ip);
+        } else {
+            System.err.println("IP could not be set to: " + ip + ", already using: " + this.ip);
+        }
     }
 
-    public void sendCommand(ServerCommand command){
+    /**
+     * Sends a given ServerCommand through the socket to the server.
+     *
+     * @param command the given command to send to server
+     */
+    public void sendCommand(ServerCommand command) {
         try {
             this.out.writeObject(command);
             out.flush();
@@ -33,40 +66,46 @@ public enum SocketClientCommunication implements Runnable {
         }
     }
 
+    /**
+     * Establishes a socket and if successful gets input and output streams
+     * from it and then waits for commands to be received on the input stream
+     * after which it will run the execute function and continue to listen
+     * for commands.
+     */
     @Override
     public void run() {
         try {
             this.socket = new Socket(ip, 888);
             System.out.println("Connection established.");
-        }catch (IOException e){
+        } catch (IOException e) {
             System.err.println("Connection could not be established.");
             return;
         }
 
         try {
-
             out = new ObjectOutputStream(socket.getOutputStream());
+            in = new ObjectInputStream(socket.getInputStream());
 
-            in = new ObjectInputStream(this.socket.getInputStream());
-
-
-            while(socket.isConnected()){
+            while (socket.isConnected()) {
                 ClientCommand command = (ClientCommand) in.readObject();
-                command.execute(ClientModel.getInstance(), in, out);
-
+                command.execute(ClientModel.getInstance());
             }
-        } catch (EOFException e){
+        } catch (EOFException e) {
             closeConnection();
-        } catch(SocketException e){
+        } catch (SocketException e) {
             System.out.println("Connection reset.");
-        } catch (IOException | ClassNotFoundException e){
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    public void closeConnection(){
+    /**
+     * Flushes the out buffer before closing all relevant streams
+     * and socket.
+     */
+    public void closeConnection() {
         try {
-            if(!socket.isClosed()){
+            if (!socket.isClosed()) {
                 out.flush();
                 System.out.println("Connection closed.");
                 this.out.close();

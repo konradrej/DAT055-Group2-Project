@@ -25,8 +25,6 @@ public class CinemaClient {
 
         ClientModel.getInstance().setNavigator(new Navigator(new MainMenuPane(frame)));
 
-        //new MainMenuPane(frame).start();
-
         this.frame.pack();
         this.frame.setVisible(true);
     }

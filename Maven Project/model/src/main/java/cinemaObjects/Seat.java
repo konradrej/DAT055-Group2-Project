@@ -30,8 +30,8 @@ public class Seat implements Serializable {
      * @param s the Seat which is to be cloned
      */
     public Seat (Seat s){
-        this.seatNumber = s.seatNumber;
-        this.available = true;
+        this.seatNumber = s.getSeatNumber();
+        this.available = s.getAvailable();
     }
 
     /**
@@ -77,6 +77,8 @@ public class Seat implements Serializable {
 
     /**
      * Method for toggling the seat status
+     *
+     * @param status - TODO
      */
     public void updateSeatStatus(boolean status) {
         this.available = status;

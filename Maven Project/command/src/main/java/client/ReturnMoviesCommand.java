@@ -1,19 +1,21 @@
 package client;
 
+import collections.MovieCollection;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 public class ReturnMoviesCommand implements ClientCommand {
 
-    private Object movieCollection;
+    private final MovieCollection movieCollection;
 
-    public ReturnMoviesCommand(Object movieCollection){
+    public ReturnMoviesCommand(MovieCollection movieCollection){
         this.movieCollection = movieCollection;
     }
 
     @Override
-    public void execute(ClientHandler handler, ObjectInputStream in, ObjectOutputStream out) throws IOException, ClassNotFoundException {
+    public void execute(ClientHandler handler) throws IOException {
         handler.setMovieCollection(movieCollection);
     }
 }

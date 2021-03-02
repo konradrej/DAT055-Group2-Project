@@ -7,5 +7,5 @@ import java.io.Serializable;
 
 
 public interface ServerCommand extends Serializable {
-     void execute(ServerHandler handler, ObjectInputStream in, ObjectOutputStream out) throws IOException, ClassNotFoundException;
+     void execute(ServerHandler handler, ObjectOutputStream out) throws IOException, ClassNotFoundException;
 }

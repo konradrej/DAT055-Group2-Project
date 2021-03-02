@@ -6,5 +6,5 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 public interface ClientCommand extends Serializable {
-     void execute(ClientHandler handler, ObjectInputStream in, ObjectOutputStream out) throws IOException, ClassNotFoundException;
+     void execute(ClientHandler handler) throws IOException;
 }
