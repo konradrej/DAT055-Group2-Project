@@ -7,13 +7,21 @@ import java.awt.event.ActionEvent;
 
 /**
  * Pane for displaying status and options after making a booking.
+ *
+ * @author Konrad Rej
+ * @version 2021-03-02
  */
 public class StatusPane extends AbstractPane implements IObserver<ClientModel> {
     private final ClientModel cm;
     private ResponseStatus response;
     private final JPanel statusPanel;
 
-    private JPanel createStatusPanel(){
+    /**
+     * Generates the status panel.
+     *
+     * @return the JPanel with status pane items added
+     */
+    private JPanel createStatusPanel() {
         JPanel statusPanel = new JPanel();
         statusPanel.setLayout(new GridLayout());
 
@@ -23,7 +31,12 @@ public class StatusPane extends AbstractPane implements IObserver<ClientModel> {
         return statusPanel;
     }
 
-    private JPanel createUserControlsPanel(){
+    /**
+     * Generates the user controls panel.
+     *
+     * @return the JPanel with buttons added
+     */
+    private JPanel createUserControlsPanel() {
         JPanel userControls = new JPanel();
         userControls.setLayout(new FlowLayout());
 
@@ -33,7 +46,7 @@ public class StatusPane extends AbstractPane implements IObserver<ClientModel> {
 
         userControls.add(mainMenuButton);
 
-        if(!this.response.getStatus()){
+        if (!this.response.getStatus()) {
             JButton backButton = new JButton("Back");
             backButton.addActionListener((ActionEvent e) ->
                     cm.getNavigator().back());
@@ -44,7 +57,10 @@ public class StatusPane extends AbstractPane implements IObserver<ClientModel> {
         return userControls;
     }
 
-    private void updateStatusPanel(){
+    /**
+     * Updates text value of label in statusPanel to the received response.
+     */
+    private void updateStatusPanel() {
         JLabel statusLabel = (JLabel) statusPanel.getComponent(0);
         statusLabel.setText(this.response.getMessage());
     }
@@ -67,15 +83,22 @@ public class StatusPane extends AbstractPane implements IObserver<ClientModel> {
         contentPane.add(statusPanel, BorderLayout.CENTER);
     }
 
+    /**
+     * Method to be called my observed object to notify about changes.
+     * Retrieves new relevant values and updates the GUI accordingly.
+     *
+     * @param observable the observed object
+     */
     @Override
     public void notify(ClientModel observable) {
         ResponseStatus response = observable.getResponse();
 
-        if(response != null && response != this.response){
+        if (response != null && response != this.response) {
             this.response = response;
 
             updateStatusPanel();
             JPanel userControlsPanel = createUserControlsPanel();
+
             contentPane.add(userControlsPanel, BorderLayout.SOUTH);
             contentPane.validate();
         }

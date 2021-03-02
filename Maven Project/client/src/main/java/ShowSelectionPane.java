@@ -14,6 +14,9 @@ import java.util.*;
 
 /**
  * Pane for selecting a show
+ *
+ * @author Konrad Rej
+ * @version 2021-03-02
  */
 public class ShowSelectionPane extends AbstractPane implements IObserver<ClientModel> {
     private final ClientModel cm;
@@ -23,11 +26,16 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
     private JButton continueButton;
 
     /**
-     *  Variable for new booking
+     * Variable for new booking
      */
     private Show bookShow;
 
-    private JPanel createMovieShowSelectionPanel(){
+    /**
+     * Generates the movie and show selection panel.
+     *
+     * @return the JPanel with movie and show picking items added
+     */
+    public JPanel createMovieShowSelectionPanel() {
         JPanel movieShowSelectionPanel = new JPanel();
         JPanel movieSelectionPanel = createMovieSelectionPanel();
         JPanel showSelectionPanel = createShowSelectionPanel();
@@ -39,7 +47,12 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
         return movieShowSelectionPanel;
     }
 
-    private JPanel createMovieSelectionPanel() {
+    /**
+     * Generates the movie selection panel.
+     *
+     * @return the JPanel with movie picking items added
+     */
+    public JPanel createMovieSelectionPanel() {
         JPanel movieSelection = new JPanel();
 
         movieSelection.setLayout(new GridLayout(1, 1));
@@ -50,7 +63,12 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
         return movieSelection;
     }
 
-    private JPanel createShowSelectionPanel(){
+    /**
+     * Generates the show selection panel.
+     *
+     * @return the JPanel with show picking items added
+     */
+    public JPanel createShowSelectionPanel() {
         JPanel showSelection = new JPanel();
         showSelection.setLayout(new GridLayout());
 
@@ -61,7 +79,12 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
         return showSelection;
     }
 
-    private JPanel createUserControlsPanel(){
+    /**
+     * Generates the user controls panel.
+     *
+     * @return the JPanel with buttons added
+     */
+    public JPanel createUserControlsPanel() {
         JPanel userControls = new JPanel();
         userControls.setLayout(new FlowLayout());
 
@@ -85,20 +108,20 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
     /**
      * Updates movieSelection panel with new information from movieCollection
      */
-    public void updateMovieSelection(){
-        if(this.movieCollection != null){
+    public void updateMovieSelection() {
+        if (this.movieCollection != null) {
             Container con = (Container) movieShowSelectionPanel.getComponent(0);
             con.removeAll();
 
             JComboBox<String> movieList = new JComboBox<>();
             movieList.addItem("--- Pick a movie ---");
 
-            for(Movie movie : this.movieCollection.getAllMovies()){
+            for (Movie movie : this.movieCollection.getAllMovies()) {
                 movieList.addItem(movie.getTitle());
             }
 
             movieList.addActionListener(e -> {
-                if(movieList.getSelectedIndex() > 0){
+                if (movieList.getSelectedIndex() > 0) {
                     Container con2 = (Container) movieShowSelectionPanel.getComponent(1);
                     con2.removeAll();
 
@@ -120,14 +143,14 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
     /**
      * Updates showSelection panel with new information from showCollection
      */
-    public void updateShowSelection(){
+    public void updateShowSelection() {
         Container con = (Container) movieShowSelectionPanel.getComponent(1);
         con.removeAll();
 
         Set<String> dates = new HashSet<>();
         Set<String> times = new HashSet<>();
 
-        for(Show show : showCollection.getAllShows()){
+        for (Show show : showCollection.getAllShows()) {
             CinemaDate datetime = show.getShowDateAndTime();
 
             dates.add(datetime.getDay() + " " + datetime.getMonth());
@@ -140,7 +163,7 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
         datesList.sort((item1, item2) -> {
             List<String> months = new ArrayList<>();
 
-            for(String month : new DateFormatSymbols().getMonths()){
+            for (String month : new DateFormatSymbols().getMonths()) {
                 months.add(month.toLowerCase());
             }
 
@@ -168,17 +191,25 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
         contentPane.validate();
     }
 
-    private JScrollPane createShowGrid(List<String> datesList, List<String> timesList){
+    /**
+     * Generates a panel containing a grid based on provided date and time lists
+     * as well as adds shows to the matching grid spot.
+     *
+     * @param datesList list of dates to be added as columns
+     * @param timesList list of times to be added as rows
+     * @return the panel containing a grid of shows, show dates and show times
+     */
+    private JScrollPane createShowGrid(List<String> datesList, List<String> timesList) {
         JPanel showGrid = new JPanel();
         showGrid.setLayout(new GridLayout((timesList.size() + 1), (datesList.size() + 1)));
 
         JScrollPane gridWrapper = new JScrollPane(showGrid);
         gridWrapper.setLayout(new ScrollPaneLayout());
 
-        if(timesList.size() != 0 && datesList.size() != 0){
+        if (timesList.size() != 0 && datesList.size() != 0) {
             JPanel[][] panelArray = new JPanel[(timesList.size() + 1)][(datesList.size() + 1)];
-            for(int i = 0; i < panelArray.length; i++){
-                for(int j = 0; j < panelArray[i].length; j++){
+            for (int i = 0; i < panelArray.length; i++) {
+                for (int j = 0; j < panelArray[i].length; j++) {
                     JPanel panel = new JPanel();
                     panel.setLayout(new GridBagLayout());
                     panel.setBorder(BorderFactory.createEtchedBorder());
@@ -189,15 +220,15 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
                 }
             }
 
-            for(int i = 1; i < (datesList.size() + 1); i++){
+            for (int i = 1; i < (datesList.size() + 1); i++) {
                 panelArray[0][i].add(new JLabel(datesList.get(i - 1)));
             }
 
-            for(int i = 1; i < (timesList.size() + 1); i++){
-                panelArray[i][0].add(new JLabel(timesList.get(i-1)));
+            for (int i = 1; i < (timesList.size() + 1); i++) {
+                panelArray[i][0].add(new JLabel(timesList.get(i - 1)));
             }
 
-            for(Show show : showCollection.getAllShows()){
+            for (Show show : showCollection.getAllShows()) {
                 int i, j;
 
                 i = timesList.indexOf(show.getShowDateAndTime().getTime()) + 1;
@@ -218,7 +249,7 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
                 label.setAlignmentX(JLabel.CENTER_ALIGNMENT);
                 wrapperPanel.add(label);
 
-                if(show.getShow().getAllAvailableSeats().size() > 0){
+                if (show.getShow().getAllAvailableSeats().size() > 0) {
                     JButton button = new JButton("Select");
                     button.setActionCommand(show.getUniqueID());
                     button.setAlignmentX(JButton.CENTER_ALIGNMENT);
@@ -226,7 +257,7 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
                     button.addActionListener((ActionEvent e) -> {
                         bookShow = cm.getShowCollection().getShowByUID(e.getActionCommand());
 
-                        if(bookShow == null){
+                        if (bookShow == null) {
                             JOptionPane.showMessageDialog(
                                     frame,
                                     "Could not retrieve seats.",
@@ -235,7 +266,7 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
                             );
 
                             cm.getNavigator().back();
-                        }else{
+                        } else {
                             continueButton.setEnabled(true);
                         }
                     });
@@ -245,7 +276,7 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
 
                 panelArray[i][j].add(wrapperPanel);
             }
-        }else{
+        } else {
             JLabel label = new JLabel("No available shows.", JLabel.CENTER);
             label.setAlignmentX(JLabel.CENTER_ALIGNMENT);
 
@@ -275,24 +306,33 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
         contentPane.add(userControlsPanel, BorderLayout.SOUTH);
     }
 
+    /**
+     * Runs parents start function and also asks CinemaModel for movieCollection update.
+     */
     @Override
-    public void start(){
+    public void start() {
         super.start();
 
         cm.updateMovies();
     }
 
+    /**
+     * Method to be called my observed object to notify about changes.
+     * Retrieves new relevant values and updates the GUI accordingly.
+     *
+     * @param observable the observed object
+     */
     @Override
     public void notify(ClientModel observable) {
         MovieCollection movieCollection = observable.getMovieCollection();
         ShowCollection showCollection = observable.getShowCollection();
 
-        if(movieCollection != null && movieCollection != this.movieCollection){
+        if (movieCollection != null && movieCollection != this.movieCollection) {
             this.movieCollection = movieCollection;
 
             updateMovieSelection();
         }
-        if(showCollection != null && showCollection != this.showCollection){
+        if (showCollection != null && showCollection != this.showCollection) {
             this.showCollection = showCollection;
 
             updateShowSelection();

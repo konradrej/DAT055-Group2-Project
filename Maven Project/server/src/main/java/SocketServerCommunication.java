@@ -8,7 +8,7 @@ import java.net.Socket;
  * ConnectionHandler thread for each active connection.
  *
  * @author Konrad Rej
- * @version 2021-03-01
+ * @version 2021-03-02
  */
 public enum SocketServerCommunication implements Runnable {
     INSTANCE();
@@ -18,8 +18,6 @@ public enum SocketServerCommunication implements Runnable {
                 listenForConnection = false));
     }
 
-    boolean listenForConnection = true;
-
     /**
      * Retrieves singleton instance of SockerCommunication.
      *
@@ -28,6 +26,8 @@ public enum SocketServerCommunication implements Runnable {
     public static SocketServerCommunication getInstance() {
         return INSTANCE;
     }
+
+    boolean listenForConnection = true;
 
     /**
      * Starts listening on port 888 for connections and

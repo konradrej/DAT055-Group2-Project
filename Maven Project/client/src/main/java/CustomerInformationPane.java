@@ -13,26 +13,30 @@ import java.util.List;
 
 /**
  * Pane for inputting customer information during booking.
+ *
+ * @author Konrad Rej
+ * @version 2021-03-02
  */
 public class CustomerInformationPane extends AbstractPane implements IObserver<ClientModel> {
     private final ClientModel cm;
     private final JPanel customerInformationPanel;
     private final List<JTextField> customerInfoFields = new ArrayList<>();
-
-    /**
-     * User control buttons
-     */
     private JButton continueButton;
 
     /**
-     *  Variables for new booking
+     * Variables for new booking
      */
     private final Show bookShow;
     private final List<Row> bookRows;
     private Customer bookCustomer;
 
-    private JPanel createCustomerInformationPanel(){
-        if(bookCustomer == null){
+    /**
+     * Generates the customer information entering panel.
+     *
+     * @return the JPanel with input fields added
+     */
+    public JPanel createCustomerInformationPanel() {
+        if (bookCustomer == null) {
             bookCustomer = new Customer();
         }
 
@@ -71,7 +75,7 @@ public class CustomerInformationPane extends AbstractPane implements IObserver<C
                 update();
             }
 
-            public void update(){
+            public void update() {
                 bookCustomer.setName(enterNameTextField.getText());
                 updateContinueButton();
             }
@@ -96,7 +100,7 @@ public class CustomerInformationPane extends AbstractPane implements IObserver<C
                 update();
             }
 
-            public void update(){
+            public void update() {
                 bookCustomer.setSSN(enterSSNTextField.getText());
                 updateContinueButton();
             }
@@ -121,7 +125,7 @@ public class CustomerInformationPane extends AbstractPane implements IObserver<C
                 update();
             }
 
-            public void update(){
+            public void update() {
                 bookCustomer.setPhoneNumber(enterTelephoneTextField.getText());
                 updateContinueButton();
             }
@@ -147,7 +151,12 @@ public class CustomerInformationPane extends AbstractPane implements IObserver<C
         return customerInformationPanel;
     }
 
-    private JPanel createUserControlsPanel(){
+    /**
+     * Generates the user controls panel.
+     *
+     * @return the JPanel with buttons added
+     */
+    public JPanel createUserControlsPanel() {
         JPanel userControls = new JPanel();
         userControls.setLayout(new FlowLayout());
 
@@ -157,7 +166,7 @@ public class CustomerInformationPane extends AbstractPane implements IObserver<C
 
         continueButton.setEnabled(false);
 
-        continueButton.addActionListener((ActionEvent e) ->{
+        continueButton.addActionListener((ActionEvent e) -> {
             cm.createBooking(bookShow, bookCustomer, new ArrayList<>(bookRows));
             cm.getNavigator().startNewPane(new StatusPane(frame));
         });
@@ -175,7 +184,11 @@ public class CustomerInformationPane extends AbstractPane implements IObserver<C
         return userControls;
     }
 
-    private void updateCustomerInformationPanel(){
+    /**
+     * Updates the customer information entering panel by entering
+     * customer information from server into the input fields.
+     */
+    public void updateCustomerInformationPanel() {
         JPanel con = (JPanel) customerInformationPanel.getComponent(1);
         JPanel con2 = (JPanel) con.getComponent(0);
         JTextField[] textFields = new JTextField[3];
@@ -195,11 +208,11 @@ public class CustomerInformationPane extends AbstractPane implements IObserver<C
     /**
      * Checks text fields and updates continue button if all fields contain text.
      */
-    public void updateContinueButton(){
+    public void updateContinueButton() {
         boolean enabled = true;
 
-        for(JTextField textField : customerInfoFields){
-            if(textField.getText() == null || textField.getText().equals("")){
+        for (JTextField textField : customerInfoFields) {
+            if (textField.getText() == null || textField.getText().equals("")) {
                 enabled = false;
                 break;
             }
@@ -233,11 +246,17 @@ public class CustomerInformationPane extends AbstractPane implements IObserver<C
         contentPane.add(userControlsPanel, BorderLayout.SOUTH);
     }
 
+    /**
+     * Method to be called my observed object to notify about changes.
+     * Retrieves new relevant values and updates the GUI accordingly.
+     *
+     * @param observable the observed object
+     */
     @Override
     public void notify(ClientModel observable) {
         Customer bookCustomer = observable.getCustomer();
 
-        if(bookCustomer != null && bookCustomer != this.bookCustomer){
+        if (bookCustomer != null && bookCustomer != this.bookCustomer) {
             this.bookCustomer = bookCustomer;
 
             updateCustomerInformationPanel();

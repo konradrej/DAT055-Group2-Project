@@ -4,16 +4,19 @@ import java.awt.event.ActionEvent;
 
 /**
  * Pane for displaying the main menu.
+ *
+ * @author Konrad Rej
+ * @version 2021-03-02
  */
 public class MainMenuPane extends AbstractPane {
     private final ClientModel cm;
 
     /**
-     * Generates the main menu pane.
+     * Generates the main menu panel.
      *
      * @return the JPanel with main menu items added
      */
-    public JPanel createMainMenuPanel(){
+    public JPanel createMainMenuPanel() {
         JPanel mainMenuPanel = new JPanel();
         mainMenuPanel.setLayout(new GridLayout(3, 1, 10, 10));
 

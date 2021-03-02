@@ -1,22 +1,37 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * @author Konrad Rej
+ * @version 2021-03-02
+ */
 public abstract class AbstractPane {
     protected final JFrame frame;
     protected final Container originalContentPane;
     protected final Container contentPane;
 
+    /**
+     * Constructs an abstractPane
+     *
+     * @param frame the JFrame window to be used
+     */
     public AbstractPane(JFrame frame) {
         this.frame = frame;
         this.originalContentPane = this.frame.getContentPane();
-        contentPane = new JPanel();
+        this.contentPane = new JPanel();
     }
 
+    /**
+     *
+     */
     public void start() {
         this.frame.setContentPane(this.contentPane);
         this.frame.pack();
     }
 
+    /**
+     *
+     */
     protected void stop() {
         this.frame.setContentPane(this.originalContentPane);
         this.frame.pack();

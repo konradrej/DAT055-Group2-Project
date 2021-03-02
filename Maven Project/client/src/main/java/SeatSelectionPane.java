@@ -12,6 +12,9 @@ import java.util.List;
 
 /**
  * Pane for selecting seat in theater.
+ *
+ *  @author Konrad Rej
+ *  @version 2021-03-02
  */
 public class SeatSelectionPane extends AbstractPane {
     private final ClientModel cm;
@@ -25,7 +28,12 @@ public class SeatSelectionPane extends AbstractPane {
     private final Show bookShow;
     private List<Row> bookRows;
 
-    private JPanel createSeatSelectionPanel(){
+    /**
+     * Generates the seat selection panel.
+     *
+     * @return the JPanel with screen and seat items added
+     */
+    public JPanel createSeatSelectionPanel(){
         bookRows = new ArrayList<>();
 
         JPanel rowsPanel = new JPanel();
@@ -46,31 +54,28 @@ public class SeatSelectionPane extends AbstractPane {
         JPanel wrapperPanel = new JPanel();
         wrapperPanel.setLayout(new BorderLayout());
 
-        if(bookShow != null){
-            Collection<Row> rows = bookShow.getTheater().getCollectionOfRows();
-            for(Row row : rows){
-                JPanel rowPanel = new JPanel();
+        Collection<Row> rows = bookShow.getTheater().getCollectionOfRows();
+        for(Row row : rows){
+            JPanel rowPanel = new JPanel();
+            rowPanel.setPreferredSize(new Dimension(contentPane.getWidth(), 35));
 
-                rowPanel.setPreferredSize(new Dimension(contentPane.getWidth(), 35));
+            for(Seat seat : row.getAllSeats()){
+                JButton seatButton = new JButton();
+                seatButton.setPreferredSize(new Dimension(25, 25));
 
-                for(Seat seat : row.getAllSeats()){
-                    JButton seatButton = new JButton();
-                    seatButton.setPreferredSize(new Dimension(25, 25));
+                if(seat.getAvailable()){
+                    seatButton.setBackground(Color.GREEN);
 
-                    if(seat.getAvailable()){
-                        seatButton.setBackground(Color.GREEN);
-
-                        seatButton.addActionListener((ActionEvent e) ->
-                                handleSeatClick(row, seat, seatButton));
-                    }else{
-                        seatButton.setBackground(Color.RED);
-                    }
-
-                    rowPanel.add(seatButton);
+                    seatButton.addActionListener((ActionEvent e) ->
+                            handleSeatClick(row, seat, seatButton));
+                }else{
+                    seatButton.setBackground(Color.RED);
                 }
 
-                rowsPanel.add(rowPanel);
+                rowPanel.add(seatButton);
             }
+
+            rowsPanel.add(rowPanel);
         }
 
         wrapperPanel.add(screenWrapper, BorderLayout.NORTH);
@@ -79,7 +84,12 @@ public class SeatSelectionPane extends AbstractPane {
         return wrapperPanel;
     }
 
-    private JPanel createUserControlsPanel(){
+    /**
+     * Generates the user controls panel.
+     *
+     * @return the JPanel with buttons added
+     */
+    public JPanel createUserControlsPanel(){
         JPanel userControls = new JPanel();
         userControls.setLayout(new FlowLayout());
 
@@ -105,7 +115,18 @@ public class SeatSelectionPane extends AbstractPane {
         return userControls;
     }
 
-    private void handleSeatClick(Row row, Seat seat, JButton seatButton){
+    /**
+     * On clicking a seat this method runs and either adds the seat to existing
+     * row in bookRows or creates a new row and adds seat to it and the row itself
+     * to bookRows as well as changes the button color to indicate a selected seat.
+     * If the seat was already selected it instead removes it from bookRows and
+     * changes color back to normal to indicate a non selected seat.
+     *
+     * @param row the seat row
+     * @param seat the selected seat
+     * @param seatButton the selected seats button
+     */
+    public void handleSeatClick(Row row, Seat seat, JButton seatButton){
         int rowIndex = -1;
 
         for(int i = 0; i < bookRows.size(); i++){
