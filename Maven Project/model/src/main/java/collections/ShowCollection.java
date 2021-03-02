@@ -9,9 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Anthon Lenander, Erik Kieu, Phong Nguyen
- * @version version 0.0.0
+ * This class handles the collection of show,
+ * that may modify and provide different show
+ *
+ * @author Phong Nguyen
+ * @version 2021-03-02
  */
+
 public class ShowCollection extends AbstractCollection {
 
     private static final long serialVersionUID = 368284506033169560L;
@@ -67,9 +71,9 @@ public class ShowCollection extends AbstractCollection {
                 months.add(month.toLowerCase());
             }
 
-            for(int i = 1; i <= months.size(); i++){
+            for (int i = 1; i <= months.size(); i++) {
 
-                if(months.get(i-1).equals(showDate.getMonth().toLowerCase())){
+                if (months.get(i - 1).equals(showDate.getMonth().toLowerCase())) {
                     showDateMonthNumber = i;
                     break;
                 }
@@ -152,8 +156,8 @@ public class ShowCollection extends AbstractCollection {
      */
 
     public void removeShow(Show s) {
-        for(Show s2: this.allShows) {
-            if(s2.equals(s)) {
+        for (Show s2 : this.allShows) {
+            if (s2.equals(s)) {
                 this.allShows.remove(s2);
                 return;
             }
@@ -181,13 +185,19 @@ public class ShowCollection extends AbstractCollection {
         }
     }
 
+    /**
+     * Method to locate a show given an ID
+     *
+     * @param uid - The ID of the show
+     * @return a show of the given ID
+     */
+
     public Show getShowByUID(String uid) {
         for (Show s : this.getAllShows()) {
             if (uid.equals(s.getUniqueID())) {
                 return s;
             }
         }
-        //TODO något annat
         return null;
     }
 
@@ -212,10 +222,9 @@ public class ShowCollection extends AbstractCollection {
     }
 
     /**
-     * Read serialized file
+     * Read serialized file from the filenames path
      *
      * @return ShowCollection of the read file
-     * @throws NullPointerException returns an empty ShowCollection
      */
 
     public ShowCollection readCollection() {
