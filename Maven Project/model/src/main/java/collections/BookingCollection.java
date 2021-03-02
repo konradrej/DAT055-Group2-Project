@@ -69,7 +69,7 @@ public class BookingCollection extends AbstractCollection {
 	 * @param s - The show of the booking
 	 * @param c - The customer of the booking
 	 * @param r - (TODO: ) The collection of row of the booking
-
+	 * @param showCollection - showCollection to update
 	 */
 	public void addBookings(Show s, Customer c , List<Row> r, ShowCollection showCollection) {
 		for(Row row1: r){
@@ -114,7 +114,7 @@ public class BookingCollection extends AbstractCollection {
 	 * @param s - The updated show
 	 * @param c - The updated customer
 	 * @param r - The updated collection of row
-
+	 * @param showCollection - showCollection to update
 	 */
 	public void updateBooking (Booking b , Show s, Customer c , List <Row> r, ShowCollection showCollection) {
 		for(Booking b2 : this.allBookings) {

@@ -89,8 +89,8 @@ public class MovieCollection extends AbstractCollection {
 	 * 
 	 * @param title - selected title for the movies
 	 * @param genre - selected genre for the movies
+	 * @return TODO
 	 */
-	
 	public List <Movie> getSelectedMovies(String title, String genre){
 		List <Movie> selectedMovies = new ArrayList<>();
 		
