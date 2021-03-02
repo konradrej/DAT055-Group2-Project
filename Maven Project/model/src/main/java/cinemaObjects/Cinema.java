@@ -21,11 +21,10 @@ public class Cinema implements Serializable {
      * Constructor for initializing the cinemaObjects.Cinema instance
      *
      * @param name        the name of the cinema
-     * @param allTheaters the Collection of allTheatres
      */
-    public Cinema(String name, List<Theater> allTheaters) {
+    public Cinema(String name) {
         this.name = name;
-        this.allTheaters = allTheaters;
+        this.allTheaters = new ArrayList<>();
     }
 
     /**
@@ -67,9 +66,7 @@ public class Cinema implements Serializable {
     /**
      * Method for creating a new theater given rows, cinema...
      */
-    public void addTheater() {
-        // DO WE NEED THESE?
-        //TODO: parameters
-        //TODO: CODE
+    public void addTheater(Theater t) {
+        this.allTheaters.add(t);
     }
 }

@@ -6,17 +6,22 @@ import java.text.DateFormatSymbols;
 import java.util.ArrayList;
 import cinemaObjects.*;
 
+/**
+ * This class handles GUI for the admin and
+ * execute operations such as adding theaters and shows.
+ *
+ *
+ * @author Phong Nguyen
+ * @version 2021-03-02
+ */
+
 public class CinemaAdmin {
     private int page;
-    private final CardLayout cl;
-    private final JPanel cardPanel;
-    private final JPanel buttonPanel;
+    private Container pane;
     private Movie selectedMovie;
     private Theater selectedTheater;
     private CinemaDate date;
-    private JScrollPane panelDay;
-    private JList<String> jlDay;
-
+    private DefaultListModel<String> dayList;
 
     /**
      * Constructor for initializing the CinemaAdmin with GUI
@@ -24,38 +29,165 @@ public class CinemaAdmin {
 
     public CinemaAdmin()
     {
-        cl = new CardLayout();
-        cardPanel = new JPanel();
-        buttonPanel = new JPanel();
         JFrame frame = new JFrame();
         frame.setTitle("Admin");
-        frame.setSize(300, 300);
+        frame.setSize(400, 400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        cardPanel.setLayout(cl);
         frame.setResizable(false);
-
-        page = 1;
+        pane = frame.getContentPane();
         date = new CinemaDate();
+        page = 1;
 
-        createListsWithListeners();
-        createButtonsWithListeners();
-
-        Container pane = frame.getContentPane();
-        pane.add(cardPanel, BorderLayout.NORTH);
-        pane.add(buttonPanel, BorderLayout.SOUTH);
+        makeMenu(frame);
         frame.setVisible(true);
     }
 
     /**
-     * Method for initializing every lists for Movie, Theater, Month, Day, Time with MouseListeners
+     * Constructs the menu bar and inserts sections
+     *
+     * @param frame of the interface window
+     */
+
+    public void makeMenu(JFrame frame){
+        JMenuBar menuBar = new JMenuBar();
+        frame.setJMenuBar(menuBar);
+
+        JMenu fileMenu = new JMenu("Menu");
+        menuBar.add(fileMenu);
+
+        JMenuItem addShow = new JMenuItem("Add show");
+        addShow.addActionListener((ActionEvent e) -> displayAddShowMenu(frame));
+
+        JMenuItem addTheater = new JMenuItem("Add Theater");
+        addTheater.addActionListener((ActionEvent e) -> displayAddTheaterMenu(frame));
+
+        fileMenu.add(addShow);
+        fileMenu.add(addTheater);
+    }
+
+    /**
+     * Display section where you can add shows
+     *
+     * @param frame of the interface window
+     */
+
+    public void displayAddShowMenu(JFrame frame){
+        frame.setVisible(false);
+        pane.removeAll();
+        createListsWithListeners();
+        frame.validate();
+        frame.setVisible(true);
+    }
+
+    /**
+     * Display section where you can add theaters
+     *
+     * @param frame of the interface window
+     */
+
+    public void displayAddTheaterMenu(JFrame frame){
+        frame.setVisible(false);
+        pane.removeAll();
+        frame.setLayout(new GridLayout(2,1));
+        createTheaterOption();
+        frame.validate();
+        frame.setVisible(true);
+    }
+
+    /**
+     * This method handles the graphics and controls for creating a theater,
+     * with Theater, Row and Seat.
+     */
+
+    public void createTheaterOption(){
+        DefaultListModel<Object> listModel = new DefaultListModel<>();
+        ArrayList <Row> rows = new ArrayList<>();
+        JPanel insertPanel = new JPanel();
+        JPanel listPanel = new JPanel();
+
+        JButton addTheaterButton = new JButton("Add Theater");
+        addTheaterButton.addActionListener((ActionEvent e) -> {
+            int theaterNr = CinemaBookingSystem.getInstance().getCinema().getTheaterCollection().size() + 1;
+            if(!(rows.isEmpty())) {
+                Theater t = new Theater(theaterNr, rows);
+                CinemaBookingSystem.getInstance().getCinema().addTheater(t);
+                int sum = 0;
+                for(Row r : rows){
+                    sum += r.getAllSeats().size();
+                }
+                JOptionPane.showMessageDialog(null, "Theater " + theaterNr + " has been added with " + sum +
+                        " seats!", "Theater added to " +
+                        CinemaBookingSystem.getInstance().getCinema().getCinemaName(), JOptionPane.INFORMATION_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Insert rows!", "Empty row list", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+        JButton removeRowButton = new JButton("Remove row");
+        removeRowButton.addActionListener((ActionEvent e ) -> {
+            if(!(rows.isEmpty())){
+                listModel.removeElement(listModel.lastElement());
+                rows.remove(rows.size() - 1);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Insert rows!", "Invalid list", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+        JList<Object> jlRows = new JList<>(listModel);
+        JScrollPane listOfRows = new JScrollPane(jlRows);
+        listOfRows.setColumnHeaderView(new JLabel(" Rows:"));
+
+        JPanel test = new JPanel();
+        test.setLayout(new GridLayout(2, 1, 5, 5));
+        listPanel.add(listOfRows, BorderLayout.WEST);
+        test.add(addTheaterButton);
+        test.add(removeRowButton);
+        listPanel.add(test, BorderLayout.EAST);
+
+        JLabel insertLabel = new JLabel("Insert amount of seat (1-15)");
+        JTextField insertText = new JTextField(5);
+        JButton insertSeatsButton = new JButton("Add seats");
+        insertSeatsButton.addActionListener((ActionEvent e ) -> {
+            int seats = Integer.parseInt(insertText.getText());
+            if(seats > 0 && seats <= 15){
+                int rowNr = listModel.size() + 1;
+                listModel.addElement("Row " + rowNr + " " + "Seats: " + seats);
+                ArrayList<Seat> seatList = new ArrayList<>();
+                for(int i = 0; i < seats; i++){
+                    seatList.add(new Seat(i+1));
+                }
+                rows.add(new Row(rowNr, seatList));
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Insert a seat amount between 1-15", "Invalid amount",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+        insertPanel.add(insertLabel);
+        insertPanel.add(insertText);
+        insertPanel.add(insertSeatsButton);
+        pane.add(insertPanel);
+        pane.add(listPanel);
+    }
+
+
+
+    /**
+     * This method handles the graphics and controls for creating a show,
+     * with Theater, Movie , Day and Time.
      */
 
     public void createListsWithListeners(){
-        jlDay = new JList<>();
+        dayList = new DefaultListModel<>();
+        CardLayout cl = new CardLayout();
+        JPanel cardPanel = new JPanel();
+        JPanel buttonPanel = new JPanel();
+        cardPanel.setLayout(cl);
+
         ArrayList<String> movieArr = new ArrayList<>();
         ArrayList<String> theaterArr = new ArrayList<>();
-
-
 
         for(Movie m : CinemaBookingSystem.getInstance().getMovieCollection().getAllMovies()){
             movieArr.add(m.getTitle());
@@ -64,7 +196,6 @@ public class CinemaAdmin {
         for(Theater t : CinemaBookingSystem.getInstance().getCinema().getTheaterCollection()){
             theaterArr.add(Integer.toString(t.getTheaterNumber()));
         }
-
 
         JList<Object> jlMovie = new JList<>(movieArr.toArray());
         JScrollPane panelMovies = new JScrollPane(jlMovie);
@@ -78,7 +209,8 @@ public class CinemaAdmin {
         JScrollPane panelMonth = new JScrollPane(jlMonth);
         panelMonth.setColumnHeaderView(new JLabel("Month:"));
 
-        panelDay = new JScrollPane(jlDay);
+        JList<String> jlDay  = new JList<>(dayList);
+        JScrollPane panelDay = new JScrollPane(jlDay);
         panelDay.setColumnHeaderView(new JLabel("Day:"));
 
         JList<String> jlTime = new JList<>(new String [] {"17:00", "19:00", "21:00"});
@@ -128,21 +260,24 @@ public class CinemaAdmin {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 1) {
+                    dayList.removeAllElements();
                     String s = jlMonth.getSelectedValue();
                     date = date.setMonth(s);
                     if(date.thirtyoneDays()) {
-                        jlDay = new JList<>(setDaysInList(31));
+                        for(int i = 1; i <= 31 ; i++){
+                            dayList.addElement(Integer.toString(i));
+                        }
                     }
                     else if (date.twentyeightDays()){
-                        jlDay = new JList<>(setDaysInList(28));
+                        for(int i = 1; i <= 28 ; i++){
+                            dayList.addElement(Integer.toString(i));
+                        }
                     }
                     else{
-                        jlDay = new JList<>(setDaysInList(30));
+                        for(int i = 1; i <= 30 ; i++){
+                            dayList.addElement(Integer.toString(i));
+                        }
                     }
-                    panelDay = new JScrollPane(jlDay);
-                    cardPanel.add(panelDay, "4");
-                    panelDay.setColumnHeaderView(new JLabel("Day: "));
-                    jlDay.addMouseListener(dayListener);
                 }
             }
         };
@@ -167,73 +302,41 @@ public class CinemaAdmin {
         cardPanel.add(panelMonth, "3");
         cardPanel.add(panelDay, "4");
         cardPanel.add(panelTime, "5");
-    }
+        pane.add(cardPanel, BorderLayout.NORTH);
 
-    /**
-     * Method for creating buttons with ActionListeners
-     */
-
-    public void createButtonsWithListeners(){
         JButton prev = new JButton("Previous");
         JButton next = new JButton("Next");
         JButton addShow = new JButton("Add Show");
         prev.setEnabled(false);
 
-        next.addActionListener((ActionEvent e) -> nextPage());
-        prev.addActionListener((ActionEvent e) ->  prevPage());
+        next.addActionListener((ActionEvent e) -> {
+            if (page < 5) {
+                cl.show(cardPanel, "" + (++page));
+                prev.setEnabled(true);
+            }
+            else {
+                next.setEnabled(false);
+            }
+
+        });
+
+        prev.addActionListener((ActionEvent e2) -> {
+            if (page > 1) {
+                cl.show(cardPanel, "" + (--page));
+                next.setEnabled(true);
+            }
+            else{
+                prev.setEnabled(false);
+            }
+        });
         addShow.addActionListener((ActionEvent e)->  addShowToCollection());
 
         buttonPanel.add(prev);
         buttonPanel.add(next);
         buttonPanel.add(addShow);
+        pane.add(buttonPanel, BorderLayout.SOUTH);
     }
 
-    /**
-     * Method to return an amount of days ( 1 to x)
-     *
-     * @param days amount of days
-     * @return a string array of days
-     */
-
-    public String [] setDaysInList(int days){
-        String [] dayInArr = new String[days];
-        for(int i = 1; i <= days ; i++){
-            dayInArr[i-1] = Integer.toString(i);
-        }
-        return dayInArr;
-    }
-
-    /**
-     * Method to switch to next page of the panel
-     */
-
-    public void nextPage(){
-        JButton next = (JButton) buttonPanel.getComponent(1);
-        JButton prev = (JButton) buttonPanel.getComponent(0);
-        if (page < 5) {
-            cl.show(cardPanel, "" + (++page));
-            prev.setEnabled(true);
-        }
-        else{
-            next.setEnabled(false);
-        }
-    }
-
-    /**
-     * Method to switch to previous page of the panel
-     */
-
-    public void prevPage(){
-        JButton next = (JButton) buttonPanel.getComponent(1);
-        JButton prev = (JButton) buttonPanel.getComponent(0);
-        if (page > 1) {
-            cl.show(cardPanel, "" + (--page));
-            next.setEnabled(true);
-        }
-        else{
-            prev.setEnabled(false);
-        }
-    }
 
     /**
      * Method that adds a show if Movie, Theater and date are valid
@@ -266,7 +369,7 @@ public class CinemaAdmin {
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         new Thread(SocketServerCommunication.getInstance()).start();
         CinemaBookingSystem.getInstance().readAllCollections();
         CinemaBookingSystem.getInstance().getMovieCollection().scanNewMovies();
