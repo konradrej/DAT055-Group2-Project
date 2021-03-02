@@ -17,7 +17,7 @@ import java.util.List;
  * to the ResponseCreateBookingCommand class.
  *
  * @author Anthon Lenander
- * @version 2021-02-03
+ * @version 2021-03-02
  */
 public class CreateBookingCommand implements ServerCommand {
 
@@ -43,7 +43,7 @@ public class CreateBookingCommand implements ServerCommand {
      *
      * @param handler A reference to the ServerHandler
      * @param out     A reference to the ObjectOutputStream
-     * @throws IOException
+     * @throws IOException If an input or output exception occurred
      */
     @Override
     public void execute(ServerHandler handler, ObjectOutputStream out) throws IOException {

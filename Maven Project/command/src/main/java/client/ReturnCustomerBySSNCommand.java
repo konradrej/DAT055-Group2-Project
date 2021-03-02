@@ -11,7 +11,7 @@ import java.io.*;
  * Customer, where the Customer instance has the given SSN.
  *
  * @author Anthon Lenander
- * @version 2021-02-03
+ * @version 2021-03-02
  */
 public class ReturnCustomerBySSNCommand implements ClientCommand {
 
@@ -30,7 +30,7 @@ public class ReturnCustomerBySSNCommand implements ClientCommand {
      * Method for setting the customer of the client given an SSN in the ClientHandler
      *
      * @param handler A reference to the ClientHandler
-     * @throws IOException
+     * @throws IOException If an input or output exception occurred
      */
     @Override
     public void execute(ClientHandler handler) throws IOException {

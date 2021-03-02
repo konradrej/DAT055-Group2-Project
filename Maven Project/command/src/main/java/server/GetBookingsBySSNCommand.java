@@ -12,7 +12,7 @@ import java.io.ObjectOutputStream;
  * the social security number.
  *
  * @author Anthon Lenander
- * @version 2021-02-03
+ * @version 2021-03-02
  */
 public class GetBookingsBySSNCommand implements ServerCommand {
     private final String SSN;
@@ -31,7 +31,7 @@ public class GetBookingsBySSNCommand implements ServerCommand {
      *
      * @param handler A reference to the ServerHandler
      * @param out     A reference to the ObjectOutputStream
-     * @throws IOException
+     * @throws IOException If an input or output exception occurred
      */
     @Override
     public void execute(ServerHandler handler, ObjectOutputStream out) throws IOException {

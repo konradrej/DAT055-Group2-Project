@@ -14,7 +14,7 @@ import java.io.ObjectOutputStream;
  * the execution of the command.
  *
  * @author Anthon Lenander
- * @version 2021-02-03
+ * @version 2021-03-02
  */
 public class ResponseCancelBookingCommand implements ClientCommand {
 
@@ -33,7 +33,7 @@ public class ResponseCancelBookingCommand implements ClientCommand {
      * Method that sets the responseStatus of the ClientHandler from the called command
      *
      * @param handler A reference to the ClientHandler, to call methods from the ClientHandler instance
-     * @throws IOException
+     * @throws IOException If an input or output exception occurred
      */
     @Override
     public void execute(ClientHandler handler) throws IOException {

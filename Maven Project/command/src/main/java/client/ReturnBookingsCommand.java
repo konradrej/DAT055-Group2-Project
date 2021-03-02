@@ -13,7 +13,7 @@ import java.util.List;
  * returning a list of bookings.
  *
  * @author Anthon Lenander
- * @version 2021-02-03
+ * @version 2021-03-02
  */
 public class ReturnBookingsCommand implements ClientCommand {
 
@@ -32,7 +32,7 @@ public class ReturnBookingsCommand implements ClientCommand {
      * Method for setting the bookings list of the client
      *
      * @param handler A reference to the ClientHandler object
-     * @throws IOException
+     * @throws IOException If an input or output exception occurred
      */
     @Override
     public void execute(ClientHandler handler) throws IOException {
