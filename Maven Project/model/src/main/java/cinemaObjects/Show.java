@@ -102,7 +102,6 @@ public class Show implements Serializable {
 	 * 
 	 * @return 				returns a collection of Seat, containing all seats in the theater
 	 */
-	//TODO Should seats be mapped to a specific row? For example Map(row, seat)
 	public ArrayList<Seat> getAllSeats()
 	{
 		ArrayList<Seat> allSeats = new ArrayList<>();
@@ -138,7 +137,6 @@ public class Show implements Serializable {
 	 * @param numOfSeats	the number of seats to find	
 	 * @return 				returns a collection of Seat, containing numOfSeats available seats
 	 */
-	//TODO Vad gör denna? Svar: Den returnerar en arraylist av alla Seats som är lediga
 	public ArrayList<Seat> getAvailableSeats(int numOfSeats)
 	{
 		ArrayList<Seat> availableSeats = new ArrayList <> ();

@@ -175,7 +175,7 @@ public class Row implements Serializable {
 	 * @param numOfSeats	the number of adjacent available seats to find
 	 * @return 				returns a list of size numOfSeats if numOfSeats adjacent available seats are found
      */
-    public ArrayList<Seat> getAdjacentAvailableSeats (int numOfSeats){
+    public ArrayList<Seat> getAdjacentAvailableSeats (int numOfSeats) {
 		ArrayList<Seat> availableSeatsOfRow = this.getAvailableSeats(numOfSeats);
 
 		Seat[] availableSeatsOfRowArray = (Seat[])availableSeatsOfRow.toArray();
@@ -198,6 +198,10 @@ public class Row implements Serializable {
 			if(availableAdjacent)
 			{
 				return new ArrayList<>(Arrays.asList(availableAdjacentSeatsOfRowArray).subList(0, numOfSeats));
+			}
+			else
+			{
+				availableAdjacentSeatsOfRowArray = new Seat[numOfSeats];
 			}
 		}
 		

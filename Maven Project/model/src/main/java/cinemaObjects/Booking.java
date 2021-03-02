@@ -13,7 +13,6 @@ public class Booking implements Serializable {
 	private static final long serialVersionUID = 408224943807153172L;
 	private Show show;
 	private Customer customer;
-	//TODO List of (map(Row,Seat))????
 	private List<Row> rows;
 	private Boolean cancelled;
 	

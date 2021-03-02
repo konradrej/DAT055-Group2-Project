@@ -78,7 +78,7 @@ public class Seat implements Serializable {
     /**
      * Method for toggling the seat status
      *
-     * @param status - TODO
+     * @param status    a boolean value representing the current status of the seat
      */
     public void updateSeatStatus(boolean status) {
         this.available = status;
