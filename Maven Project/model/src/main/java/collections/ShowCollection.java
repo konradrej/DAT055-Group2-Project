@@ -1,8 +1,6 @@
 package collections;
 
 import cinemaObjects.*;
-
-import java.awt.*;
 import java.io.*;
 import java.text.DateFormatSymbols;
 import java.util.ArrayList;
@@ -106,6 +104,7 @@ public class ShowCollection extends AbstractCollection {
         return s;
     }
 
+    //TODO
     public List<Seat> getAllSeats(Show show) {
         List<Seat> allSeats = new ArrayList<>();
 
@@ -204,7 +203,7 @@ public class ShowCollection extends AbstractCollection {
     /**
      * Get method to get all shows from the objects collection
      *
-     * @return - a collection of shows
+     * @return - a list of shows
      */
 
     public List<Show> getAllShows() {

@@ -1,5 +1,6 @@
 package collections;
 
+import java.awt.print.Book;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,15 +34,14 @@ public class BookingCollection extends AbstractCollection {
     /**
      * Get all bookings given a customer
      *
-     * @param c - the customer
-     * @return a collection of bookings of the customer
+     * @param SSNorPhone - the SSN or Phone number of the customer
+     * @return a list of bookings of the customer
      */
-    public List<Booking> getBookingsByCustomer(Customer c) {
+    public List<Booking> getBookingsByCustomer(String SSNorPhone) {
         List<Booking> bookings = new ArrayList<>();
         for (Booking b : this.allBookings) {
-            Customer c2 = b.getCustomer();
-
-            if (c.equals(c2)) {
+            Customer c = b.getCustomer();
+            if (c.getSSN().equals(SSNorPhone) || c.getPhoneNumber().equals(SSNorPhone)) {
                 bookings.add(b);
             }
         }
@@ -49,10 +49,9 @@ public class BookingCollection extends AbstractCollection {
     }
 
     /**
-     * Get all bookings given a show
-     *
+     * Get all bookings given a show*
      * @param s - the show
-     * @return a collection of bookings of the show
+     * @return a list of bookings of the show
      */
     public List<Booking> getBookingsByShow(Show s) {
         List<Booking> bookings = new ArrayList<>();
@@ -65,8 +64,10 @@ public class BookingCollection extends AbstractCollection {
         return bookings;
     }
 
+
     /**
-     * Adds booking to the objects booking collection given show, customer, collection of rows and collection of seats
+     * Adds booking to the objects booking collection given show,
+     * customer, list of rows containing seats
      *
      * @param s              - The show of the booking
      * @param c              - The customer of the booking
@@ -74,6 +75,8 @@ public class BookingCollection extends AbstractCollection {
      * @param showCollection - showCollection to update
      */
     public void addBookings(Show s, Customer c, List<Row> r, ShowCollection showCollection) {
+        Booking b = new Booking(s, c, r);
+        this.allBookings.add(b);
         for (Row row1 : r) {
             for (Row row : s.getTheater().getCollectionOfRows()) {
                 if (row.getRowNumber() == row1.getRowNumber()) {
@@ -87,15 +90,12 @@ public class BookingCollection extends AbstractCollection {
                 }
             }
         }
-
         showCollection.updateShow(s, s.getMovie(), s.getShowDateAndTime(), s.getCinema(), s.getTheater());
 
-        Booking b = new Booking(s, c, r);
-        this.allBookings.add(b);
     }
 
     /**
-     * Removes a booking from the objects booking collection
+     * Removes a booking from the objects booking list
      *
      * @param b - the booking that removes
      */
@@ -109,7 +109,7 @@ public class BookingCollection extends AbstractCollection {
     }
 
     /**
-     * Updates a booking given Show, customer, collection of rows and collection of seats
+     * Updates a booking given Show, customer, list of rows containing seats
      *
      * @param b              - The booking that is updating
      * @param s              - The updated show
@@ -132,8 +132,18 @@ public class BookingCollection extends AbstractCollection {
      * @return the filename when serializing
      */
 
-    public String getFilname() {
+    public String getFilename() {
         return this.filename;
+    }
+
+    /**
+     * Get method for the list of bookings
+     *
+     * @return a list of customers
+     */
+
+    public List <Booking> getAllBookings(){
+        return this.allBookings;
     }
 
     /**

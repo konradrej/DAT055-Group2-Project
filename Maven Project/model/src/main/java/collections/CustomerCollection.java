@@ -21,7 +21,7 @@ public class CustomerCollection extends AbstractCollection {
     private final String filename;
 
     /**
-     * Constructor for initializing the collections.CustomerCollection instance
+     * Constructor for initializing the CustomerCollection instance
      *
      * @param filename Filename of the object when serializing
      */
@@ -39,7 +39,7 @@ public class CustomerCollection extends AbstractCollection {
      */
 
     public Customer getCustomer(String ssn) {
-        for (Customer c : allCustomers) {
+        for (Customer c : this.allCustomers) {
             if (c.getSSN().equals(ssn)) {
                 return c;
             }
@@ -48,7 +48,7 @@ public class CustomerCollection extends AbstractCollection {
     }
 
     /**
-     * Adds a customer to the objects customer collection
+     * Adds a customer to the objects customer list
      *
      * @param c - the customer being added
      */
@@ -75,6 +75,16 @@ public class CustomerCollection extends AbstractCollection {
 
     public String getFilename() {
         return this.filename;
+    }
+
+    /**
+     * Get method for the list of customers
+     *
+     * @return a list of customers
+     */
+
+    public List<Customer> getAllCustomers() {
+        return allCustomers;
     }
 
     /**

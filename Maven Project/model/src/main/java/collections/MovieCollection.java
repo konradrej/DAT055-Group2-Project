@@ -70,17 +70,7 @@ public class MovieCollection extends AbstractCollection {
     }
 
     /**
-     * Adds a movie to the m to the objects movie collection
-     *
-     * @param m to add
-     */
-
-    public void addMovie(Movie m) {
-        this.allMovies.add(m);
-    }
-
-    /**
-     * Removes a movie to the m to the objects movie collection
+     * Removes a movie to the m to the objects movie list
      *
      * @param m to remove
      */
@@ -112,7 +102,7 @@ public class MovieCollection extends AbstractCollection {
     }
 
     /**
-     * Scans and updates new movies to the collection from this objects URL
+     * Scans and updates new movies to the list from this objects URL
      */
 
     public void scanNewMovies() {

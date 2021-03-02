@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.IOException;
 import java.text.DateFormatSymbols;
 import java.util.ArrayList;
 
@@ -17,7 +16,7 @@ import cinemaObjects.*;
 
 public class CinemaAdmin {
     private int page;
-    private Container pane;
+    private final Container pane;
     private Movie selectedMovie;
     private Theater selectedTheater;
     private CinemaDate date;

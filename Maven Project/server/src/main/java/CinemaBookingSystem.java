@@ -3,7 +3,6 @@ import collections.*;
 import misc.ResponseStatus;
 import server.ServerHandler;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public enum CinemaBookingSystem implements ServerHandler {
@@ -39,7 +38,7 @@ public enum CinemaBookingSystem implements ServerHandler {
 		movieCollection.serializeCollection(movieCollection.getFilename());
 		showCollection.serializeCollection(showCollection.getFilename());
 		customerCollection.serializeCollection(customerCollection.getFilename());
-		bookingCollection.serializeCollection(bookingCollection.getFilname());
+		bookingCollection.serializeCollection(bookingCollection.getFilename());
 	}
 
 	/**
@@ -67,30 +66,6 @@ public enum CinemaBookingSystem implements ServerHandler {
 	}
 
 	/**
-	 * A method for getting a customer given a SSN
-	 *
-	 * @param SSN	The social security number of a customer
-	 * @return		Returns the customer inside of customerCollection that has SSN as its social security number
-	 */
-	public Customer getCustomerBySSN(String SSN)
-	{
-		return this.customerCollection.getCustomer(SSN);
-	}
-
-	/**
-	 * A method for getting all the bookings of a specific customer given SSN
-	 *
-	 * @param SSN	The social security of the customer to look up
-	 * @return 		Returns a collection of all the bookings by the customer given a SSN
-	 */
-	public List<Booking> getBookingsBySSN(String SSN)
-	{
-		Customer customer = getCustomerBySSN(SSN);
-
-		return this.bookingCollection.getBookingsByCustomer(customer);
-	}
-
-	/**
 	 * A method for getting the customerCollection instance of this CinemaBookingSystem
 	 *
 	 * @return	returns this objects instance variable customerCollection
@@ -108,6 +83,29 @@ public enum CinemaBookingSystem implements ServerHandler {
 		return cinema;
 	}
 
+
+	/**
+	 * A method for getting a customer given a SSN
+	 *
+	 * @param SSN	The social security number of a customer
+	 * @return		Returns the customer inside of customerCollection that has SSN as its social security number
+	 */
+	public Customer getCustomerBySSN(String SSN)
+	{
+		return this.customerCollection.getCustomer(SSN);
+	}
+
+	/**
+	 * A method for getting all the bookings of a specific customer given SSN
+	 *
+	 * @param SSNorPhone	The social security or phone number of the customer to look up
+	 * @return 		Returns a collection of all the bookings by the customer given a SSN
+	 */
+	public List<Booking> getBookingsBySSN(String SSNorPhone)
+	{
+		return this.bookingCollection.getBookingsByCustomer(SSNorPhone);
+	}
+
 	/**
 	 * A method that should be called from a server command for creating a new booking
 	 * @param show			The show of the new booking
@@ -121,7 +119,6 @@ public enum CinemaBookingSystem implements ServerHandler {
 		if (this.customerCollection.getCustomer(customer.getSSN()) == null) {
 			this.customerCollection.addCustomer(customer);
 		}
-
 		return new ResponseStatus(true, "Booking successfully created");
 	}
 
