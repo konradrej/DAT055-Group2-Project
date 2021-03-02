@@ -19,10 +19,21 @@ public class ReturnBookingsCommand implements ClientCommand {
 
     private final List<Booking> bookings;
 
+    /**
+     * Constructor for initializing the list of bookings of this instance
+     *
+     * @param bookings the list of bookings to set this instance's list of bookings to
+     */
     public ReturnBookingsCommand(List<Booking> bookings) {
         this.bookings = bookings;
     }
 
+    /**
+     * Method for setting the bookings list of the client
+     *
+     * @param handler A reference to the ClientHandler object
+     * @throws IOException
+     */
     @Override
     public void execute(ClientHandler handler) throws IOException {
         handler.setBookings(this.bookings);

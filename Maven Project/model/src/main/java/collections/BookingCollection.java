@@ -21,7 +21,6 @@ public class BookingCollection extends AbstractCollection {
 	 * 
 	 * @param filename	Filename of the object when serializing
 	 */
-	
 	public BookingCollection(String filename) {
 		this.filename = filename; 
 		allBookings = new ArrayList <>();
@@ -33,7 +32,6 @@ public class BookingCollection extends AbstractCollection {
 	 * @param c - the customer
 	 * @return a collection of bookings of the customer
 	 */
-	
 	public List <Booking> getBookingsByCustomer(Customer c){
 		List <Booking> bookings = new ArrayList <>();
 		for(Booking b : this.allBookings) {

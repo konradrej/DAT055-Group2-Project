@@ -23,10 +23,22 @@ public class CancelBookingCommand implements ServerCommand {
 
     private final Booking booking;
 
+    /**
+     * Constructor for initializing the booking which is to be cancelled
+     *
+     * @param booking the booking which is to be cancelled
+     */
     public CancelBookingCommand(Booking booking) {
         this.booking = booking;
     }
 
+    /**
+     * Method for cancelling a booking
+     *
+     * @param handler A reference to the ServerHandler
+     * @param out     A reference to the ObjectOutputStream
+     * @throws IOException
+     */
     @Override
     public void execute(ServerHandler handler, ObjectOutputStream out) throws IOException {
         handler.cancelBooking(this.booking);

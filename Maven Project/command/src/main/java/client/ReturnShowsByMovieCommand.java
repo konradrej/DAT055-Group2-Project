@@ -19,10 +19,21 @@ public class ReturnShowsByMovieCommand implements ClientCommand {
 
     private final ShowCollection showCollection;
 
+    /**
+     * Constructor for setting the collection of shows to be returned
+     *
+     * @param showCollection the collection of shows to be returned
+     */
     public ReturnShowsByMovieCommand(ShowCollection showCollection) {
         this.showCollection = showCollection;
     }
 
+    /**
+     * Method for setting the clients show collection
+     *
+     * @param handler A reference to the ClientHandler
+     * @throws IOException
+     */
     @Override
     public void execute(ClientHandler handler) throws IOException {
         handler.setShowCollection(showCollection);

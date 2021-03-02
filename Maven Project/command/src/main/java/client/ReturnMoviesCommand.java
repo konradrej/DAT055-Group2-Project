@@ -19,10 +19,21 @@ public class ReturnMoviesCommand implements ClientCommand {
 
     private final MovieCollection movieCollection;
 
+    /**
+     * Constructor for initializing the collection of movies to be returned
+     *
+     * @param movieCollection the colleciton of movies to be returned
+     */
     public ReturnMoviesCommand(MovieCollection movieCollection) {
         this.movieCollection = movieCollection;
     }
 
+    /**
+     * Method for setting the clients collection of movies
+     *
+     * @param handler A reference to the ClientHandler
+     * @throws IOException
+     */
     @Override
     public void execute(ClientHandler handler) throws IOException {
         handler.setMovieCollection(movieCollection);

@@ -18,10 +18,22 @@ public class GetBookingsByPhoneNumberCommand implements ServerCommand {
 
     private final String phoneNumber;
 
+    /**
+     * Constructor for initializing the phone number of this instance
+     *
+     * @param phoneNumber the phone number to set this instance's variable to
+     */
     public GetBookingsByPhoneNumberCommand(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
+    /**
+     * Method for returning all bookings given a phone number
+     *
+     * @param handler A reference to the ServerHandler
+     * @param out     A reference to the ObjectOutputStream
+     * @throws IOException
+     */
     @Override
     public void execute(ServerHandler handler, ObjectOutputStream out) throws IOException {
         out.writeObject(new ReturnBookingsCommand(

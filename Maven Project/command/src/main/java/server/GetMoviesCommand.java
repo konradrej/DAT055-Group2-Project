@@ -17,9 +17,19 @@ import java.io.ObjectOutputStream;
  */
 public class GetMoviesCommand implements ServerCommand {
 
+    /**
+     * Empty constructor
+     */
     public GetMoviesCommand() {
     }
 
+    /**
+     * Method for getting a customer given a social security number if there is any
+     *
+     * @param handler A reference to the ServerHandler
+     * @param out     A reference to the ObjectOutputStream
+     * @throws IOException
+     */
     @Override
     public void execute(ServerHandler handler, ObjectOutputStream out) throws IOException {
         out.writeObject(new ReturnMoviesCommand(

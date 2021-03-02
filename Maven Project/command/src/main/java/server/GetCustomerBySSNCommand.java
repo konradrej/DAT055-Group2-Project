@@ -19,10 +19,22 @@ public class GetCustomerBySSNCommand implements ServerCommand {
 
     private final String SSN;
 
+    /**
+     * Constructor for initializing the social security number of this instance
+     *
+     * @param SSN the social security number
+     */
     public GetCustomerBySSNCommand(String SSN) {
         this.SSN = SSN;
     }
 
+    /**
+     * Method for getting a customer given a social security number if there is any
+     *
+     * @param handler A reference to the ServerHandler
+     * @param out     A reference to the ObjectOutputStream
+     * @throws IOException
+     */
     @Override
     public void execute(ServerHandler handler, ObjectOutputStream out) throws IOException {
         out.writeObject(new ReturnCustomerBySSNCommand(
