@@ -25,8 +25,7 @@ public class CreateBookingCommand implements ServerCommand {
     private final Customer customer;
     private final List<Row> rows;
 
-    public CreateBookingCommand(Show show, Customer customer, List<Row> rows)
-    {
+    public CreateBookingCommand(Show show, Customer customer, List<Row> rows) {
         this.show = show;
         this.customer = customer;
         this.rows = rows;

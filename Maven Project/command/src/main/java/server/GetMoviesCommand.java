@@ -17,7 +17,8 @@ import java.io.ObjectOutputStream;
  */
 public class GetMoviesCommand implements ServerCommand {
 
-    public GetMoviesCommand(){}
+    public GetMoviesCommand() {
+    }
 
     @Override
     public void execute(ServerHandler handler, ObjectOutputStream out) throws IOException {

@@ -17,7 +17,9 @@ public class ReturnCustomerBySSNCommand implements ClientCommand {
 
     private final Customer customer;
 
-    public ReturnCustomerBySSNCommand(Customer customer) { this.customer = customer; }
+    public ReturnCustomerBySSNCommand(Customer customer) {
+        this.customer = customer;
+    }
 
     @Override
     public void execute(ClientHandler handler) throws IOException {

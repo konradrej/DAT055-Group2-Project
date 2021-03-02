@@ -19,7 +19,7 @@ public class ReturnMoviesCommand implements ClientCommand {
 
     private final MovieCollection movieCollection;
 
-    public ReturnMoviesCommand(MovieCollection movieCollection){
+    public ReturnMoviesCommand(MovieCollection movieCollection) {
         this.movieCollection = movieCollection;
     }
 

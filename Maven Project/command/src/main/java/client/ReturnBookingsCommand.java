@@ -19,7 +19,9 @@ public class ReturnBookingsCommand implements ClientCommand {
 
     private final List<Booking> bookings;
 
-    public ReturnBookingsCommand(List<Booking> bookings) { this.bookings = bookings; }
+    public ReturnBookingsCommand(List<Booking> bookings) {
+        this.bookings = bookings;
+    }
 
     @Override
     public void execute(ClientHandler handler) throws IOException {

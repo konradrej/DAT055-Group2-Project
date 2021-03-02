@@ -20,7 +20,7 @@ public class ResponseCancelBookingCommand implements ClientCommand {
 
     private final ResponseStatus response;
 
-    public ResponseCancelBookingCommand(ResponseStatus response){
+    public ResponseCancelBookingCommand(ResponseStatus response) {
         this.response = response;
     }
 

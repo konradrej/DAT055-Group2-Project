@@ -19,7 +19,9 @@ public class GetCustomerBySSNCommand implements ServerCommand {
 
     private final String SSN;
 
-    public GetCustomerBySSNCommand(String SSN) { this.SSN = SSN; }
+    public GetCustomerBySSNCommand(String SSN) {
+        this.SSN = SSN;
+    }
 
     @Override
     public void execute(ServerHandler handler, ObjectOutputStream out) throws IOException {

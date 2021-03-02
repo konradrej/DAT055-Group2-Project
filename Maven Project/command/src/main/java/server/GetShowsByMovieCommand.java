@@ -19,7 +19,7 @@ public class GetShowsByMovieCommand implements ServerCommand {
 
     private final Movie movie;
 
-    public GetShowsByMovieCommand(Movie movie){
+    public GetShowsByMovieCommand(Movie movie) {
         this.movie = movie;
     }
 

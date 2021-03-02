@@ -23,8 +23,7 @@ public class CancelBookingCommand implements ServerCommand {
 
     private final Booking booking;
 
-    public CancelBookingCommand(Booking booking)
-    {
+    public CancelBookingCommand(Booking booking) {
         this.booking = booking;
     }
 
@@ -33,7 +32,7 @@ public class CancelBookingCommand implements ServerCommand {
         handler.cancelBooking(this.booking);
 
         out.writeObject(new ResponseCancelBookingCommand(
-                new ResponseStatus(true,"Booking cancelled")
+                new ResponseStatus(true, "Booking cancelled")
         ));
     }
 }
