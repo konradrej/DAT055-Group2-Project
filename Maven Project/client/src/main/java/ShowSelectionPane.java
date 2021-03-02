@@ -8,6 +8,8 @@ import collections.ShowCollection;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.text.DateFormatSymbols;
 import java.util.List;
 import java.util.*;
@@ -55,10 +57,10 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
     public JPanel createMovieSelectionPanel() {
         JPanel movieSelection = new JPanel();
 
-        movieSelection.setLayout(new GridLayout(1, 1));
+        movieSelection.setLayout(new BorderLayout());
 
         JLabel label = new JLabel("Loading ...", JLabel.CENTER);
-        movieSelection.add(label);
+        movieSelection.add(label, BorderLayout.CENTER);
 
         return movieSelection;
     }
@@ -120,6 +122,48 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
                 movieList.addItem(movie.getTitle());
             }
 
+            JPanel dateSelector = new JPanel();
+            JTextField startDate = new JTextField("Start date (MM-DD)", 10);
+            startDate.setForeground(Color.GRAY);
+            JTextField endDate = new JTextField("End date (MM-DD)", 10);
+            endDate.setForeground(Color.GRAY);
+
+            startDate.addFocusListener(new FocusListener() {
+                @Override
+                public void focusGained(FocusEvent e) {
+                    if (startDate.getText().equals("Start date (MM-DD)")) {
+                        startDate.setText("");
+                        startDate.setForeground(Color.BLACK);
+                    }
+                }
+
+                @Override
+                public void focusLost(FocusEvent e) {
+                    if (startDate.getText().isEmpty()) {
+                        startDate.setForeground(Color.GRAY);
+                        startDate.setText("Start  (MM-DD)");
+                    }
+                }
+            });
+
+            endDate.addFocusListener(new FocusListener() {
+                @Override
+                public void focusGained(FocusEvent e) {
+                    if (endDate.getText().equals("End date (MM-DD)")) {
+                        endDate.setText("");
+                        endDate.setForeground(Color.BLACK);
+                    }
+                }
+
+                @Override
+                public void focusLost(FocusEvent e) {
+                    if (endDate.getText().isEmpty()) {
+                        endDate.setForeground(Color.GRAY);
+                        endDate.setText("End date (MM-DD)");
+                    }
+                }
+            });
+
             movieList.addActionListener(e -> {
                 if (movieList.getSelectedIndex() > 0) {
                     Container con2 = (Container) movieShowSelectionPanel.getComponent(1);
@@ -130,11 +174,31 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
                     Movie movie = movieCollection.getMovieByTitle(String.valueOf(movieList.getSelectedItem()));
                     continueButton.setEnabled(false);
 
-                    cm.updateShows(movie);
+                    String startDateText = startDate.getText();
+                    String endDateText = endDate.getText();
+                    CinemaDate startDateObj = null;
+                    CinemaDate endDateObj = null;
+
+                    if (startDateText.matches("\\d{2}-\\d{2}")) {
+                        String[] parts = startDateText.split("-");
+                        startDateObj = new CinemaDate(parts[0], parts[1], null);
+                    }
+
+                    if (endDateText.matches("\\d{2}-\\d{2}")) {
+                        String[] parts = endDateText.split("-");
+                        endDateObj = new CinemaDate(parts[0], parts[1], null);
+                    }
+
+                    cm.updateShows(movie, startDateObj, endDateObj);
                 }
             });
 
-            con.add(movieList);
+
+            dateSelector.add(startDate);
+            dateSelector.add(endDate);
+
+            con.add(movieList, BorderLayout.CENTER);
+            con.add(dateSelector, BorderLayout.EAST);
 
             contentPane.validate();
         }

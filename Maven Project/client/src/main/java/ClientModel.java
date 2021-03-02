@@ -43,8 +43,8 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
         SocketClientCommunication.getInstance().sendCommand(new GetMoviesCommand());
     }
 
-    public void updateShows(Movie movie){
-        SocketClientCommunication.getInstance().sendCommand(new GetShowsByMovieCommand(movie));
+    public void updateShows(Movie movie, CinemaDate startDate, CinemaDate endDate){
+        SocketClientCommunication.getInstance().sendCommand(new GetShowsByMovieDateRangeCommand(movie, startDate, endDate));
     }
 
     public void updateCustomer(String customer){

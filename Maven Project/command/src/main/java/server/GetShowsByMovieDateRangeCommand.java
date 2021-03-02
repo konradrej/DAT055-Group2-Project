@@ -2,6 +2,7 @@ package server;
 
 import java.io.*;
 
+import cinemaObjects.CinemaDate;
 import cinemaObjects.Movie;
 import client.ReturnShowsByMovieCommand;
 
@@ -15,17 +16,23 @@ import client.ReturnShowsByMovieCommand;
  * @author Anthon Lenander
  * @version 2021-03-02
  */
-public class GetShowsByMovieCommand implements ServerCommand {
+public class GetShowsByMovieDateRangeCommand implements ServerCommand {
 
     private final Movie movie;
+    private final CinemaDate startDate;
+    private final CinemaDate endDate;
 
     /**
      * Constructor for initializing the movie of this instance
      *
-     * @param movie the movie to get shows by
+     * @param movie     the movie to get shows by
+     * @param startDate first showing earliest date
+     * @param endDate   last showing latest date
      */
-    public GetShowsByMovieCommand(Movie movie) {
+    public GetShowsByMovieDateRangeCommand(Movie movie, CinemaDate startDate, CinemaDate endDate) {
         this.movie = movie;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     /**
@@ -38,7 +45,7 @@ public class GetShowsByMovieCommand implements ServerCommand {
     @Override
     public void execute(ServerHandler handler, ObjectOutputStream out) throws IOException {
         out.writeObject(new ReturnShowsByMovieCommand(
-                handler.getShowsByMovie(movie)
+                handler.getShowsByMovieDateRange(movie, startDate, endDate)
         ));
     }
 }

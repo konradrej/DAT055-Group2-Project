@@ -19,7 +19,7 @@ public interface ServerHandler {
 
     ShowCollection getShowCollection();
 
-    ShowCollection getShowsByMovie(Movie movie);
+    ShowCollection getShowsByMovieDateRange(Movie movie, CinemaDate startDate, CinemaDate endDate);
 
     List<Booking> getBookingsBySSN(String SSN);
 

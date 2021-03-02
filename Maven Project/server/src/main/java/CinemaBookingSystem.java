@@ -3,7 +3,6 @@ import collections.*;
 import misc.ResponseStatus;
 import server.ServerHandler;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,8 +92,8 @@ public enum CinemaBookingSystem implements ServerHandler {
 
 	public ShowCollection getShowCollection() { return this.showCollection; }
 
-	public ShowCollection getShowsByMovie(Movie movie) {
-		return showCollection.getShowsGivenMovie(movie);
+	public ShowCollection getShowsByMovieDateRange(Movie movie, CinemaDate startDate, CinemaDate endDate) {
+		return showCollection.getShowsGivenMovie(movie).getShowsGivenDateRange(startDate, endDate);
 	}
 
 	/**
