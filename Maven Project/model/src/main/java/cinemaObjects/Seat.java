@@ -5,13 +5,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Anthon Lenander, Erik Kieu, Phong Nguyen
- * @version version 0.0.0
+ * This class handles the seat placement
+ * by storing seat numbers and the availability
+ * of a seat.
+ *
+ * @author Erik Kieu
+ * @version 2021-03-02
  */
 public class Seat implements Serializable {
 
-	private static final long serialVersionUID = 2724216208606386504L;
-	private final int seatNumber;
+    private static final long serialVersionUID = 2724216208606386504L;
+    private final int seatNumber;
     private boolean available;
 
     /**
@@ -29,7 +33,7 @@ public class Seat implements Serializable {
      *
      * @param s the Seat which is to be cloned
      */
-    public Seat (Seat s){
+    public Seat(Seat s) {
         this.seatNumber = s.getSeatNumber();
         this.available = s.getAvailable();
     }
@@ -46,12 +50,12 @@ public class Seat implements Serializable {
     /**
      * Method for cloning a list of seats
      *
-     * @param seat  the list which is to be cloned
-     * @return      returns a cloned list of all input seats
+     * @param seat the list which is to be cloned
+     * @return returns a cloned list of all input seats
      */
-    public static List <Seat>cloneList (List<Seat> seat){
+    public static List<Seat> cloneList(List<Seat> seat) {
         ArrayList<Seat> cl = new ArrayList<>();
-        for(Seat s: seat){
+        for (Seat s : seat) {
             cl.add(s.cloneSeat());
         }
         return cl;
@@ -69,7 +73,7 @@ public class Seat implements Serializable {
     /**
      * Method for getting an available seat
      *
-     * @return      returns if this seat is available
+     * @return returns if this seat is available
      */
     public boolean getAvailable() {
         return this.available;
@@ -78,7 +82,7 @@ public class Seat implements Serializable {
     /**
      * Method for toggling the seat status
      *
-     * @param status    a boolean value representing the current status of the seat
+     * @param status a boolean value representing the current status of the seat
      */
     public void updateSeatStatus(boolean status) {
         this.available = status;

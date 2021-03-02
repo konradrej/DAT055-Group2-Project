@@ -2,6 +2,14 @@ package cinemaObjects;
 
 import java.io.Serializable;
 
+
+/**
+ * This class handles the date for a show
+ * with the variables month, day and time
+ *
+ * @author Erik Kieu
+ * @version 2021-03-02
+ */
 public class CinemaDate implements Serializable {
 
     private String month;
@@ -11,7 +19,7 @@ public class CinemaDate implements Serializable {
     /**
      * Empty constructor for initializing an empty CinemaDate instance
      */
-    public CinemaDate (){
+    public CinemaDate() {
     }
 
     /**
@@ -21,7 +29,7 @@ public class CinemaDate implements Serializable {
      * @param d is the day
      * @param t is the time
      */
-    public CinemaDate(String m, String d, String t){
+    public CinemaDate(String m, String d, String t) {
         this.month = m;
         this.day = d;
         this.time = t;
@@ -33,7 +41,7 @@ public class CinemaDate implements Serializable {
      * @param m the month which going to be set
      * @return a CinemaDate with s as month
      */
-    public CinemaDate setMonth(String m){
+    public CinemaDate setMonth(String m) {
         return new CinemaDate(m, this.day, this.time);
     }
 
@@ -43,7 +51,7 @@ public class CinemaDate implements Serializable {
      * @param d the day which going to be set
      * @return a CinemaDate with d as day
      */
-    public CinemaDate setDay(String d){
+    public CinemaDate setDay(String d) {
         return new CinemaDate(this.month, d, this.time);
     }
 
@@ -53,7 +61,7 @@ public class CinemaDate implements Serializable {
      * @param t the time which is going to be set
      * @return a CinemaDate with t as time
      */
-    public CinemaDate setTime(String t){
+    public CinemaDate setTime(String t) {
         return new CinemaDate(this.month, this.day, t);
     }
 
@@ -62,7 +70,7 @@ public class CinemaDate implements Serializable {
      *
      * @return a string of the month
      */
-    public String getMonth(){
+    public String getMonth() {
         return month;
     }
 
@@ -71,7 +79,7 @@ public class CinemaDate implements Serializable {
      *
      * @return a string of the day
      */
-    public String getDay(){
+    public String getDay() {
         return this.day;
     }
 
@@ -80,7 +88,7 @@ public class CinemaDate implements Serializable {
      *
      * @return a string of the time
      */
-    public String getTime(){
+    public String getTime() {
         return this.time;
     }
 
@@ -89,8 +97,8 @@ public class CinemaDate implements Serializable {
      *
      * @return a string of the whole date
      */
-    public String toString(){
-        return this.day + " " + this.month + " " + this.time ;
+    public String toString() {
+        return this.day + " " + this.month + " " + this.time;
     }
 
     /**
@@ -98,7 +106,7 @@ public class CinemaDate implements Serializable {
      *
      * @return true if february
      */
-    public boolean twentyeightDays(){
+    public boolean twentyeightDays() {
         return this.month.equals("February");
     }
 
@@ -107,10 +115,10 @@ public class CinemaDate implements Serializable {
      *
      * @return true if it contains thirty one days
      */
-    public boolean thirtyoneDays(){
-        String[] months = new String []{"January", "March", "May", "July", "August", "October", "December"};
-        for(String m : months){
-            if(m.equals(this.month)){
+    public boolean thirtyoneDays() {
+        String[] months = new String[]{"January", "March", "May", "July", "August", "October", "December"};
+        for (String m : months) {
+            if (m.equals(this.month)) {
                 return true;
             }
         }

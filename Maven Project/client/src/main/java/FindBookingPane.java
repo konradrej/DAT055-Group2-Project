@@ -1,5 +1,6 @@
 import ObserverPattern.IObserver;
 import cinemaObjects.*;
+import collections.CustomerCollection;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,6 +42,9 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
         JButton b1 = new JButton("Show Bookings");
 
         b1.addActionListener((ActionEvent e) -> {
+           // if(j1.getText() == ((Customer)customer.))
+
+
             if(j1.getText()!=null) {
                 ssn = j1.getText();
                 cm.updateBookingsBySSN(ssn);
@@ -137,6 +141,7 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
 
                 rowSeatPanel.add(bookedSeatsLabel);
                 rowSeatPanel.add(seatsText);
+                rowSeatPanel.setAlignmentX(JPanel.LEFT_ALIGNMENT);
 
                 JButton cancelButton = new JButton("Cancel booking");
                 buttonContainer.add(cancelButton);

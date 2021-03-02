@@ -6,12 +6,16 @@ import java.util.List;
 
 
 /**
- * @author Anthon Lenander, Erik Kieu, Phong Nguyen
- * @version version 0.0.0
+ * This class handles the theater and contains
+ * a collection of rows and theater number to
+ * differentiate the multiple theaters in a cinema.
+ *
+ * @author Erik Kieu
+ * @version 2021-03-02
  */
-public class Theater implements Serializable{
+public class Theater implements Serializable {
 
-	private static final long serialVersionUID = 264852408018552280L;
+    private static final long serialVersionUID = 264852408018552280L;
     private int theaterNumber;
     private List<Row> allRows;
 
@@ -26,7 +30,7 @@ public class Theater implements Serializable{
         this.allRows = Row.cloneList(allRows);
     }
 
-    public Theater (Theater t){
+    public Theater(Theater t) {
         this.theaterNumber = t.theaterNumber;
         this.allRows = Row.cloneList(t.getCollectionOfRows());
     }
@@ -34,7 +38,7 @@ public class Theater implements Serializable{
     /**
      * Method for setting a theatre number
      *
-     * @param theaterNumber     the number to set to this theaters theaterNumber
+     * @param theaterNumber the number to set to this theaters theaterNumber
      */
     public void setTheaterNumber(int theaterNumber) {
         this.theaterNumber = theaterNumber;
@@ -52,12 +56,12 @@ public class Theater implements Serializable{
     /**
      * Method for cloning a list of theaters
      *
-     * @param theaters  the list of theaters to clone
-     * @return          returns a cloned list of the input list of theaters
+     * @param theaters the list of theaters to clone
+     * @return returns a cloned list of the input list of theaters
      */
-    public static List<Theater> cloneList(List <Theater> theaters){
-        List <Theater> cl = new ArrayList<>();
-        for(Theater t: theaters){
+    public static List<Theater> cloneList(List<Theater> theaters) {
+        List<Theater> cl = new ArrayList<>();
+        for (Theater t : theaters) {
             cl.add(t.cloneTheater());
         }
         return cl;

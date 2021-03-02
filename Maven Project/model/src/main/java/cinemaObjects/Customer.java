@@ -3,9 +3,13 @@ package cinemaObjects;
 import java.io.Serializable;
 
 /**
-* @author Anthon Lenander, Erik Kieu, Phong Nguyen
-* @version version 0.0.0
-*/
+ * This class handles the customer and stores
+ * the name of a customer,telephone number and
+ * social security number
+ *
+ * @author Erik Kieu
+ * @version 2021-03-02
+ */
 public class Customer implements Serializable {
 
 	private static final long serialVersionUID = 6060898922086321725L;

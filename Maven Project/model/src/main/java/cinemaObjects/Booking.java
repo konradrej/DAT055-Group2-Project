@@ -5,9 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
-* @author Anthon Lenander, Erik Kieu, Phong Nguyen
-* @version version 0.0.0
-*/
+ * This class handles the booking for a customer
+ * and stores a show, customer information, row
+ * and seat number for all booked seats.
+ *
+ * @author Erik Kieu
+ * @version 2021-03-02
+ */
 public class Booking implements Serializable {
 
 	private static final long serialVersionUID = 408224943807153172L;

@@ -4,9 +4,13 @@ import java.io.Serializable;
 import java.util.*;
 
 /**
-* @author Anthon Lenander, Erik Kieu, Phong Nguyen
-* @version version 0.0.0
-*/
+ * This class handles a show and contains the movie,
+ * the date for the movie, the cinema where the movie
+ * is viewed and the theater where the movie is viewed.
+ *
+ * @author Erik Kieu
+ * @version 2021-03-02
+ */
 public class Show implements Serializable {
 
 	private static final long serialVersionUID = -9177195168561009276L;
