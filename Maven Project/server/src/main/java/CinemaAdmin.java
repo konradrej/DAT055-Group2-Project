@@ -35,7 +35,6 @@ public class CinemaAdmin {
         frame.setResizable(false);
         pane = frame.getContentPane();
         date = new CinemaDate();
-        page = 1;
 
         makeMenu(frame);
         frame.setVisible(true);
@@ -72,6 +71,7 @@ public class CinemaAdmin {
 
     public void displayAddShowMenu(JFrame frame) {
         frame.setVisible(false);
+        page = 1;
         pane.removeAll();
         createListsWithListeners();
         frame.validate();
