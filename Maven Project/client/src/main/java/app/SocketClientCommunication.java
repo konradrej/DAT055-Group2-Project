@@ -17,10 +17,7 @@ import java.net.SocketException;
  * @version 2021-03-03
  */
 public enum SocketClientCommunication implements Runnable {
-    INSTANCE();
-
-    SocketClientCommunication() {
-    }
+    INSTANCE;
 
     /**
      * Get singleton instance of this class

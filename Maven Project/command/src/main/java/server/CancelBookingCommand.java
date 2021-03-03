@@ -41,10 +41,8 @@ public class CancelBookingCommand implements ServerCommand {
      */
     @Override
     public void execute(ServerHandler handler, ObjectOutputStream out) throws IOException {
-        handler.cancelBooking(this.booking);
-
         out.writeObject(new ResponseCancelBookingCommand(
-                new ResponseStatus(true, "Booking cancelled")
+                handler.cancelBooking(this.booking)
         ));
     }
 }
