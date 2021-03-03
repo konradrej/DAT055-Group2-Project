@@ -1,7 +1,6 @@
 package pane;
 
 import app.ClientModel;
-import pane.AbstractPane;
 import util.IObserver;
 import cinemaObjects.*;
 
@@ -11,14 +10,28 @@ import java.awt.event.ActionEvent;
 import java.util.*;
 import java.util.List;
 
+/**
+ * Pane for finding booking by inserting customer SSN or phone number.
+ *
+ * @author Jakob Ståhl, Konrad Rej, Erik Kieu
+ * @version 2021-03-03
+ */
 public class FindBookingPane extends AbstractPane implements IObserver<ClientModel> {
-
-    private String ssn;
-    private String phonenumber;
-    private ClientModel cm;
+    private final ClientModel cm;
     private List<Booking> bookings = new ArrayList<>();
 
-    public FindBookingPane(JFrame frame){
+    /**
+     * Variables for finding a booking
+     */
+    private String ssn;
+    private String phoneNumber;
+
+    /**
+     * Instantiates a new FindingBookingPane.
+     *
+     * @param frame the window frame
+     */
+    public FindBookingPane(JFrame frame) {
         super(frame);
 
         cm = ClientModel.getInstance();
@@ -29,12 +42,16 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
         contentPane.add(backToMain(), BorderLayout.SOUTH);
     }
 
+    /**
+     * Runs parents start function.
+     */
     @Override
-    public void start(){
+    public void start() {
         super.start();
     }
 
-    public Container enterInformation() {
+
+    private Container enterInformation() {
         Container enterInformation = new JPanel();
         enterInformation.setLayout(new FlowLayout());
 
@@ -45,13 +62,12 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
         JButton b1 = new JButton("Show Bookings");
 
         b1.addActionListener((ActionEvent e) -> {
-
-            if(j1.getText()!=null) {
+            if (!j1.getText().equals("")) {
                 ssn = j1.getText();
                 cm.updateBookingsBySSN(ssn);
-            } else if(j2.getText()!=null){
-                phonenumber = j2.getText();
-                cm.updateBookingsByPhoneNumber(phonenumber);
+            } else if (!j2.getText().equals("")) {
+                phoneNumber = j2.getText();
+                cm.updateBookingsByPhoneNumber(phoneNumber);
             }
         });
 
@@ -65,15 +81,27 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
         return enterInformation;
     }
 
-    public Container showBookings() {
+    private Container showBookings() {
         Container showBookings = new JPanel();
-        showBookings.setLayout(new GridLayout(4, 1, 10,10));
+        showBookings.setLayout(new GridLayout(4, 1, 10, 10));
         JLabel l1 = new JLabel("Bookings will show here", JLabel.CENTER);
         showBookings.add(l1);
         return showBookings;
     }
 
-    public void updateShowBookings() {
+    private Container backToMain() {
+
+        Container backToMain = new JPanel();
+        backToMain.setLayout(new FlowLayout());
+        JButton backButton = new JButton("Back");
+        backToMain.add(backButton);
+        backButton.addActionListener((ActionEvent e) ->
+                cm.getNavigator().backToStart());
+        backToMain.setPreferredSize(new Dimension(frame.getWidth(), 50));
+        return backToMain;
+    }
+
+    private void updateShowBookings() {
         Container con = (Container) contentPane.getComponent(1);
         con.setLayout(new GridLayout());
         con.removeAll();
@@ -85,7 +113,7 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
 
             wrapperpanel.setLayout(new BoxLayout(wrapperpanel, BoxLayout.Y_AXIS));
 
-            for(Booking booking : bookings) {
+            for (Booking booking : bookings) {
                 JPanel bookingPanel = new JPanel();
                 bookingPanel.setLayout(new BorderLayout());
                 bookingPanel.setBorder(BorderFactory.createEtchedBorder());
@@ -94,11 +122,11 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
                 JPanel infoContainer = new JPanel();
                 infoContainer.setLayout(new BoxLayout(infoContainer, BoxLayout.Y_AXIS));
 
-                JLabel movieLabel = new JLabel("Movie: " + booking.getShow().getMovie().getTitle() );
+                JLabel movieLabel = new JLabel("Movie: " + booking.getShow().getMovie().getTitle());
                 movieLabel.setAlignmentX(JPanel.LEFT_ALIGNMENT);
                 infoContainer.add(movieLabel);
 
-                JLabel dateTimeLabel = new JLabel("Date and time: " + booking.getShow().getShowDateAndTime() );
+                JLabel dateTimeLabel = new JLabel("Date and time: " + booking.getShow().getShowDateAndTime());
                 dateTimeLabel.setAlignmentX(JPanel.LEFT_ALIGNMENT);
                 infoContainer.add(dateTimeLabel);
 
@@ -114,8 +142,8 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
                 rowSeatPanel.setAlignmentX(JPanel.LEFT_ALIGNMENT);
                 JLabel bookedSeatsLabel = new JLabel("Booked Seats: ");
                 JComboBox<String> seatsText = new JComboBox<>();
-                for(Row row: booking.getBookedRows()){
-                    for(Seat seat : booking.getBookedSeats(row.getRowNumber())){
+                for (Row row : booking.getBookedRows()) {
+                    for (Seat seat : booking.getBookedSeats(row.getRowNumber())) {
                         seatsText.addItem("Row:" + row.getRowNumber() + " Seat:" + seat.getSeatNumber());
                     }
                 }
@@ -126,9 +154,11 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
 
                 JButton cancelButton = new JButton("Cancel booking");
                 buttonContainer.add(cancelButton);
+
                 cancelButton.addActionListener((ActionEvent e) -> {
                     cm.cancelBooking(booking);
-                    JOptionPane.showMessageDialog(null,"Your booking has been canceled.");
+                    System.out.println(booking.getCustomer().getName().toString());
+                    cm.getNavigator().startNewPane(new StatusPane(frame));
                 });
 
                 infoContainer.add(rowSeatPanel);
@@ -145,34 +175,27 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
 
             con.add(scrollpane);
             con.setLayout(new GridLayout());
-        }else{
+        } else {
             JLabel label = new JLabel("No booking found");
             con.add(label);
         }
-
         contentPane.validate();
     }
 
-    public Container backToMain(){
 
-        Container backToMain = new JPanel();
-        backToMain.setLayout(new FlowLayout());
-        JButton backButton = new JButton("Back");
-        backToMain.add(backButton);
-        backButton.addActionListener((ActionEvent e) ->
-                cm.getNavigator().backToStart());
-        backToMain.setPreferredSize(new Dimension(frame.getWidth(), 50));
-        return backToMain;
-    }
-
+    /**
+     * Method to be called by observed object to notify about changes.
+     * Retrieves new relevant values and updates the GUI accordingly.
+     *
+     * @param observable the observed object
+     */
     @Override
     public void notify(ClientModel observable) {
         List<Booking> bookings = observable.getBookingCollection();
 
-        if(bookings != null && bookings != this.bookings){
+        if (bookings != null && bookings != this.bookings) {
             this.bookings = bookings;
             updateShowBookings();
         }
-
     }
 }

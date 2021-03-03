@@ -6,8 +6,19 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Map;
 
+/**
+ * Class for setting up the GUI for client.
+ *
+ * @author Jakob Ståhl, Konrad Rej
+ * @version 2021-03-03
+ */
 public class CinemaClient {
 
+    /**
+     * Main method on client side.
+     *
+     * @param args The command line arguments.
+     **/
     public static void main(String[] args) {
         Map<String, String> ipNum = ConfigReader.readText();
 
@@ -30,4 +41,5 @@ public class CinemaClient {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
+
 }
