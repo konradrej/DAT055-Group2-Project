@@ -32,16 +32,34 @@ public class BookingCollection extends AbstractCollection {
     }
 
     /**
-     * Get all bookings given a customer
+     * Get all bookings given a customer PhoneNumber
      *
-     * @param SSNorPhone - the SSN or Phone number of the customer
+     * @param SSN - the SSN of the customer
      * @return a list of bookings of the customer
      */
-    public List<Booking> getBookingsByCustomer(String SSNorPhone) {
+    public List<Booking> getBookingsByCustomerSSN(String SSN) {
         List<Booking> bookings = new ArrayList<>();
         for (Booking b : this.allBookings) {
             Customer c = b.getCustomer();
-            if (c.getSSN().equals(SSNorPhone) || c.getPhoneNumber().equals(SSNorPhone)) {
+            if (c.getSSN().equals(SSN)){
+                bookings.add(b);
+            }
+        }
+        return bookings;
+    }
+
+    /**
+     * Get all bookings given a customer SSN
+     *
+     * @param PhoneNumber - the PhoneNumber of the customer
+     * @return a list of bookings of the customer
+     */
+
+    public List <Booking> getBookingsByCustomerPhoneNumber(String PhoneNumber){
+        List<Booking> bookings = new ArrayList<>();
+        for (Booking b : this.allBookings) {
+            Customer c = b.getCustomer();
+            if (c.getPhoneNumber().equals(PhoneNumber)) {
                 bookings.add(b);
             }
         }
