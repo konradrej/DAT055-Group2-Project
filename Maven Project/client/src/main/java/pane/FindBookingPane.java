@@ -1,4 +1,8 @@
-import utils.IObserver;
+package pane;
+
+import app.ClientModel;
+import pane.AbstractPane;
+import util.IObserver;
 import cinemaObjects.*;
 
 import javax.swing.*;

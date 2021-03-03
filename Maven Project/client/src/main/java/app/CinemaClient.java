@@ -1,3 +1,7 @@
+package app;
+
+import pane.MainMenuPane;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Map;

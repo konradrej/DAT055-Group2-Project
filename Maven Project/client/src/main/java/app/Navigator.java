@@ -1,3 +1,7 @@
+package app;
+
+import pane.AbstractPane;
+
 import java.util.Stack;
 
 /**
@@ -11,7 +15,7 @@ public class Navigator {
     private final Stack<AbstractPane> paneTrace = new Stack<>();
 
     /**
-     * Instantiates a new Navigator.
+     * Instantiates a new app.Navigator.
      *
      * @param startPane the initial pane to show
      */

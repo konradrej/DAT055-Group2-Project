@@ -1,4 +1,4 @@
-package utils;
+package util;
 
 public interface IObservable<T> {
     void addObserver(IObserver<T> obs);

@@ -1,10 +1,13 @@
-import utils.IObserver;
+package pane;
+
+import app.ClientModel;
+import util.IObserver;
 import cinemaObjects.CinemaDate;
 import cinemaObjects.Movie;
 import cinemaObjects.Show;
 import collections.MovieCollection;
 import collections.ShowCollection;
-import utils.PlaceholderFocusListener;
+import util.PlaceholderFocusListener;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
