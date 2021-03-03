@@ -42,23 +42,6 @@ public class Movie implements Serializable {
         return title;
     }
 
-    /**
-     * Get method to retrieve all the genres of the movie
-     *
-     * @return a string array of the genres
-     */
-    public List<String> getGenre() {
-        return this.genre;
-    }
-
-    /**
-     * Get method to retrieve the length of the movie
-     *
-     * @return an array of string of the length
-     */
-    public String getLength() {
-        return length;
-    }
 
     /**
      * Get method to retrieve the URL ouf the movie
@@ -69,16 +52,6 @@ public class Movie implements Serializable {
         return this.url;
     }
 
-    /**
-     * Method that prints the title, length and all genres of the movie
-     */
-    public void provideMovieDetails() {
-        System.out.println(title);
-        System.out.println(length);
-        for (String s : this.genre) {
-            System.out.print(s + " ");
-        }
-        System.out.println();
-    }
+
 
 }

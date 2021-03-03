@@ -86,16 +86,6 @@ public class Booking implements Serializable {
     }
 
     /**
-     * Method for updating what rows and seats the customer has booked
-     *
-     * @param rows  what rows the customer has booked
-     * @param seats what seat numbers the customer has booked
-     */
-    public void updateRowsAndSeats(List<Row> rows, List<Seat> seats) {
-        this.rows = rows;
-    }
-
-    /**
      * Method for getting what customer the booking belongs to
      *
      * @return customer        what customer the booking belongs to

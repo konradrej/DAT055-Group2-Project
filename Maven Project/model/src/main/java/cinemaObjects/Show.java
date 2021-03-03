@@ -95,20 +95,6 @@ public class Show implements Serializable {
         return this;
     }
 
-    /**
-     * Method for finding all seats in the theater that the show will be held in
-     *
-     * @return returns a collection of Seat, containing all seats in the theater
-     */
-    public ArrayList<Seat> getAllSeats() {
-        ArrayList<Seat> allSeats = new ArrayList<>();
-
-        for (Row r : this.rows) {
-            allSeats.addAll(r.getAllSeats());
-        }
-
-        return allSeats;
-    }
 
     /**
      * Method for finding all available seats in the theater that the show will be held in
@@ -123,53 +109,6 @@ public class Show implements Serializable {
         }
 
         return allAvailableSeats;
-    }
-
-    /**
-     * Method for finding numOfSeats available seats in the theater that the show will be held in
-     *
-     * @param numOfSeats the number of seats to find
-     * @return returns a collection of Seat, containing numOfSeats available seats
-     */
-    public ArrayList<Seat> getAvailableSeats(int numOfSeats) {
-        ArrayList<Seat> availableSeats = new ArrayList<>();
-
-        for (Row r : this.rows) {
-            availableSeats = r.getAvailableSeats(numOfSeats);
-
-            if (availableSeats.size() != 0) {
-                return availableSeats;
-            }
-        }
-
-        return availableSeats;
-    }
-
-    /**
-     * Method for finding numOfSeats available seats adjacent to each other
-     *
-     * @param numOfSeats the number of seats to find, adjacent to each other
-     * @return returns a collection of Seat, containing numOfSeats adjacent available seats
-     */
-    public ArrayList<Seat> getAdjacentAvailableSeats(int numOfSeats) {
-        ArrayList<Seat> availableAdjacentSeats = new ArrayList<>();
-
-        for (Row r : this.rows) {
-            availableAdjacentSeats = r.getAdjacentAvailableSeats(numOfSeats);
-
-            if (availableAdjacentSeats.size() != 0) {
-                return availableAdjacentSeats;
-            }
-        }
-
-        return availableAdjacentSeats;
-    }
-
-    /**
-     * Method for turning the status of the show to cancelled
-     */
-    public void cancelShow() {
-        this.cancelled = true;
     }
 
     /**

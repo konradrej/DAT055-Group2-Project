@@ -53,15 +53,6 @@ public class Row implements Serializable {
     }
 
     /**
-     * Method for setting a row number
-     *
-     * @param rowNumber the row number to set this rows rowNumber to
-     */
-    public void setRowNumber(int rowNumber) {
-        this.rowNumber = rowNumber;
-    }
-
-    /**
      * Method for getting a row
      *
      * @return returns the cinemaObjects.Row instance itself
@@ -88,16 +79,6 @@ public class Row implements Serializable {
         return new ArrayList<>(this.allSeats);
     }
 
-    /**
-     * Method for creating new seats and adding it to a collection of seats
-     *
-     * @param available a boolean value signifying if the seat to be added should be made available or not
-     */
-    public void addSeat(boolean available) {
-
-        Seat s = new Seat(this.allSeats.size() + 1);
-        this.allSeats.add(s);
-    }
 
     /**
      * Method for adding a seat given another instance of a seat

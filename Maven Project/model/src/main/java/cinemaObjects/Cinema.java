@@ -28,15 +28,6 @@ public class Cinema implements Serializable {
     }
 
     /**
-     * Method for setting a cinema name
-     *
-     * @param name the name to set this Cinema's name to
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
      * Method for getting a cinema
      *
      * @return returns the cinema instance itself

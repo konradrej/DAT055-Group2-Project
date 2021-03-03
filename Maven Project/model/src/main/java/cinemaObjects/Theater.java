@@ -35,14 +35,6 @@ public class Theater implements Serializable {
         this.allRows = Row.cloneList(t.getCollectionOfRows());
     }
 
-    /**
-     * Method for setting a theatre number
-     *
-     * @param theaterNumber the number to set to this theaters theaterNumber
-     */
-    public void setTheaterNumber(int theaterNumber) {
-        this.theaterNumber = theaterNumber;
-    }
 
     /**
      * Method for getting a theatre
@@ -51,20 +43,6 @@ public class Theater implements Serializable {
      */
     public Theater cloneTheater() {
         return new Theater(this);
-    }
-
-    /**
-     * Method for cloning a list of theaters
-     *
-     * @param theaters the list of theaters to clone
-     * @return returns a cloned list of the input list of theaters
-     */
-    public static List<Theater> cloneList(List<Theater> theaters) {
-        List<Theater> cl = new ArrayList<>();
-        for (Theater t : theaters) {
-            cl.add(t.cloneTheater());
-        }
-        return cl;
     }
 
 
@@ -86,13 +64,5 @@ public class Theater implements Serializable {
         return this.allRows;
     }
 
-
-    /*
-    // TODO DO WE NEED THIS? are rowNumber and numOfSeats their own classes or should these be ints?
-    public void addRow(int rowNumber, int numOfSeats) {
-        cinemaObjects.Row row = new cinemaObjects.Row(r, s);
-        this.allRows.add(row);
-    }
-    */
 
 }
