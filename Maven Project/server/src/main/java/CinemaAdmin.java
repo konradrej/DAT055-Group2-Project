@@ -15,7 +15,7 @@ import cinemaObjects.*;
  */
 
 public class CinemaAdmin {
-    private int page;
+    private int page = 1;
     private final Container pane;
     private Movie selectedMovie;
     private Theater selectedTheater;
@@ -70,7 +70,6 @@ public class CinemaAdmin {
 
     public void displayAddShowMenu(JFrame frame) {
         frame.setVisible(false);
-        page = 1;
         pane.removeAll();
         createListsWithListeners();
         frame.validate();
@@ -83,7 +82,7 @@ public class CinemaAdmin {
      * @param frame of the interface window
      */
 
-    public void displayAddTheaterMenu(JFrame frame) {
+    private void displayAddTheaterMenu(JFrame frame) {
         frame.setVisible(false);
         pane.removeAll();
         frame.setLayout(new GridLayout(2, 1));
@@ -97,7 +96,7 @@ public class CinemaAdmin {
      * with Theater, Row and Seat.
      */
 
-    public void createTheaterOption() {
+    private void createTheaterOption() {
         DefaultListModel<Object> listModel = new DefaultListModel<>();
         ArrayList<Row> rows = new ArrayList<>();
         JPanel insertPanel = new JPanel();
@@ -173,7 +172,7 @@ public class CinemaAdmin {
      * with Theater, Movie , Day and Time.
      */
 
-    public void createListsWithListeners() {
+    private void createListsWithListeners() {
         dayList = new DefaultListModel<>();
         CardLayout cl = new CardLayout();
         JPanel cardPanel = new JPanel();
@@ -332,7 +331,7 @@ public class CinemaAdmin {
      * Method that adds a show if Movie, Theater and date are valid
      */
 
-    public void addShowToCollection() {
+    private void addShowToCollection() {
 
         if (selectedMovie != null && selectedTheater != null &&
                 date.getMonth() != null && date.getTime() != null && date.getDay() != null) {

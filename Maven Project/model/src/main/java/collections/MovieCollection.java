@@ -70,38 +70,6 @@ public class MovieCollection extends AbstractCollection {
     }
 
     /**
-     * Removes a movie to the m to the objects movie list
-     *
-     * @param m to remove
-     */
-
-    public void removeMovie(Movie m) {
-        this.allMovies.removeIf(m2 -> m2.equals(m));
-        System.out.println("cinemaObjects.Movie not found");
-    }
-
-    /**
-     * Get a collection of selected movies with title and genres preferences
-     *
-     * @param title - selected title for the movies
-     * @param genre - selected genre for the movies
-     * @return selectedMovies - returns a list of movies
-     */
-    public List<Movie> getSelectedMovies(String title, String genre) {
-        List<Movie> selectedMovies = new ArrayList<>();
-
-        for (Movie m : this.allMovies) {
-            for (String g : m.getGenre()) {
-                if (title.equals(m.getTitle()) || genre.equals(g)) {
-                    selectedMovies.add(m);
-                }
-            }
-
-        }
-        return selectedMovies;
-    }
-
-    /**
      * Scans and updates new movies to the list from this objects URL
      */
 
@@ -139,7 +107,7 @@ public class MovieCollection extends AbstractCollection {
      * @param title - title of the movie being added
      */
 
-    public void scanMovieDetails(String l, String title) {
+    private void scanMovieDetails(String l, String title) {
         Document doc;
 
         try {

@@ -1,6 +1,5 @@
 package collections;
 
-import java.awt.print.Book;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -67,23 +66,6 @@ public class BookingCollection extends AbstractCollection {
     }
 
     /**
-     * Get all bookings given a show*
-     * @param s - the show
-     * @return a list of bookings of the show
-     */
-    public List<Booking> getBookingsByShow(Show s) {
-        List<Booking> bookings = new ArrayList<>();
-        for (Booking b : this.allBookings) {
-            Show s2 = s.getShow();
-            if (s.equals(s2)) {
-                bookings.add(b);
-            }
-        }
-        return bookings;
-    }
-
-
-    /**
      * Adds booking to the objects booking collection given show,
      * customer, list of rows containing seats
      *
@@ -122,24 +104,6 @@ public class BookingCollection extends AbstractCollection {
             if (b2.equals(b) && b.getCancelledStatus()) {
                 b2.cancelBooking();
                 this.allBookings.remove(b2);
-            }
-        }
-    }
-
-    /**
-     * Updates a booking given Show, customer, list of rows containing seats
-     *
-     * @param b              - The booking that is updating
-     * @param s              - The updated show
-     * @param c              - The updated customer
-     * @param r              - The updated collection of row
-     * @param showCollection - showCollection to update
-     */
-    public void updateBooking(Booking b, Show s, Customer c, List<Row> r, ShowCollection showCollection) {
-        for (Booking b2 : this.allBookings) {
-            if (b2.equals(b)) {
-                this.allBookings.remove(b2);
-                this.addBookings(s, c, r, showCollection);
             }
         }
     }

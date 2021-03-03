@@ -56,16 +56,6 @@ public class CustomerCollection extends AbstractCollection {
         this.allCustomers.add(c);
     }
 
-    /**
-     * Removes a customer from the objects customer collection
-     *
-     * @param c - the customer being removed
-     */
-
-    public void removeCustomer(Customer c) {
-        this.allCustomers.removeIf(c2 -> c2.equals(c));
-        System.out.println("cinemaObjects.Customer not found");
-    }
 
     /**
      * Get method for the filename when serializing
