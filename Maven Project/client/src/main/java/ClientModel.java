@@ -12,10 +12,11 @@ import cinemaObjects.*;
 public class ClientModel implements ClientHandler, IObservable<ClientModel> {
     private static ClientModel INSTANCE;
 
-    private ClientModel() { }
+    private ClientModel() {
+    }
 
-    public synchronized static ClientModel getInstance(){
-        if(INSTANCE == null){
+    public synchronized static ClientModel getInstance() {
+        if (INSTANCE == null) {
             INSTANCE = new ClientModel();
         }
 
@@ -24,11 +25,11 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
 
     private Navigator navigator;
 
-    public void setNavigator(Navigator navigator){
+    public void setNavigator(Navigator navigator) {
         this.navigator = navigator;
     }
 
-    public Navigator getNavigator(){
+    public Navigator getNavigator() {
         return navigator;
     }
 
@@ -40,72 +41,72 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
     private ResponseStatus response;
     private boolean connectionAlive = false;
 
-    public void updateMovies(){
+    public void updateMovies() {
         SocketClientCommunication.getInstance().sendCommand(new GetMoviesCommand());
     }
 
-    public void updateShows(Movie movie, CinemaDate startDate, CinemaDate endDate){
+    public void updateShows(Movie movie, CinemaDate startDate, CinemaDate endDate) {
         SocketClientCommunication.getInstance().sendCommand(new GetShowsByMovieDateRangeCommand(movie, startDate, endDate));
     }
 
-    public void updateCustomer(String customer){
+    public void updateCustomer(String customer) {
         SocketClientCommunication.getInstance().sendCommand(new GetCustomerBySSNCommand(customer));
     }
 
-    public void updateBookingsBySSN(String SSN){
+    public void updateBookingsBySSN(String SSN) {
         SocketClientCommunication.getInstance().sendCommand(new GetBookingsBySSNCommand(SSN));
     }
 
-    public void updateBookingsByPhoneNumber(String phoneNumber){
+    public void updateBookingsByPhoneNumber(String phoneNumber) {
         SocketClientCommunication.getInstance().sendCommand(new GetBookingsByPhoneNumberCommand(phoneNumber));
     }
 
-    public void createBooking(Show show, Customer customer, List<Row> rows){
+    public void createBooking(Show show, Customer customer, List<Row> rows) {
         SocketClientCommunication.getInstance().sendCommand(new CreateBookingCommand(show, customer, new ArrayList<>(rows)));
     }
 
-    public void cancelBooking(Booking booking){
+    public void cancelBooking(Booking booking) {
         SocketClientCommunication.getInstance().sendCommand(new CancelBookingCommand(booking));
     }
 
-    public MovieCollection getMovieCollection(){
+    public MovieCollection getMovieCollection() {
         return movieCollection;
     }
 
-    public ShowCollection getShowCollection(){
+    public ShowCollection getShowCollection() {
         return showCollection;
     }
 
-    public List<Booking> getBookingCollection(){
+    public List<Booking> getBookingCollection() {
         return bookings;
     }
 
-    public Customer getCustomer(){
+    public Customer getCustomer() {
         return customer;
     }
 
-    public ResponseStatus getResponse(){
+    public ResponseStatus getResponse() {
         return response;
     }
 
-    public boolean getConnectionAlive(){
+    public boolean getConnectionAlive() {
         return connectionAlive;
     }
 
-    public void setConnectionAlive(boolean connectionAlive){
+    public void setConnectionAlive(boolean connectionAlive) {
         this.connectionAlive = connectionAlive;
         notifyObservers();
     }
 
     @Override
-    public void setMovieCollection(MovieCollection movieCollection){
+    public void setMovieCollection(MovieCollection movieCollection) {
         this.movieCollection = movieCollection;
         this.showCollection = null;
         notifyObservers();
     }
 
     @Override
-    public void setShowCollection(ShowCollection showCollection){
+    public void setShowCollection(ShowCollection showCollection) {
         this.showCollection = showCollection;
         notifyObservers();
     }
@@ -139,7 +140,7 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
     }
 
     public void notifyObservers() {
-        for(IObserver<ClientModel> o : observers) {
+        for (IObserver<ClientModel> o : observers) {
             o.notify(this);
         }
     }

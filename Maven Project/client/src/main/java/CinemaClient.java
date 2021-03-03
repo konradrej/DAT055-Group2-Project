@@ -15,7 +15,7 @@ public class CinemaClient {
         createFrame();
     }
 
-    private static void createFrame(){
+    private static void createFrame() {
         JFrame frame = new JFrame("Cinema");
         frame.setPreferredSize(new Dimension(600, 600));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

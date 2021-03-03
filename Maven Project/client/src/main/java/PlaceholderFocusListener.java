@@ -17,9 +17,9 @@ public class PlaceholderFocusListener implements FocusListener {
      * Initializes the object.
      *
      * @param component the item to add placeholder text to
-     * @param text the placeholder text to add
+     * @param text      the placeholder text to add
      */
-    public PlaceholderFocusListener(JTextComponent component, String text){
+    public PlaceholderFocusListener(JTextComponent component, String text) {
         this.component = component;
         this.text = text;
     }

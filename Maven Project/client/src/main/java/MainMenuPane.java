@@ -74,10 +74,10 @@ public class MainMenuPane extends AbstractPane implements IObserver<ClientModel>
     public void notify(ClientModel observable) {
         boolean connectionAlive = observable.getConnectionAlive();
 
-        if(connectionAlive){
+        if (connectionAlive) {
             bookingButton.setEnabled(true);
             findBookingButton.setEnabled(true);
-        }else{
+        } else {
             bookingButton.setEnabled(false);
             findBookingButton.setEnabled(false);
         }
