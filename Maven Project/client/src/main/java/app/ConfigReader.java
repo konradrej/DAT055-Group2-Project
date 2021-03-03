@@ -5,7 +5,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
-public class ipReader {
+public class ConfigReader {
 
     public static Map<String, String> readText(){
 

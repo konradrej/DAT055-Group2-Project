@@ -9,7 +9,7 @@ import java.util.Map;
 public class CinemaClient {
 
     public static void main(String[] args) {
-        Map<String, String> ipNum = ipReader.readText();
+        Map<String, String> ipNum = ConfigReader.readText();
 
         SocketClientCommunication scc = SocketClientCommunication.getInstance();
         scc.setIp(ipNum.getOrDefault("ip", "localhost"));
