@@ -99,13 +99,15 @@ public class BookingCollection extends AbstractCollection {
      *
      * @param b - the booking that removes
      */
-    public void removeBooking(Booking b) {
+    public boolean removeBooking(Booking b) {
         for (Booking b2 : this.allBookings) {
             if (b2.equals(b) && b.getCancelledStatus()) {
                 b2.cancelBooking();
                 this.allBookings.remove(b2);
+                return true;
             }
         }
+        return false;
     }
 
     /**

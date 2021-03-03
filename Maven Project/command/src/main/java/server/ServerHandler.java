@@ -27,7 +27,7 @@ public interface ServerHandler {
 
     ResponseStatus createBooking(Show show, Customer customer, List<Row> rows);
 
-    void cancelBooking(Booking booking);
+    ResponseStatus cancelBooking(Booking booking);
 
     List<Booking> getBookingsByPhoneNumber(String phoneNumber);
 }
