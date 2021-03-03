@@ -46,7 +46,7 @@ public class CinemaAdmin {
      * @param frame of the interface window
      */
 
-    public void makeMenu(JFrame frame) {
+    private void makeMenu(JFrame frame) {
         JMenuBar menuBar = new JMenuBar();
         frame.setJMenuBar(menuBar);
 
@@ -69,7 +69,7 @@ public class CinemaAdmin {
      * @param frame of the interface window
      */
 
-    public void displayAddShowMenu(JFrame frame) {
+    private void displayAddShowMenu(JFrame frame) {
         frame.setVisible(false);
         pane.removeAll();
         createListsWithListeners();
@@ -336,6 +336,7 @@ public class CinemaAdmin {
 
         if (selectedMovie != null && selectedTheater != null &&
                 date.getMonth() != null && date.getTime() != null && date.getDay() != null) {
+
             boolean addShow = true;
             for (Show s2 : CinemaBookingSystem.getInstance().getShowCollection().getAllShows()) {
                 if (s2.getTheater().getTheaterNumber() == selectedTheater.getTheaterNumber() &&

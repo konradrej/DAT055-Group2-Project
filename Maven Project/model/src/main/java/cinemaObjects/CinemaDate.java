@@ -8,7 +8,7 @@ import java.io.Serializable;
  * with the variables month, day and time
  *
  * @author Erik Kieu
- * @version 2021-03-02
+ * @version 2021-03-03
  */
 public class CinemaDate implements Serializable {
 
@@ -123,6 +123,29 @@ public class CinemaDate implements Serializable {
             }
         }
         return false;
+    }
+
+    /**
+     * Method to determine if equals
+     *
+     * @param o the object being compared
+     * @return true if objects are equals and false if not
+     */
+
+    @Override
+    public boolean equals (Object o){
+        if(this == o){
+            return true;
+        }
+        if(o == null){
+            return false;
+        }
+        if(getClass() != o.getClass()){
+            return false;
+        }
+
+        CinemaDate cd = (CinemaDate) o;
+        return this.day.equals(cd.getDay()) && this.month.equals(cd.getMonth()) && this.time.equals(cd.getTime());
     }
 
 }
