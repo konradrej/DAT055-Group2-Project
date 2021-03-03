@@ -11,17 +11,15 @@ import util.*;
 import collections.*;
 import cinemaObjects.*;
 
-public class ClientModel implements ClientHandler, IObservable<ClientModel> {
-    private static ClientModel INSTANCE;
+public enum ClientModel implements ClientHandler, IObservable<ClientModel> {
+    INSTANCE;
 
-    private ClientModel() {
-    }
-
-    public synchronized static ClientModel getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new ClientModel();
-        }
-
+    /**
+     * Get method to get the instance of ClientModel object
+     *
+     * @return a ClientModel of the instance
+     */
+    public static ClientModel getInstance() {
         return INSTANCE;
     }
 
