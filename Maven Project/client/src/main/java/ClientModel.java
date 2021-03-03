@@ -64,6 +64,10 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
         SocketClientCommunication.getInstance().sendCommand(new CreateBookingCommand(show, customer, new ArrayList<>(rows)));
     }
 
+    public void cancelBooking(Booking booking){
+        SocketClientCommunication.getInstance().sendCommand(new CancelBookingCommand(booking));
+    }
+
     public MovieCollection getMovieCollection(){
         return movieCollection;
     }

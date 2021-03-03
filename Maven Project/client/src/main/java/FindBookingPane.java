@@ -42,8 +42,6 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
         JButton b1 = new JButton("Show Bookings");
 
         b1.addActionListener((ActionEvent e) -> {
-           // if(j1.getText() == ((Customer)customer.))
-
 
             if(j1.getText()!=null) {
                 ssn = j1.getText();
@@ -76,26 +74,6 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
         Container con = (Container) contentPane.getComponent(1);
         con.setLayout(new GridLayout());
         con.removeAll();
-
-        // TEMP
-        Seat newSeat = new Seat(1);
-        ArrayList<Seat> seats = new ArrayList<>();
-        seats.add(newSeat);
-        Row newRow = new Row(1, seats);
-        ArrayList<Row> rows = new ArrayList<>();
-        rows.add(newRow);
-        Show show = cm.getShowCollection().getAllShows().iterator().next();
-        Booking newBooking = new Booking(show, new Customer("Konrad", "999999", "99"), rows);
-        bookings.add(newBooking);
-        Booking newBooking1 = new Booking(show, new Customer("Konrad", "999999", "99"), rows);
-        bookings.add(newBooking1);
-        Booking newBooking2 = new Booking(show, new Customer("Konrad", "999999", "99"), rows);
-        bookings.add(newBooking2);
-        Booking newBooking3 = new Booking(show, new Customer("Konrad", "999999", "99"), rows);
-        bookings.add(newBooking3);
-        Booking newBooking4 = new Booking(show, new Customer("Konrad", "999999", "99"), rows);
-        bookings.add(newBooking4);
-        // END TEMP
 
         if (bookings != null && bookings.size() > 0) {
             JPanel wrapperpanel = new JPanel();
@@ -145,6 +123,10 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
 
                 JButton cancelButton = new JButton("Cancel booking");
                 buttonContainer.add(cancelButton);
+                cancelButton.addActionListener((ActionEvent e) -> {
+                    cm.cancelBooking(booking);
+                    JOptionPane.showMessageDialog(null,"Your booking has been canceled.");
+                });
 
                 infoContainer.add(rowSeatPanel);
 
