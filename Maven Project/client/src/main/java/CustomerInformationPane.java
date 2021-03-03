@@ -15,7 +15,7 @@ import java.util.List;
  * Pane for inputting customer information during booking.
  *
  * @author Konrad Rej
- * @version 2021-03-02
+ * @version 2021-03-03
  */
 public class CustomerInformationPane extends AbstractPane implements IObserver<ClientModel> {
     private final ClientModel cm;
@@ -30,12 +30,7 @@ public class CustomerInformationPane extends AbstractPane implements IObserver<C
     private final List<Row> bookRows;
     private Customer bookCustomer;
 
-    /**
-     * Generates the customer information entering panel.
-     *
-     * @return the JPanel with input fields added
-     */
-    public JPanel createCustomerInformationPanel() {
+    private JPanel createCustomerInformationPanel() {
         if (bookCustomer == null) {
             bookCustomer = new Customer();
         }
@@ -151,12 +146,7 @@ public class CustomerInformationPane extends AbstractPane implements IObserver<C
         return customerInformationPanel;
     }
 
-    /**
-     * Generates the user controls panel.
-     *
-     * @return the JPanel with buttons added
-     */
-    public JPanel createUserControlsPanel() {
+    private JPanel createUserControlsPanel() {
         JPanel userControls = new JPanel();
         userControls.setLayout(new FlowLayout());
 
@@ -184,11 +174,7 @@ public class CustomerInformationPane extends AbstractPane implements IObserver<C
         return userControls;
     }
 
-    /**
-     * Updates the customer information entering panel by entering
-     * customer information from server into the input fields.
-     */
-    public void updateCustomerInformationPanel() {
+    private void updateCustomerInformationPanel() {
         JPanel con = (JPanel) customerInformationPanel.getComponent(1);
         JPanel con2 = (JPanel) con.getComponent(0);
         JTextField[] textFields = new JTextField[3];
@@ -205,10 +191,7 @@ public class CustomerInformationPane extends AbstractPane implements IObserver<C
         contentPane.validate();
     }
 
-    /**
-     * Checks text fields and updates continue button if all fields contain text.
-     */
-    public void updateContinueButton() {
+    private void updateContinueButton() {
         boolean enabled = true;
 
         for (JTextField textField : customerInfoFields) {

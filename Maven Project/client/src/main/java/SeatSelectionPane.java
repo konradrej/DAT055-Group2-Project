@@ -28,12 +28,7 @@ public class SeatSelectionPane extends AbstractPane {
     private final Show bookShow;
     private List<Row> bookRows;
 
-    /**
-     * Generates the seat selection panel.
-     *
-     * @return the JPanel with screen and seat items added
-     */
-    public JPanel createSeatSelectionPanel() {
+    private JPanel createSeatSelectionPanel() {
         bookRows = new ArrayList<>();
 
         JPanel rowsPanel = new JPanel();
@@ -84,12 +79,7 @@ public class SeatSelectionPane extends AbstractPane {
         return wrapperPanel;
     }
 
-    /**
-     * Generates the user controls panel.
-     *
-     * @return the JPanel with buttons added
-     */
-    public JPanel createUserControlsPanel() {
+    private JPanel createUserControlsPanel() {
         JPanel userControls = new JPanel();
         userControls.setLayout(new FlowLayout());
 
@@ -115,18 +105,7 @@ public class SeatSelectionPane extends AbstractPane {
         return userControls;
     }
 
-    /**
-     * On clicking a seat this method runs and either adds the seat to existing
-     * row in bookRows or creates a new row and adds seat to it and the row itself
-     * to bookRows as well as changes the button color to indicate a selected seat.
-     * If the seat was already selected it instead removes it from bookRows and
-     * changes color back to normal to indicate a non selected seat.
-     *
-     * @param row        the seat row
-     * @param seat       the selected seat
-     * @param seatButton the selected seats button
-     */
-    public void handleSeatClick(Row row, Seat seat, JButton seatButton) {
+    private void handleSeatClick(Row row, Seat seat, JButton seatButton) {
         int rowIndex = -1;
 
         for (int i = 0; i < bookRows.size(); i++) {

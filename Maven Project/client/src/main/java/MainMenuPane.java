@@ -15,12 +15,7 @@ public class MainMenuPane extends AbstractPane implements IObserver<ClientModel>
     private JButton bookingButton;
     private JButton findBookingButton;
 
-    /**
-     * Generates the main menu panel.
-     *
-     * @return the JPanel with main menu items added
-     */
-    public JPanel createMainMenuPanel() {
+    private JPanel createMainMenuPanel() {
         JPanel mainMenuPanel = new JPanel();
         mainMenuPanel.setLayout(new GridLayout(3, 1, 10, 10));
 

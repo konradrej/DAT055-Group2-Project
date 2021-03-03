@@ -9,18 +9,13 @@ import java.awt.event.ActionEvent;
  * Pane for displaying status and options after making a booking.
  *
  * @author Konrad Rej
- * @version 2021-03-02
+ * @version 2021-03-03
  */
 public class StatusPane extends AbstractPane implements IObserver<ClientModel> {
     private final ClientModel cm;
     private ResponseStatus response;
     private final JPanel statusPanel;
 
-    /**
-     * Generates the status panel.
-     *
-     * @return the JPanel with status pane items added
-     */
     private JPanel createStatusPanel() {
         JPanel statusPanel = new JPanel();
         statusPanel.setLayout(new GridLayout());
@@ -31,11 +26,6 @@ public class StatusPane extends AbstractPane implements IObserver<ClientModel> {
         return statusPanel;
     }
 
-    /**
-     * Generates the user controls panel.
-     *
-     * @return the JPanel with buttons added
-     */
     private JPanel createUserControlsPanel() {
         JPanel userControls = new JPanel();
         userControls.setLayout(new FlowLayout());
@@ -57,9 +47,6 @@ public class StatusPane extends AbstractPane implements IObserver<ClientModel> {
         return userControls;
     }
 
-    /**
-     * Updates text value of label in statusPanel to the received response.
-     */
     private void updateStatusPanel() {
         JLabel statusLabel = (JLabel) statusPanel.getComponent(0);
         statusLabel.setText(this.response.getMessage());

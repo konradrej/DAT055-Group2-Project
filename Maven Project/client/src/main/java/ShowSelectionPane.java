@@ -36,12 +36,7 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
      */
     private Show bookShow;
 
-    /**
-     * Generates the movie and show selection panel.
-     *
-     * @return the JPanel with movie and show picking items added
-     */
-    public JPanel createMovieShowSelectionPanel() {
+    private JPanel createMovieShowSelectionPanel() {
         JPanel movieShowSelectionPanel = new JPanel();
         JPanel movieSelectionPanel = createMovieSelectionPanel();
         JPanel showSelectionPanel = createShowSelectionPanel();
@@ -53,12 +48,7 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
         return movieShowSelectionPanel;
     }
 
-    /**
-     * Generates the movie selection panel.
-     *
-     * @return the JPanel with movie picking items added
-     */
-    public JPanel createMovieSelectionPanel() {
+    private JPanel createMovieSelectionPanel() {
         JPanel movieSelection = new JPanel();
 
         movieSelection.setLayout(new BorderLayout());
@@ -69,12 +59,7 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
         return movieSelection;
     }
 
-    /**
-     * Generates the show selection panel.
-     *
-     * @return the JPanel with show picking items added
-     */
-    public JPanel createShowSelectionPanel() {
+    private JPanel createShowSelectionPanel() {
         JPanel showSelection = new JPanel();
         showSelection.setLayout(new GridLayout());
 
@@ -85,12 +70,7 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
         return showSelection;
     }
 
-    /**
-     * Generates the user controls panel.
-     *
-     * @return the JPanel with buttons added
-     */
-    public JPanel createUserControlsPanel() {
+    private JPanel createUserControlsPanel() {
         JPanel userControls = new JPanel();
         userControls.setLayout(new FlowLayout());
 
@@ -111,10 +91,7 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
         return userControls;
     }
 
-    /**
-     * Updates movieSelection panel with new information from movieCollection
-     */
-    public void updateMovieSelection() {
+    private void updateMovieSelection() {
         if (this.movieCollection != null) {
             Container con = (Container) movieShowSelectionPanel.getComponent(0);
             con.removeAll();
@@ -139,7 +116,7 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
             endDate.getDocument().addDocumentListener(this);
 
             movieList.addActionListener(e ->
-                    callShowUpdate());
+                    updateShows());
 
             dateSelector.add(startDate);
             dateSelector.add(endDate);
@@ -151,11 +128,7 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
         }
     }
 
-    /**
-     * Gets values of selected movie and entered start/end dates and
-     * asks ClientModel to update showCollection given this data.
-     */
-    public void callShowUpdate() {
+    private void updateShows() {
         if (movieList.getSelectedIndex() > 0) {
             Container con2 = (Container) movieShowSelectionPanel.getComponent(1);
             con2.removeAll();
@@ -184,10 +157,7 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
         }
     }
 
-    /**
-     * Updates showSelection panel with new information from showCollection
-     */
-    public void updateShowSelection() {
+    private void updateShowSelection() {
         Container con = (Container) movieShowSelectionPanel.getComponent(1);
         con.removeAll();
 
@@ -235,14 +205,6 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
         contentPane.validate();
     }
 
-    /**
-     * Generates a panel containing a grid based on provided date and time lists
-     * as well as adds shows to the matching grid spot.
-     *
-     * @param datesList list of dates to be added as columns
-     * @param timesList list of times to be added as rows
-     * @return the panel containing a grid of shows, show dates and show times
-     */
     private JScrollPane createShowGrid(List<String> datesList, List<String> timesList) {
         JPanel showGrid = new JPanel();
         showGrid.setLayout(new GridLayout((timesList.size() + 1), (datesList.size() + 1)));
@@ -390,7 +352,7 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
      */
     @Override
     public void insertUpdate(DocumentEvent e) {
-        callShowUpdate();
+        updateShows();
     }
 
     /**
@@ -400,7 +362,7 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
      */
     @Override
     public void removeUpdate(DocumentEvent e) {
-        callShowUpdate();
+        updateShows();
     }
 
     /**
@@ -410,6 +372,6 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
      */
     @Override
     public void changedUpdate(DocumentEvent e) {
-        callShowUpdate();
+        updateShows();
     }
 }

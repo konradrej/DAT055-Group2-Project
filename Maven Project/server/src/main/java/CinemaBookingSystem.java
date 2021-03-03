@@ -113,7 +113,7 @@ public enum CinemaBookingSystem implements ServerHandler {
 	 * @param rows			A collection of all the rows, containing all seats to be reserved for the customer
 	 * @return 				Returns a string to the client containing information about how the creation went
 	 */
-	public ResponseStatus createBooking(Show show, Customer customer, List<Row> rows) {
+	public synchronized ResponseStatus createBooking(Show show, Customer customer, List<Row> rows) {
 		this.bookingCollection.addBookings(show, customer, rows, this.showCollection);
 
 		if (this.customerCollection.getCustomer(customer.getSSN()) == null) {
@@ -129,7 +129,7 @@ public enum CinemaBookingSystem implements ServerHandler {
 	 * @param SSN			The social security number of the customer to be created
 	 * @return 				Returns a string to the client containing information about how the creation went
 	 */
-	public String createCustomer(String name, String phoneNumber, String SSN) {
+	public synchronized String createCustomer(String name, String phoneNumber, String SSN) {
 		Customer newCustomer = null;
 
 		try {
@@ -150,7 +150,7 @@ public enum CinemaBookingSystem implements ServerHandler {
 	 *
 	 * @param booking	cinemaObjects.Booking to be cancelled
 	 */
-	public void cancelBooking(Booking booking) {
+	public synchronized void cancelBooking(Booking booking) {
 		booking.cancelBooking();
 		this.bookingCollection.removeBooking(booking);
 	}
