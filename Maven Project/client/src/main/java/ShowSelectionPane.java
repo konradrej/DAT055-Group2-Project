@@ -1,17 +1,16 @@
-import ObserverPattern.IObserver;
+import utils.IObserver;
 import cinemaObjects.CinemaDate;
 import cinemaObjects.Movie;
 import cinemaObjects.Show;
 import collections.MovieCollection;
 import collections.ShowCollection;
+import utils.PlaceholderFocusListener;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.text.DateFormatSymbols;
 import java.util.List;
 import java.util.*;

@@ -37,7 +37,7 @@ public class GetBookingsByPhoneNumberCommand implements ServerCommand {
     @Override
     public void execute(ServerHandler handler, ObjectOutputStream out) throws IOException {
         out.writeObject(new ReturnBookingsCommand(
-                handler.getBookingsBySSN(this.phoneNumber)
+                handler.getBookingsByPhoneNumber(this.phoneNumber)
         ));
     }
 }

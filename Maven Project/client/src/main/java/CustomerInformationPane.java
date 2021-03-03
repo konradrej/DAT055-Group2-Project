@@ -1,4 +1,4 @@
-import ObserverPattern.IObserver;
+import utils.IObserver;
 import cinemaObjects.Customer;
 import cinemaObjects.Row;
 import cinemaObjects.Show;

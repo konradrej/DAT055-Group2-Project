@@ -12,7 +12,7 @@ import java.util.List;
  * in the class being used by the server to handle incoming commands.
  *
  * @author Konrad Rej
- * @version 2021-03-02
+ * @version 2021-03-03
  */
 public interface ServerHandler {
     MovieCollection getMovieCollection();
@@ -28,4 +28,6 @@ public interface ServerHandler {
     ResponseStatus createBooking(Show show, Customer customer, List<Row> rows);
 
     void cancelBooking(Booking booking);
+
+    List<Booking> getBookingsByPhoneNumber(String phoneNumber);
 }

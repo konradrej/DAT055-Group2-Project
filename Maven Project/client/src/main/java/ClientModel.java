@@ -5,7 +5,7 @@ import server.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import ObserverPattern.*;
+import utils.*;
 import collections.*;
 import cinemaObjects.*;
 

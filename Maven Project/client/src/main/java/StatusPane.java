@@ -1,4 +1,4 @@
-import ObserverPattern.IObserver;
+import utils.IObserver;
 import misc.ResponseStatus;
 
 import javax.swing.*;

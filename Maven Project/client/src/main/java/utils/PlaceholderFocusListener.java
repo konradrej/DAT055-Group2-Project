@@ -1,3 +1,5 @@
+package utils;
+
 import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.FocusEvent;

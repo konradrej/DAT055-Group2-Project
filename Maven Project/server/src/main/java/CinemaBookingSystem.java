@@ -98,12 +98,12 @@ public enum CinemaBookingSystem implements ServerHandler {
 	/**
 	 * A method for getting all the bookings of a specific customer given SSN
 	 *
-	 * @param SSNorPhone	The social security or phone number of the customer to look up
+	 * @param SSN	The social security or phone number of the customer to look up
 	 * @return 		Returns a collection of all the bookings by the customer given a SSN
 	 */
-	public List<Booking> getBookingsBySSN(String SSNorPhone)
+	public List<Booking> getBookingsBySSN(String SSN)
 	{
-		return this.bookingCollection.getBookingsByCustomer(SSNorPhone);
+		return this.bookingCollection.getBookingsByCustomerSSN(SSN);
 	}
 
 	/**
@@ -153,5 +153,10 @@ public enum CinemaBookingSystem implements ServerHandler {
 	public void cancelBooking(Booking booking) {
 		booking.cancelBooking();
 		this.bookingCollection.removeBooking(booking);
+	}
+
+	@Override
+	public List<Booking> getBookingsByPhoneNumber(String phoneNumber) {
+		return this.bookingCollection.getBookingsByCustomerPhoneNumber(phoneNumber);
 	}
 }

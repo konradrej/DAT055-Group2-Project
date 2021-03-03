@@ -1,4 +1,4 @@
-package ObserverPattern;
+package utils;
 
 public interface IObservable<T> {
     void addObserver(IObserver<T> obs);

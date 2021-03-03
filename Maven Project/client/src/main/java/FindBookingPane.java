@@ -1,6 +1,5 @@
-import ObserverPattern.IObserver;
+import utils.IObserver;
 import cinemaObjects.*;
-import collections.CustomerCollection;
 
 import javax.swing.*;
 import java.awt.*;

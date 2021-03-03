@@ -1,6 +1,4 @@
-import ObserverPattern.IObserver;
-import collections.MovieCollection;
-import collections.ShowCollection;
+import utils.IObserver;
 
 import javax.swing.*;
 import java.awt.*;
