@@ -78,11 +78,11 @@ public enum SocketClientCommunication implements Runnable {
         try {
             this.socket = new Socket(ip, 888);
             System.out.println("Connection established.");
-            JOptionPane.showMessageDialog(null, "Connection to server established.");
+            JOptionPane.showMessageDialog(null, "Connection to server established.", "Connection success", JOptionPane.INFORMATION_MESSAGE);
             ClientModel.getInstance().setConnectionAlive(true);
         } catch (IOException e) {
             System.err.println("Connection could not be established.");
-            JOptionPane.showMessageDialog(null, "Connection to server could not be established.", "Connection error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Connection to server could not be established.\nPress OK to exit.", "Connection error", JOptionPane.ERROR_MESSAGE);
             System.exit(1);
         }
 
@@ -102,6 +102,8 @@ public enum SocketClientCommunication implements Runnable {
             e.printStackTrace();
         } finally {
             ClientModel.getInstance().setConnectionAlive(false);
+            JOptionPane.showMessageDialog(null, "There was a problem with server communication.\nPress OK to exit.", "Communication error", JOptionPane.ERROR_MESSAGE);
+            System.exit(1);
         }
     }
 

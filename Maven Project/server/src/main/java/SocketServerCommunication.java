@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -8,7 +9,7 @@ import java.net.Socket;
  * ConnectionHandler thread for each active connection.
  *
  * @author Konrad Rej
- * @version 2021-03-02
+ * @version 2021-03-03
  */
 public enum SocketServerCommunication implements Runnable {
     INSTANCE();
@@ -19,7 +20,7 @@ public enum SocketServerCommunication implements Runnable {
     }
 
     /**
-     * Retrieves singleton instance of SockerCommunication.
+     * Retrieves singleton instance of SocketCommunication.
      *
      * @return SocketCommunication instance
      */
@@ -30,24 +31,27 @@ public enum SocketServerCommunication implements Runnable {
     boolean listenForConnection = true;
 
     /**
-     * Starts listening on port 888 for connections and
-     * starts a new ConnectionHandler thread for each
-     * established connection.
+     * Starts listening for connections and starts a
+     * new ConnectionHandler thread for each established
+     * connection.
      */
     @Override
     public void run() {
-        try (ServerSocket ss = new ServerSocket(888)) {
-            Socket s;
+        int port = 888;
+
+        try (ServerSocket serverSocket = new ServerSocket(port)) {
+            Socket socket;
 
             while (listenForConnection) {
-                s = ss.accept();
+                socket = serverSocket.accept();
                 System.out.println("Connection established.");
 
-                new Thread(new ConnectionHandler(s)).start();
+                new Thread(new ConnectionHandler(socket)).start();
             }
         } catch (IOException e) {
             e.printStackTrace();
-            System.err.println("Could not listen for connections on port 888. Exiting...");
+            System.err.println("Could not listen for connections on port " + port + ". Exiting...");
+            JOptionPane.showMessageDialog(null, "Could not listen for connections on port " + port + ".\nPress OK to exit.", "Error", JOptionPane.ERROR_MESSAGE);
             System.exit(1);
         }
     }
