@@ -38,6 +38,7 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
     private List<Booking> bookings;
     private Customer customer;
     private ResponseStatus response;
+    private boolean connectionAlive = false;
 
     public void updateMovies(){
         SocketClientCommunication.getInstance().sendCommand(new GetMoviesCommand());
@@ -81,6 +82,15 @@ public class ClientModel implements ClientHandler, IObservable<ClientModel> {
 
     public ResponseStatus getResponse(){
         return response;
+    }
+
+    public boolean getConnectionAlive(){
+        return connectionAlive;
+    }
+
+    public void setConnectionAlive(boolean connectionAlive){
+        this.connectionAlive = connectionAlive;
+        notifyObservers();
     }
 
     @Override

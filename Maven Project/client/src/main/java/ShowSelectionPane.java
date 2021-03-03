@@ -6,6 +6,8 @@ import collections.MovieCollection;
 import collections.ShowCollection;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusEvent;
@@ -18,14 +20,17 @@ import java.util.*;
  * Pane for selecting a show
  *
  * @author Konrad Rej
- * @version 2021-03-02
+ * @version 2021-03-03
  */
-public class ShowSelectionPane extends AbstractPane implements IObserver<ClientModel> {
+public class ShowSelectionPane extends AbstractPane implements IObserver<ClientModel>, DocumentListener {
     private final ClientModel cm;
     private MovieCollection movieCollection;
     private ShowCollection showCollection;
     private final JPanel movieShowSelectionPanel;
     private JButton continueButton;
+    private JComboBox<String> movieList;
+    private JTextField startDate;
+    private JTextField endDate;
 
     /**
      * Variable for new booking
@@ -115,7 +120,7 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
             Container con = (Container) movieShowSelectionPanel.getComponent(0);
             con.removeAll();
 
-            JComboBox<String> movieList = new JComboBox<>();
+            movieList = new JComboBox<>();
             movieList.addItem("--- Pick a movie ---");
 
             for (Movie movie : this.movieCollection.getAllMovies()) {
@@ -123,76 +128,19 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
             }
 
             JPanel dateSelector = new JPanel();
-            JTextField startDate = new JTextField("Start date (MM-DD)", 10);
+            startDate = new JTextField("Start date (MM-DD)", 10);
             startDate.setForeground(Color.GRAY);
-            JTextField endDate = new JTextField("End date (MM-DD)", 10);
+            endDate = new JTextField("End date (MM-DD)", 10);
             endDate.setForeground(Color.GRAY);
 
-            startDate.addFocusListener(new FocusListener() {
-                @Override
-                public void focusGained(FocusEvent e) {
-                    if (startDate.getText().equals("Start date (MM-DD)")) {
-                        startDate.setText("");
-                        startDate.setForeground(Color.BLACK);
-                    }
-                }
+            startDate.addFocusListener(new PlaceholderFocusListener(startDate, "Start date (MM-DD)"));
+            startDate.getDocument().addDocumentListener(this);
 
-                @Override
-                public void focusLost(FocusEvent e) {
-                    if (startDate.getText().isEmpty()) {
-                        startDate.setForeground(Color.GRAY);
-                        startDate.setText("Start  (MM-DD)");
-                    }
-                }
-            });
+            endDate.addFocusListener(new PlaceholderFocusListener(endDate, "End date (MM-DD)"));
+            endDate.getDocument().addDocumentListener(this);
 
-            endDate.addFocusListener(new FocusListener() {
-                @Override
-                public void focusGained(FocusEvent e) {
-                    if (endDate.getText().equals("End date (MM-DD)")) {
-                        endDate.setText("");
-                        endDate.setForeground(Color.BLACK);
-                    }
-                }
-
-                @Override
-                public void focusLost(FocusEvent e) {
-                    if (endDate.getText().isEmpty()) {
-                        endDate.setForeground(Color.GRAY);
-                        endDate.setText("End date (MM-DD)");
-                    }
-                }
-            });
-
-            movieList.addActionListener(e -> {
-                if (movieList.getSelectedIndex() > 0) {
-                    Container con2 = (Container) movieShowSelectionPanel.getComponent(1);
-                    con2.removeAll();
-
-                    con2.add(new JLabel("Loading shows..."));
-
-                    Movie movie = movieCollection.getMovieByTitle(String.valueOf(movieList.getSelectedItem()));
-                    continueButton.setEnabled(false);
-
-                    String startDateText = startDate.getText();
-                    String endDateText = endDate.getText();
-                    CinemaDate startDateObj = null;
-                    CinemaDate endDateObj = null;
-
-                    if (startDateText.matches("\\d{2}-\\d{2}")) {
-                        String[] parts = startDateText.split("-");
-                        startDateObj = new CinemaDate(parts[0], parts[1], null);
-                    }
-
-                    if (endDateText.matches("\\d{2}-\\d{2}")) {
-                        String[] parts = endDateText.split("-");
-                        endDateObj = new CinemaDate(parts[0], parts[1], null);
-                    }
-
-                    cm.updateShows(movie, startDateObj, endDateObj);
-                }
-            });
-
+            movieList.addActionListener(e ->
+                    callShowUpdate());
 
             dateSelector.add(startDate);
             dateSelector.add(endDate);
@@ -201,6 +149,39 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
             con.add(dateSelector, BorderLayout.EAST);
 
             contentPane.validate();
+        }
+    }
+
+    /**
+     * Gets values of selected movie and entered start/end dates and
+     * asks ClientModel to update showCollection given this data.
+     */
+    public void callShowUpdate() {
+        if (movieList.getSelectedIndex() > 0) {
+            Container con2 = (Container) movieShowSelectionPanel.getComponent(1);
+            con2.removeAll();
+
+            con2.add(new JLabel("Loading shows..."));
+
+            Movie movie = movieCollection.getMovieByTitle(String.valueOf(movieList.getSelectedItem()));
+            continueButton.setEnabled(false);
+
+            String startDateText = startDate.getText();
+            String endDateText = endDate.getText();
+            CinemaDate startDateObj = null;
+            CinemaDate endDateObj = null;
+
+            if (startDateText.matches("\\d{2}-\\d{2}")) {
+                String[] parts = startDateText.split("-");
+                startDateObj = new CinemaDate(parts[0], parts[1], null);
+            }
+
+            if (endDateText.matches("\\d{2}-\\d{2}")) {
+                String[] parts = endDateText.split("-");
+                endDateObj = new CinemaDate(parts[0], parts[1], null);
+            }
+
+            cm.updateShows(movie, startDateObj, endDateObj);
         }
     }
 
@@ -401,5 +382,35 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
 
             updateShowSelection();
         }
+    }
+
+    /**
+     * Update show on document insert.
+     *
+     * @param e the event itself
+     */
+    @Override
+    public void insertUpdate(DocumentEvent e) {
+        callShowUpdate();
+    }
+
+    /**
+     * Update show on document delete.
+     *
+     * @param e the event itself
+     */
+    @Override
+    public void removeUpdate(DocumentEvent e) {
+        callShowUpdate();
+    }
+
+    /**
+     * Update show on document change.
+     *
+     * @param e the event itself
+     */
+    @Override
+    public void changedUpdate(DocumentEvent e) {
+        callShowUpdate();
     }
 }

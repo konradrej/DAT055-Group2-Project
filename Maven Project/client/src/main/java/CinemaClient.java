@@ -3,7 +3,6 @@ import java.awt.*;
 import java.util.Map;
 
 public class CinemaClient {
-    private JFrame frame;
 
     public static void main(String[] args) {
         Map<String, String> ipNum = ipReader.readText();
@@ -13,19 +12,18 @@ public class CinemaClient {
 
         new Thread(scc).start();
 
-        new CinemaClient();
+        createFrame();
     }
 
-    public CinemaClient() { createFrame(); }
-
-    private void createFrame(){
-        this.frame = new JFrame("Cinema");
-        this.frame.setPreferredSize(new Dimension(600, 600));
-        this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    private static void createFrame(){
+        JFrame frame = new JFrame("Cinema");
+        frame.setPreferredSize(new Dimension(600, 600));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         ClientModel.getInstance().setNavigator(new Navigator(new MainMenuPane(frame)));
 
-        this.frame.pack();
-        this.frame.setVisible(true);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
 }

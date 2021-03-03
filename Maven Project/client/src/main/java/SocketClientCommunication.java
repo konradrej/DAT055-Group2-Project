@@ -1,6 +1,7 @@
 import client.ClientCommand;
 import server.ServerCommand;
 
+import javax.swing.*;
 import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
@@ -11,7 +12,7 @@ import java.net.SocketException;
  * commands to server.
  *
  * @author Konrad Rej
- * @version 2021-03-01
+ * @version 2021-03-03
  */
 public enum SocketClientCommunication implements Runnable {
     INSTANCE();
@@ -77,9 +78,12 @@ public enum SocketClientCommunication implements Runnable {
         try {
             this.socket = new Socket(ip, 888);
             System.out.println("Connection established.");
+            JOptionPane.showMessageDialog(null, "Connection to server established.");
+            ClientModel.getInstance().setConnectionAlive(true);
         } catch (IOException e) {
             System.err.println("Connection could not be established.");
-            return;
+            JOptionPane.showMessageDialog(null, "Connection to server could not be established.", "Connection error", JOptionPane.ERROR_MESSAGE);
+            System.exit(1);
         }
 
         try {
@@ -96,6 +100,8 @@ public enum SocketClientCommunication implements Runnable {
             System.out.println("Connection reset.");
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
+        } finally {
+            ClientModel.getInstance().setConnectionAlive(false);
         }
     }
 
