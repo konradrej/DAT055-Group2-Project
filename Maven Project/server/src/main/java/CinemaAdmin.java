@@ -36,6 +36,7 @@ public class CinemaAdmin {
         date = new CinemaDate();
 
         makeMenu(frame);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 

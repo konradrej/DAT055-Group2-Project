@@ -1,3 +1,5 @@
+package app;
+
 import client.ClientHandler;
 import misc.ResponseStatus;
 import server.*;
@@ -5,7 +7,7 @@ import server.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import utils.*;
+import util.*;
 import collections.*;
 import cinemaObjects.*;
 

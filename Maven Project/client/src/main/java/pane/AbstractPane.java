@@ -1,3 +1,5 @@
+package pane;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -32,7 +34,7 @@ public abstract class AbstractPane {
     /**
      *
      */
-    protected void stop() {
+    public void stop() {
         this.frame.setContentPane(this.originalContentPane);
         this.frame.pack();
     }

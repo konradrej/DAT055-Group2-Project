@@ -1,4 +1,7 @@
-import utils.IObserver;
+package pane;
+
+import app.ClientModel;
+import util.IObserver;
 
 import javax.swing.*;
 import java.awt.*;

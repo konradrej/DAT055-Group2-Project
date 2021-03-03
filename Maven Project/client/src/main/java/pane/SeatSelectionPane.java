@@ -1,3 +1,6 @@
+package pane;
+
+import app.ClientModel;
 import cinemaObjects.Row;
 import cinemaObjects.Seat;
 import cinemaObjects.Show;

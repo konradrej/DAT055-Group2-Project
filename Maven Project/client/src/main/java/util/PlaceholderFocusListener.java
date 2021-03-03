@@ -1,4 +1,4 @@
-package utils;
+package util;
 
 import javax.swing.text.JTextComponent;
 import java.awt.*;

@@ -1,3 +1,5 @@
+package app;
+
 import client.ClientCommand;
 import server.ServerCommand;
 
@@ -23,7 +25,7 @@ public enum SocketClientCommunication implements Runnable {
     /**
      * Get singleton instance of this class
      *
-     * @return SocketClientCommunication instance
+     * @return app.SocketClientCommunication instance
      */
     public static SocketClientCommunication getInstance() {
         return INSTANCE;

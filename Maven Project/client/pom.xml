@@ -45,7 +45,7 @@
                             <archive>
                                 <manifest>
                                     <mainClass>
-                                        CinemaClient
+                                        app.CinemaClient
                                     </mainClass>
                                 </manifest>
                             </archive>
