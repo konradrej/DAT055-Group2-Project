@@ -143,7 +143,7 @@ public class CinemaAdmin {
 
         JLabel insertLabel = new JLabel("Insert amount of seat (1-15)");
         JTextField insertText = new JTextField(5);
-        JButton insertSeatsButton = new JButton("Add seats");
+        JButton insertSeatsButton = new JButton("Add row");
         insertSeatsButton.addActionListener((ActionEvent e) -> {
             int seats = Integer.parseInt(insertText.getText());
             if (seats > 0 && seats <= 15) {

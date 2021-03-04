@@ -63,11 +63,13 @@ public class SeatSelectionPane extends AbstractPane {
 
                 if (seat.getAvailable()) {
                     seatButton.setBackground(Color.GREEN);
+                    seatButton.setToolTipText("Available");
 
                     seatButton.addActionListener((ActionEvent e) ->
                             handleSeatClick(row, seat, seatButton));
                 } else {
                     seatButton.setBackground(Color.RED);
+                    seatButton.setToolTipText("Taken");
                 }
 
                 rowPanel.add(seatButton);
@@ -135,9 +137,11 @@ public class SeatSelectionPane extends AbstractPane {
             if (seatIndex == -1) {
                 operatingRow.addSeat(seat);
                 seatButton.setBackground(Color.ORANGE);
+                seatButton.setToolTipText("Selected");
             } else {
                 operatingRow.removeSeat(seat);
                 seatButton.setBackground(Color.GREEN);
+                seatButton.setToolTipText("Available");
 
                 if (operatingRow.getAllSeats().size() == 0) {
                     bookRows.remove(rowIndex);
