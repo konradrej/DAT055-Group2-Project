@@ -11,7 +11,7 @@ import cinemaObjects.*;
  * that may modify and provide different bookings
  *
  * @author Phong Nguyen
- * @version 2021-03-02
+ * @version 2021-03-04
  */
 
 public class BookingCollection extends AbstractCollection {
@@ -144,14 +144,10 @@ public class BookingCollection extends AbstractCollection {
             BookingCollection readThis = (BookingCollection) stream.readObject();
             System.out.println("File: " + this.filename + " has been read");
             return readThis;
-        } catch (ClassCastException | ClassNotFoundException | FileNotFoundException | NullPointerException e) {
+        } catch (ClassCastException | ClassNotFoundException | NullPointerException | IOException e) {
             System.err.println(e.getMessage());
             e.printStackTrace();
             return new BookingCollection(this.filename);
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
-            e.printStackTrace();
-            return null;
         }
     }
 }

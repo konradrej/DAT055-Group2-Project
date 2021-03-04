@@ -14,7 +14,7 @@ import java.util.List;
  * This class handles the collection of movie provided from URL and may provide these.
  *
  * @author Phong Nguyen
- * @version 2021-03-02
+ * @version 2021-03-04
  */
 
 public class MovieCollection extends AbstractCollection {
@@ -184,14 +184,10 @@ public class MovieCollection extends AbstractCollection {
             MovieCollection readThis = (MovieCollection) stream.readObject();
             System.out.println("File: " + this.filename + " has been read");
             return readThis;
-        } catch (ClassCastException | ClassNotFoundException | FileNotFoundException | NullPointerException e) {
+        } catch (IOException | ClassCastException | ClassNotFoundException | NullPointerException e) {
             System.err.println(e.getMessage());
             e.printStackTrace();
             return new MovieCollection(this.filename);
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
-            e.printStackTrace();
-            return null;
         }
     }
 

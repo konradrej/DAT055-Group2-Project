@@ -17,7 +17,7 @@ import java.util.List;
  * Pane for selecting seat in theater.
  *
  * @author Konrad Rej
- * @version 2021-03-03
+ * @version 2021-03-04
  */
 public class SeatSelectionPane extends AbstractPane {
     private final ClientModel cm;

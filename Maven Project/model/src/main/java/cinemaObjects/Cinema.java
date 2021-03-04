@@ -11,7 +11,7 @@ import java.util.List;
  * and stores a collection of theatres.
  *
  * @author Erik Kieu
- * @version 2021-03-02
+ * @version 2021-03-04
  */
 public class Cinema implements Serializable {
 
@@ -87,14 +87,10 @@ public class Cinema implements Serializable {
             Cinema readThis = (Cinema) stream.readObject();
             System.out.println("File: " + this.name + " has been read");
             return readThis;
-        } catch (ClassCastException | ClassNotFoundException | FileNotFoundException | NullPointerException e) {
+        } catch (ClassCastException | ClassNotFoundException | NullPointerException | IOException e) {
             System.err.println(e.getMessage());
             e.printStackTrace();
             return new Cinema(this.name);
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
-            e.printStackTrace();
-            return null;
         }
     }
 
