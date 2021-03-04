@@ -57,7 +57,7 @@ public class Row implements Serializable {
      *
      * @return returns the cinemaObjects.Row instance itself
      */
-    public Row cloneRow() {
+    private Row cloneRow() {
         return new Row(this);
     }
 
@@ -76,7 +76,7 @@ public class Row implements Serializable {
      * @return returns an arraylist containing all seats of this Row instance's seats
      */
     public List<Seat> getAllSeats() {
-        return new ArrayList<>(this.allSeats);
+        return this.allSeats;
     }
 
 
@@ -112,68 +112,4 @@ public class Row implements Serializable {
 
         return availableSeats;
     }
-
-    /**
-     * Method for getting available seats from a list of available seats
-     *
-     * @param numOfSeats the number of available seats to find
-     * @return returns an arraylist of size numOfSeats of available seats
-     */
-    public ArrayList<Seat> getAvailableSeats(int numOfSeats) {
-        ArrayList<Seat> availableSeats = new ArrayList<>();
-
-        if (this.getAllAvailableSeats().size() > numOfSeats) {
-            availableSeats = this.getAllAvailableSeats();
-            ArrayList<Seat> temp = new ArrayList<>();
-
-            int count = 0;
-
-            for (Seat s : availableSeats) {
-                if (count < numOfSeats) {
-                    temp.add(s);
-                    count++;
-                }
-            }
-
-            availableSeats = temp;
-        } else if (this.getAllAvailableSeats().size() == numOfSeats) {
-            availableSeats = this.getAllAvailableSeats();
-        } else if (this.getAllAvailableSeats().size() < numOfSeats) availableSeats = new ArrayList<>();
-
-        return availableSeats;
-    }
-
-
-    /**
-     * Method for getting n number of adjacent available seats
-     *
-     * @param numOfSeats the number of adjacent available seats to find
-     * @return returns a list of size numOfSeats if numOfSeats adjacent available seats are found
-     */
-    public ArrayList<Seat> getAdjacentAvailableSeats(int numOfSeats) {
-        ArrayList<Seat> availableSeatsOfRow = this.getAvailableSeats(numOfSeats);
-
-        Seat[] availableSeatsOfRowArray = (Seat[]) availableSeatsOfRow.toArray();
-        Seat[] availableAdjacentSeatsOfRowArray = new Seat[numOfSeats];
-
-        for (int i = 0; i < availableSeatsOfRowArray.length - numOfSeats; i++) {
-            boolean availableAdjacent = true;
-
-            for (int j = i; j <= numOfSeats; j++) {
-                if (!availableSeatsOfRowArray[j].getAvailable()) {
-                    availableAdjacent = false;
-                    break;
-                } else availableAdjacentSeatsOfRowArray[j] = availableSeatsOfRowArray[i];
-            }
-
-            if (availableAdjacent) {
-                return new ArrayList<>(Arrays.asList(availableAdjacentSeatsOfRowArray).subList(0, numOfSeats));
-            } else {
-                availableAdjacentSeatsOfRowArray = new Seat[numOfSeats];
-            }
-        }
-
-        return new ArrayList<>();
-    }
-
 }

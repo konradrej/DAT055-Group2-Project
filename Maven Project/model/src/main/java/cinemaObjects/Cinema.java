@@ -30,15 +30,6 @@ public class Cinema implements Serializable {
     }
 
     /**
-     * Method for getting a cinema
-     *
-     * @return returns the cinema instance itself
-     */
-    public Cinema getCinema() {
-        return this;
-    }
-
-    /**
      * Method for getting cinema name
      *
      * @return returns the cinema name
@@ -52,7 +43,7 @@ public class Cinema implements Serializable {
      *
      * @return return
      */
-    public List<Theater> getTheaterCollection() {
+    public List<Theater> getAllTheaters() {
         return this.allTheaters;
     }
 
@@ -63,28 +54,6 @@ public class Cinema implements Serializable {
      */
     public void addTheater(Theater t) {
         this.allTheaters.add(t);
-    }
-
-    /**
-     * Method for checking if the object is a theater
-     *
-     * @return returns the cinema name and the theaters int the cinema
-     */
-    @Override
-    public boolean equals (Object o){
-        if(this == o){
-            return true;
-        }
-        if(o == null){
-            return false;
-        }
-        if(getClass() != o.getClass()){
-            return false;
-        }
-
-        Cinema cinema = (Cinema) o;
-        return this.allTheaters.equals(cinema.getTheaterCollection()) &&
-                this.name.equals(cinema.getCinemaName());
     }
 
     /**

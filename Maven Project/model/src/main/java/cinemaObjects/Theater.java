@@ -38,7 +38,7 @@ public class Theater implements Serializable {
      */
     public Theater(Theater t) {
         this.theaterNumber = t.theaterNumber;
-        this.allRows = Row.cloneList(t.getCollectionOfRows());
+        this.allRows = Row.cloneList(t.getAllRows());
     }
 
 
@@ -66,7 +66,7 @@ public class Theater implements Serializable {
      *
      * @return returns this theaters list of rows as a list of rows
      */
-    public List<Row> getCollectionOfRows() {
+    public List<Row> getAllRows() {
         return this.allRows;
     }
 

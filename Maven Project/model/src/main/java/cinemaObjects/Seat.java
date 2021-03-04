@@ -43,7 +43,7 @@ public class Seat implements Serializable {
      *
      * @return returns the seat instance itself
      */
-    public Seat cloneSeat() {
+    private Seat cloneSeat() {
         return new Seat(this);
     }
 

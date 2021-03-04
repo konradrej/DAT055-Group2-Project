@@ -99,7 +99,7 @@ public class CinemaAdmin {
 
         JButton addTheaterButton = new JButton("Add Theater");
         addTheaterButton.addActionListener((ActionEvent e) -> {
-            int theaterNr = CinemaBookingSystem.getInstance().getCinema().getTheaterCollection().size() + 1;
+            int theaterNr = CinemaBookingSystem.getInstance().getCinema().getAllTheaters().size() + 1;
             if (!(rows.isEmpty())) {
                 Theater t = new Theater(theaterNr, rows);
                 CinemaBookingSystem.getInstance().getCinema().addTheater(t);
@@ -180,7 +180,7 @@ public class CinemaAdmin {
             movieArr.add(m.getTitle());
         }
 
-        for (Theater t : CinemaBookingSystem.getInstance().getCinema().getTheaterCollection()) {
+        for (Theater t : CinemaBookingSystem.getInstance().getCinema().getAllTheaters()) {
             theaterArr.add(Integer.toString(t.getTheaterNumber()));
         }
 
@@ -222,7 +222,7 @@ public class CinemaAdmin {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 1) {
-                    for (Theater t : CinemaBookingSystem.getInstance().getCinema().getTheaterCollection()) {
+                    for (Theater t : CinemaBookingSystem.getInstance().getCinema().getAllTheaters()) {
                         if (jlTheater.getSelectedValue().equals(Integer.toString(t.getTheaterNumber()))) {
                             selectedTheater = t;
                             break;

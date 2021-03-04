@@ -78,7 +78,7 @@ public class BookingCollection extends AbstractCollection {
         Booking b = new Booking(s, c, r);
         this.allBookings.add(b);
         for (Row row1 : r) {
-            for (Row row : s.getTheater().getCollectionOfRows()) {
+            for (Row row : s.getTheater().getAllRows()) {
                 if (row.getRowNumber() == row1.getRowNumber()) {
                     for (Seat seat : row.getAllSeats()) {
                         for (Seat seat1 : row1.getAllSeats()) {

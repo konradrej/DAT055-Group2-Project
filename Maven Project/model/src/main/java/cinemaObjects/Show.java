@@ -19,9 +19,6 @@ public class Show implements Serializable {
     private final CinemaDate dayAndTime;
     private final Cinema cinema;
     private final Theater theater;
-    private Boolean cancelled;
-
-    private final List<Row> rows;
 
     /**
      * Constructor for initializing the show instance with corresponding parameter values
@@ -36,8 +33,6 @@ public class Show implements Serializable {
         this.dayAndTime = dayAndTime;
         this.cinema = cinema;
         this.theater = theater;
-        this.cancelled = false;
-        this.rows = this.theater.getCollectionOfRows();
         this.uniqueID = UUID.randomUUID().toString();
     }
 
@@ -87,16 +82,6 @@ public class Show implements Serializable {
     }
 
     /**
-     * Method for getting this show object
-     *
-     * @return returns this show object
-     */
-    public Show getShow() {
-        return this;
-    }
-
-
-    /**
      * Method for finding all available seats in the theater that the show will be held in
      *
      * @return returns a list of Seat, containing all available seats
@@ -104,10 +89,9 @@ public class Show implements Serializable {
     public ArrayList<Seat> getAllAvailableSeats() {
         ArrayList<Seat> allAvailableSeats = new ArrayList<>();
 
-        for (Row r : this.rows) {
+        for (Row r : this.theater.getAllRows()) {
             allAvailableSeats.addAll(r.getAllAvailableSeats());
         }
-
         return allAvailableSeats;
     }
 

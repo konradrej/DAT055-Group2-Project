@@ -258,7 +258,7 @@ public class ShowSelectionPane extends AbstractPane implements IObserver<ClientM
                 label.setAlignmentX(JLabel.CENTER_ALIGNMENT);
                 wrapperPanel.add(label);
 
-                if (show.getShow().getAllAvailableSeats().size() > 0) {
+                if (show.getAllAvailableSeats().size() > 0) {
                     JButton button = new JButton("Select");
                     button.setActionCommand(show.getUniqueID());
                     button.setAlignmentX(JButton.CENTER_ALIGNMENT);

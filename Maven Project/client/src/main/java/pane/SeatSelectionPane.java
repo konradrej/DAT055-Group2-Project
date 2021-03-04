@@ -52,7 +52,7 @@ public class SeatSelectionPane extends AbstractPane {
         JPanel wrapperPanel = new JPanel();
         wrapperPanel.setLayout(new BorderLayout());
 
-        Collection<Row> rows = bookShow.getTheater().getCollectionOfRows();
+        Collection<Row> rows = bookShow.getTheater().getAllRows();
         for (Row row : rows) {
             JPanel rowPanel = new JPanel();
             rowPanel.setPreferredSize(new Dimension(contentPane.getWidth(), 35));
