@@ -48,7 +48,7 @@ public class Cinema implements Serializable {
     }
 
     /**
-     * Method for getting theatres in collection of theatres.
+     * Method for getting theatres in List of theatres.
      *
      * @return return
      */
@@ -57,13 +57,19 @@ public class Cinema implements Serializable {
     }
 
     /**
-     * Method for creating a new theater given rows, cinema...
+     * Method for creating a new theater
+     *
+     * @param t     the new theater
      */
     public void addTheater(Theater t) {
         this.allTheaters.add(t);
     }
 
-
+    /**
+     * Method for checking if the object is a theater
+     *
+     * @return returns the cinema name and the theaters int the cinema
+     */
     @Override
     public boolean equals (Object o){
         if(this == o){
@@ -80,6 +86,10 @@ public class Cinema implements Serializable {
         return this.allTheaters.equals(cinema.getTheaterCollection()) &&
                 this.name.equals(cinema.getCinemaName());
     }
+
+    /**
+     * Method for reading a cinema
+     */
 
     public Cinema readCinema() {
         try (ObjectInputStream stream = new ObjectInputStream(new FileInputStream(this.name + ".txt"))) {
@@ -98,6 +108,9 @@ public class Cinema implements Serializable {
         }
     }
 
+    /**
+     * Method for serializing a cinema
+     */
     public void serializeCinema(String s) {
 
         try (ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(s))) {

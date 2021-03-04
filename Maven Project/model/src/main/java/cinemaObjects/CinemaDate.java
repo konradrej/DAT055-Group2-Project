@@ -131,7 +131,6 @@ public class CinemaDate implements Serializable {
      * @param o the object being compared
      * @return true if objects are equals and false if not
      */
-
     @Override
     public boolean equals (Object o){
         if(this == o){

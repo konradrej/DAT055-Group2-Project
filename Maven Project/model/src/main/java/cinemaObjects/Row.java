@@ -21,7 +21,7 @@ public class Row implements Serializable {
      * Constructor for initializing the cinemaObjects.Row instance
      *
      * @param rowNumber the number of the row
-     * @param allSeats  the Collection of allSeats
+     * @param allSeats  the list of allSeats
      */
     public Row(int rowNumber, List<Seat> allSeats) {
         this.rowNumber = rowNumber;
@@ -71,7 +71,7 @@ public class Row implements Serializable {
     }
 
     /**
-     * Method for getting seats from a collection of seats
+     * Method for getting seats from a list of seats
      *
      * @return returns an arraylist containing all seats of this Row instance's seats
      */
@@ -114,7 +114,7 @@ public class Row implements Serializable {
     }
 
     /**
-     * Method for getting available seats from a collection of available seats
+     * Method for getting available seats from a list of available seats
      *
      * @param numOfSeats the number of available seats to find
      * @return returns an arraylist of size numOfSeats of available seats
