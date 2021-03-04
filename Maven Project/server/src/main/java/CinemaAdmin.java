@@ -8,12 +8,11 @@ import cinemaObjects.*;
 
 /**
  * This class handles GUI for the admin and
- * execute operations such as adding theaters and shows.
+ * executes operations such as adding theaters and shows.
  *
  * @author Phong Nguyen
  * @version 2021-03-02
  */
-
 public class CinemaAdmin {
     private int page = 1;
     private final Container pane;
@@ -25,7 +24,6 @@ public class CinemaAdmin {
     /**
      * Constructor for initializing the CinemaAdmin with GUI
      */
-
     public CinemaAdmin() {
         JFrame frame = new JFrame();
         frame.setTitle("Admin");
@@ -45,7 +43,6 @@ public class CinemaAdmin {
      *
      * @param frame of the interface window
      */
-
     private void makeMenu(JFrame frame) {
         JMenuBar menuBar = new JMenuBar();
         frame.setJMenuBar(menuBar);
@@ -68,7 +65,6 @@ public class CinemaAdmin {
      *
      * @param frame of the interface window
      */
-
     private void displayAddShowMenu(JFrame frame) {
         frame.setVisible(false);
         pane.removeAll();
@@ -82,7 +78,6 @@ public class CinemaAdmin {
      *
      * @param frame of the interface window
      */
-
     private void displayAddTheaterMenu(JFrame frame) {
         frame.setVisible(false);
         pane.removeAll();
@@ -96,7 +91,6 @@ public class CinemaAdmin {
      * This method handles the graphics and controls for creating a theater,
      * with Theater, Row and Seat.
      */
-
     private void createTheaterOption() {
         DefaultListModel<Object> listModel = new DefaultListModel<>();
         ArrayList<Row> rows = new ArrayList<>();
@@ -172,7 +166,6 @@ public class CinemaAdmin {
      * This method handles the graphics and controls for creating a show,
      * with Theater, Movie , Day and Time.
      */
-
     private void createListsWithListeners() {
         dayList = new DefaultListModel<>();
         CardLayout cl = new CardLayout();
@@ -331,7 +324,6 @@ public class CinemaAdmin {
     /**
      * Method that adds a show if Movie, Theater and date are valid
      */
-
     private void addShowToCollection() {
 
         if (selectedMovie != null && selectedTheater != null &&
@@ -369,4 +361,5 @@ public class CinemaAdmin {
                 CinemaBookingSystem.getInstance().serializeAllCollection()));
 
     }
+
 }

@@ -3,7 +3,6 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-
 /**
  * Handles connection establishment, creates a new
  * ConnectionHandler thread for each active connection.
@@ -14,6 +13,9 @@ import java.net.Socket;
 public enum SocketServerCommunication implements Runnable {
     INSTANCE();
 
+    /**
+     * Constructor, sets up a shutdown hook for the connection between client and server
+     */
     SocketServerCommunication() {
         Runtime.getRuntime().addShutdownHook(new Thread(() ->
                 listenForConnection = false));
@@ -55,4 +57,5 @@ public enum SocketServerCommunication implements Runnable {
             System.exit(1);
         }
     }
+
 }
