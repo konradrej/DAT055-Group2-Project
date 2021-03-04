@@ -101,7 +101,9 @@ public class BookingCollection extends AbstractCollection {
      */
     public boolean removeBooking(Booking b) {
         for (Booking b2 : this.allBookings) {
-            if (b2.equals(b) && b.getCancelledStatus()) {
+            System.out.println(b2);
+            System.out.println(b);
+            if (b2.getUniqueID().equals(b.getUniqueID()) ) {
                 b2.cancelBooking();
                 this.allBookings.remove(b2);
                 return true;

@@ -3,6 +3,7 @@ package cinemaObjects;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * This class handles the booking for a customer
@@ -17,8 +18,8 @@ public class Booking implements Serializable {
     private static final long serialVersionUID = 408224943807153172L;
     private Show show;
     private Customer customer;
-    private List<Row> rows;
-    private Boolean cancelled;
+    private List<Row> bookedRows;
+    private final String uniqueID;
 
     /**
      * Constructor for initializing the cinemaObjects.Booking instance
@@ -30,8 +31,8 @@ public class Booking implements Serializable {
     public Booking(Show show, Customer customer, List<Row> rows) {
         this.show = show;
         this.customer = customer;
-        this.rows = rows;
-        this.cancelled = false;
+        this.bookedRows = rows;
+        this.uniqueID = UUID.randomUUID().toString();
     }
 
     /**
@@ -40,7 +41,7 @@ public class Booking implements Serializable {
      * @return rows        what rows the customer has booked seats in
      */
     public List<Row> getBookedRows() {
-        return this.rows;
+        return this.bookedRows;
     }
 
     /**
@@ -52,7 +53,7 @@ public class Booking implements Serializable {
     public List<Seat> getBookedSeats(int rowNumber) {
         List<Seat> bookedSeats = new ArrayList<>();
 
-        for (Row r : this.rows) {
+        for (Row r : this.bookedRows) {
             if (r.getRowNumber() == rowNumber) {
                 bookedSeats = r.getAllSeats();
             }
@@ -65,24 +66,11 @@ public class Booking implements Serializable {
      * Method for internally changing the status of the booking
      */
     public void cancelBooking() {
-
-        this.cancelled = true;
-
-        for (Row r : rows) {
+        for (Row r : bookedRows) {
             for (Seat s : r.getAllSeats()) {
                 s.updateSeatStatus(false);
             }
         }
-
-    }
-
-    /**
-     * Method for getting the status of this particular booking
-     *
-     * @return returns the cancelled status of this particular booking
-     */
-    public Boolean getCancelledStatus() {
-        return cancelled;
     }
 
     /**
@@ -103,4 +91,7 @@ public class Booking implements Serializable {
         return this.show;
     }
 
+    public String getUniqueID(){
+        return this.uniqueID;
+    }
 }
