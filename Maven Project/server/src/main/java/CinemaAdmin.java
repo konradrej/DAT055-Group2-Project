@@ -53,7 +53,7 @@ public class CinemaAdmin {
         JMenu fileMenu = new JMenu("Menu");
         menuBar.add(fileMenu);
 
-        JMenuItem addShow = new JMenuItem("Add show");
+        JMenuItem addShow = new JMenuItem("Add Show");
         addShow.addActionListener((ActionEvent e) -> displayAddShowMenu(frame));
 
         JMenuItem addTheater = new JMenuItem("Add Theater");
