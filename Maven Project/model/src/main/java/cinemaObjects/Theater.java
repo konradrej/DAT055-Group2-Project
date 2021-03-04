@@ -11,7 +11,7 @@ import java.util.List;
  * differentiate the multiple theaters in a cinema.
  *
  * @author Erik Kieu
- * @version 2021-03-02
+ * @version 2021-03-04
  */
 public class Theater implements Serializable {
 

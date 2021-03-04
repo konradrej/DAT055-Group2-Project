@@ -10,7 +10,7 @@ import java.util.List;
  * of a seat.
  *
  * @author Erik Kieu
- * @version 2021-03-02
+ * @version 2021-03-04
  */
 public class Seat implements Serializable {
 

@@ -9,7 +9,7 @@ import java.util.*;
  * is viewed and the theater where the movie is viewed.
  *
  * @author Erik Kieu
- * @version 2021-03-02
+ * @version 2021-03-04
  */
 public class Show implements Serializable {
 

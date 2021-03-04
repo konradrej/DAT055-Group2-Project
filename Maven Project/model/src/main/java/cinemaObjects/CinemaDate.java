@@ -8,7 +8,7 @@ import java.io.Serializable;
  * with the variables month, day and time
  *
  * @author Erik Kieu
- * @version 2021-03-03
+ * @version 2021-03-04
  */
 public class CinemaDate implements Serializable {
 

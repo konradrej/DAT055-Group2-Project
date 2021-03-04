@@ -9,7 +9,7 @@ import java.util.List;
  * This class handles rows for the seating placement
  *
  * @author Erik Kieu
- * @version 2021-03-02
+ * @version 2021-03-04
  */
 public class Row implements Serializable {
 
