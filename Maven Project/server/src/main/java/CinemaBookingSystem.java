@@ -8,7 +8,7 @@ import java.util.List;
 public enum CinemaBookingSystem implements ServerHandler {
     INSTANCE();
 
-    private final Cinema cinema;
+    private Cinema cinema = new Cinema("Underground Bio");
     private BookingCollection bookingCollection = new BookingCollection("bookingCollection.txt");
     private MovieCollection movieCollection = new MovieCollection("movieCollection.txt");
     private ShowCollection showCollection = new ShowCollection("showCollection.txt");
@@ -19,7 +19,7 @@ public enum CinemaBookingSystem implements ServerHandler {
      * Predefined for all Cinema, Theater, Row, Seat
      */
     CinemaBookingSystem() {
-        cinema = new Cinema("Underground Bio");
+
     }
 
     /**
@@ -39,6 +39,7 @@ public enum CinemaBookingSystem implements ServerHandler {
         showCollection.serializeCollection(showCollection.getFilename());
         customerCollection.serializeCollection(customerCollection.getFilename());
         bookingCollection.serializeCollection(bookingCollection.getFilename());
+        cinema.serializeCinema(cinema.getCinemaName() + ".txt");
     }
 
     /**
@@ -49,6 +50,7 @@ public enum CinemaBookingSystem implements ServerHandler {
         this.showCollection = showCollection.readCollection();
         this.customerCollection = customerCollection.readCollection();
         this.bookingCollection = bookingCollection.readCollection();
+        this.cinema = cinema.readCinema();
     }
 
     /**

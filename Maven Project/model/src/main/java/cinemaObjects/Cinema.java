@@ -1,6 +1,8 @@
 package cinemaObjects;
 
-import java.io.Serializable;
+import collections.CustomerCollection;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,5 +61,50 @@ public class Cinema implements Serializable {
      */
     public void addTheater(Theater t) {
         this.allTheaters.add(t);
+    }
+
+
+    @Override
+    public boolean equals (Object o){
+        if(this == o){
+            return true;
+        }
+        if(o == null){
+            return false;
+        }
+        if(getClass() != o.getClass()){
+            return false;
+        }
+
+        Cinema cinema = (Cinema) o;
+        return this.allTheaters.equals(cinema.getTheaterCollection()) &&
+                this.name.equals(cinema.getCinemaName());
+    }
+
+    public Cinema readCinema() {
+        try (ObjectInputStream stream = new ObjectInputStream(new FileInputStream(this.name + ".txt"))) {
+
+            Cinema readThis = (Cinema) stream.readObject();
+            System.out.println("File: " + this.name + " has been read");
+            return readThis;
+        } catch (ClassCastException | ClassNotFoundException | FileNotFoundException | NullPointerException e) {
+            System.err.println(e.getMessage());
+            e.printStackTrace();
+            return new Cinema(this.name);
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public void serializeCinema(String s) {
+
+        try (ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(s))) {
+            stream.writeObject(this);
+        } catch (IOException e) {
+            System.err.println("Error initializing stream " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }
