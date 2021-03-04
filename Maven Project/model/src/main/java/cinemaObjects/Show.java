@@ -99,7 +99,7 @@ public class Show implements Serializable {
     /**
      * Method for finding all available seats in the theater that the show will be held in
      *
-     * @return returns a collection of Seat, containing all available seats
+     * @return returns a list of Seat, containing all available seats
      */
     public ArrayList<Seat> getAllAvailableSeats() {
         ArrayList<Seat> allAvailableSeats = new ArrayList<>();

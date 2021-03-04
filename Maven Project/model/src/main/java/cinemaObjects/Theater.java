@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * This class handles the theater and contains
- * a collection of rows and theater number to
+ * a list of rows and theater number to
  * differentiate the multiple theaters in a cinema.
  *
  * @author Erik Kieu
@@ -23,13 +23,19 @@ public class Theater implements Serializable {
      * Constructor for initializing the Theater instance
      *
      * @param theaterNumber the number of the theater
-     * @param allRows       the Collection of allrows
+     * @param allRows       the list of allrows
      */
     public Theater(int theaterNumber, List<Row> allRows) {
         this.theaterNumber = theaterNumber;
         this.allRows = Row.cloneList(allRows);
     }
 
+    /**
+     * Constructor for initializing the Theater instance
+     *
+     * @param t the number of the theater
+
+     */
     public Theater(Theater t) {
         this.theaterNumber = t.theaterNumber;
         this.allRows = Row.cloneList(t.getCollectionOfRows());
@@ -56,9 +62,9 @@ public class Theater implements Serializable {
     }
 
     /**
-     * Method for getting a row from a collection of rows
+     * Method for getting a row from a list of rows
      *
-     * @return returns this theaters collection of rows as a list of rows
+     * @return returns this theaters list of rows as a list of rows
      */
     public List<Row> getCollectionOfRows() {
         return this.allRows;
