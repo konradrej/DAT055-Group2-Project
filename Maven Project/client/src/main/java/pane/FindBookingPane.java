@@ -5,6 +5,8 @@ import util.IObserver;
 import cinemaObjects.*;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EtchedBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.*;
@@ -50,16 +52,16 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
         super.start();
     }
 
-
     private Container enterInformation() {
-        Container enterInformation = new JPanel();
-        enterInformation.setLayout(new FlowLayout());
 
-        JLabel l1 = new JLabel("Enter ssn:");
-        JTextField j1 = new JTextField(13);
-        JLabel l2 = new JLabel("Phone:");
-        JTextField j2 = new JTextField(13);
-        JButton b1 = new JButton("Show Bookings");
+        Container enterInformation = new JPanel();
+        enterInformation.setLayout(new FlowLayout(FlowLayout.LEFT));
+
+        JLabel l1 = new JLabel("SSN:");
+        JTextField j1 = new JTextField(12);
+        JLabel l2 = new JLabel("Phone number:");
+        JTextField j2 = new JTextField(12);
+        JButton b1 = new JButton("Search");
 
         b1.addActionListener((ActionEvent e) -> {
             if (!j1.getText().equals("")) {
@@ -76,16 +78,17 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
         enterInformation.add(l2);
         enterInformation.add(j2);
         enterInformation.add(b1);
-        enterInformation.setPreferredSize(new Dimension(frame.getWidth(), 50));
+        enterInformation.setPreferredSize(new Dimension(frame.getWidth(), 60));
 
         return enterInformation;
     }
 
     private Container showBookings() {
         Container showBookings = new JPanel();
-        showBookings.setLayout(new GridLayout(4, 1, 10, 10));
+        showBookings.setLayout(new GridLayout(1, 1, 10, 10));
         JLabel l1 = new JLabel("Bookings will show here", JLabel.CENTER);
         showBookings.add(l1);
+
         return showBookings;
     }
 
@@ -102,86 +105,81 @@ public class FindBookingPane extends AbstractPane implements IObserver<ClientMod
     }
 
     private void updateShowBookings() {
+
         Container con = (Container) contentPane.getComponent(1);
-        con.setLayout(new GridLayout());
         con.removeAll();
 
         if (bookings != null && bookings.size() > 0) {
-            JPanel wrapperpanel = new JPanel();
-            JScrollPane scrollpane = new JScrollPane(wrapperpanel);
-            scrollpane.setLayout(new ScrollPaneLayout());
 
-            wrapperpanel.setLayout(new BoxLayout(wrapperpanel, BoxLayout.Y_AXIS));
+            GridLayout grid;
+            if(bookings.size()<4) {
+                grid = new GridLayout(4, 1);
+            }else
+                grid = new GridLayout(bookings.size(), 1);
+
+            JPanel framePanel = new JPanel();
+            framePanel.setLayout(grid);
 
             for (Booking booking : bookings) {
-                JPanel bookingPanel = new JPanel();
-                bookingPanel.setLayout(new BorderLayout());
-                bookingPanel.setBorder(BorderFactory.createEtchedBorder());
 
-                JPanel buttonContainer = new JPanel();
-                JPanel infoContainer = new JPanel();
-                infoContainer.setLayout(new BoxLayout(infoContainer, BoxLayout.Y_AXIS));
+                JPanel bookingPanel = new JPanel();
+                bookingPanel.setLayout(new GridLayout(0,2,250,2));
 
                 JLabel movieLabel = new JLabel("Movie: " + booking.getShow().getMovie().getTitle());
-                movieLabel.setAlignmentX(JPanel.LEFT_ALIGNMENT);
-                infoContainer.add(movieLabel);
+                bookingPanel.add(movieLabel);
 
-                JLabel dateTimeLabel = new JLabel("Date and time: " + booking.getShow().getShowDateAndTime());
-                dateTimeLabel.setAlignmentX(JPanel.LEFT_ALIGNMENT);
-                infoContainer.add(dateTimeLabel);
+                JLabel emptyLabel1 = new JLabel();
+                bookingPanel.add(emptyLabel1);
 
-                JLabel cinemaLabel = new JLabel("Cinema " + booking.getShow().getCinema().getCinemaName());
-                cinemaLabel.setAlignmentX(JPanel.LEFT_ALIGNMENT);
-                infoContainer.add(cinemaLabel);
+                JLabel dateTimeLabel = new JLabel("When: " + booking.getShow().getShowDateAndTime());
+                bookingPanel.add(dateTimeLabel);
 
-                JLabel theaterLabel = new JLabel("Theater: " + booking.getShow().getTheater().getTheaterNumber());
-                theaterLabel.setAlignmentX(JPanel.LEFT_ALIGNMENT);
-                infoContainer.add(theaterLabel);
+                JLabel emptyLabel2 = new JLabel();
+                bookingPanel.add(emptyLabel2);
 
-                JPanel rowSeatPanel = new JPanel();
-                rowSeatPanel.setAlignmentX(JPanel.LEFT_ALIGNMENT);
-                JLabel bookedSeatsLabel = new JLabel("Booked Seats: ");
+                JLabel cinemaLabel = new JLabel("Where: " + booking.getShow().getCinema().getCinemaName());
+                bookingPanel.add(cinemaLabel);
+
+                JLabel emptyLabel3 = new JLabel();
+                bookingPanel.add(emptyLabel3);
+
+                JLabel theaterLabel = new JLabel("Theater nr: " + booking.getShow().getTheater().getTheaterNumber());
+                bookingPanel.add(theaterLabel);
+
+                JLabel emptyLabel4 = new JLabel();
+                bookingPanel.add(emptyLabel4);
+
                 JComboBox<String> seatsText = new JComboBox<>();
                 for (Row row : booking.getBookedRows()) {
                     for (Seat seat : booking.getBookedSeats(row.getRowNumber())) {
                         seatsText.addItem("Row:" + row.getRowNumber() + " Seat:" + seat.getSeatNumber());
                     }
                 }
-
-                rowSeatPanel.add(bookedSeatsLabel);
-                rowSeatPanel.add(seatsText);
-                rowSeatPanel.setAlignmentX(JPanel.LEFT_ALIGNMENT);
+                bookingPanel.add(seatsText);
 
                 JButton cancelButton = new JButton("Cancel booking");
-                buttonContainer.add(cancelButton);
-
                 cancelButton.addActionListener((ActionEvent e) -> {
-                    cm.cancelBooking(booking);
-                    System.out.println(booking.getCustomer().getName().toString());
-                    cm.getNavigator().startNewPane(new StatusPane(frame));
+                    int confirmation = JOptionPane.showConfirmDialog(framePanel
+                            , "Are you sure you want to cancel your booking?"
+                            ,"Confirm cancellation"
+                            ,JOptionPane.YES_NO_OPTION);
+
+                    if(confirmation == JOptionPane.YES_OPTION){
+                        cm.cancelBooking(booking);
+                        cm.getNavigator().startNewPane(new StatusPane(frame));
+                    }
                 });
-
-                infoContainer.add(rowSeatPanel);
-
-                buttonContainer.setBackground(Color.BLACK);
-                infoContainer.setBackground(Color.RED);
-                rowSeatPanel.setBackground(Color.yellow);
-
-                bookingPanel.add(buttonContainer, BorderLayout.EAST);
-                bookingPanel.add(infoContainer, BorderLayout.CENTER);
-                bookingPanel.setPreferredSize(new Dimension(scrollpane.getWidth(), 120));
-                wrapperpanel.add(bookingPanel);
+                bookingPanel.add(cancelButton);
+                bookingPanel.setBorder(new EtchedBorder(55,Color.LIGHT_GRAY, Color.WHITE));
+                framePanel.add(bookingPanel);
             }
-
-            con.add(scrollpane);
-            con.setLayout(new GridLayout());
+            con.add(framePanel);
         } else {
             JLabel label = new JLabel("No booking found");
             con.add(label);
         }
         contentPane.validate();
     }
-
 
     /**
      * Method to be called by observed object to notify about changes.

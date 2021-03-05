@@ -18,7 +18,7 @@ public class ConfigReader {
      * and the name´s address as value.
      */
     public static Map<String, String> readText() {
-        int s;
+
         Map<String, String> ipNum = new HashMap<>();
 
         Path path = Paths.get(System.getProperty("user.dir")).resolve("Config.txt");
@@ -26,7 +26,7 @@ public class ConfigReader {
         try {
             reader = new BufferedReader(new FileReader(path.toFile()));
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("Config file not found. Using default config.");
             return new HashMap<>();
         }
         String line = null;
