@@ -12,6 +12,7 @@ import java.util.List;
  */
 public class Row implements Serializable {
 
+    private static final long serialVersionUID = -1432188689020345890L;
     private final int rowNumber;
     private final List<Seat> allSeats;
 

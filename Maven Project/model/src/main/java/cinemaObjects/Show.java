@@ -13,6 +13,7 @@ import java.util.*;
  */
 public class Show implements Serializable {
 
+    private static final long serialVersionUID = -9177195168561009276L;
     private final String uniqueID;
     private final Movie movie;
     private final CinemaDate dayAndTime;

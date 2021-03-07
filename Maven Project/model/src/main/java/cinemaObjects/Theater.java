@@ -14,6 +14,7 @@ import java.util.List;
  */
 public class Theater implements Serializable {
 
+    private static final long serialVersionUID = 264852408018552280L;
     private final int theaterNumber;
     private final List<Row> allRows;
 
@@ -32,6 +33,7 @@ public class Theater implements Serializable {
      * Constructor for initializing the Theater instance
      *
      * @param t the number of the theater
+
      */
     public Theater(Theater t) {
         this.theaterNumber = t.theaterNumber;

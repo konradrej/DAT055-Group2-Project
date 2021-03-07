@@ -63,6 +63,7 @@ public class Booking implements Serializable {
         return bookedSeats;
     }
 
+
     /**
      * Method for getting what customer the booking belongs to
      *
