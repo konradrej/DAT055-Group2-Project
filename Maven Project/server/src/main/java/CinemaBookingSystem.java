@@ -5,6 +5,15 @@ import server.ServerHandler;
 
 import java.util.List;
 
+/**
+ * This singleton class contains all collections that is being modified
+ * from each and acts like a "server".
+ * It handles all incoming commands and replies back to the sender.
+ *
+ * @author
+ * @version - 2021-03-07
+ */
+
 public enum CinemaBookingSystem implements ServerHandler {
     INSTANCE();
 
@@ -13,14 +22,6 @@ public enum CinemaBookingSystem implements ServerHandler {
     private MovieCollection movieCollection = new MovieCollection("movieCollection.txt");
     private ShowCollection showCollection = new ShowCollection("showCollection.txt");
     private CustomerCollection customerCollection = new CustomerCollection("customerCollection.txt");
-
-    /**
-     * Constructor for initializing the CinemaBookingSystem instance
-     * Predefined for all Cinema, Theater, Row, Seat
-     */
-    CinemaBookingSystem() {
-
-    }
 
     /**
      * Get method to get the instance of CinemaBookingSystem object
@@ -151,9 +152,7 @@ public enum CinemaBookingSystem implements ServerHandler {
      */
     public synchronized ResponseStatus cancelBooking(Booking booking) {
         ResponseStatus response;
-
-        booking.cancelBooking();
-        boolean removed = this.bookingCollection.removeBooking(booking);
+        boolean removed = this.bookingCollection.removeBooking(booking, this.showCollection);
 
         if (removed) response = new ResponseStatus(true, "Booking successfully removed");
         else response = new ResponseStatus(false, "Booking failed to get removed");

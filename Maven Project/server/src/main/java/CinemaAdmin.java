@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import cinemaObjects.*;
 
 /**
- * This class handles GUI for the admin and
+ * This class handles and acts as GUI for the admin and
  * executes operations such as adding theaters and shows.
  *
  * @author Phong Nguyen

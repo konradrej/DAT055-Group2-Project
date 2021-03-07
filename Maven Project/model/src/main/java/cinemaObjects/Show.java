@@ -13,7 +13,6 @@ import java.util.*;
  */
 public class Show implements Serializable {
 
-    private static final long serialVersionUID = -9177195168561009276L;
     private final String uniqueID;
     private final Movie movie;
     private final CinemaDate dayAndTime;
@@ -34,6 +33,24 @@ public class Show implements Serializable {
         this.cinema = cinema;
         this.theater = theater;
         this.uniqueID = UUID.randomUUID().toString();
+    }
+
+    /**
+     * Constructor for initializing the show instance with corresponding parameter values
+     *
+     * @param movie      the movie that the show will play
+     * @param dayAndTime the day and time of the show
+     * @param cinema     what cinema the show will be played at
+     * @param theater    what theater the show will be played at
+     * @param uid        what unique ID the show will identify as
+     */
+
+    public Show(Movie movie, CinemaDate dayAndTime, Cinema cinema, Theater theater, String uid) {
+        this.movie = movie;
+        this.dayAndTime = dayAndTime;
+        this.cinema = cinema;
+        this.theater = theater;
+        this.uniqueID = uid;
     }
 
     /**

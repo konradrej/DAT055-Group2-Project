@@ -14,7 +14,6 @@ import java.util.List;
  */
 public class Seat implements Serializable {
 
-    private static final long serialVersionUID = 2724216208606386504L;
     private final int seatNumber;
     private boolean available;
 

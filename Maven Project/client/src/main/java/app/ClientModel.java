@@ -189,7 +189,6 @@ public enum ClientModel implements ClientHandler, IObservable<ClientModel> {
      * Notifies all observers.
      *
      * @param connectionAlive Boolean parameter.
-     * @return connectionAlive
      */
     public void setConnectionAlive(boolean connectionAlive) {
         this.connectionAlive = connectionAlive;

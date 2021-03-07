@@ -2,7 +2,6 @@ package cinemaObjects;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -13,9 +12,8 @@ import java.util.List;
  */
 public class Row implements Serializable {
 
-    private static final long serialVersionUID = -1432188689020345890L;
-    private int rowNumber;
-    private List<Seat> allSeats;
+    private final int rowNumber;
+    private final List<Seat> allSeats;
 
     /**
      * Constructor for initializing the cinemaObjects.Row instance

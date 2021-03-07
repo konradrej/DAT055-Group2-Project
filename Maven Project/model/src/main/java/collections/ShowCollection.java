@@ -1,6 +1,7 @@
 package collections;
 
 import cinemaObjects.*;
+
 import java.io.*;
 import java.text.DateFormatSymbols;
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.List;
  * that may modify and provide different show
  *
  * @author Phong Nguyen
- * @version 2021-03-04
+ * @version 2021-03-07
  */
 
 public class ShowCollection extends AbstractCollection {
@@ -127,7 +128,6 @@ public class ShowCollection extends AbstractCollection {
                 return;
             }
         }
-        System.out.println("Show not found");
     }
 
     /**
@@ -140,11 +140,11 @@ public class ShowCollection extends AbstractCollection {
      * @param t   - The updated theater of the show
      */
 
-    public void updateShow(Show s, Movie m, CinemaDate dat, Cinema c, Theater t) {
+    public void updateShow(Show s, Movie m, CinemaDate dat, Cinema c, Theater t, String uid) {
         for (Show s2 : allShows) {
             if (s.getUniqueID().equals(s2.getUniqueID())) {
+                this.addShow(new Show(m, dat, c, t, uid));
                 this.removeShow(s2);
-                this.addShow(new Show(m, dat, c, t));
                 break;
             }
         }

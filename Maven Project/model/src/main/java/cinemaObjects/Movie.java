@@ -1,11 +1,10 @@
 package cinemaObjects;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class handles the movie for a show
+ * This class contains the basic information about the movie
  *
  * @author Erik Kieu
  * @version 2021-03-02

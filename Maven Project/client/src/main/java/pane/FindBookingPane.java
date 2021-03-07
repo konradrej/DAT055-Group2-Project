@@ -5,7 +5,6 @@ import util.IObserver;
 import cinemaObjects.*;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;

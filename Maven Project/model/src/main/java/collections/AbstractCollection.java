@@ -12,7 +12,9 @@ import java.io.*;
 public abstract class AbstractCollection implements AllCollections {
 
     /**
-     * Serializing and updates this object
+     * This method method serialize its object to a filepath
+     *
+     * @param s - the filepath being serialize to
      */
 
     @Override

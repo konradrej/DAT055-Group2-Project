@@ -1,7 +1,6 @@
 package cinemaObjects;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -15,15 +14,14 @@ import java.util.List;
  */
 public class Theater implements Serializable {
 
-    private static final long serialVersionUID = 264852408018552280L;
-    private int theaterNumber;
-    private List<Row> allRows;
+    private final int theaterNumber;
+    private final List<Row> allRows;
 
     /**
      * Constructor for initializing the Theater instance
      *
      * @param theaterNumber the number of the theater
-     * @param allRows       the list of allrows
+     * @param allRows       the list of all rows
      */
     public Theater(int theaterNumber, List<Row> allRows) {
         this.theaterNumber = theaterNumber;
@@ -34,7 +32,6 @@ public class Theater implements Serializable {
      * Constructor for initializing the Theater instance
      *
      * @param t the number of the theater
-
      */
     public Theater(Theater t) {
         this.theaterNumber = t.theaterNumber;

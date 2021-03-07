@@ -12,14 +12,13 @@ import java.util.UUID;
  * unique ID as an identifier.
  *
  * @author Erik Kieu
- * @version 2021-03-04
+ * @version 2021-03-07
  */
 public class Booking implements Serializable {
 
-    private static final long serialVersionUID = 408224943807153172L;
-    private Show show;
-    private Customer customer;
-    private List<Row> bookedRows;
+    private final Show show;
+    private final Customer customer;
+    private final List<Row> bookedRows;
     private final String uniqueID;
 
     /**
@@ -62,17 +61,6 @@ public class Booking implements Serializable {
         }
 
         return bookedSeats;
-    }
-
-    /**
-     * Method for internally changing the status of the booking
-     */
-    public void cancelBooking() {
-        for (Row r : bookedRows) {
-            for (Seat s : r.getAllSeats()) {
-                s.updateSeatStatus(false);
-            }
-        }
     }
 
     /**

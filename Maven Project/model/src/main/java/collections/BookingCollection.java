@@ -11,7 +11,7 @@ import cinemaObjects.*;
  * that may modify and provide different bookings
  *
  * @author Phong Nguyen
- * @version 2021-03-04
+ * @version 2021-03-07
  */
 
 public class BookingCollection extends AbstractCollection {
@@ -40,7 +40,7 @@ public class BookingCollection extends AbstractCollection {
         List<Booking> bookings = new ArrayList<>();
         for (Booking b : this.allBookings) {
             Customer c = b.getCustomer();
-            if (c.getSSN().equals(SSN)){
+            if (c.getSSN().equals(SSN)) {
                 bookings.add(b);
             }
         }
@@ -54,7 +54,7 @@ public class BookingCollection extends AbstractCollection {
      * @return a list of bookings of the customer
      */
 
-    public List <Booking> getBookingsByCustomerPhoneNumber(String PhoneNumber){
+    public List<Booking> getBookingsByCustomerPhoneNumber(String PhoneNumber) {
         List<Booking> bookings = new ArrayList<>();
         for (Booking b : this.allBookings) {
             Customer c = b.getCustomer();
@@ -90,23 +90,39 @@ public class BookingCollection extends AbstractCollection {
                 }
             }
         }
-        showCollection.updateShow(s, s.getMovie(), s.getShowDateAndTime(), s.getCinema(), s.getTheater());
+        showCollection.updateShow(s, s.getMovie(), s.getShowDateAndTime(), s.getCinema(), s.getTheater(), s.getUniqueID());
 
     }
 
     /**
      * Removes a booking from the objects booking list
      *
-     * @param b - the booking that removes
+     * @param b              - the booking that removes
+     * @param showCollection - the ShowCollection that is being updated
+     * @return - true if the removal of the booking was successful, false if not
      */
-    public boolean removeBooking(Booking b) {
+    public boolean removeBooking(Booking b, ShowCollection showCollection) {
         for (Booking b2 : this.allBookings) {
-            System.out.println(b2);
-            System.out.println(b);
-            if (b2.getUniqueID().equals(b.getUniqueID()) ) {
-                b2.cancelBooking();
-                this.allBookings.remove(b2);
-                return true;
+            if (b2.getUniqueID().equals(b.getUniqueID())) {
+                for (Show s : showCollection.getAllShows()) {
+                    if (b.getShow().getUniqueID().equals(s.getUniqueID())) {
+                        for (Row row1 : b.getBookedRows()) {
+                            for (Row row : s.getTheater().getAllRows()) {
+                                if (row.getRowNumber() == row1.getRowNumber()) {
+                                    for (Seat seat : row.getAllSeats()) {
+                                        for (Seat seat1 : row1.getAllSeats()) {
+                                            if (seat.getSeatNumber() == seat1.getSeatNumber()) {
+                                                seat.updateSeatStatus(true);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        showCollection.updateShow(s, s.getMovie(), s.getShowDateAndTime(), s.getCinema(), s.getTheater(), s.getUniqueID());
+                        return true;
+                    }
+                }
             }
         }
         return false;
@@ -128,7 +144,7 @@ public class BookingCollection extends AbstractCollection {
      * @return a list of customers
      */
 
-    public List <Booking> getAllBookings(){
+    public List<Booking> getAllBookings() {
         return this.allBookings;
     }
 

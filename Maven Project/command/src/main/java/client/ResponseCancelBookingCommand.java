@@ -3,8 +3,7 @@ package client;
 import misc.ResponseStatus;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+
 
 /**
  * This class implements the ClientCommand interface

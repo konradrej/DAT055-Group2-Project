@@ -6,12 +6,12 @@ import cinemaObjects.Show;
 import client.ResponseCreateBookingCommand;
 
 import java.io.*;
-import java.util.ArrayList;
+
 import java.util.List;
 
 /**
  * This class implements the ServerCommand interface,
- * and creates a new booking aswell as
+ * and creates a new booking as well as
  * returning an instance of ResponseStatus containing
  * information about the execution of the command
  * to the ResponseCreateBookingCommand class.

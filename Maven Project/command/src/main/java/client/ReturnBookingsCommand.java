@@ -3,7 +3,6 @@ package client;
 import cinemaObjects.Booking;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

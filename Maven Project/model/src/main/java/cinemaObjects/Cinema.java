@@ -1,7 +1,5 @@
 package cinemaObjects;
 
-import collections.CustomerCollection;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +14,8 @@ import java.util.List;
 public class Cinema implements Serializable {
 
     private static final long serialVersionUID = -573847747221470914L;
-    private String name;
-    private List<Theater> allTheaters;
+    private final String name;
+    private final List<Theater> allTheaters;
 
     /**
      * Constructor for initializing the cinemaObjects.Cinema instance

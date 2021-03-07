@@ -3,8 +3,6 @@ package client;
 import collections.MovieCollection;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
 /**
  * This class implements the ClientCommand interface
@@ -22,7 +20,7 @@ public class ReturnMoviesCommand implements ClientCommand {
     /**
      * Constructor for initializing the collection of movies to be returned
      *
-     * @param movieCollection the colleciton of movies to be returned
+     * @param movieCollection the collection of movies to be returned
      */
     public ReturnMoviesCommand(MovieCollection movieCollection) {
         this.movieCollection = movieCollection;
