@@ -57,6 +57,8 @@ public class Cinema implements Serializable {
 
     /**
      * Method for reading a cinema
+     *
+     * @return  cinema name
      */
 
     public Cinema readCinema() {
@@ -74,6 +76,8 @@ public class Cinema implements Serializable {
 
     /**
      * Method for serializing a cinema
+     *
+     * @param s     serialVersionUID
      */
     public void serializeCinema(String s) {
 
