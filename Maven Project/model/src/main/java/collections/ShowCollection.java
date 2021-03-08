@@ -138,6 +138,7 @@ public class ShowCollection extends AbstractCollection {
      * @param dat - The updated day and time of the movie
      * @param c   - The updated cinema of the show
      * @param t   - The updated theater of the show
+     * @param uid - The unique id of the show
      */
 
     public void updateShow(Show s, Movie m, CinemaDate dat, Cinema c, Theater t, String uid) {
