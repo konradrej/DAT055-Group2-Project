@@ -29,9 +29,7 @@ public enum ClientModel implements ClientHandler, IObservable<ClientModel> {
         return INSTANCE;
     }
 
-    /**
-     * variable for navigator.
-     */
+
     private Navigator navigator;
 
     /**

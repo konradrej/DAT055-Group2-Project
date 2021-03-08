@@ -330,6 +330,11 @@ public class CinemaAdmin {
         }
     }
 
+    /**
+     * Main method on server side.
+     *
+     * @param args The command line arguments.
+     **/
     public static void main(String[] args) {
         new Thread(SocketServerCommunication.getInstance()).start();
         CinemaBookingSystem.getInstance().readAllCollections();
