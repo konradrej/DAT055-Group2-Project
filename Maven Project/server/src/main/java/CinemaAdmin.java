@@ -11,7 +11,7 @@ import cinemaObjects.*;
  * executes operations such as adding theaters and shows.
  *
  * @author Phong Nguyen
- * @version 2021-03-02
+ * @version 2021-03-08
  */
 public class CinemaAdmin {
     private int page = 1;

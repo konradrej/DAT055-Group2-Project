@@ -2,6 +2,8 @@ package server;
 
 import cinemaObjects.Booking;
 import client.ResponseCancelBookingCommand;
+
+import java.awt.*;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
@@ -39,6 +41,8 @@ public class CancelBookingCommand implements ServerCommand {
     public void execute(ServerHandler handler, ObjectOutputStream out) throws IOException {
         out.writeObject(new ResponseCancelBookingCommand(
                 handler.cancelBooking(this.booking)
+
         ));
+
     }
 }

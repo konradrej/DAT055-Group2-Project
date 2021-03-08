@@ -11,11 +11,11 @@ import java.awt.event.ActionEvent;
 import java.util.*;
 import java.util.List;
 
-/**
+/**x
  * Pane for finding booking by inserting customer SSN or phone number.
  *
- * @author Jakob Ståhl, Konrad Rej, Erik Kieu
- * @version 2021-03-03
+ * @author Jakob Ståhl
+ * @version 2021-03-08
  */
 public class FindBookingPane extends AbstractPane implements IObserver<ClientModel> {
     private final ClientModel cm;

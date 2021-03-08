@@ -14,7 +14,7 @@ import java.util.List;
  * This class handles the collection of movie provided from URL and may provide these.
  *
  * @author Phong Nguyen
- * @version 2021-03-04
+ * @version 2021-03-08
  */
 
 public class MovieCollection extends AbstractCollection {
