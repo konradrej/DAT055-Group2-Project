@@ -152,6 +152,7 @@ public enum CinemaBookingSystem implements ServerHandler {
      */
     public synchronized ResponseStatus cancelBooking(Booking booking) {
         ResponseStatus response;
+
         boolean removed = this.bookingCollection.removeBooking(booking, this.showCollection);
 
         if (removed) response = new ResponseStatus(true, "Booking successfully removed");

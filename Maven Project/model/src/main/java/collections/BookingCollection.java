@@ -119,6 +119,7 @@ public class BookingCollection extends AbstractCollection {
                                 }
                             }
                         }
+                        this.allBookings.remove(b2);
                         showCollection.updateShow(s, s.getMovie(), s.getShowDateAndTime(), s.getCinema(), s.getTheater(), s.getUniqueID());
                         return true;
                     }
