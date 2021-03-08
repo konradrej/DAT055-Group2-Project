@@ -14,8 +14,9 @@ import java.util.*;
 public class ConfigReader {
 
     /**
-     * returns a Map<String,String> with name as key
+     * returns a Map (String, String) with name as key
      * and the name´s address as value.
+     * @return new Hashmap with text.
      */
     public static Map<String, String> readText() {
 
