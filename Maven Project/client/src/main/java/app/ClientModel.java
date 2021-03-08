@@ -34,6 +34,7 @@ public enum ClientModel implements ClientHandler, IObservable<ClientModel> {
 
     /**
      * Method for setting Navigator .
+     * @param navigator. Parameter for navigator.
      */
     public void setNavigator(Navigator navigator) {
         this.navigator = navigator;
@@ -253,7 +254,7 @@ public enum ClientModel implements ClientHandler, IObservable<ClientModel> {
     /**
      * Method to add observer.
      *
-     * @param obs Parameter of type IObserver<ClientModel>.
+     * @param obs object which observes.
      */
     @Override
     public void addObserver(IObserver<ClientModel> obs) {
@@ -263,7 +264,7 @@ public enum ClientModel implements ClientHandler, IObservable<ClientModel> {
     /**
      * Method to remove observer.
      *
-     * @param obs Parameter of type IObserver<ClientModel>.
+     * @param obs object to remove.
      */
     @Override
     public void removeObserver(IObserver<ClientModel> obs) {
