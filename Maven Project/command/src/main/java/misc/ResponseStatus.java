@@ -5,8 +5,7 @@ import java.io.Serializable;
 /**
  * This class implements the Serializable interface
  * and serves as a response sent with each command
- * implementing this class as a return type,
- * returning an instance of.
+ * implementing this class as a return type.
  *
  * @author Anthon Lenander
  * @version 2021-03-08
