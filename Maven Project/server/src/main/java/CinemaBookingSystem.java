@@ -10,7 +10,7 @@ import java.util.List;
  * from each and acts like a "server".
  * It handles all incoming commands and replies back to the sender.
  *
- * @author
+ * @author Anthon Lenander
  * @version - 2021-03-07
  */
 
