@@ -5,7 +5,7 @@ import java.awt.*;
 
 /**
  * @author Konrad Rej
- * @version 2021-03-02
+ * @version 2021-03-08
  */
 public abstract class AbstractPane {
     protected final JFrame frame;
@@ -24,7 +24,7 @@ public abstract class AbstractPane {
     }
 
     /**
-     *
+     * Used to start using current pane.
      */
     public void start() {
         this.frame.setContentPane(this.contentPane);
@@ -32,7 +32,7 @@ public abstract class AbstractPane {
     }
 
     /**
-     *
+     * Used to stop using current pane.
      */
     public void stop() {
         this.frame.setContentPane(this.originalContentPane);
