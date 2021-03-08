@@ -38,11 +38,7 @@ public class Seat implements Serializable {
         this.available = s.getAvailable();
     }
 
-    /**
-     * Method for getting the details of the seat
-     *
-     * @return returns the seat instance itself
-     */
+
     private Seat cloneSeat() {
         return new Seat(this);
     }

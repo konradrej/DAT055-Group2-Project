@@ -38,11 +38,7 @@ public class CinemaAdmin {
         frame.setVisible(true);
     }
 
-    /**
-     * Constructs the menu bar and inserts sections
-     *
-     * @param frame of the interface window
-     */
+
     private void makeMenu(JFrame frame) {
         JMenuBar menuBar = new JMenuBar();
         frame.setJMenuBar(menuBar);
@@ -60,11 +56,7 @@ public class CinemaAdmin {
         fileMenu.add(addTheater);
     }
 
-    /**
-     * Display section where you can add shows
-     *
-     * @param frame of the interface window
-     */
+
     private void displayAddShowMenu(JFrame frame) {
         frame.setVisible(false);
         pane.removeAll();
@@ -73,11 +65,7 @@ public class CinemaAdmin {
         frame.setVisible(true);
     }
 
-    /**
-     * Display section where you can add theaters
-     *
-     * @param frame of the interface window
-     */
+
     private void displayAddTheaterMenu(JFrame frame) {
         frame.setVisible(false);
         pane.removeAll();
@@ -87,10 +75,6 @@ public class CinemaAdmin {
         frame.setVisible(true);
     }
 
-    /**
-     * This method handles the graphics and controls for creating a theater,
-     * with Theater, Row and Seat.
-     */
     private void createTheaterOption() {
         DefaultListModel<Object> listModel = new DefaultListModel<>();
         ArrayList<Row> rows = new ArrayList<>();
@@ -162,10 +146,7 @@ public class CinemaAdmin {
     }
 
 
-    /**
-     * This method handles the graphics and controls for creating a show,
-     * with Theater, Movie , Day and Time.
-     */
+
     private void createListsWithListeners() {
         dayList = new DefaultListModel<>();
         CardLayout cl = new CardLayout();
@@ -321,9 +302,7 @@ public class CinemaAdmin {
     }
 
 
-    /**
-     * Method that adds a show if Movie, Theater and date are valid
-     */
+
     private void addShowToCollection() {
 
         if (selectedMovie != null && selectedTheater != null &&

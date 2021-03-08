@@ -100,13 +100,6 @@ public class MovieCollection extends AbstractCollection {
         }
     }
 
-    /**
-     * Scans and adds the movie details: title, length, genres and URL
-     *
-     * @param l     - path to the movie link
-     * @param title - title of the movie being added
-     */
-
     private void scanMovieDetails(String l, String title) {
         Document doc;
 
