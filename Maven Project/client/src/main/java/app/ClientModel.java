@@ -12,10 +12,10 @@ import collections.*;
 import cinemaObjects.*;
 
 /**
- * enum Class that...
+ *  This singleton class recieves all data from the server.
  *
- * @author Jakob Ståhl, Konrad Rej, Erik Kieu
- * @version 2021-03-03
+ * @author Jakob Ståhl
+ * @version 2021-03-08
  */
 public enum ClientModel implements ClientHandler, IObservable<ClientModel> {
     INSTANCE;
