@@ -9,8 +9,8 @@ import java.util.Map;
 /**
  * Class for setting up the GUI for client.
  *
- * @author Jakob Ståhl, Konrad Rej
- * @version 2021-03-03
+ * @author Jakob Ståhl
+ * @version 2021-03-08
  */
 public class CinemaClient {
 

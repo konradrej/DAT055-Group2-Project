@@ -12,7 +12,7 @@ import collections.*;
 import cinemaObjects.*;
 
 /**
- *  This singleton class recieves all data from the server.
+ *  This singleton class receives all data from the server.
  *
  * @author Jakob Ståhl
  * @version 2021-03-08

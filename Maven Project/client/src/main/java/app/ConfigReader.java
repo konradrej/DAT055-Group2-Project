@@ -8,8 +8,8 @@ import java.util.*;
 /**
  * Class for copying an IP-address from Config.txt.
  *
- * @author Jakob Ståhl, Konrad Rej
- * @version 2021-03-03
+ * @author Jakob Ståhl
+ * @version 2021-03-08
  */
 public class ConfigReader {
 
@@ -52,5 +52,4 @@ public class ConfigReader {
         }
         return ipNum;
     }
-
 }
